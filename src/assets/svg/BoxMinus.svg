@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>Icons/Box Minus</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/Box-Minus" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M17,4 C18.6568542,4 20,5.34314575 20,7 L20,17 C20,18.6568542 18.6568542,20 17,20 L7,20 C5.34314575,20 4,18.6568542 4,17 L4,7 C4,5.34314575 5.34314575,4 7,4 L17,4 Z M15.2,11 L8.8,11 C8.3581722,11 8,11.3581722 8,11.8 C8,12.2418278 8.3581722,12.6 8.8,12.6 L15.2,12.6 C15.6418278,12.6 16,12.2418278 16,11.8 C16,11.3581722 15.6418278,11 15.2,11 Z" id="Combined-Shape" fill="#3F51B5"></path>
+    </g>
+</svg>
