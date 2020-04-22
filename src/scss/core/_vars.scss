@@ -1,0 +1,168 @@
+/* ---COLORS--- */
+
+// BG
+$BG-COLOR: #0d101a;
+
+// Naturel
+$N0: #ffffff;
+$N10: #fafbfc;
+$N20: #f4f5f7;
+$N30: #ebecf0;
+$N40: #dfe1e5;
+$N50: #c1c7d0;
+$N60: #b3bac5;
+$N70: #a5adba;
+$N80: #97a0af;
+$N90: #8993a4;
+$N100: #7a869a;
+$N200: #6b778c;
+$N300: #5e6c84;
+$N400: #505f79;
+$N500: #42526e;
+$N600: #344563;
+$N700: #253858;
+$N800: #172b4d;
+$N900: #091e42;
+$N00: #000000;
+
+// Dark
+$D1: #242642;
+$D2: #21233d;
+$D3: #1e2038;
+$D4: #1b1d33;
+$D5: #2b2d3b;
+$D6: #2b2d3b;
+$D7: #2b2d3b;
+$D8: #2b2d3b;
+$D9: #11131f;
+$D10: #0e101a;
+
+// Grey
+$G1: #ebedf5;
+$G2: #daddeb;
+$G3: #cacee0;
+$G4: #adb2c7;
+$G5: #8489a1;
+$G6: #5e6480;
+$G7: #373c54;
+$G8: #25293b;
+$G9: #1c1f2e;
+$G10: #171a29;
+
+// Deep Purple
+$DP1: #ede6f6;
+$DP2: #d0c4e9;
+$DP3: #b39ddb;
+$DP4: #9574cd;
+$DP5: #7e57c2;
+$DP6: #673ab7;
+$DP7: #5e35b1;
+$DP8: #512da8;
+$DP9: #4527a0;
+$DP10: #311b92;
+
+// Indigo
+$I1: #e8eaf6;
+$I2: #c5cae9;
+$I3: #9fa8da;
+$I4: #7986cb;
+$I5: #5c6bc0;
+$I6: #3f51b5;
+$I7: #3949ab;
+$I8: #303f9f;
+$I9: #283593;
+$I10: #1a237e;
+
+// Blue
+$B1: #e2f2fd;
+$B2: #bbdffb;
+$B3: #91caf9;
+$B4: #65b4f6;
+$B5: #41a5f5;
+$B6: #2296f3;
+$B7: #2296f3;
+$B8: #1876d1;
+$B9: #1665c0;
+$B10: #0d47a1;
+
+// Teal
+$T1: #e0f2f1;
+$T2: #b2dfdb;
+$T3: #80cbc4;
+$T4: #4db6ac;
+$T5: #27a69a;
+$T6: #009688;
+$T7: #00897b;
+$T8: #00796b;
+$T9: #02695c;
+$T10: #004e41;
+
+// Lime
+$L1: #f9fbe7;
+$L2: #f0f4c3;
+$L3: #e6ee9c;
+$L4: #dce775;
+$L5: #d3e157;
+$L6: #cddc39;
+$L7: #c0ca33;
+$L8: #afb42c;
+$L9: #9e9d24;
+$L10: #827717;
+
+// Red
+$R1: #ffebee;
+$R2: #ffcdd2;
+$R3: #ef9a9a;
+$R4: #e57373;
+$R5: #ef534f;
+$R6: #f34436;
+$R7: #e53934;
+$R8: #d32e30;
+$R9: #c62728;
+$R10: #b71b1c;
+
+// Blue Gray
+$BG0: #f7f9fa;
+$BG1: #ebeff1;
+$BG2: #ced8dd;
+$BG3: #b0bec5;
+$BG4: #8fa4ae;
+$BG5: #78909c;
+$BG6: #607d8b;
+$BG7: #546d7a;
+$BG8: #455a64;
+$BG9: #37474f;
+$BG10: #263237;
+
+/* ---FONT SIZE--- */
+@function calcRem($size) {
+  $remSize: $size / 16px;
+  @return #{$remSize}rem;
+}
+
+$H18: calcRem(18px);
+$H16: calcRem(16px);
+$H14: calcRem(14px);
+$H12: calcRem(12px);
+$H11: calcRem(11px);
+$H10: calcRem(10px);
+$H9: calcRem(9px);
+$H8: calcRem(8px);
+
+/* Screens */
+$screen-iphone-5: 320px;
+$screen-iphone-6: 375px;
+$screen-iphone-plus: 414px;
+$screen-tablet-small: 600px;
+$screen-tablet: 768px;
+$screen-tablet-large: 860px;
+$screen-netbook: 960px;
+$screen-desktop: 1024px;
+$screen-desktop-large: 1280px;
+$screen-hd: 1366px;
+$screen-fullhd: 1440px;
+$screen-retina: 1660px;
+
+// FONTS
+$base-font: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
