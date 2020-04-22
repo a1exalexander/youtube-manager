@@ -1,0 +1,87 @@
+:root {
+  --bg-color: #091e42;
+  --bg-color-secondary: #172b4d;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
+  font-family: $base-font !important;
+  scrollbar-color: $N900 transparent;
+  scrollbar-width: thin;
+  ::-webkit-scrollbar {
+    width: 2px;
+    border-radius: 1px;
+    min-width: 2px;
+    background: $N0;
+  }
+  ::-webkit-scrollbar-thumb {
+    width: 2px;
+    border-radius: 1px;
+    min-width: 2px;
+    background: $N900;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    background-clip: content-box;
+  }
+}
+
+html,
+body {
+  background-color: var(--bg-color);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul {
+  list-style: none;
+}
+
+button,
+a {
+  text-decoration: none;
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+.flip {
+  transition: all 0.2s;
+}
+.flip-enter,
+.flip-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.flip-move {
+  transition: transform 0.4s;
+}
+.flip-leave-active {
+  position: absolute;
+}
+.hidden-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
