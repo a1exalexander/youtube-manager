@@ -1,0 +1,63 @@
+<template>
+  <div>
+    <input
+      class="ms-input"
+      id=""
+      type=""
+      value=""
+      onChange=""
+      disabled=""
+      placeholder=""
+    />
+  </div>
+</template>
+<script>
+export default {
+  name: 'MsInput',
+};
+</script>
+<style lang="scss">
+$style: ms-input;
+.#{$style} {
+  display: block;
+  &__input {
+    width: 100%;
+    min-height: 32px;
+    @include flex(flex-start, center);
+    @include text($H12, 400, $N13);
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 2px;
+    border: 1px solid $N4;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+    outline: none;
+    @include transition(all);
+    @include media {
+      &:hover {
+        border-color: $B2;
+      }
+    }
+    &::placeholder {
+      @include text($H12, 400, $N10);
+    }
+    &:not(:focus)._error {
+      border-color: $R5;
+    }
+    &:not(:focus)._success {
+      border-color: $G5;
+    }
+    &:focus {
+      border-color: $B5;
+    }
+    &:disabled {
+      background-color: $N2;
+      border-color: $N4;
+    }
+  }
+  &__label {
+    display: inline-block;
+    margin-bottom: 8px;
+    @include text($H11, 600, $N13);
+  }
+}
+</style>
