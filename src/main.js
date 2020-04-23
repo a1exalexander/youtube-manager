@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import MsButton from './components/common/buttons/MsButton.vue';
+import MsInput from './components/common/form/MsInput.vue';
 import Icon from './components/icons/Icon.vue';
 import Container from './components/common/grid/Container.vue';
 import Row from './components/common/grid/Row.vue';
@@ -19,8 +20,9 @@ Vue.component('Container', Container);
 Vue.component('Row', Row);
 Vue.component('Col', Col);
 Vue.component('Divider', Divider);
-Vue.component('MsButton', MsButton);
 Vue.component('Icon', Icon);
+Vue.component('MsButton', MsButton);
+Vue.component('MsInput', MsInput);
 
 new Vue({
   router,

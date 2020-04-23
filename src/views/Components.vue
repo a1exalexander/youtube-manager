@@ -3,7 +3,7 @@
     <h1>Components</h1>
     <divider />
     <section>
-      <h2>Buttons</h2>
+      <h2>Button</h2>
       <row wrap class="row">
         <ms-button>Primary</ms-button>
         <ms-button loading>Primary</ms-button>
@@ -44,11 +44,79 @@ props: {
       </pre>
     </section>
     <divider />
+    <section>
+      <h2>Input</h2>
+      <row class="row" wrap>
+        <ms-input placeholder="Placeholder" v-model="input.empty"
+          >Label</ms-input
+        >
+        <ms-input
+          placeholder="Placeholder success"
+          v-model="input.success"
+          status="success"
+          >Success</ms-input
+        >
+        <ms-input
+          placeholder="Placeholder warning"
+          v-model="input.warning"
+          status="warning"
+          >Warning</ms-input
+        >
+        <ms-input
+          placeholder="Placeholder error"
+          v-model="input.error"
+          status="error"
+          >Error</ms-input
+        >
+      </row>
+      <pre>{{ input }}</pre>
+      <br />
+      <pre>
+props: {
+  label: {
+    type: String,
+    default: '', // or by slot
+  },
+  type: {
+    type: String,
+    default: 'text',
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  status: {
+    validator(value) {
+      return ['default', 'success', 'danger'].indexOf(value) !== -1;
+    },
+    default: 'default',
+  },
+  value: {
+    type: [String, Number],
+    required: true,
+  },
+  placeholder: {
+    type: String,
+    default: 'text',
+  },
+},
+      </pre>
+    </section>
   </container>
 </template>
 <script>
 export default {
   name: 'Components',
+  data() {
+    return {
+      input: {
+        empty: '',
+        success: '',
+        error: '',
+        warning: '',
+      },
+    };
+  },
 };
 </script>
 <style lang="scss">

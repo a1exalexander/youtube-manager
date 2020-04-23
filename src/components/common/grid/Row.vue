@@ -5,7 +5,7 @@
       justifyContent: jc,
       alignItems: ai,
       alignContent: ac,
-      flexDirection: d,
+      flexDirection: direction,
       flexWrap: wrap ? 'wrap' : 'no-wrap',
     }"
   >

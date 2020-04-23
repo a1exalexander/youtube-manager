@@ -134,6 +134,9 @@ $BG8: #455a64;
 $BG9: #37474f;
 $BG10: #263237;
 
+$input-bg: #161829;
+$input-bg-disabled: #151726;
+
 /* ---FONT SIZE--- */
 @function calcRem($size) {
   $remSize: $size / 16px;
