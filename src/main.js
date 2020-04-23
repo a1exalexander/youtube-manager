@@ -3,10 +3,24 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import MsButton from './components/common/buttons/MsButton.vue';
-
-Vue.component('MsButton', MsButton);
+import Icon from './components/icons/Icon.vue';
+import Container from './components/common/grid/Container.vue';
+import Row from './components/common/grid/Row.vue';
+import Col from './components/common/grid/Col.vue';
+import Divider from './components/common/grid/Divider.vue';
+import { isDev, isProd } from './utils';
 
 Vue.config.productionTip = false;
+
+Vue.prototype.$isDev = isDev;
+Vue.prototype.$isProd = isProd;
+
+Vue.component('Container', Container);
+Vue.component('Row', Row);
+Vue.component('Col', Col);
+Vue.component('Divider', Divider);
+Vue.component('MsButton', MsButton);
+Vue.component('Icon', Icon);
 
 new Vue({
   router,

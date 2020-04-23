@@ -1,15 +1,18 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
-    <ms-input />
+    <h1 class="home__title">Home</h1>
   </div>
 </template>
 
 <script>
-import MsInput from '../components/common/input/MsInput.vue';
-
 export default {
   name: 'Home',
-  components: [MsInput],
 };
 </script>
+<style lang="scss">
+.home {
+  &__title {
+    color: white;
+  }
+}
+</style>

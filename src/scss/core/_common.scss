@@ -4,7 +4,6 @@
   padding: 0;
   -webkit-overflow-scrolling: touch;
   touch-action: manipulation;
-  font-family: $base-font !important;
   scrollbar-color: $N0 transparent;
   scrollbar-width: thin;
   ::-webkit-scrollbar {
@@ -23,6 +22,14 @@
     background: transparent;
     background-clip: content-box;
   }
+}
+
+body,
+input,
+a,
+button,
+textarea {
+  font-family: $base-font;
 }
 
 html,
@@ -47,7 +54,8 @@ a {
   background-color: transparent;
 }
 
-code {
+code,
+pre {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
