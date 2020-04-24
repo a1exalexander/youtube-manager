@@ -21,37 +21,61 @@
         >
         <ms-button type="secondary" google>Secondary google</ms-button>
       </row>
-      <row wrap class="row">
-        <ms-button type="subtle">Subtle</ms-button>
-        <ms-button loading type="subtle">Subtle</ms-button>
-        <ms-button type="subtle">
-          <template #icon><icon #icon/></template>
-          Subtle icon</ms-button
-        >
-        <ms-button type="subtle" disabled>Subtle Disabled</ms-button>
-      </row>
       <pre>
 props: {
-  type: {
-    validator(value) {
-      return ['primary', 'secondary', 'subtle'].indexOf(value) !== -1;
+    type: {
+      validator(value) {
+        return ['primary', 'secondary'].indexOf(value) !== -1;
+      },
+      default: 'primary',
     },
-    default: 'primary',
+    fluid: {
+      type: Boolean,
+      default: false,
+    },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+    google: {
+      type: Boolean,
+      default: false,
+    },
   },
-  fluid: {
-    type: Boolean,
-    default: false,
-  },
-  loading: {
-    type: Boolean,
-    default: false,
-  },
-  google: {
-    type: Boolean,
-    default: false,
-  },
-}
       </pre>
+    </section>
+    <section>
+      <h2>Subtle Button</h2>
+      <row wrap class="row">
+        <ms-subtle-button>Subtle button</ms-subtle-button>
+        <ms-subtle-button disabled>Subtle button disabled</ms-subtle-button>
+        <ms-subtle-button
+          ><template #icon><icon #icon/></template>Subtle button icon
+          left</ms-subtle-button
+        >
+        <ms-subtle-button position="right"
+          ><template #icon><icon #icon/></template>Subtle button icon
+          left</ms-subtle-button
+        >
+      </row>
+      <pre>
+           props: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    position: {
+      validator(value) {
+        return ['left', 'right'].indexOf(value) !== -1;
+      },
+      default: 'left',
+    },
+    label: {
+      type: String,
+    },
+  },
+        </pre
+      >
     </section>
     <divider />
     <section>
@@ -122,12 +146,28 @@ props: {
           label="with label"
         ></ms-checkbox>
         <ms-checkbox
-          v-model="checkbox.unchaked"
+          v-model="checkbox.uncheked"
           label="with label unchaked"
         ></ms-checkbox>
-        <ms-checkbox-label v-model="checkbox.checkedLabeled" label="Active" />
-        <ms-checkbox-label v-model="checkbox.unchekedLabeled" label="Default" />
+        <ms-checkbox-button v-model="checkbox.checkedLabeled" label="Active" />
+        <ms-checkbox-button
+          v-model="checkbox.unchekedLabeled"
+          label="Default"
+        />
       </row>
+      <pre>
+        props: {
+    val: {
+      type: String || Boolean,
+    },
+    value: {
+      type: Boolean,
+    },
+    label: {
+      type: String,
+    },
+  },
+      </pre>
     </section>
   </container>
 </template>

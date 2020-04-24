@@ -10,16 +10,26 @@
       <div class="ms-checkbox__cell">
         <icon class="ms-checkbox__image" icon="check" />
       </div>
-      <slot>
-        <span v-if="!!label" class="ms-checkbox__text">{{ label }}</span>
-      </slot>
+      <span v-if="!!$slots.default || !!label" class="ms-checkbox__text"
+        ><slot>{{ label }}</slot></span
+      >
     </div>
   </label>
 </template>
 <script>
 export default {
   name: 'MsCheckbox',
-  props: ['val', 'value', 'label'],
+  props: {
+    val: {
+      type: String || Boolean,
+    },
+    value: {
+      type: Boolean,
+    },
+    label: {
+      type: String,
+    },
+  },
   computed: {
     checked: {
       get() {
