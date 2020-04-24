@@ -11,8 +11,9 @@ export default {
     },
   },
   components: {
-    search: () => import(`./IconSearch.vue`),
-    check: () => import(`./IconCheck.vue`),
+    search: () => import(`../icons/IconSearch.vue`),
+    check: () => import(`../icons/IconCheck.vue`),
+    close: () => import(`../icons/IconClose.vue`),
   },
 };
 </script>

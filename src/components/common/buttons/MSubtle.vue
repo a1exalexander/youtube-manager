@@ -1,22 +1,21 @@
 <template>
   <a
-    class="ms-subtle-button"
+    class="m-subtle"
+    :disabled="disabled"
     @click="() => !disabled && $emit('click')"
-    :class="{ disabled: disabled }"
+    :class="{
+      [position]: $slots.icon && $slots.default,
+    }"
   >
-    <slot name="icon" v-if="!!$slots.icon && position === 'left'" />
-    <span
-      class="ms-subtle-button__text"
-      :class="[!!$slots.icon && position]"
-      v-if="!!$slots.default || !!label"
+    <slot name="icon" />
+    <span class="m-subtle__text" v-if="!!$slots.default || !!label"
       ><slot>{{ label }}</slot></span
     >
-    <slot name="icon" v-if="!!$slots.icon && position === 'right'" />
   </a>
 </template>
 <script>
 export default {
-  name: 'MsSubtleButton',
+  name: 'MSubtle',
   props: {
     disabled: {
       type: Boolean,
@@ -35,25 +34,29 @@ export default {
 };
 </script>
 <style lang="scss">
-$style: ms-subtle-button;
+$style: m-subtle;
 
 .#{$style} {
   cursor: pointer;
   position: relative;
+  @include flex(flex-start, center);
   display: inline-flex;
   @include transition(all);
-  &.disabled {
+  &[disabled] {
     cursor: not-allowed;
+    pointer-events: none;
     .#{$style}__text {
       color: $G6;
     }
   }
-  &:hover {
-    .#{$style}__text {
-      color: $I5;
-    }
-    svg {
-      fill: $I5;
+  @include media {
+    &:hover {
+      .#{$style}__text {
+        color: $I5;
+      }
+      svg {
+        fill: $I5;
+      }
     }
   }
   &:active {
@@ -62,6 +65,19 @@ $style: ms-subtle-button;
     }
     svg {
       fill: $I8;
+      transform: scale(0.9);
+    }
+  }
+  &.left {
+    svg {
+      order: -2;
+      margin-right: 8px;
+    }
+  }
+  &.right {
+    svg {
+      order: 2;
+      margin-left: 8px;
     }
   }
   svg {
@@ -70,12 +86,6 @@ $style: ms-subtle-button;
   &__text {
     @include text($H12, 500, $I6);
     @include transition(all);
-    &.left {
-      margin-left: 8px;
-    }
-    &.right {
-      margin-right: 8px;
-    }
   }
 }
 </style>

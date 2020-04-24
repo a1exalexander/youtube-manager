@@ -1,26 +1,26 @@
 <template>
   <button
-    class="ms-button"
-    :class="[type, { _fluid: fluid }, { _loading: loading }]"
+    class="m-button"
+    :class="[type, { fluid, loading }]"
     @click="() => $emit('click')"
   >
-    <span class="ms-button__google" v-if="google">
+    <span class="m-button__google" v-if="google">
       <img
         src="@/assets/svg/Google.svg"
         alt="Google"
-        class="ms-button__google-icon"
+        class="m-button__google-icon"
       />
     </span>
     <slot name="icon" />
-    <span class="ms-button__text"><slot /></span>
-    <svg class="ms-button__loading" focusable="false" viewBox="0 0 20 20">
+    <span class="m-button__text"><slot /></span>
+    <svg class="m-button__loading" focusable="false" viewBox="0 0 20 20">
       <circle cx="10" cy="10" r="9" />
     </svg>
   </button>
 </template>
 <script>
 export default {
-  name: 'MsButton',
+  name: 'MButton',
   props: {
     type: {
       validator(value) {
@@ -55,7 +55,7 @@ export default {
   }
 }
 
-$style: ms-button;
+$style: m-button;
 
 $names: 'primary', 'secondary';
 
@@ -105,6 +105,8 @@ $loading: (
   border-radius: 2px;
   padding: 0px 16px 0 8px;
   min-height: 32px;
+  border: none;
+  outline: none;
   position: relative;
   @include flex(center, center);
   height: fit-content;
@@ -130,6 +132,7 @@ $loading: (
     width: 20px;
     height: 20px;
     object-fit: contain;
+    @include transition(all);
   }
   &__loading {
     display: none;
@@ -143,7 +146,7 @@ $loading: (
     stroke-linecap: round;
     animation: 0.86s cubic-bezier(0.4, 0.15, 0.6, 0.85) infinite ButtonSpinner;
   }
-  &._loading {
+  &.loading {
     color: transparent;
     cursor: not-allowed;
     pointer-events: none;
@@ -153,7 +156,7 @@ $loading: (
       pointer-events: none;
     }
   }
-  &._fluid {
+  &.fluid {
     width: 100%;
   }
   @each $name in $names {
@@ -210,7 +213,7 @@ $loading: (
         fill: map-get($color-disabled, $name);
       }
     }
-    &.#{$name}._loading {
+    &.#{$name}.loading {
       .#{$style}__loading {
         visibility: visible;
         opacity: 1;

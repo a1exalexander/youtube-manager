@@ -1,5 +1,5 @@
 <template>
-  <span class="ms-divider" />
+  <span class="divider" />
 </template>
 <script>
 export default {
@@ -7,7 +7,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.ms-divider {
+.divider {
   display: block;
   background-color: $G8;
   height: 1px;

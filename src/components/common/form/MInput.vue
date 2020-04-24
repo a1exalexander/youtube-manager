@@ -1,6 +1,6 @@
 <template>
-  <div class="ms-input">
-    <label class="ms-input__label" :for="id" v-if="!!$slots.default || !!label">
+  <div class="m-input">
+    <label class="m-input__label" :for="id" v-if="!!$slots.default || !!label">
       <slot>{{ label }}</slot>
     </label>
     <input
@@ -10,8 +10,8 @@
       @input="(e) => $emit('input', e.target.value)"
       :disabled="disabled"
       :placeholder="placeholder"
-      class="ms-input__input"
-      :class="`_${status}`"
+      class="m-input__input"
+      :class="status"
     />
   </div>
 </template>
@@ -19,7 +19,7 @@
 import { v4 } from 'uuid';
 
 export default {
-  name: 'MsInput',
+  name: 'MInput',
   props: {
     label: {
       type: String,
@@ -58,7 +58,7 @@ export default {
 };
 </script>
 <style lang="scss">
-$style: ms-input;
+$style: m-input;
 .#{$style} {
   display: block;
   &__input {

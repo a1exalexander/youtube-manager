@@ -1,16 +1,17 @@
 <template>
-  <label class="ms-checkbox">
+  <label class="m-checkbox">
     <input
       type="checkbox"
-      class="ms-checkbox__input"
+      :name="name"
+      class="m-checkbox__input"
       :value="val"
       v-model="checked"
     />
-    <div class="ms-checkbox__inner">
-      <div class="ms-checkbox__cell">
-        <icon class="ms-checkbox__image" icon="check" />
+    <div class="m-checkbox__inner">
+      <div class="m-checkbox__cell">
+        <icon class="m-checkbox__image" icon="check" />
       </div>
-      <span v-if="!!$slots.default || !!label" class="ms-checkbox__text"
+      <span v-if="!!$slots.default || !!label" class="m-checkbox__text"
         ><slot>{{ label }}</slot></span
       >
     </div>
@@ -18,13 +19,16 @@
 </template>
 <script>
 export default {
-  name: 'MsCheckbox',
+  name: 'MCheckbox',
   props: {
     val: {
-      type: String || Boolean,
+      type: [String, Boolean, Number],
+    },
+    name: {
+      type: String,
     },
     value: {
-      type: Boolean,
+      type: [Boolean, Array],
     },
     label: {
       type: String,
@@ -48,7 +52,7 @@ export default {
 };
 </script>
 <style lang="scss">
-$styles: ms-checkbox;
+$styles: m-checkbox;
 .#{$styles} {
   position: relative;
   @include flex-row(flex-start, center);
