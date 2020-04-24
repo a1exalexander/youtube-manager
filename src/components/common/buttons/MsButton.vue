@@ -24,7 +24,7 @@ export default {
   props: {
     type: {
       validator(value) {
-        return ['primary', 'secondary'].indexOf(value) !== -1;
+        return ['primary', 'secondary', 'subtle'].indexOf(value) !== -1;
       },
       default: 'primary',
     },
@@ -57,39 +57,47 @@ export default {
 
 $style: ms-button;
 
-$names: 'primary', 'secondary';
+$names: 'primary', 'secondary', 'subtle';
 
 $bg: (
   'primary': $I6,
   'secondary': $D1,
+  'subtle': transparent,
 );
 $bg-hover: (
   'primary': $I5,
   'secondary': $G7,
+  'subtle': transparent,
 );
 $bg-active: (
   'primary': $I8,
   'secondary': $D2,
+  'subtle': transparent,
 );
 $bg-disabled: (
   'primary': $G7,
   'secondary': $D2,
+  'subtle': transparent,
 );
 $color: (
   'primary': $N0,
   'secondary': $N0,
+  'subtle': $I6,
 );
 $color-hover: (
   'primary': $N0,
   'secondary': $N0,
+  'subtle': $I5,
 );
 $color-active: (
   'primary': $N0,
   'secondary': $N0,
+  'subtle': $I8,
 );
 $color-disabled: (
   'primary': $G6,
   'secondary': $D1,
+  'subtle': $G6,
 );
 $devider: (
   'primary': $I8,
@@ -98,6 +106,7 @@ $devider: (
 $loading: (
   'primary': $N0,
   'secondary': $N0,
+  'subtle': $I6,
 );
 
 .#{$style} {

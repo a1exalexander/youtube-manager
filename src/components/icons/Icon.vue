@@ -12,6 +12,7 @@ export default {
   },
   components: {
     search: () => import(`./IconSearch.vue`),
+    check: () => import(`./IconCheck.vue`),
   },
 };
 </script>

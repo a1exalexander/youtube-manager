@@ -11,6 +11,7 @@
           ><template #icon><icon #icon/></template>Primary Icon</ms-button
         >
         <ms-button google>Primary Google</ms-button>
+        <ms-button disabled>Primary</ms-button>
       </row>
       <row wrap class="row">
         <ms-button type="secondary">Secondary</ms-button>
@@ -20,11 +21,20 @@
         >
         <ms-button type="secondary" google>Secondary google</ms-button>
       </row>
+      <row wrap class="row">
+        <ms-button type="subtle">Subtle</ms-button>
+        <ms-button loading type="subtle">Subtle</ms-button>
+        <ms-button type="subtle">
+          <template #icon><icon #icon/></template>
+          Subtle icon</ms-button
+        >
+        <ms-button type="subtle" disabled>Subtle Disabled</ms-button>
+      </row>
       <pre>
 props: {
   type: {
     validator(value) {
-      return ['primary', 'secondary'].indexOf(value) !== -1;
+      return ['primary', 'secondary', 'subtle'].indexOf(value) !== -1;
     },
     default: 'primary',
   },
@@ -102,6 +112,23 @@ props: {
 },
       </pre>
     </section>
+    <section>
+      <h2>Checkbox</h2>
+      <row class="row" wrap>
+        <ms-checkbox v-model="checkbox.checked"></ms-checkbox>
+        <ms-checkbox v-model="checkbox.uncheked"></ms-checkbox>
+        <ms-checkbox
+          v-model="checkbox.checked"
+          label="with label"
+        ></ms-checkbox>
+        <ms-checkbox
+          v-model="checkbox.unchaked"
+          label="with label unchaked"
+        ></ms-checkbox>
+        <ms-checkbox-label v-model="checkbox.checkedLabeled" label="Active" />
+        <ms-checkbox-label v-model="checkbox.unchekedLabeled" label="Default" />
+      </row>
+    </section>
   </container>
 </template>
 <script>
@@ -114,6 +141,12 @@ export default {
         success: '',
         error: '',
         warning: '',
+      },
+      checkbox: {
+        checked: true,
+        uncheked: false,
+        checkedLabeled: true,
+        unchekedLabeled: false,
       },
     };
   },

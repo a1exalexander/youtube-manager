@@ -4,6 +4,8 @@ import router from './router';
 import store from './store';
 import MsButton from './components/common/buttons/MsButton.vue';
 import MsInput from './components/common/form/MsInput.vue';
+import MsCheckbox from './components/common/form/MsCheckbox.vue';
+import MsCheckboxLabel from './components/common/form/MsCheckboxLabel.vue';
 import Icon from './components/icons/Icon.vue';
 import Container from './components/common/grid/Container.vue';
 import Row from './components/common/grid/Row.vue';
@@ -23,6 +25,8 @@ Vue.component('Divider', Divider);
 Vue.component('Icon', Icon);
 Vue.component('MsButton', MsButton);
 Vue.component('MsInput', MsInput);
+Vue.component('MsCheckbox', MsCheckbox);
+Vue.component('MsCheckboxLabel', MsCheckboxLabel);
 
 new Vue({
   router,
