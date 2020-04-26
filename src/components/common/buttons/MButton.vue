@@ -3,6 +3,10 @@
     class="m-button"
     :class="[type, { fluid, loading }]"
     @click="() => $emit('click')"
+    @mouseover="() => $emit('mouseover')"
+    @mouseenter="() => $emit('mouseenter')"
+    @mouseleave="() => $emit('mouseleave')"
+    @mouseout="() => $emit('mouseout')"
   >
     <span class="m-button__google" v-if="google">
       <img
@@ -24,7 +28,7 @@ export default {
   props: {
     type: {
       validator(value) {
-        return ['primary', 'secondary'].indexOf(value) !== -1;
+        return ['primary', 'secondary', 'danger'].indexOf(value) !== -1;
       },
       default: 'primary',
     },
@@ -57,47 +61,57 @@ export default {
 
 $style: m-button;
 
-$names: 'primary', 'secondary';
+$names: 'primary', 'secondary', 'danger';
 
 $bg: (
   'primary': $I6,
   'secondary': $D1,
+  'danger': $R5,
 );
 $bg-hover: (
   'primary': $I5,
   'secondary': $G7,
+  'danger': $R4,
 );
 $bg-active: (
   'primary': $I8,
   'secondary': $D2,
+  'danger': $R6,
 );
 $bg-disabled: (
   'primary': $G7,
   'secondary': $D2,
+  'danger': $G7,
 );
 $color: (
   'primary': $N0,
   'secondary': $N0,
+  'danger': $N0,
 );
 $color-hover: (
   'primary': $N0,
   'secondary': $N0,
+  'danger': $N0,
 );
 $color-active: (
   'primary': $N0,
   'secondary': $N0,
+  'danger': $N0,
 );
 $color-disabled: (
   'primary': $G6,
   'secondary': $D1,
+  'danger': $G6,
 );
 $devider: (
   'primary': $I8,
   'secondary': $G7,
+  'danger': $I8,
 );
 $loading: (
   'primary': $N0,
   'secondary': $N0,
+  'danger': $N0,
 );
 
 .#{$style} {
@@ -113,7 +127,7 @@ $loading: (
   @include transition(all);
   &__text {
     margin-left: 8px;
-    @include text($H12, 500, $N0);
+    @include text($H12, 500, $D10);
     @include transition(all);
   }
   svg:not(.#{$style}__loading) {

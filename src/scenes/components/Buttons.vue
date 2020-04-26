@@ -5,7 +5,8 @@
       <m-button>Primary</m-button>
       <m-button loading>Primary</m-button>
       <m-button
-        ><template #icon><icon icon="search"/></template>Primary Icon</m-button
+        ><template #icon><m-icon icon="search"/></template>Primary
+        Icon</m-button
       >
       <m-button google>Primary Google</m-button>
       <m-button disabled>Primary</m-button>
@@ -14,7 +15,7 @@
       <m-button type="secondary">Secondary</m-button>
       <m-button type="secondary" loading>Secondary</m-button>
       <m-button type="secondary"
-        ><template #icon><icon icon="search"/></template>Secondary</m-button
+        ><template #icon><m-icon icon="search"/></template>Secondary</m-button
       >
       <m-button type="secondary" google>Secondary google</m-button>
     </row>

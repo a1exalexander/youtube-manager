@@ -14,6 +14,7 @@ export default {
     search: () => import(`../icons/IconSearch.vue`),
     check: () => import(`../icons/IconCheck.vue`),
     close: () => import(`../icons/IconClose.vue`),
+    dropDown: () => import(`../icons/IconDropDown.vue`),
   },
 };
 </script>

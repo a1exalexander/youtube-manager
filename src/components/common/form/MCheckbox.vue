@@ -9,7 +9,7 @@
     />
     <div class="m-checkbox__inner">
       <div class="m-checkbox__cell">
-        <icon class="m-checkbox__image" icon="check" />
+        <m-icon class="m-checkbox__image" icon="check" />
       </div>
       <span v-if="!!$slots.default || !!label" class="m-checkbox__text"
         ><slot>{{ label }}</slot></span

@@ -4,11 +4,11 @@
     <row wrap class="row">
       <m-subtle>Subtle</m-subtle>
       <m-subtle
-        ><template #icon><icon icon="search"/></template>Subtle icon
+        ><template #icon><m-icon icon="search"/></template>Subtle icon
         left</m-subtle
       >
       <m-subtle position="right"
-        ><template #icon><icon icon="search"/></template>Subtle icon
+        ><template #icon><m-icon icon="search"/></template>Subtle icon
         right</m-subtle
       >
       <m-subtle disabled>Subtle disabled</m-subtle>

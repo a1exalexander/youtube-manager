@@ -11,7 +11,7 @@
           <row jc="space-between" ai="center" class="m-popup__header">
             <h3 class="m-popup__title">{{ title }}</h3>
             <button @click="onClose" class="m-popup__close-btn">
-              <icon class="m-popup__close-icon" icon="close" />
+              <m-icon class="m-popup__close-icon" icon="close" />
             </button>
           </row>
           <div class="m-popup__content"><slot /></div>

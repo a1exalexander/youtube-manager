@@ -1,18 +1,12 @@
 <template>
   <section>
-    <h2>Popup</h2>
+    <h2>Popconfirm</h2>
     <row wrap class="row">
-      <button @click="popup = true">Open Popup</button>
-      <m-popup title="Popup" :visible="popup" @close="closePopup">
-        <div class="fake-content-popup">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt,
-          aspernatur?
-        </div>
-        <template #buttons>
-          <m-button type="secondary" @click="closePopup">Cancel</m-button>
-          <m-button>Submit</m-button>
-        </template>
-      </m-popup>
+      <button @click="popup = true">Open Popconfirm</button>
+      <m-popconfirm title="Popconfirm" :visible="popup" @close="closePopup">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt,
+        aspernatur?
+      </m-popconfirm>
     </row>
     <button @click="visible = !visible">Props</button>
     <m-accordion>
@@ -22,6 +16,10 @@ props: {
     type: String,
     required: true,
   },
+  text: {
+    type: String,
+    default: '',
+  },
   width: {
     type: String,
     default: '333px',
@@ -30,6 +28,10 @@ props: {
     type: Boolean,
     default: false,
   },
+  dangerLabel: {
+    type: String,
+    default: 'Delete',
+  },
 }       
       </pre>
     </m-accordion>
@@ -37,7 +39,7 @@ props: {
 </template>
 <script>
 export default {
-  name: 'Popup',
+  name: 'Popconfirm',
   data() {
     return {
       visible: false,

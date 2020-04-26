@@ -1,19 +1,21 @@
 <template>
   <container class="components">
     <h1>Components</h1>
-    <divider />
+    <m-divider />
     <buttons />
-    <divider />
+    <m-divider />
     <subtles />
-    <divider />
+    <m-divider />
     <inputs />
-    <divider />
+    <m-divider />
     <dropdowns />
-    <divider />
+    <m-divider />
     <checkboxes />
-    <divider />
+    <m-divider />
     <popup />
-    <divider />
+    <m-divider />
+    <popconfirm />
+    <m-divider />
   </container>
 </template>
 <script>
@@ -23,6 +25,7 @@ import Inputs from '@/scenes/components/Inputs.vue';
 import Checkboxes from '@/scenes/components/Checkboxes.vue';
 import Dropdowns from '@/scenes/components/Dropdowns.vue';
 import Popup from '@/scenes/components/Popup.vue';
+import Popconfirm from '@/scenes/components/Poponfirm.vue';
 
 export default {
   name: 'Components',
@@ -33,6 +36,7 @@ export default {
     Checkboxes,
     Dropdowns,
     Popup,
+    Popconfirm,
   },
 };
 </script>
