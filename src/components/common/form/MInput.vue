@@ -6,7 +6,7 @@
     <input
       :autocomplete="autocomplete"
       :id="id"
-      :type="type"
+      :type="inputType"
       :value="value"
       @input="(e) => $emit('input', e.target.value)"
       :disabled="disabled"
@@ -14,6 +14,9 @@
       class="m-input__input"
       :class="status"
     />
+    <button v-if="type === 'password'" @click="toggleVisibility" class="m-input__visibility-btn">
+      <m-icon class="m-input__visibility-icon" :icon="visibility ? 'visibility-on' : 'visibility-off'" />
+    </button>
   </div>
 </template>
 <script>
@@ -40,9 +43,7 @@ export default {
     },
     status: {
       validator(value) {
-        return (
-          ['default', 'success', 'warning', 'danger'].indexOf(value) !== -1
-        );
+        return ['default', 'success', 'warning', 'danger'].indexOf(value) !== -1;
       },
       default: 'default',
     },
@@ -55,9 +56,23 @@ export default {
       default: '',
     },
   },
+  data() {
+    return {
+      visibility: false,
+    };
+  },
+  methods: {
+    toggleVisibility() {
+      this.visibility = !this.visibility;
+    },
+  },
   computed: {
     id() {
       return v4();
+    },
+    inputType() {
+      if (this.type === 'password' && this.visibility) return 'text';
+      return this.type;
     },
   },
 };
@@ -67,12 +82,49 @@ $style: m-input;
 .#{$style} {
   display: block;
   text-align: left;
+  position: relative;
   &__input {
     @extend %input;
+    @include media {
+      &:hover + .#{$style}__visibility-btn {
+        .#{$style}__visibility-icon {
+          fill: lighten($G7, 10%);
+        }
+      }
+    }
+    &:focus + .#{$style}__visibility-btn {
+      .#{$style}__visibility-icon {
+        fill: $G6;
+      }
+    }
   }
   &__label {
     text-align: left;
     @extend %label;
+  }
+  &__visibility-btn {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    position: absolute;
+    right: 6px;
+    bottom: 4px;
+    align-self: center;
+    @include media {
+      &:hover {
+        .#{$style}__visibility-icon {
+          fill: $G6;
+        }
+      }
+    }
+    &:active {
+      .#{$style}__visibility-icon {
+        fill: $G7;
+      }
+    }
+  }
+  &__visibility-icon {
+    @include svg(18px, $G7);
   }
 }
 </style>

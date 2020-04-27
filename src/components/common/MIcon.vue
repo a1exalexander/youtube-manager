@@ -15,6 +15,8 @@ export default {
     check: () => import('../icons/IconCheck.vue'),
     close: () => import('../icons/IconClose.vue'),
     dropDown: () => import('../icons/IconDropDown.vue'),
+    visibilityOn: () => import('../icons/IconVisibilityOn.vue'),
+    visibilityOff: () => import('../icons/IconVisibilityOff.vue'),
   },
 };
 </script>
