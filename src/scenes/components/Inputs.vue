@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>Input</h2>
-    <row class="row" wrap>
+    <m-row class="row" wrap>
       <m-input placeholder="Placeholder" v-model="input.default">Label</m-input>
       <m-input
         placeholder="Placeholder success"
@@ -21,7 +21,7 @@
         status="danger"
         >Danger</m-input
       >
-    </row>
+    </m-row>
     <pre>{{ input }}</pre>
     <br />
     <button @click="visible = !visible">Props</button>

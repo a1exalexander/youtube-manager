@@ -1,13 +1,13 @@
 <template>
   <section>
     <h2>Popconfirm</h2>
-    <row wrap class="row">
+    <m-row wrap class="row">
       <button @click="popup = true">Open Popconfirm</button>
       <m-popconfirm title="Popconfirm" :visible="popup" @close="closePopup">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt,
         aspernatur?
       </m-popconfirm>
-    </row>
+    </m-row>
     <button @click="visible = !visible">Props</button>
     <m-accordion>
       <pre v-if="visible">
@@ -32,8 +32,9 @@ props: {
     type: String,
     default: 'Delete',
   },
-}       
-      </pre>
+}
+</pre
+      >
     </m-accordion>
   </section>
 </template>

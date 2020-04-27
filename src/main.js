@@ -1,5 +1,7 @@
 import Vue from 'vue';
-import { AutoComplete, Select, Popover, Divider } from 'ant-design-vue';
+import {
+  AutoComplete, Select, Popover, Divider,
+} from 'ant-design-vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -10,9 +12,9 @@ import MCheckbox from './components/common/form/MCheckbox.vue';
 import MCheckboxButton from './components/common/form/MCheckboxButton.vue';
 import MSelectItem from './components/common/form/MSelectItem.vue';
 import MIcon from './components/common/MIcon.vue';
-import Container from './components/common/grid/Container.vue';
-import Row from './components/common/grid/Row.vue';
-import Col from './components/common/grid/Col.vue';
+import MContainer from './components/common/grid/MContainer.vue';
+import MRow from './components/common/grid/MRow.vue';
+import MCol from './components/common/grid/MCol.vue';
 import MDivider from './components/common/MDivider.vue';
 import MTransition from './components/common/animate/MTransition.vue';
 import MAccordion from './components/common/animate/MAccordion.vue';
@@ -29,9 +31,9 @@ Vue.prototype.$isDev = isDev;
 Vue.prototype.$isProd = isProd;
 
 // Grid
-Vue.component('Container', Container);
-Vue.component('Row', Row);
-Vue.component('Col', Col);
+Vue.component('MContainer', MContainer);
+Vue.component('MRow', MRow);
+Vue.component('MCol', MCol);
 
 // Helpers
 Vue.component('MDivider', MDivider);

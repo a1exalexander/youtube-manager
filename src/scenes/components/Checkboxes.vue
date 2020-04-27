@@ -1,10 +1,10 @@
 <template>
   <section>
     <h2>Checkbox</h2>
-    <row class="row" wrap>
+    <m-row class="row" wrap>
       <m-checkbox v-model="simple">{{ simple }}</m-checkbox>
-    </row>
-    <row class="row" wrap ai="center">
+    </m-row>
+    <m-row class="row" wrap ai="center">
       <m-checkbox name="fruits" v-model="fruits" val="Apple">Apple</m-checkbox>
       <m-checkbox name="fruits" v-model="fruits" val="Raspberry"
         >Raspberry</m-checkbox
@@ -13,12 +13,12 @@
         >Strawberry</m-checkbox
       >
       <code>{{ fruits }}</code>
-    </row>
+    </m-row>
     <br />
-    <row class="row" wrap>
+    <m-row class="row" wrap>
       <m-checkbox-button v-model="button">{{ button }}</m-checkbox-button>
-    </row>
-    <row class="row" wrap ai="center">
+    </m-row>
+    <m-row class="row" wrap ai="center">
       <m-checkbox-button name="drive" v-model="drive" val="Bike"
         >Bike</m-checkbox-button
       >
@@ -29,7 +29,7 @@
         >Jeep</m-checkbox-button
       >
       <code>{{ drive }}</code>
-    </row>
+    </m-row>
     <button @click="visible = !visible">Props</button>
     <m-accordion>
       <pre v-if="visible">

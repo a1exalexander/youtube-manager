@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>Dropdowns</h2>
-    <row wrap class="row">
+    <m-row wrap class="row">
       <a-auto-complete
         :value="value"
         :dataSource="dataSource"
@@ -56,7 +56,7 @@
         </template>
         <m-button>Click me</m-button>
       </a-popover>
-    </row>
+    </m-row>
   </section>
 </template>
 <script>

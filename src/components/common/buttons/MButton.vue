@@ -7,6 +7,7 @@
     @mouseenter="() => $emit('mouseenter')"
     @mouseleave="() => $emit('mouseleave')"
     @mouseout="() => $emit('mouseout')"
+    :disabled='disabled'
   >
     <span class="m-button__google" v-if="google">
       <img
@@ -41,6 +42,10 @@ export default {
       default: false,
     },
     google: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
       type: Boolean,
       default: false,
     },
@@ -108,6 +113,11 @@ $devider: (
   'secondary': $G7,
   'danger': $I8,
 );
+$devider-hover: (
+  'primary': $I8,
+  'secondary': $G6,
+  'danger': $I8,
+);
 $loading: (
   'primary': $N0,
   'secondary': $N0,
@@ -126,6 +136,7 @@ $loading: (
   height: fit-content;
   @include transition(all);
   &__text {
+    flex-grow: 1;
     margin-left: 8px;
     @include text($H12, 500, $D10);
     @include transition(all);
@@ -141,6 +152,7 @@ $loading: (
     border-right-width: 1px;
     border-right-style: solid;
     margin-right: 8px;
+    @include transition(all);
   }
   &__google-icon {
     width: 20px;
@@ -200,6 +212,9 @@ $loading: (
           color: map-get($color-hover, $name);
           fill: map-get($color-hover, $name);
         }
+        .#{$style}__google {
+          border-right-color: map-get($devider-hover, $name);
+        }
       }
     }
     &.#{$name}:active {
@@ -215,6 +230,9 @@ $loading: (
       .#{$style}__google-icon {
         transform: scale(0.9);
       }
+      .#{$style}__google {
+          border-right-color: map-get($devider, $name);
+        }
     }
     &.#{$name}:disabled {
       background-color: map-get($bg-disabled, $name);

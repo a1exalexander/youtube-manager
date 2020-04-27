@@ -12,14 +12,14 @@
           <div class="m-popconfirm__content">
             <slot>{{ text }}</slot>
           </div>
-          <row jc="center" class="m-popconfirm__buttons">
+          <m-row jc="center" class="m-popconfirm__buttons">
             <slot name="buttons">
               <m-button type="secondary" @click="onClose">Cancel</m-button>
               <m-button type="danger" @click="() => $emit('danger-action')">
                 {{ dangerLabel }}
               </m-button>
             </slot>
-          </row>
+          </m-row>
         </article>
       </div>
     </div>
@@ -72,7 +72,7 @@ $style: m-popconfirm;
     @include flex(center, center);
   }
   &__card {
-    background-color: $input-bg;
+    background-color: $dark;
     border-radius: 2px;
     border: none;
     box-shadow: 0 4px 11px 0 rgba(0, 0, 0, 0.28);

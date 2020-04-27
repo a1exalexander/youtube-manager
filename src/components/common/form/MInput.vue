@@ -4,6 +4,7 @@
       <slot>{{ label }}</slot>
     </label>
     <input
+      :autocomplete="autocomplete"
       :id="id"
       :type="type"
       :value="value"
@@ -33,6 +34,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    autocomplete: {
+      type: String,
+      default: 'on',
+    },
     status: {
       validator(value) {
         return (
@@ -47,7 +52,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'text',
+      default: '',
     },
   },
   computed: {
@@ -61,10 +66,12 @@ export default {
 $style: m-input;
 .#{$style} {
   display: block;
+  text-align: left;
   &__input {
     @extend %input;
   }
   &__label {
+    text-align: left;
     @extend %label;
   }
 }

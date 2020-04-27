@@ -1,6 +1,6 @@
 <template>
   <div
-    class="ms-row"
+    class="m-col"
     :style="{
       justifyContent: jc,
       alignItems: ai,
@@ -16,12 +16,12 @@
 import { props } from './props';
 
 export default {
-  name: 'Row',
-  props: { ...props() },
+  name: 'MCol',
+  props: { ...props('column') },
 };
 </script>
 <style lang="scss">
-.ms-row {
+.m-col {
   display: flex;
 }
 </style>

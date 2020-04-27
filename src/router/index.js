@@ -12,6 +12,18 @@ const routes = [
     component: Home,
     meta: { title: 'Media Scout' },
   },
+  {
+    path: '/auth',
+    name: 'Auth',
+    component: () => import(/* webpackChunkName: "auth" */ '../views/Auth.vue'),
+    meta: { title: 'Media Scout' },
+  },
+  {
+    path: '/reset-password',
+    name: 'ResetPassword',
+    component: () => import(/* webpackChunkName: "password" */ '../views/ResetPassword.vue'),
+    meta: { title: 'Reset Password | Media Scout' },
+  },
 ];
 
 // Add components guide Route in Development mode
@@ -19,9 +31,8 @@ if (isDev) {
   routes.push({
     path: '/components',
     name: 'Components',
-    meta: { title: 'Component | Media Scout' },
-    component: () =>
-      import(/* webpackChunkName: "components" */ '../views/Components.vue'),
+    meta: { title: 'Components | Media Scout' },
+    component: () => import(/* webpackChunkName: "components" */ '../views/Components.vue'),
   });
 }
 

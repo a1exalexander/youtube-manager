@@ -8,16 +8,16 @@
           :style="{ width }"
           :class="{ zoomIn: visible }"
         >
-          <row jc="space-between" ai="center" class="m-popup__header">
+          <m-row jc="space-between" ai="center" class="m-popup__header">
             <h3 class="m-popup__title">{{ title }}</h3>
             <button @click="onClose" class="m-popup__close-btn">
               <m-icon class="m-popup__close-icon" icon="close" />
             </button>
-          </row>
+          </m-row>
           <div class="m-popup__content"><slot /></div>
-          <row jc="flex-end" class="m-popup__buttons" v-if="$slots.buttons"
+          <m-row jc="flex-end" class="m-popup__buttons" v-if="$slots.buttons"
             ><slot name="buttons"
-          /></row>
+          /></m-row>
         </article>
       </div>
     </div>
@@ -62,7 +62,7 @@ $style: m-popup;
     @include flex(center, center);
   }
   &__card {
-    background-color: $input-bg;
+    background-color: $dark;
     border-radius: 2px;
     border: none;
     box-shadow: 0 4px 11px 0 rgba(0, 0, 0, 0.28);

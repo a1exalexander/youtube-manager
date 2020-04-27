@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>Popup</h2>
-    <row wrap class="row">
+    <m-row wrap class="row">
       <button @click="popup = true">Open Popup</button>
       <m-popup title="Popup" :visible="popup" @close="closePopup">
         <div class="fake-content-popup">
@@ -13,7 +13,7 @@
           <m-button>Submit</m-button>
         </template>
       </m-popup>
-    </row>
+    </m-row>
     <button @click="visible = !visible">Props</button>
     <m-accordion>
       <pre v-if="visible">
@@ -30,8 +30,8 @@ props: {
     type: Boolean,
     default: false,
   },
-}       
-      </pre>
+}</pre
+      >
     </m-accordion>
   </section>
 </template>

@@ -11,10 +11,10 @@ export default {
     },
   },
   components: {
-    search: () => import(`../icons/IconSearch.vue`),
-    check: () => import(`../icons/IconCheck.vue`),
-    close: () => import(`../icons/IconClose.vue`),
-    dropDown: () => import(`../icons/IconDropDown.vue`),
+    search: () => import('../icons/IconSearch.vue'),
+    check: () => import('../icons/IconCheck.vue'),
+    close: () => import('../icons/IconClose.vue'),
+    dropDown: () => import('../icons/IconDropDown.vue'),
   },
 };
 </script>

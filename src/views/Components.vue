@@ -1,5 +1,5 @@
 <template>
-  <container class="components">
+  <m-container class="components">
     <h1>Components</h1>
     <m-divider />
     <buttons />
@@ -16,7 +16,7 @@
     <m-divider />
     <popconfirm />
     <m-divider />
-  </container>
+  </m-container>
 </template>
 <script>
 import Buttons from '@/scenes/components/Buttons.vue';

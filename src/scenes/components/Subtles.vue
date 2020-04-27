@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>Subtle</h2>
-    <row wrap class="row">
+    <m-row wrap class="row">
       <m-subtle>Subtle</m-subtle>
       <m-subtle
         ><template #icon><m-icon icon="search"/></template>Subtle icon
@@ -12,7 +12,7 @@
         right</m-subtle
       >
       <m-subtle disabled>Subtle disabled</m-subtle>
-    </row>
+    </m-row>
     <button @click="visible = !visible">Props</button>
     <m-accordion>
       <pre v-if="visible">

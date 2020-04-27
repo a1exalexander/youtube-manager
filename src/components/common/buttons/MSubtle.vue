@@ -3,7 +3,15 @@
     class="m-subtle"
     :disabled="disabled"
     @click="() => !disabled && $emit('click')"
+    @mouseover="() => !disabled && $emit('mouseover')"
+    @mouseleave="() => !disabled && $emit('mouseleave')"
+    @mouseenter="() => !disabled && $emit('mouseenter')"
+    @mouseout="() => !disabled && $emit('mouseout')"
+    @mousedown="() => !disabled && $emit('mousedown')"
+    @mouseup="() => !disabled && $emit('mouseup')"
     :class="{
+      hover,
+      active,
       [position]: $slots.icon && $slots.default,
     }"
   >
@@ -30,6 +38,14 @@ export default {
     label: {
       type: String,
     },
+    hover: {
+      type: Boolean,
+      default: false,
+    },
+    active: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
@@ -42,6 +58,7 @@ $style: m-subtle;
   @include flex(flex-start, center);
   display: inline-flex;
   @include transition(all);
+  flex-wrap: wrap;
   &[disabled] {
     cursor: not-allowed;
     pointer-events: none;
@@ -50,6 +67,7 @@ $style: m-subtle;
     }
   }
   @include media {
+    &.hover,
     &:hover {
       .#{$style}__text {
         color: $I5;
@@ -59,6 +77,7 @@ $style: m-subtle;
       }
     }
   }
+  &.active,
   &:active {
     .#{$style}__text {
       color: $I8;
@@ -86,6 +105,7 @@ $style: m-subtle;
   &__text {
     @include text($H12, 500, $I6);
     @include transition(all);
+    @include word-wrap;
   }
 }
 </style>
