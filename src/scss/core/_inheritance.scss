@@ -34,7 +34,7 @@
   @include transition(all);
   @include media {
     &:hover {
-      border-color: $G6;
+      border-color: lighten($G7, 10%);
     }
   }
   &::placeholder {
@@ -50,7 +50,7 @@
     border-color: $T6;
   }
   &:focus {
-    border-color: $G7;
+    border-color: $G6;
   }
   &:disabled {
     background-color: $darken;
