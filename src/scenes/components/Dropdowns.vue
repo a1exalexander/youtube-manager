@@ -12,7 +12,7 @@
         placeholder="Autocomplete"
       />
       <a-select style="width: 200px" placeholder="Select">
-        <template #suffixIcon><m-icon icon="dropDown"/></template>
+        <template #suffixIcon><m-icon icon="drop-down"/></template>
         <a-select-option value="jack">Jack</a-select-option>
         <a-select-option value="lucy">Lucy</a-select-option>
         <a-select-option value="disabled" disabled>Disabled</a-select-option>
