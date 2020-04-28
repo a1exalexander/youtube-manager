@@ -1,22 +1,43 @@
 <template>
-  <div class="m-input">
-    <label class="m-input__label" :for="id" v-if="!!$slots.default || !!label">
+  <div
+    class="m-input"
+    :class="[status, {'danger': error}]"
+  >
+    <label
+      class="m-input__label"
+      :for="id"
+      v-if="!!$slots.default || !!label"
+    >
       <slot>{{ label }}</slot>
     </label>
-    <input
-      :autocomplete="autocomplete"
-      :id="id"
-      :type="inputType"
-      :value="value"
-      @input="(e) => $emit('input', e.target.value)"
-      :disabled="disabled"
-      :placeholder="placeholder"
-      class="m-input__input"
-      :class="status"
-    />
-    <button v-if="type === 'password'" @click="toggleVisibility" class="m-input__visibility-btn">
-      <m-icon class="m-input__visibility-icon" :icon="visibility ? 'visibility-on' : 'visibility-off'" />
-    </button>
+    <div class="m-input__field">
+      <input
+        :autocomplete="autocomplete"
+        :id="id"
+        :type="inputType"
+        :value="value"
+        :disabled="disabled"
+        :placeholder="placeholder"
+        @input="(e) => $emit('input', e.target.value)"
+        @blur="(e) => $emit('blur', e)"
+        @focus="(e) => $emit('focus', e)"
+        class="m-input__input"
+      />
+      <button
+        v-if="type === 'password'"
+        @click.prevent="toggleVisibility"
+        class="m-input__visibility-btn"
+      >
+        <m-icon
+          class="m-input__visibility-icon"
+          :icon="visibility ? 'visibility-on' : 'visibility-off'"
+        />
+      </button>
+      <p
+        class='m-input__message animated fast bounceIn'
+        v-if='!!message'
+      >{{ message }}</p>
+    </div>
   </div>
 </template>
 <script>
@@ -27,7 +48,11 @@ export default {
   props: {
     label: {
       type: String,
-      default: '',
+      default: null,
+    },
+    message: {
+      type: String,
+      default: null,
     },
     type: {
       type: String,
@@ -47,13 +72,17 @@ export default {
       },
       default: 'default',
     },
+    error: {
+      type: Boolean,
+      default: false,
+    },
     value: {
       type: [String, Number],
       required: true,
     },
     placeholder: {
       type: String,
-      default: '',
+      default: null,
     },
   },
   data() {
@@ -83,6 +112,33 @@ $style: m-input;
   display: block;
   text-align: left;
   position: relative;
+  &.danger {
+    .#{$style}__input:not(:focus) {
+      border-color: $R6;
+    }
+    .#{$style}__message {
+      color: $R6;
+    }
+  }
+  &.warning {
+    .#{$style}__input:not(:focus) {
+      border-color: $L6;
+    }
+    .#{$style}__message {
+      color: $L6;
+    }
+  }
+  &.success {
+    .#{$style}__input:not(:focus) {
+      border-color: $T6;
+    }
+    .#{$style}__message {
+      color: $T6;
+    }
+  }
+  &__field {
+    position: relative;
+  }
   &__input {
     @extend %input;
     @include media {
@@ -92,10 +148,13 @@ $style: m-input;
         }
       }
     }
-    &:focus + .#{$style}__visibility-btn {
+    &:focus ~ .#{$style}__visibility-btn {
       .#{$style}__visibility-icon {
         fill: $G6;
       }
+    }
+    &:focus ~ .#{$style}__message {
+      display: none;
     }
   }
   &__label {
@@ -108,7 +167,7 @@ $style: m-input;
     background-color: transparent;
     position: absolute;
     right: 6px;
-    bottom: 4px;
+    top: 7px;
     align-self: center;
     @include media {
       &:hover {
@@ -125,6 +184,11 @@ $style: m-input;
   }
   &__visibility-icon {
     @include svg(18px, $G7);
+  }
+  &__message {
+    @include text($H10, 400);
+    display: inline-block;
+    margin-top: 6px;
   }
 }
 </style>

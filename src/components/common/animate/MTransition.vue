@@ -1,5 +1,9 @@
 <template>
-  <transition :name="name" :appear="appear" :mode="mode">
+  <transition
+    :name="name"
+    :appear="appear"
+    :mode="mode"
+  >
     <slot />
   </transition>
 </template>

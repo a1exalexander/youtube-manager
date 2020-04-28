@@ -1,6 +1,5 @@
 <template>
   <svg
-    @mouseenter="start"
     @click="start"
     width="124px"
     height="24px"

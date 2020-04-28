@@ -40,15 +40,6 @@
   &::placeholder {
     @include text($H12, 400, $G6);
   }
-  &:not(:focus).danger {
-    border-color: $R6;
-  }
-  &:not(:focus).warning {
-    border-color: $L6;
-  }
-  &:not(:focus).success {
-    border-color: $T6;
-  }
   &:focus {
     border-color: $G6;
   }

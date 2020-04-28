@@ -2,6 +2,7 @@ import Vue from 'vue';
 import {
   AutoComplete, Select, Popover, Divider,
 } from 'ant-design-vue';
+import VueCompositionApi from '@vue/composition-api';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -56,6 +57,7 @@ Vue.component('MSelectItem', MSelectItem);
 Vue.component('MRadio', MRadio);
 Vue.component('MSliderTabs', MSliderTabs);
 
+Vue.use(VueCompositionApi);
 Vue.use(AutoComplete);
 Vue.use(Select);
 Vue.use(Popover);
