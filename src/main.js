@@ -20,6 +20,9 @@ import MTransition from './components/common/animate/MTransition.vue';
 import MAccordion from './components/common/animate/MAccordion.vue';
 import MPopup from './components/common/MPopup.vue';
 import MPopconfirm from './components/common/MPopconfirm.vue';
+import MRadio from './components/common/form/MRadio.vue';
+import MSliderTabs from './components/common/navigation/MSliderTabs.vue';
+
 import { isDev, isProd } from './utils';
 import './libs/animate.scss';
 import './libs/antd.scss';
@@ -50,6 +53,8 @@ Vue.component('MSubtle', MSubtle);
 Vue.component('MPopup', MPopup);
 Vue.component('MPopconfirm', MPopconfirm);
 Vue.component('MSelectItem', MSelectItem);
+Vue.component('MRadio', MRadio);
+Vue.component('MSliderTabs', MSliderTabs);
 
 Vue.use(AutoComplete);
 Vue.use(Select);

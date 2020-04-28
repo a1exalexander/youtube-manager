@@ -16,6 +16,10 @@
     <m-divider />
     <popconfirm />
     <m-divider />
+    <radio-buttons />
+    <m-divider />
+    <slider />
+    <m-divider />
   </m-container>
 </template>
 <script>
@@ -26,6 +30,8 @@ import Checkboxes from '@/scenes/components/Checkboxes.vue';
 import Dropdowns from '@/scenes/components/Dropdowns.vue';
 import Popup from '@/scenes/components/Popup.vue';
 import Popconfirm from '@/scenes/components/Poponfirm.vue';
+import RadioButtons from '@/scenes/components/RadioButtons.vue';
+import Slider from '@/scenes/components/Slider.vue';
 
 export default {
   name: 'Components',
@@ -37,6 +43,8 @@ export default {
     Dropdowns,
     Popup,
     Popconfirm,
+    RadioButtons,
+    Slider,
   },
 };
 </script>
