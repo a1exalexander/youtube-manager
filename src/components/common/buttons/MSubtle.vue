@@ -10,6 +10,7 @@
     @mousedown="() => !disabled && $emit('mousedown')"
     @mouseup="() => !disabled && $emit('mouseup')"
     :class="{
+      grey,
       hover,
       active,
       [position]: $slots.icon && $slots.default,
@@ -46,6 +47,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    grey: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
@@ -59,6 +64,14 @@ $style: m-subtle;
   display: inline-flex;
   @include transition(all);
   flex-wrap: wrap;
+  &.grey {
+    .#{$style}__text {
+      color: $G6;
+    }
+    svg {
+      fill: $G6;
+    }
+  }
   &[disabled] {
     cursor: not-allowed;
     pointer-events: none;

@@ -136,6 +136,7 @@ $BG10: #263237;
 
 $dark: #161829;
 $darken: #151726;
+$user-border: #343652;
 
 /* ---FONT SIZE--- */
 @function calcRem($size) {
@@ -143,6 +144,7 @@ $darken: #151726;
   @return #{$remSize}rem;
 }
 
+$H32: calcRem(32px);
 $H18: calcRem(18px);
 $H16: calcRem(16px);
 $H14: calcRem(14px);

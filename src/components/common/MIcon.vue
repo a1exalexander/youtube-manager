@@ -17,6 +17,10 @@ export default {
     dropDown: () => import('../icons/IconDropDown.vue'),
     visibilityOn: () => import('../icons/IconVisibilityOn.vue'),
     visibilityOff: () => import('../icons/IconVisibilityOff.vue'),
+    photo: () => import('../icons/IconPhoto.vue'),
+    user: () => import('../icons/IconUser.vue'),
+    back: () => import('../icons/IconBack.vue'),
+    ad: () => import('../icons/IconAD.vue'),
   },
 };
 </script>

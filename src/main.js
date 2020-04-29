@@ -23,6 +23,7 @@ import MPopup from './components/common/MPopup.vue';
 import MPopconfirm from './components/common/MPopconfirm.vue';
 import MRadio from './components/common/form/MRadio.vue';
 import MSliderTabs from './components/common/navigation/MSliderTabs.vue';
+import MLabel from './components/common/MLabel.vue';
 
 import { isDev, isProd } from './utils';
 import './libs/animate.scss';
@@ -56,6 +57,7 @@ Vue.component('MPopconfirm', MPopconfirm);
 Vue.component('MSelectItem', MSelectItem);
 Vue.component('MRadio', MRadio);
 Vue.component('MSliderTabs', MSliderTabs);
+Vue.component('MLabel', MLabel);
 
 Vue.use(VueCompositionApi);
 Vue.use(AutoComplete);

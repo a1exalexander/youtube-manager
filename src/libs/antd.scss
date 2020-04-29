@@ -2194,13 +2194,13 @@ html {
   top: 50%;
   right: 11px;
   margin-top: -6px;
-  color: $N0;
+  color: $G7;
   font-size: 12px;
   line-height: 1;
   transform-origin: 50% 50%;
   transform: translateY(-15%);
   svg {
-    @include svg(19px, $N0);
+    @include svg(19px, $G7);
   }
 }
 .ant-select-open {

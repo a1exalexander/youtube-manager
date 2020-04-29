@@ -24,6 +24,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "password" */ '../views/ResetPassword.vue'),
     meta: { title: 'Reset Password | Media Scout' },
   },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: () => import(/* webpackChunkName: "setings" */ '../views/Settings.vue'),
+    meta: { title: 'Settings | Media Scout' },
+  },
 ];
 
 // Add components guide Route in Development mode

@@ -20,6 +20,8 @@
     <m-divider />
     <slider />
     <m-divider />
+    <labels />
+    <m-divider />
   </m-container>
 </template>
 <script>
@@ -32,6 +34,7 @@ import Popup from '@/scenes/components/Popup.vue';
 import Popconfirm from '@/scenes/components/Poponfirm.vue';
 import RadioButtons from '@/scenes/components/RadioButtons.vue';
 import Slider from '@/scenes/components/Slider.vue';
+import Labels from '@/scenes/components/Labels.vue';
 
 export default {
   name: 'Components',
@@ -45,6 +48,7 @@ export default {
     Popconfirm,
     RadioButtons,
     Slider,
+    Labels,
   },
 };
 </script>

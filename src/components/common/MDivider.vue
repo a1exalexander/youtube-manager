@@ -11,7 +11,7 @@ export default {
   display: block;
   background-color: $G8;
   height: 1px;
-  margin: 12px 0;
+  margin: 20px 0;
   padding: 0;
 }
 </style>
