@@ -27,7 +27,7 @@
         </label>
       </m-col>
     </m-row>
-    <m-row>
+    <m-row wrap class="settings-scene__inputs-wrapper">
       <m-input class="settings-scene__input" v-model="user.name">Full Name</m-input>
       <m-input class="settings-scene__input" type="email" v-model="user.email">Email</m-input>
     </m-row>
@@ -158,10 +158,17 @@ export default {
     margin-bottom: 30px;
   }
   &__input {
-    min-width: 260px;
-    margin-right: 20px;
+    width: 100%;
+    max-width: 260px;
+    margin-bottom: 16px;
     &:last-child {
-      margin-right: 0;
+      margin-bottom: 0;
+    }
+    @include media {
+      margin-right: 20px;
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
   &__password-date {

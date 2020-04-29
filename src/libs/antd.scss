@@ -7239,8 +7239,8 @@ span.ant-radio + * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: rgba(0, 0, 0, 0.65);
-  font-size: 14px;
+  color: $G4;
+  font-size: $H12;
   font-variant: tabular-nums;
   line-height: 1.5;
   list-style: none;
@@ -7265,13 +7265,14 @@ span.ant-radio + * {
   box-sizing: border-box;
   width: 0;
   height: 2px;
-  background-color: #1890ff;
+  background-color: $I6;
   transform-origin: 0 0;
 }
 .ant-tabs-bar {
-  margin: 0 0 16px 0;
-  border-bottom: 1px solid #e8e8e8;
+  margin: 0 0 24px 0;
+  border-bottom: 1px solid $G8;
   outline: none;
+  max-width: fit-content;
   transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .ant-tabs-nav-container {
@@ -7279,7 +7280,7 @@ span.ant-radio + * {
   box-sizing: border-box;
   margin-bottom: -1px;
   overflow: hidden;
-  font-size: 14px;
+  font-size: $H12;
   line-height: 1.5;
   white-space: nowrap;
   transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -7414,7 +7415,7 @@ span.ant-radio + * {
   box-sizing: border-box;
   height: 100%;
   margin: 0 32px 0 0;
-  padding: 12px 16px;
+  padding: 12px 0 24px;
   text-decoration: none;
   cursor: pointer;
   transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -7434,16 +7435,16 @@ span.ant-radio + * {
   margin-right: 0;
 }
 .ant-tabs-nav .ant-tabs-tab:hover {
-  color: #40a9ff;
+  color: $N0;
 }
 .ant-tabs-nav .ant-tabs-tab:active {
-  color: #096dd9;
+  color: $N0;
 }
 .ant-tabs-nav .ant-tabs-tab .anticon {
   margin-right: 8px;
 }
 .ant-tabs-nav .ant-tabs-tab-active {
-  color: #1890ff;
+  color: $N0;
   font-weight: 500;
 }
 .ant-tabs-nav .ant-tabs-tab-disabled,
@@ -7458,7 +7459,7 @@ span.ant-radio + * {
   padding: 16px;
 }
 .ant-tabs .ant-tabs-small-bar .ant-tabs-nav-container {
-  font-size: 14px;
+  font-size: $H12;
 }
 .ant-tabs .ant-tabs-small-bar .ant-tabs-tab {
   padding: 8px 16px;

@@ -30,6 +30,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "setings" */ '../views/Settings.vue'),
     meta: { title: 'Settings | Media Scout' },
   },
+  {
+    path: '/video-details',
+    name: 'VideoDetails',
+    component: () => import(/* webpackChunkName: "video-details" */ '../views/VideoDetails.vue'),
+    meta: { title: 'Video Details | Media Scout' },
+  },
 ];
 
 // Add components guide Route in Development mode
