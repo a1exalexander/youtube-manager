@@ -165,6 +165,7 @@ export default {
       margin-bottom: 0;
     }
     @include media {
+      margin-bottom: 0;
       margin-right: 20px;
       &:last-child {
         margin-right: 0;
