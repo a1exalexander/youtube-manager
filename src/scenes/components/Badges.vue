@@ -2,8 +2,8 @@
   <section>
     <h2>Labels</h2>
     <m-row wrap class="row">
-      <m-label>Label</m-label>
-      <m-label withIcon>Label whith icon</m-label>
+      <m-badge>Label</m-badge>
+      <m-badge withIcon>Label whith icon</m-badge>
     </m-row>
     <button @click="visible = !visible">Props</button>
     <m-accordion>

@@ -52,6 +52,7 @@ $style: m-container;
   }
   &__content {
     margin: 0 auto;
+    width: 100%;
   }
 }
 </style>

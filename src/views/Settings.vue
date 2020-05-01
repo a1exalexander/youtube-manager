@@ -1,12 +1,10 @@
 <template>
-  <transition
-    mode="out-in"
-    enter-active-class="animated faster fadeIn"
-    leave-active-class="animated faster fadeOut"
-  >
-    <settings-scene key="settings" v-if="navigation === 'settings'" @disableAccount="navigation = 'disable-account'" />
-    <settings-disable-account-scene key="disable-acount" v-else @back="navigation = 'settings'"/>
-  </transition>
+  <m-container center width='884px'>
+    <m-transition>
+      <settings-scene key="settings" v-if="navigation === 'settings'" @disableAccount="navigation = 'disable-account'" />
+      <settings-disable-account-scene key="disable-account" v-else @back="navigation = 'settings'"/>
+    </m-transition>
+  </m-container>
 </template>
 <script>
 import SettingsScene from '@/scenes/settings/SettingsScene.vue';

@@ -1,5 +1,5 @@
 <template>
-  <m-container class="settings-scene" contentClass="settings-scene__inner" width="884px">
+  <div class="settings-scene">
     <h2 class="settings-scene__title settings-scene__title--main">Personal Settings</h2>
     <m-row ai="center" class="settings-scene__avatar-row">
       <div class="settings-scene__img-wrapper">
@@ -9,7 +9,7 @@
       <m-col>
         <m-row ai="center" class="settings-scene__username-wrapper">
           <h2 class="settings-scene__title settings-scene__title--user">Pavel Tseluyko</h2>
-          <m-label>Admin</m-label>
+          <m-badge>Admin</m-badge>
         </m-row>
         <label class="settings-scene__upload">
           <input
@@ -27,10 +27,10 @@
         </label>
       </m-col>
     </m-row>
-    <m-row wrap class="settings-scene__inputs-wrapper">
+    <div class="settings-scene__inputs-wrapper">
       <m-input class="settings-scene__input" v-model="user.name">Full Name</m-input>
       <m-input class="settings-scene__input" type="email" v-model="user.email">Email</m-input>
-    </m-row>
+    </div>
     <m-divider />
     <h2 class="settings-scene__title settings-scene__title--pass">Change password</h2>
     <transition
@@ -68,7 +68,7 @@
     <h2 class="settings-scene__title settings-scene__title--last">Disable Account</h2>
     <p class="settings-scene__text">The page can be restored with all previous data saved.</p>
     <m-button type="secondary" @click="$emit('disableAccount')">Disable</m-button>
-  </m-container>
+  </div>
 </template>
 <script>
 export default {
@@ -99,14 +99,17 @@ export default {
 </script>
 <style lang="scss">
 .settings-scene {
-  padding-top: 96px;
-  &__inner {
-    flex: 1;
-    background-color: $dark;
-    border-radius: 2px;
-    padding: 25px 32px;
-    text-align: left;
-    color: $N0;
+  flex: 1;
+  background-color: $dark;
+  border-radius: 2px;
+  padding: 25px 32px;
+  text-align: left;
+  color: $N0;
+  &__inputs-wrapper {
+    @include flex-col;
+    @include media($screen-tablet) {
+      flex-direction: row;
+    }
   }
   &__title {
     @include text($H16, 500, $N0);
@@ -160,15 +163,11 @@ export default {
   &__input {
     width: 100%;
     max-width: 260px;
-    margin-bottom: 16px;
-    &:last-child {
-      margin-bottom: 0;
-    }
-    @include media {
-      margin-bottom: 0;
-      margin-right: 20px;
-      &:last-child {
-        margin-right: 0;
+    &:not(:last-child) {
+      margin-bottom: 16px;
+      @include media($screen-tablet) {
+        margin-bottom: 0;
+        margin-right: 20px;
       }
     }
   }
