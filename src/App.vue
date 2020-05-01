@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="app">
     <m-transition>
       <router-view />
     </m-transition>
@@ -10,4 +10,8 @@ export default {
   name: 'App',
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+.app {
+  min-height: 100vh;
+}
+</style>

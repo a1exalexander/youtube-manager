@@ -1,32 +1,34 @@
 <template>
-  <m-container
-    center
-    class="settings-disable-account-scene"
-    contentClass="settings-disable-account-scene__inner"
-    width="660px"
-  >
+  <div class="settings-disable-account-scene">
     <m-col class="settings-disable-account-scene__col">
-      <m-subtle grey @click="$emit('back')" class="settings-disable-account-scene__back-btn">
+      <m-subtle
+        grey
+        @click="$emit('back')"
+        class="settings-disable-account-scene__back-btn"
+      >
         Back to Account Setting
         <template #icon>
           <m-icon icon="back" />
         </template>
       </m-subtle>
       <h2 class="settings-disable-account-scene__title">Disable Account</h2>
-      <p
-        class="settings-disable-account-scene__text"
-      >Are you sure you want to disable your account? The page can be restored with all previous data saved.</p>
+      <p class="settings-disable-account-scene__text">Are you sure you want to disable your account? The page can be restored with all previous data saved.</p>
     </m-col>
     <m-col class="settings-disable-account-scene__col">
-      <form @submit.prevent="submit" class="settings-disable-account-scene__form">
+      <form
+        @submit.prevent="submit"
+        class="settings-disable-account-scene__form"
+      >
         <m-input
           v-model="password"
           type="password"
           class="settings-disable-account-scene__input"
         >Password</m-input>
-        <label class="settings-disable-account-scene__dropdown">
-          <span class="settings-disable-account-scene__label">Reason</span>
-          <a-select style="width: 100%" placeholder="Choose Reason">
+        <m-input-wrapper class="settings-disable-account-scene__dropdown" label='Reason'>
+          <a-select
+            style="width: 100%"
+            placeholder="Choose Reason"
+          >
             <template #suffixIcon>
               <m-icon icon="drop-down" />
             </template>
@@ -34,11 +36,14 @@
             <a-select-option value="lucy">Lucy</a-select-option>
             <a-select-option value="Yiminghe">yiminghe</a-select-option>
           </a-select>
-        </label>
-        <m-button type="danger" :loading="loading">Disable</m-button>
+        </m-input-wrapper>
+        <m-button
+          type="danger"
+          :loading="loading"
+        >Disable</m-button>
       </form>
     </m-col>
-  </m-container>
+  </div>
 </template>
 <script>
 export default {
@@ -62,21 +67,24 @@ export default {
 </script>
 <style lang="scss">
 .settings-disable-account-scene {
-  padding-top: 96px;
-  &__inner {
-    flex: 1;
-    @include flex-row(center, center);
-    color: $N0;
+  color: $N0;
+  @include flex-col(center);
+  @include media($screen-tablet) {
+    flex-direction: row;
+    align-items: center;
   }
   &__col {
-    flex: 1 1 308px;
-    max-width: 336px;
-    padding: 0;
-    text-align: left;
-    padding-right: 28px;
-    &:last-child {
-      padding-left: 28px;
-      padding-right: 0;
+    &:not(:last-child) {
+      margin-bottom: 64px;
+    }
+    @include media($screen-tablet) {
+      flex: 1 1 308px;
+      max-width: 336px;
+      text-align: left;
+      &:not(:last-child) {
+        margin-bottom: 0;
+        margin-right: 56px;
+      }
     }
   }
   &__back-btn {

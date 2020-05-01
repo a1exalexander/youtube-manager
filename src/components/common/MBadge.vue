@@ -1,6 +1,6 @@
 <template>
-  <div class="m-label" :class="{'with-icon': withIcon}">
-    <span class="m-label__text">
+  <div class="m-badge" :class="{'with-icon': withIcon}">
+    <span class="m-badge__text">
       <slot />
     </span>
     <m-icon icon="ad" v-if="withIcon" />
@@ -8,7 +8,7 @@
 </template>
 <script>
 export default {
-  name: 'MLabel',
+  name: 'MBadge',
   props: {
     withIcon: {
       type: Boolean,
@@ -18,7 +18,7 @@ export default {
 };
 </script>
 <style lang="scss">
-$styles: m-label;
+$styles: m-badge;
 .#{$styles} {
   padding: 4px 12px;
   border-radius: 10px;
