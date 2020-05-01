@@ -37,7 +37,7 @@ import Slider from '@/scenes/components/Slider.vue';
 import Badges from '@/scenes/components/Badges.vue';
 
 export default {
-  name: 'Components',
+  name: 'ComponentsView',
   components: {
     Buttons,
     Subtles,

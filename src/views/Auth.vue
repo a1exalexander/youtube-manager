@@ -48,7 +48,7 @@ import LoginScene from '@/scenes/auth/LoginScene.vue';
 import SignupScene from '@/scenes/auth/SignupScene.vue';
 
 export default {
-  name: 'Auth',
+  name: 'AuthView',
   components: {
     AuthScene,
     LoginScene,

@@ -3,7 +3,7 @@
     <input type="radio" class="m-radio__input" :name="name" :value="val" v-model="checked" />
     <div class="m-radio__inner">
       <div class="m-radio__cell" :class="{ 'm-radio__cell--margin': !!label }">
-        <div class="m-radio__image"></div>
+        <div class="m-radio__image animated fast bounceIn"></div>
       </div>
       <span v-if="!!$slots.default || !!label" class="m-radio__text"
         ><slot>{{ label }}</slot></span
@@ -16,13 +16,13 @@ export default {
   name: 'MRadio',
   props: {
     val: {
-      type: String,
+      type: [String, Number, Boolean],
     },
     name: {
       type: String,
     },
     value: {
-      type: String,
+      type: [String, Number, Boolean],
     },
     label: {
       type: String,
@@ -34,7 +34,7 @@ export default {
         return this.value;
       },
       set() {
-        this.$emit('change', this.val);
+        this.$emit('input', this.val);
       },
     },
   },
@@ -59,7 +59,7 @@ $styles: m-radio;
         border-color: $I8;
       }
       .#{$styles}__image {
-        opacity: 1;
+        display: block;
       }
       .#{$styles}__text {
         color: $G2;
@@ -83,11 +83,9 @@ $styles: m-radio;
   &__image {
     @include size(10px, true);
     background-color: $G2;
-    opacity: 0;
-    transition-property: opacity;
-    transition-duration: 0.2s;
-    transition-timing-function: ease;
+    transition: all ease 0.2s;
     position: relative;
+    display: none;
   }
   &__text {
     @include text($H12, 500, $G2);

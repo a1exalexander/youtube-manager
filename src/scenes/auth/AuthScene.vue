@@ -1,6 +1,6 @@
 <template>
   <m-container center class="auth-scene" contentClass="auth-scene__inner">
-    <icon-logo class="auth-scene__logo" />
+    <icon-logo animation class="auth-scene__logo" />
     <article class="auth-scene__card">
       <slot />
     </article>

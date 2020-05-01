@@ -4,7 +4,7 @@ import {
 } from 'ant-design-vue';
 import VueCompositionApi from '@vue/composition-api';
 import App from './App.vue';
-import router from './router';
+import router, { routeName, routePath } from './router';
 import store from './store';
 import MButton from './components/common/buttons/MButton.vue';
 import MSubtle from './components/common/buttons/MSubtle.vue';
@@ -25,6 +25,7 @@ import MRadio from './components/common/form/MRadio.vue';
 import MSliderTabs from './components/common/navigation/MSliderTabs.vue';
 import MBadge from './components/common/MBadge.vue';
 import MInputWrapper from './components/common/form/MInputWrapper.vue';
+import MAvatar from './components/common/MAvatar.vue';
 
 import { isDev, isProd } from './utils';
 import './libs/animate.scss';
@@ -35,6 +36,8 @@ Vue.config.productionTip = false;
 
 Vue.prototype.$isDev = isDev;
 Vue.prototype.$isProd = isProd;
+Vue.prototype.$routeName = routeName;
+Vue.prototype.$routePath = routePath;
 
 // Grid
 Vue.component('MContainer', MContainer);
@@ -60,6 +63,7 @@ Vue.component('MRadio', MRadio);
 Vue.component('MSliderTabs', MSliderTabs);
 Vue.component('MBadge', MBadge);
 Vue.component('MInputWrapper', MInputWrapper);
+Vue.component('MAvatar', MAvatar);
 
 Vue.use(VueCompositionApi);
 Vue.use(AutoComplete);

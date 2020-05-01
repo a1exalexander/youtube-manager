@@ -11,7 +11,7 @@ import SettingsScene from '@/scenes/settings/SettingsScene.vue';
 import SettingsDisableAccountScene from '@/scenes/settings/SettingsDisableAccountScene.vue';
 
 export default {
-  name: 'Settings',
+  name: 'SettingsView',
   components: {
     SettingsScene,
     SettingsDisableAccountScene,

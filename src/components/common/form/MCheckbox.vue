@@ -9,7 +9,7 @@
     />
     <div class="m-checkbox__inner">
       <div class="m-checkbox__cell">
-        <m-icon class="m-checkbox__image" icon="check" />
+        <m-icon class="m-checkbox__image animated fast bounceIn" icon="check" />
       </div>
       <span v-if="!!$slots.default || !!label" class="m-checkbox__text"
         ><slot>{{ label }}</slot></span
@@ -71,7 +71,7 @@ $styles: m-checkbox;
         background-color: $I6;
       }
       .#{$styles}__image {
-        opacity: 1;
+        display: block;
       }
       .#{$styles}__text {
         color: $G2;
@@ -92,8 +92,8 @@ $styles: m-checkbox;
     border: 1px solid $G7;
   }
   &__image {
-    opacity: 0;
     @include svg(14px, $N0);
+    display: none;
   }
   &__text {
     line-height: 1;

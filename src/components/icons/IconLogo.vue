@@ -1,6 +1,7 @@
 <template>
   <svg
     @click="start"
+    :animation='animation'
     width="124px"
     height="24px"
     viewBox="0 0 124 24"
@@ -27,19 +28,27 @@ import Velocity from 'velocity-animate';
 
 export default {
   name: 'IconLogo',
+  props: {
+    animation: {
+      type: Boolean,
+      default: false,
+    },
+  },
   methods: {
     start() {
-      Velocity(
-        this.$refs.picture,
-        {
-          fill: '#f34436', transformOrigin: '25% 25% 0', scaleX: 1, scaleY: 1,
-        },
-        { duration: 200 },
-      );
-      Velocity(this.$refs.picture, { fill: '#cddc39', scaleX: 0.85, scaleY: 0.85 }, { duration: 200 });
-      Velocity(this.$refs.picture, { fill: '#009688', scaleX: 1, scaleY: 1 }, { duration: 200 });
-      Velocity(this.$refs.picture, { fill: '#673ab7', scaleX: 0.85, scaleY: 0.85 }, { duration: 200 });
-      Velocity(this.$refs.picture, { fill: '#2296F3', scaleX: 1, scaleY: 1 }, { duration: 200 });
+      if (this.animation) {
+        Velocity(
+          this.$refs.picture,
+          {
+            fill: '#f34436', transformOrigin: '25% 25% 0', scaleX: 1, scaleY: 1,
+          },
+          { duration: 200 },
+        );
+        Velocity(this.$refs.picture, { fill: '#cddc39', scaleX: 0.85, scaleY: 0.85 }, { duration: 200 });
+        Velocity(this.$refs.picture, { fill: '#009688', scaleX: 1, scaleY: 1 }, { duration: 200 });
+        Velocity(this.$refs.picture, { fill: '#673ab7', scaleX: 0.85, scaleY: 0.85 }, { duration: 200 });
+        Velocity(this.$refs.picture, { fill: '#2296F3', scaleX: 1, scaleY: 1 }, { duration: 200 });
+      }
     },
   },
 };

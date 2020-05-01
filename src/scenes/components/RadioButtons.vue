@@ -2,33 +2,15 @@
   <section>
     <h2>Radio Buttons</h2>
     <m-row wrap class="row">
-      <m-radio name="radios" val="first" :value="selectedValue" @change="changeValue" />
-      <m-radio name="radios" val="second" :value="selectedValue" @change="changeValue" />
-      <m-radio name="radios" val="third" :value="selectedValue" @change="changeValue" />
+      <m-radio name="radios" val="first" v-model="selectedValue" />
+      <m-radio name="radios" val="second" v-model="selectedValue" />
+      <m-radio name="radios" val="third" v-model="selectedValue" />
       <code>{{ selectedValue }}</code>
     </m-row>
     <m-row wrap class="row">
-      <m-radio
-        name="radiosLabeled"
-        val="first"
-        label="first"
-        :value="selectedValueLabeled"
-        @change="changeValueLabeled"
-      />
-      <m-radio
-        name="radiosLabeled"
-        val="second"
-        label="second"
-        :value="selectedValueLabeled"
-        @change="changeValueLabeled"
-      />
-      <m-radio
-        name="radiosLabeled"
-        val="third"
-        label="third"
-        :value="selectedValueLabeled"
-        @change="changeValueLabeled"
-      />
+      <m-radio name="radiosLabeled" val="first" label="first" v-model="selectedValueLabeled" />
+      <m-radio name="radiosLabeled" val="second" label="second" v-model="selectedValueLabeled" />
+      <m-radio name="radiosLabeled" val="third" label="third" v-model="selectedValueLabeled" />
       <code>{{ selectedValueLabeled }}</code>
     </m-row>
     <button @click="visible = !visible">Props</button>

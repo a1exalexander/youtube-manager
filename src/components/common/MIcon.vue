@@ -1,7 +1,8 @@
 <template>
-  <component :is="icon"></component>
+  <component :is="getIcon"></component>
 </template>
 <script>
+const getName = (name) => `icon-${name}`;
 export default {
   name: 'Icon',
   props: {
@@ -11,16 +12,30 @@ export default {
     },
   },
   components: {
-    search: () => import('../icons/IconSearch.vue'),
-    check: () => import('../icons/IconCheck.vue'),
-    close: () => import('../icons/IconClose.vue'),
-    dropDown: () => import('../icons/IconDropDown.vue'),
-    visibilityOn: () => import('../icons/IconVisibilityOn.vue'),
-    visibilityOff: () => import('../icons/IconVisibilityOff.vue'),
-    photo: () => import('../icons/IconPhoto.vue'),
-    user: () => import('../icons/IconUser.vue'),
-    back: () => import('../icons/IconBack.vue'),
-    ad: () => import('../icons/IconAD.vue'),
+    [getName('search')]: () => import('../icons/IconSearch.vue'),
+    [getName('check')]: () => import('../icons/IconCheck.vue'),
+    [getName('close')]: () => import('../icons/IconClose.vue'),
+    [getName('drop-down')]: () => import('../icons/IconDropDown.vue'),
+    [getName('visibility-on')]: () => import('../icons/IconVisibilityOn.vue'),
+    [getName('visibility-off')]: () => import('../icons/IconVisibilityOff.vue'),
+    [getName('photo')]: () => import('../icons/IconPhoto.vue'),
+    [getName('user')]: () => import('../icons/IconUser.vue'),
+    [getName('back')]: () => import('../icons/IconBack.vue'),
+    [getName('ad')]: () => import('../icons/IconAD.vue'),
+    [getName('profile')]: () => import('../icons/IconProfile.vue'),
+    [getName('angle-down')]: () => import('../icons/IconAngleDown.vue'),
+    [getName('video')]: () => import('../icons/IconVideo.vue'),
+    [getName('settings')]: () => import('../icons/IconSettings.vue'),
+    [getName('team')]: () => import('../icons/IconTeam.vue'),
+    [getName('link')]: () => import('../icons/IconLink.vue'),
+    [getName('components')]: () => import('../icons/IconComponents.vue'),
+    [getName('exit')]: () => import('../icons/IconExit.vue'),
+    [getName('plus')]: () => import('../icons/IconPlus.vue'),
+  },
+  computed: {
+    getIcon() {
+      return getName(this.icon);
+    },
   },
 };
 </script>

@@ -161,6 +161,9 @@ $loading: (
     @include transition(all);
   }
   &__loading {
+    margin: 0 auto;
+    right: 0;
+    left: 0;
     display: none;
     position: absolute;
     @include svg(20px);
