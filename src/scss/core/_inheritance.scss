@@ -54,3 +54,8 @@
   margin-bottom: 8px;
   @include text($H11, 500);
 }
+
+%block-style {
+  background-color: $dark;
+  border-radius: 2px;
+}

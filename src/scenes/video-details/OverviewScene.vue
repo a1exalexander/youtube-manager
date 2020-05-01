@@ -39,17 +39,63 @@
           </m-col>
         </m-row>
         <h6 class="overview-scene__video-subtitle overview-scene__video-subtitle--mb">Description:</h6>
-        <p
-          class="overview-scene__video-text"
-        >Traditionally, consumer companies have had viral growth and network effects, while enterprise companies have been built brick by brick and sale by sale. But a new wave of B2B companies — Dropbox, Twilio, Atlassian, SurveyMonkey, GitHub — show that recently enterprise businesses have started to look a lot more like their consumer counterparts.</p>
+        <p class="overview-scene__video-text">
+          Traditionally, consumer companies have had viral growth and network effects, while enterprise companies have
+          been built brick by brick and sale by sale. But a new wave of B2B companies — Dropbox, Twilio, Atlassian,
+          SurveyMonkey, GitHub — show that recently enterprise businesses have started to look a lot more like their
+          consumer counterparts.
+        </p>
       </m-col>
     </m-row>
     <m-divider />
+    <m-row class="overview-scene__charts-row">
+      <div class="overview-scene__chart-wrapper">
+        <overview-chart />
+      </div>
+      <div class="overview-scene__chart-wrapper">
+        <overview-chart type="teal" />
+      </div>
+      <div class="overview-scene__chart-wrapper">
+        <overview-chart type="violet" />
+      </div>
+      <div class="overview-scene__chart-wrapper">
+        <overview-chart type="lime" />
+      </div>
+    </m-row>
+    <div class="overview-scene__bottom-block">
+      <a-tabs
+        defaultActiveKey="1"
+        class="overview-scene__tabs"
+        :tabBarStyle="{ width: '100%', maxWidth: '100%', padding: '0 24px' }"
+      >
+        <a-tab-pane tab="Production Overview" key="1" class="overview-scene__tab">Production Overview</a-tab-pane>
+        <a-tab-pane tab="Transcript Overview" key="2" class="overview-scene__tab">Transcript Overview</a-tab-pane>
+        <a-tab-pane tab="Language Stats" key="3" class="overview-scene__tab">Language Stats</a-tab-pane>
+      </a-tabs>
+    </div>
   </div>
 </template>
 <script>
+import OverviewChart from './overview-scene/OverviewChart.vue';
+
 export default {
   name: 'OverviewScene',
+  components: {
+    OverviewChart,
+  },
+  data() {
+    return {
+      chartdata: {
+        labels: ['NOV 12', 'JAN25', 'MAR 17', 'NOV 12', 'JAN25', 'MAR 17'],
+        datasets: [
+          {
+            label: 'First data',
+            data: [1, 6, 3, 8, 1, 7],
+          },
+        ],
+      },
+    };
+  },
 };
 </script>
 <style lang="scss">
@@ -99,6 +145,24 @@ export default {
   &__video-text {
     @include text($H12, 400, $G4);
     line-height: 1.7;
+  }
+  &__bottom-block {
+    @extend %block-style;
+  }
+  &__tab {
+    padding: 0 24px 30px;
+  }
+  &__chart-wrapper {
+    @extend %block-style;
+    flex: 1 1 25%;
+    max-width: 25%;
+    margin-right: 24px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  &__charts-row {
+    margin-bottom: 24px;
   }
 }
 </style>
