@@ -31,7 +31,7 @@ const routes = [
     meta: { title: 'Settings | Media Scout' },
   },
   {
-    path: '/video-details',
+    path: '/video-details/:id',
     name: 'VideoDetails',
     component: () => import(/* webpackChunkName: "video-details" */ '../views/VideoDetails.vue'),
     meta: { title: 'Video Details | Media Scout' },

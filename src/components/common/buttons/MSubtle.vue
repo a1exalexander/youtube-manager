@@ -71,6 +71,27 @@ $style: m-subtle;
     svg {
       fill: $G6;
     }
+    @include media {
+      &.hover,
+      &:hover {
+        .#{$style}__text {
+          color: $N0;
+        }
+        svg {
+          fill: $N0;
+        }
+      }
+      &.active,
+      &:active {
+        .#{$style}__text {
+          color: $N0;
+        }
+        svg {
+          fill: $N0;
+          transform: scale(0.9);
+        }
+      }
+    }
   }
   &[disabled] {
     cursor: not-allowed;
