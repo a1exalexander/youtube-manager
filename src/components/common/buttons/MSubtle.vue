@@ -51,7 +51,7 @@ export default {
     },
     type: {
       validator(value) {
-        return ['primary', 'grey', 'white'].indexOf(value) !== -1;
+        return ['primary', 'grey', 'light-grey', 'white'].indexOf(value) !== -1;
       },
       default: 'primary',
     },
@@ -60,25 +60,29 @@ export default {
 </script>
 <style lang="scss">
 $style: m-subtle;
-$names: 'primary', 'grey', 'white';
+$names: 'primary', 'grey', 'light-grey', 'white';
 $color: (
   'primary': $I6,
   'grey': $G6,
+  'light-grey': $G4,
   'white': $N0,
 );
 $hover: (
   'primary': $I5,
   'grey': $G5,
+  'light-grey': $G3,
   'white': $N30,
 );
 $active: (
   'primary': $I8,
   'grey': $G7,
+  'light-grey': $N0,
   'white': $N60,
 );
 $disabled: (
   'primary': $G6,
   'grey': $G6,
+  'light-grey': $G6,
   'white': $G6,
 );
 .#{$style} {
@@ -152,7 +156,8 @@ $disabled: (
         fill: map-get($active, $name);
       }
     }
-    &.#{$name}[disabled='true'], &.#{$name}.disabled {
+    &.#{$name}[disabled='true'],
+    &.#{$name}.disabled {
       cursor: not-allowed;
       pointer-events: none;
       .#{$style}__text {

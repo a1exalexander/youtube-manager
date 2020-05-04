@@ -1,6 +1,6 @@
 <template>
   <m-container class="video-details" contentClass="video-details__inner" fluid>
-    <m-subtle grey @click="$emit('back')" class="video-details__back-btn">
+    <m-subtle type="grey" @click="$emit('back')" class="video-details__back-btn">
       Back to Account Setting
       <template #icon>
         <m-icon icon="back" />
@@ -35,12 +35,14 @@ export default {
 </script>
 <style lang="scss">
 .video-details {
+  position: relative;
+  z-index: 1;
   &__inner {
     width: 100%;
     @include flex-row(stretch, stretch);
     position: relative;
   }
-  &__back-btn {
+  .m-subtle.video-details__back-btn {
     position: absolute;
     left: 0;
     top: 26px;

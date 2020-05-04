@@ -4,14 +4,14 @@
     <a-popover trigger="click" placement="bottomLeft" @visibleChange="handleChangeVisibility">
       <template slot="content">
         <div class="overview-chart__dropdown">
-          <m-subtle :active="impressions" class="overview-chart__dropdown-item" grey>Impressions</m-subtle>
-          <m-subtle class="overview-chart__dropdown-item" grey>
+          <m-subtle :active="impressions" class="overview-chart__dropdown-item" type="light-grey">Impressions</m-subtle>
+          <m-subtle class="overview-chart__dropdown-item" type="light-grey">
             Click Through Rate
           </m-subtle>
         </div>
       </template>
-      <m-subtle :active="isClickedDropdown" class="overview-chart__dropdown-button" grey position="right"
-        ><template #icon><m-icon icon="dropDown"/></template>Click me</m-subtle
+      <m-subtle :active="isClickedDropdown" class="overview-chart__dropdown-button" type="light-grey" position="right"
+        ><template #icon-right><m-icon icon="drop-down" class="overview-chart__dropdown-arrow"/></template>Click me</m-subtle
       >
     </a-popover>
     <m-line-chart :chartdata="chartData" :width="100" :height="140" />
@@ -84,7 +84,7 @@ export default {
   height: 170px;
   padding: 30px 2px 10px 2px;
   position: relative;
-  &__dropdown-button {
+  & &__dropdown-button {
     position: absolute;
     top: 16px;
     left: 16px;
@@ -92,12 +92,8 @@ export default {
       font-size: $H10;
       text-transform: uppercase;
     }
-    @include media {
-      &.active.grey {
-        svg {
-          transform: rotate(180deg);
-        }
-      }
+    svg {
+      top: 0;
     }
   }
   &__dropdown-item {
@@ -112,6 +108,10 @@ export default {
   }
   &__dropdown {
     padding: 0 12px;
+    @include flex-col(flex-start, flex-start);
+    & .m-subtle {
+      align-self: start;
+    }
   }
   &__value {
     @include text($H12, 500);
