@@ -16,7 +16,7 @@ import NewPasswordScene from '@/scenes/reset-password/NewPasswordScene.vue';
 import FinishScene from '@/scenes/reset-password/FinishScene.vue';
 
 export default {
-  name: 'ResetPassword',
+  name: 'ResetPasswordView',
   components: {
     EmailScene,
     AuthScene,

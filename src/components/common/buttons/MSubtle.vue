@@ -9,17 +9,21 @@
     @mouseout="() => !disabled && $emit('mouseout')"
     @mousedown="() => !disabled && $emit('mousedown')"
     @mouseup="() => !disabled && $emit('mouseup')"
-    :class="{
-      grey,
-      hover,
-      active,
-      [position]: $slots.icon && $slots.default,
-    }"
+    :class="[
+      {
+        hover,
+        disabled,
+        active,
+        rotate,
+      },
+      type,
+    ]"
   >
     <slot name="icon" />
-    <span class="m-subtle__text" v-if="!!$slots.default || !!label"
-      ><slot>{{ label }}</slot></span
-    >
+    <span class="m-subtle__text" v-if="!!$slots.default || !!label">
+      <slot>{{ label }}</slot>
+    </span>
+    <slot name="icon-right" />
   </a>
 </template>
 <script>
@@ -30,11 +34,9 @@ export default {
       type: Boolean,
       default: false,
     },
-    position: {
-      validator(value) {
-        return ['left', 'right'].indexOf(value) !== -1;
-      },
-      default: 'left',
+    rotate: {
+      type: Boolean,
+      default: true,
     },
     label: {
       type: String,
@@ -47,65 +49,49 @@ export default {
       type: Boolean,
       default: false,
     },
-    grey: {
-      type: Boolean,
-      default: false,
+    type: {
+      validator(value) {
+        return ['primary', 'grey', 'white'].indexOf(value) !== -1;
+      },
+      default: 'primary',
     },
   },
 };
 </script>
 <style lang="scss">
 $style: m-subtle;
-
+$names: 'primary', 'grey', 'white';
+$color: (
+  'primary': $I6,
+  'grey': $G6,
+  'white': $N0,
+);
+$hover: (
+  'primary': $I5,
+  'grey': $G5,
+  'white': $N30,
+);
+$active: (
+  'primary': $I8,
+  'grey': $G7,
+  'white': $N60,
+);
+$disabled: (
+  'primary': $G6,
+  'grey': $G6,
+  'white': $G6,
+);
 .#{$style} {
+  align-self: center;
   cursor: pointer;
   position: relative;
   @include flex(flex-start, center);
   display: inline-flex;
   @include transition(all);
   flex-wrap: wrap;
-  &.grey {
-    .#{$style}__text {
-      color: $G6;
-    }
-    svg {
-      fill: $G6;
-    }
-    @include media {
-      &.hover,
-      &:hover {
-        .#{$style}__text {
-          color: $N0;
-        }
-        svg {
-          fill: $N0;
-        }
-      }
-      &.active,
-      &:active {
-        .#{$style}__text {
-          color: $N0;
-        }
-        svg {
-          fill: $N0;
-          transform: scale(0.9);
-        }
-      }
-    }
-  }
-  &[disabled] {
-    cursor: not-allowed;
-    pointer-events: none;
-    .#{$style}__text {
-      color: $G6;
-    }
-  }
   @include media {
     &.hover,
     &:hover {
-      .#{$style}__text {
-        color: $I5;
-      }
       svg {
         fill: $I5;
       }
@@ -113,33 +99,69 @@ $style: m-subtle;
   }
   &.active,
   &:active {
-    .#{$style}__text {
-      color: $I8;
-    }
     svg {
-      fill: $I8;
       transform: scale(0.9);
     }
   }
-  &.left {
-    svg {
-      order: -2;
-      margin-right: 8px;
-    }
-  }
-  &.right {
-    svg {
-      order: 2;
-      margin-left: 8px;
-    }
-  }
   svg {
-    @include svg(16px, $I6);
+    @include svg(18px, $I6);
+    margin-right: 8px;
+  }
+  &.rotate.ant-popover-open {
+    .#{$style}__text + svg {
+      transform: rotateX(180deg);
+    }
   }
   &__text {
-    @include text($H12, 500, $I6);
+    @include text($H12, 500);
     @include transition(all);
     @include word-wrap;
+    & + svg {
+      margin-right: 0;
+      margin-left: 3px;
+      position: relative;
+      top: 1px;
+    }
+  }
+  @each $name in $names {
+    &.#{$name} {
+      .#{$style}__text {
+        color: map-get($color, $name);
+      }
+      svg {
+        fill: map-get($color, $name);
+      }
+    }
+    @include media {
+      &.#{$name}:hover,
+      &.#{$name}.hover {
+        .#{$style}__text {
+          color: map-get($hover, $name);
+        }
+        svg {
+          fill: map-get($hover, $name);
+        }
+      }
+    }
+    &.#{$name}:active,
+    &.#{$name}.active {
+      .#{$style}__text {
+        color: map-get($active, $name);
+      }
+      svg {
+        fill: map-get($active, $name);
+      }
+    }
+    &.#{$name}[disabled='true'], &.#{$name}.disabled {
+      cursor: not-allowed;
+      pointer-events: none;
+      .#{$style}__text {
+        color: map-get($disabled, $name);
+      }
+      svg {
+        fill: map-get($disabled, $name);
+      }
+    }
   }
 }
 </style>

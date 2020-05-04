@@ -6,7 +6,7 @@
         <m-icon icon="back" />
       </template>
     </m-subtle>
-    <a-tabs defaultActiveKey="1" class="video-details__tabs" :tabBarStyle="{margin: 'auto'}">
+    <a-tabs defaultActiveKey="1" class="video-details__tabs" :tabBarStyle="{ margin: 'auto' }">
       <a-tab-pane tab="Overview" key="1" class="video-details__tab">
         <overview-scene />
       </a-tab-pane>
@@ -25,7 +25,7 @@ import ClipLocatorScene from '@/scenes/video-details/ClipLocatorScene.vue';
 import ImagesUsedScene from '@/scenes/video-details/ImagesUsedScene.vue';
 
 export default {
-  name: 'VideoDetails',
+  name: 'VideoDetailsView',
   components: {
     OverviewScene,
     ClipLocatorScene,

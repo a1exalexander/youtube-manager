@@ -41,9 +41,10 @@ export default {
 $style: m-container;
 .#{$style} {
   width: 100%;
-  padding: 0 40px;
+  padding-right: 40px;
+  padding-left: 40px;
   &.center {
-    min-height: 100vh;
+    min-height: calc(100vh - 61px);
     @include flex(center, center);
     text-align: center;
     .#{$style}__content {

@@ -1,9 +1,5 @@
 <template>
-  <button
-    class="m-select-item"
-    :class="{ active }"
-    @click="() => $emit('click')"
-  >
+  <button class="m-select-item" :class="{ active }" @click="() => $emit('click')">
     <m-icon :icon="icon" class="m-select-item__icon" v-if="!!icon" />
     <span v-if="!!$slots.default || !!label" class="m-select-item__text">
       <slot>
@@ -33,6 +29,20 @@ export default {
 </script>
 <style lang="scss">
 $style: m-select-item;
+.router-link-active {
+  .#{$style} {
+    &::before {
+      opacity: 1;
+      visibility: visible;
+    }
+    .#{$style}__icon {
+      fill: $N0;
+    }
+    .#{$style}__text {
+      color: $N0;
+    }
+  }
+}
 .#{$style} {
   position: relative;
   padding: 4px 14px;
@@ -40,7 +50,7 @@ $style: m-select-item;
   outline: none;
   box-shadow: none;
   background-color: transparent;
-  @include flex(center, center);
+  @include flex(flex-start, center);
   &:before {
     position: absolute;
     background-color: $I6;
