@@ -55,7 +55,7 @@ const routes = [
     meta: { title: 'Settings | Media Scout' },
   },
   {
-    path: routePath.videoDetails,
+    path: `${routePath.videoDetails}/:id`,
     name: routeName.videoDetails,
     component: VideoDetails,
     meta: { title: 'Video Details | Media Scout' },

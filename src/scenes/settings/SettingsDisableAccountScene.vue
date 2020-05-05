@@ -2,7 +2,7 @@
   <div class="settings-disable-account-scene">
     <m-col class="settings-disable-account-scene__col">
       <m-subtle
-        grey
+        type="grey"
         @click="$emit('back')"
         class="settings-disable-account-scene__back-btn"
       >
@@ -87,8 +87,9 @@ export default {
       }
     }
   }
-  &__back-btn {
+  & &__back-btn {
     margin-bottom: 38px;
+    align-self: flex-start;
   }
   &__title {
     @include text($H32, 700, $N0);

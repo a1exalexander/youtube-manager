@@ -115,6 +115,7 @@ export default {
   &__video-wrapper {
     flex: 1 1 516px;
     min-width: 40%;
+    max-width: 340px;
     border: 1px solid $D9;
     border-radius: 2px;
     overflow: hidden;

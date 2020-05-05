@@ -31,6 +31,8 @@ export default {
     [getName('components')]: () => import('../icons/IconComponents.vue'),
     [getName('exit')]: () => import('../icons/IconExit.vue'),
     [getName('plus')]: () => import('../icons/IconPlus.vue'),
+    [getName('play')]: () => import('../icons/IconPlay.vue'),
+    [getName('download')]: () => import('../icons/IconDownload.vue'),
   },
   computed: {
     getIcon() {

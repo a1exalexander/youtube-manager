@@ -45,7 +45,7 @@ export default {
   .m-subtle.video-details__back-btn {
     position: absolute;
     left: 0;
-    top: 26px;
+    top: 29px;
     transform: translateY(-50%);
     z-index: 10;
   }
@@ -59,7 +59,7 @@ export default {
       height: 1px;
       width: 100%;
       background-color: $G8;
-      top: 52px;
+      top: 59px;
     }
   }
   &__tab {
