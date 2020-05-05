@@ -68,20 +68,32 @@
         class="overview-scene__tabs"
         :tabBarStyle="{ width: '100%', maxWidth: '100%', padding: '0 24px' }"
       >
-        <a-tab-pane tab="Production Overview" key="1" class="overview-scene__tab">Production Overview</a-tab-pane>
-        <a-tab-pane tab="Transcript Overview" key="2" class="overview-scene__tab">Transcript Overview</a-tab-pane>
-        <a-tab-pane tab="Language Stats" key="3" class="overview-scene__tab">Language Stats</a-tab-pane>
+        <a-tab-pane tab="Production Overview" key="1" class="overview-scene__tab">
+          <production-overview-tab />
+        </a-tab-pane>
+        <a-tab-pane tab="Transcript Overview" key="2" class="overview-scene__tab">
+          <transcript-overview-tab />
+        </a-tab-pane>
+        <a-tab-pane tab="Language Stats" key="3" class="overview-scene__tab">
+          <language-stats-tab />
+        </a-tab-pane>
       </a-tabs>
     </div>
   </div>
 </template>
 <script>
 import OverviewChart from './overview-scene/OverviewChart.vue';
+import ProductionOverviewTab from './overview-scene/ProductionOverview.vue';
+import TranscriptOverviewTab from './overview-scene/TranscriptOverview.vue';
+import LanguageStatsTab from './overview-scene/LanguageStats.vue';
 
 export default {
   name: 'OverviewScene',
   components: {
     OverviewChart,
+    ProductionOverviewTab,
+    TranscriptOverviewTab,
+    LanguageStatsTab,
   },
   data() {
     return {

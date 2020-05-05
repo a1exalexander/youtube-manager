@@ -59,3 +59,13 @@
   background-color: $dark;
   border-radius: 2px;
 }
+
+%overview-col-name {
+  @include text($H10, 500, $G4);
+  text-transform: uppercase;
+  margin-bottom: 11px;
+}
+
+%overview-col-value {
+  @include text($H16, 400, $N0);
+}
