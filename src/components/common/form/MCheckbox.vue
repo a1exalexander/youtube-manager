@@ -82,7 +82,7 @@ $styles: m-checkbox;
     @include flex-row(flex-start, center);
   }
   &__cell {
-    @include size(18px);
+    @include size(16px);
     @include flex-row(center, center);
     background-color: $D3;
     border-radius: 3px;

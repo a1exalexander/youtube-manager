@@ -2,7 +2,7 @@
   <label class="m-radio">
     <input type="radio" class="m-radio__input" :name="name" :value="val" v-model="checked" />
     <div class="m-radio__inner">
-      <div class="m-radio__cell" :class="{ 'm-radio__cell--margin': !!label }">
+      <div class="m-radio__cell">
         <div class="m-radio__image animated fast bounceIn"></div>
       </div>
       <span v-if="!!$slots.default || !!label" class="m-radio__text"
@@ -88,6 +88,7 @@ $styles: m-radio;
     display: none;
   }
   &__text {
+    margin-left: 8px;
     @include text($H12, 500, $G2);
     line-height: 1;
     @include transition(color);

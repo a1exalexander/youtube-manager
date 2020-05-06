@@ -33,6 +33,7 @@ export default {
     [getName('plus')]: () => import('../icons/IconPlus.vue'),
     [getName('play')]: () => import('../icons/IconPlay.vue'),
     [getName('download')]: () => import('../icons/IconDownload.vue'),
+    [getName('trash')]: () => import('../icons/IconTrash.vue'),
   },
   computed: {
     getIcon() {

@@ -21,7 +21,9 @@ module.exports = {
     ],
     'max-len': [0],
     'no-underscore-dangle': ['error', { allow: ['_chart'] }],
-    'indent': ["error", 2, { "SwitchCase": 1 }]
+    'indent': ["error", 2, { "SwitchCase": 1 }],
+    'import/prefer-default-export': 'off',
+    'no-shadow': 'off'
   },
   overrides: [
     {
