@@ -1,5 +1,5 @@
 <template>
-  <m-container class="video-details" contentClass="video-details__inner" fluid>
+  <m-container class="video-details" contentClass="video-details__inner">
     <m-subtle type="grey" @click="$emit('back')" class="video-details__back-btn">
       Back to Account Setting
       <template #icon>
@@ -39,7 +39,6 @@ export default {
   z-index: 1;
   padding-bottom: 32px;
   &__inner {
-    width: 100%;
     @include flex-row(stretch, stretch);
     position: relative;
   }

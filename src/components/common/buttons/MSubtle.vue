@@ -51,7 +51,7 @@ export default {
     },
     type: {
       validator(value) {
-        return ['primary', 'grey', 'light-grey', 'white'].indexOf(value) !== -1;
+        return ['primary', 'grey', 'light-grey', 'white', 'danger'].indexOf(value) !== -1;
       },
       default: 'primary',
     },
@@ -60,30 +60,34 @@ export default {
 </script>
 <style lang="scss">
 $style: m-subtle;
-$names: 'primary', 'grey', 'light-grey', 'white';
+$names: 'primary', 'grey', 'light-grey', 'white', 'danger';
 $color: (
   'primary': $I6,
   'grey': $G6,
   'light-grey': $G4,
   'white': $N0,
+  'danger': $R5,
 );
 $hover: (
   'primary': $I5,
   'grey': $G5,
   'light-grey': $G3,
   'white': $N30,
+  'danger': $R4,
 );
 $active: (
   'primary': $I8,
   'grey': $G7,
   'light-grey': $N0,
   'white': $N60,
+  'danger': $R6,
 );
 $disabled: (
   'primary': $G6,
   'grey': $G6,
   'light-grey': $G6,
   'white': $G6,
+  'danger': $G6,
 );
 .#{$style} {
   align-self: center;
@@ -108,8 +112,15 @@ $disabled: (
     }
   }
   svg {
-    @include svg(18px, $I6);
-    margin-right: 8px;
+    @extend %noselect;
+    @include svg(16px, $I6);
+    margin-right: 7px;
+    position: relative;
+    & ~ svg {
+      margin-right: 0;
+      margin-left: 3px !important;
+      position: relative;
+    }
   }
   &.rotate.ant-popover-open {
     .#{$style}__text + svg {
@@ -120,11 +131,11 @@ $disabled: (
     @include text($H12, 500);
     @include transition(all);
     @include word-wrap;
+    @extend %noselect;
     & + svg {
       margin-right: 0;
-      margin-left: 3px;
+      margin-left: 7px;
       position: relative;
-      top: 1px;
     }
   }
   @each $name in $names {

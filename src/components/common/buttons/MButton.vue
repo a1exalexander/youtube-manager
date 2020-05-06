@@ -136,6 +136,7 @@ $loading: (
   height: fit-content;
   @include transition(all);
   &__text {
+    @extend %noselect;
     flex-grow: 1;
     margin-left: 8px;
     @include text($H12, 500, $D10);
@@ -143,6 +144,7 @@ $loading: (
   }
   svg:not(.#{$style}__loading) {
     @include svg(16px, $N0);
+    @extend %noselect;
   }
   &__google {
     padding-right: 8px;
@@ -161,6 +163,7 @@ $loading: (
     @include transition(all);
   }
   &__loading {
+    @extend %noselect;
     margin: 0 auto;
     right: 0;
     left: 0;

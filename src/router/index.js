@@ -31,6 +31,10 @@ export const routeName = {
 
 const routes = [
   {
+    path: '*',
+    redirect: routePath.home,
+  },
+  {
     path: routePath.home,
     name: routeName.home,
     component: Home,
