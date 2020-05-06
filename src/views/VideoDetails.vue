@@ -37,6 +37,7 @@ export default {
 .video-details {
   position: relative;
   z-index: 1;
+  padding-bottom: 32px;
   &__inner {
     width: 100%;
     @include flex-row(stretch, stretch);

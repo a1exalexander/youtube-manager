@@ -30,11 +30,17 @@
     <div class="clip-locator-scene__bottom-block">
       <m-row ai="center" class="clip-locator-scene__bottom-search">
         <h4 class="clip-locator-scene__bottom-title">Results</h4>
-        <m-input v-model="value" class="clip-locator-scene__input" />
+        <m-input v-model="search" class="clip-locator-scene__input" placeholder="Search..."/>
         <m-checkbox v-model="isAdShown" class="clip-locator-scene__checkbox">Show Ad Objects</m-checkbox>
       </m-row>
       <m-row wrap>
-        <m-badge v-for="item in 200" :key="item" class="clip-locator-scene__badge">Man</m-badge>
+        <m-badge
+          v-for="{ value, isAd } in filteredData"
+          :key="value"
+          class="clip-locator-scene__badge"
+          :withIcon="isAd"
+          >{{ value }}</m-badge
+        >
       </m-row>
     </div>
   </div>
@@ -44,9 +50,62 @@ export default {
   name: 'ClipLocatorScene',
   data() {
     return {
-      value: '',
+      search: '',
       isAdShown: false,
+      test_data: [
+        {
+          value: 'Man',
+          isAd: false,
+        },
+        {
+          value: 'Company',
+          isAd: true,
+        },
+        {
+          value: 'Company logo',
+          isAd: true,
+        },
+        {
+          value: 'Crowd',
+          isAd: false,
+        },
+        {
+          value: 'Emotional Speaking',
+          isAd: false,
+        },
+        {
+          value: 'People',
+          isAd: false,
+        },
+        {
+          value: 'Presentation',
+          isAd: true,
+        },
+        {
+          value: 'Companyes Logotypes',
+          isAd: true,
+        },
+        {
+          value: 'Tip',
+          isAd: false,
+        },
+        {
+          value: 'TV show',
+          isAd: false,
+        },
+      ],
     };
+  },
+  computed: {
+    filteredArrayByAd() {
+      if (this.isAdShown) {
+        return this.test_data;
+      }
+      return this.test_data.filter(({ isAd }) => isAd === false);
+    },
+    filteredData() {
+      return this.filteredArrayByAd.filter(({ value }) => value.toLowerCase().indexOf(this.search) !== -1);
+    },
   },
 };
 </script>
