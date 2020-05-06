@@ -32,7 +32,6 @@
           <images-list-item v-model="checkedPictures" name="checkedPictures" :val="item" />
         </li>
       </ul>
-      <pre>{{checkedPictures}}</pre>
     </div>
   </div>
 </template>
