@@ -97,7 +97,7 @@ $styles: m-checkbox;
   }
   &__text {
     line-height: 1;
-    @include text($H12, 400, $G4);
+    @include text($H12, 500, $G4);
     @include transition(color);
     cursor: pointer;
   }

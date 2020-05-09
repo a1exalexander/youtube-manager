@@ -27,7 +27,9 @@ import MBadge from './components/common/MBadge.vue';
 import MInputWrapper from './components/common/form/MInputWrapper.vue';
 import MAvatar from './components/common/MAvatar.vue';
 
-import { isDev, isProd } from './utils';
+import {
+  isDev, isProd, isArray, isFunction, isNumber, isObject, isString,
+} from './utils';
 import './libs/animate.scss';
 import './libs/antd.scss';
 import './scss/style.scss';
@@ -38,6 +40,11 @@ Vue.prototype.$isDev = isDev;
 Vue.prototype.$isProd = isProd;
 Vue.prototype.$routeName = routeName;
 Vue.prototype.$routePath = routePath;
+Vue.prototype.$isArray = isArray;
+Vue.prototype.$isFunction = isFunction;
+Vue.prototype.$isNumber = isNumber;
+Vue.prototype.$isObject = isObject;
+Vue.prototype.$isString = isString;
 
 // Grid
 Vue.component('MContainer', MContainer);

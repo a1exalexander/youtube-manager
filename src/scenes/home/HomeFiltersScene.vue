@@ -1,34 +1,59 @@
 <template>
   <m-container class="home-filters-scene">
-    <m-row wrap ai='center'>
-      <span class="home-filters-scene__caption">Filter by: </span>
-      <m-subtle class='home-filters-scene__add-btn'>
-        <template #icon>
-          <m-icon icon='plus' />
-        </template>
-        More
-      </m-subtle>
+    <m-row wrap ai="center">
+      <span class="home-filters-scene__caption">Filter by:</span>
+      <component
+        :is="`home-filter-${filter.value}`"
+        v-for="filter in activeFilters"
+        :key="filter.value"
+      />
+      <home-filter-select
+        v-model="activeFilters"
+        :filters="filters"
+        :active-filters="activeFilters"
+      />
     </m-row>
   </m-container>
 </template>
 <script>
+import HomeFilterViews from './filters/HomeFilterViews.vue';
+import HomeFilterSelect from './components/HomeFilterSelect.vue';
+
 export default {
   name: 'HomeFiltersScene',
+  components: {
+    HomeFilterViews,
+    HomeFilterSelect,
+  },
+  data() {
+    return {
+      filters: [
+        { name: 'views', value: 'views' },
+        // { name: 'date range', value: 'date-range' },
+        // { name: 'run time', value: 'run-time' },
+        // { name: 'watch time', value: 'watch-time' },
+        // { name: 'watch time ratio', value: 'watch-time-ratio' },
+        // { name: 'engagement ratio', value: 'engagement-ratio' },
+        // { name: 'click through rate', value: 'click-through-rate' },
+        // { name: 'impressions', value: 'impressions' },
+        // { name: 'no. of faces detected', value: 'no-of-faces-detected' },
+      ],
+      activeFilters: [],
+    };
+  },
+  methods: {
+    addFilter() {},
+  },
 };
 </script>
 <style lang="scss">
 $style: home-filters-scene;
 .#{$style} {
   background-color: $dark;
+  padding-bottom: 16px;
   &__caption {
     @include text($H12, 500);
     margin-right: 10px;
-  }
-  &__add-btn {
-    svg {
-      position: relative;
-      top: -1px;
-    }
   }
 }
 </style>

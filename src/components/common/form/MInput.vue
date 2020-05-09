@@ -1,13 +1,6 @@
 <template>
-  <div
-    class="m-input"
-    :class="[status, {'danger': error}]"
-  >
-    <label
-      class="m-input__label"
-      :for="id"
-      v-if="!!$slots.default || !!label"
-    >
+  <div class="m-input" :class="[status, {'danger': error}, `_${size}-size`]">
+    <label class="m-input__label" :class="labelClass" :for="id" v-if="!!$slots.default || !!label">
       <slot>{{ label }}</slot>
     </label>
     <div class="m-input__field">
@@ -15,10 +8,9 @@
         :autocomplete="autocomplete"
         :id="id"
         :type="inputType"
-        :value="value"
         :disabled="disabled"
         :placeholder="placeholder"
-        @input="(e) => $emit('input', e.target.value)"
+        v-model="vModel"
         @blur="(e) => $emit('blur', e)"
         @focus="(e) => $emit('focus', e)"
         class="m-input__input"
@@ -33,10 +25,7 @@
           :icon="visibility ? 'visibility-on' : 'visibility-off'"
         />
       </button>
-      <p
-        class='m-input__message animated fast bounceIn'
-        v-if='!!message'
-      >{{ message }}</p>
+      <p class="m-input__message animated fast bounceIn" v-if="!!message">{{ message }}</p>
     </div>
   </div>
 </template>
@@ -84,6 +73,13 @@ export default {
       type: String,
       default: null,
     },
+    labelClass: String,
+    size: {
+      validator(value) {
+        return ['default', 'small'].indexOf(value) !== -1;
+      },
+      default: 'default',
+    },
   },
   data() {
     return {
@@ -99,9 +95,25 @@ export default {
     id() {
       return v4();
     },
+    vModel: {
+      get() {
+        return this.value;
+      },
+      set(value) {
+        if ((this.type === 'number' && this.$isNumber(value)) || this.type !== 'number') {
+          console.log(this.$isNumber(this.value));
+          this.$emit('input', value);
+        }
+        this.$forceUpdate();
+      },
+    },
     inputType() {
-      if (this.type === 'password' && this.visibility) return 'text';
-      return this.type;
+      switch (true) {
+        case (this.type === 'password' && this.visibility) || this.type === 'number':
+          return 'text';
+        default:
+          return this.type;
+      }
     },
   },
 };
@@ -134,6 +146,16 @@ $style: m-input;
     }
     .#{$style}__message {
       color: $T6;
+    }
+  }
+  &._small-size {
+    .#{$style}__input {
+      min-height: 25px;
+      @include text($H10, 400, $G2);
+    }
+    .#{$style}__label {
+      @include text($H9, 500, $G4);
+      margin-bottom: 7px;
     }
   }
   &__field {
