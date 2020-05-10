@@ -1,10 +1,10 @@
 <template>
-  <div id="app" class="app">
+  <m-col id="app" class="app">
     <the-navigation />
     <m-transition>
       <router-view />
     </m-transition>
-  </div>
+  </m-col>
 </template>
 <script>
 import TheNavigation from './components/TheNavigation.vue';

@@ -34,6 +34,7 @@ export default {
     [getName('play')]: () => import('../icons/IconPlay.vue'),
     [getName('download')]: () => import('../icons/IconDownload.vue'),
     [getName('trash')]: () => import('../icons/IconTrash.vue'),
+    [getName('arrow-up')]: () => import('../icons/IconArrowUp.vue'),
   },
   computed: {
     getIcon() {

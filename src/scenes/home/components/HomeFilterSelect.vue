@@ -69,7 +69,7 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 $style: home-filter-select;
 .#{$style} {
   &__search {

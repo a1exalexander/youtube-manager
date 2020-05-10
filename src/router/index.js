@@ -4,7 +4,7 @@ import Home from '../views/Home.vue';
 import Team from '../views/Team.vue';
 import Settings from '../views/Settings.vue';
 import VideoDetails from '../views/VideoDetails.vue';
-import { isDev } from '../utils';
+import { isDev } from '../config';
 import scrollBehavior from './scroll';
 
 Vue.use(VueRouter);

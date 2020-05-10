@@ -33,7 +33,8 @@ export const useValidation = ({ required = [] }) => {
     }),
     password: computed(() => {
       if (!blur.password) return true;
-      const valid = regex.password(password.value);
+      // const valid = regex.password(password.value);
+      const valid = regex.minAmount(password.value, 6);
       if (isRequired('password')) {
         return !!password.value.trim() && valid;
       }
@@ -57,14 +58,14 @@ export const useValidation = ({ required = [] }) => {
       switch (true) {
         case isRequired('password') && !password.value:
           return messages.password.required;
-        case !regex.lowerCase(password.value):
-          return messages.password.lowerCase;
-        case !regex.upperCase(password.value):
-          return messages.password.upperCase;
-        case !regex.oneNumber(password.value):
-          return messages.password.oneNumber;
-        case !regex.specialChars(password.value):
-          return messages.password.specialChars;
+        // case !regex.lowerCase(password.value):
+        //   return messages.password.lowerCase;
+        // case !regex.upperCase(password.value):
+        //   return messages.password.upperCase;
+        // case !regex.oneNumber(password.value):
+        //   return messages.password.oneNumber;
+        // case !regex.specialChars(password.value):
+        //   return messages.password.specialChars;
         case !regex.minAmount(password.value, 6):
           return messages.password.minAmount;
         case !isValid.password:

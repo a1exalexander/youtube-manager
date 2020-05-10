@@ -3,7 +3,7 @@
     <input type="radio" class="m-radio__input" :name="name" :value="val" v-model="checked" />
     <div class="m-radio__inner">
       <div class="m-radio__cell">
-        <div class="m-radio__image animated fast bounceIn"></div>
+        <div class="m-radio__image animated slow bounceIn"></div>
       </div>
       <span v-if="!!$slots.default || !!label" class="m-radio__text"
         ><slot>{{ label }}</slot></span

@@ -6,6 +6,7 @@
         :is="`home-filter-${filter.value}`"
         v-for="filter in activeFilters"
         :key="filter.value"
+        @remove="() => onRemove(filter.value)"
       />
       <home-filter-select
         v-model="activeFilters"
@@ -42,7 +43,10 @@ export default {
     };
   },
   methods: {
-    addFilter() {},
+    onRemove(value) {
+      const idx = this.activeFilters.findIndex((item) => item.value === value);
+      this.activeFilters.splice(idx, 1);
+    },
   },
 };
 </script>
@@ -50,7 +54,7 @@ export default {
 $style: home-filters-scene;
 .#{$style} {
   background-color: $dark;
-  padding-bottom: 16px;
+  padding-bottom: 20px;
   &__caption {
     @include text($H12, 500);
     margin-right: 10px;

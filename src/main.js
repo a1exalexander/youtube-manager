@@ -26,9 +26,11 @@ import MSliderTabs from './components/common/navigation/MSliderTabs.vue';
 import MBadge from './components/common/MBadge.vue';
 import MInputWrapper from './components/common/form/MInputWrapper.vue';
 import MAvatar from './components/common/MAvatar.vue';
-
 import {
-  isDev, isProd, isArray, isFunction, isNumber, isObject, isString,
+  isDev, isProd,
+} from './config';
+import {
+  isArray, isFunction, isNumber, isObject, isString,
 } from './utils';
 import './libs/animate.scss';
 import './libs/antd.scss';

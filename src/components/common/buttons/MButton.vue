@@ -135,6 +135,7 @@ $loading: (
   @include flex(center, center);
   height: fit-content;
   @include transition(all);
+  width: fit-content;
   &__text {
     @extend %noselect;
     flex-grow: 1;

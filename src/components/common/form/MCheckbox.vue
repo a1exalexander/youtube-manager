@@ -1,19 +1,13 @@
 <template>
   <label class="m-checkbox">
-    <input
-      type="checkbox"
-      :name="name"
-      class="m-checkbox__input"
-      :value="val"
-      v-model="checked"
-    />
+    <input type="checkbox" :name="name" class="m-checkbox__input" :value="val" v-model="checked" />
     <div class="m-checkbox__inner">
       <div class="m-checkbox__cell">
-        <m-icon class="m-checkbox__image animated fast bounceIn" icon="check" />
+        <m-icon class="m-checkbox__image animated slow bounceIn" icon="check" />
       </div>
-      <span v-if="!!$slots.default || !!label" class="m-checkbox__text"
-        ><slot>{{ label }}</slot></span
-      >
+      <span v-if="!!$slots.default || !!label" class="m-checkbox__text">
+        <slot>{{ label }}</slot>
+      </span>
     </div>
   </label>
 </template>
@@ -22,7 +16,7 @@ export default {
   name: 'MCheckbox',
   props: {
     val: {
-      type: [String, Boolean, Number],
+      type: [String, Boolean, Number, Object, Array],
     },
     name: {
       type: String,
@@ -32,6 +26,10 @@ export default {
     },
     label: {
       type: String,
+    },
+    light: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
@@ -58,6 +56,13 @@ $styles: m-checkbox;
   @include flex-row(flex-start, center);
   z-index: 1;
   max-width: fit-content;
+  @include media {
+    &:hover {
+      .#{$styles}__cell {
+        border-color: $G6;
+      }
+    }
+  }
   &__input {
     position: absolute;
     left: 2px;
@@ -87,7 +92,6 @@ $styles: m-checkbox;
     background-color: $D3;
     border-radius: 3px;
     @include transition(background-color, border-color);
-    margin-right: 8px;
     cursor: pointer;
     border: 1px solid $G7;
   }
@@ -100,6 +104,7 @@ $styles: m-checkbox;
     @include text($H12, 500, $G4);
     @include transition(color);
     cursor: pointer;
+    margin-left: 8px;
   }
 }
 </style>

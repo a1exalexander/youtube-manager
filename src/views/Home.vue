@@ -1,12 +1,14 @@
 <template>
-  <div class="home">
+  <m-col class="home">
     <home-charts-scene />
-    <m-divider class="home__divider" />
+    <m-container>
+      <m-divider class="home__divider" />
+    </m-container>
     <home-folders-scene />
     <home-search-scene />
     <home-filters-scene />
     <home-table-scene />
-  </div>
+  </m-col>
 </template>
 
 <script>
@@ -29,9 +31,10 @@ export default {
 </script>
 <style lang="scss">
 .home {
-  padding: 24px 0;
+  flex: 1 1;
+  padding: 24px 0 0;
   &__divider {
-    margin: 24px 40px 20px !important;
+    margin: 24px 0 20px !important;
   }
 }
 </style>
