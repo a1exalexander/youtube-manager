@@ -1,5 +1,5 @@
 <template>
-  <span class="divider" :class="[{ _vertical: vertical }]" />
+  <span class="divider" :class="[{ _horizontal: horizontal }]" :style="[{backgroundColor: color}, getOffset]" />
 </template>
 <script>
 export default {
@@ -9,6 +9,23 @@ export default {
       type: Boolean,
       defaul: false,
     },
+    color: {
+      type: String,
+      default: '#25293b',
+    },
+    offset: Number,
+  },
+  computed: {
+    getOffset() {
+      const offset = `${this.offset}px`;
+      if (this.offset || (this.offset === 0 && !this.horizontal)) {
+        return { marginTop: offset, marginBottom: offset };
+      }
+      if (this.offset || (this.offset === 0 && this.horizontal)) {
+        return { marginLeft: offset, marginRight: offset };
+      }
+      return null;
+    },
   },
 };
 </script>
@@ -16,7 +33,6 @@ export default {
 .divider {
   flex-shrink: 0;
   display: block;
-  background-color: $G8;
   height: 1px;
   margin: 20px 0;
   padding: 0;

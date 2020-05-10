@@ -147,3 +147,7 @@ $screen-retina: 1660px;
     @content;
   }
 }
+
+@mixin noselect() {
+  @extend %noselect;
+}

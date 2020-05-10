@@ -52,6 +52,7 @@
 %label {
   display: inline-block;
   margin-bottom: 8px;
+  line-height: 1;
   @include text($H11, 500);
 }
 
@@ -77,4 +78,8 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+%rotate {
+  transform: rotateX(180deg);
 }
