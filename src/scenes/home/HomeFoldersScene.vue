@@ -37,7 +37,7 @@
     </m-row>
     <m-row ai="flex-start">
       <m-checkbox-button v-model="all">All</m-checkbox-button>
-      <m-divider vertical style="height: 34px" />
+      <m-divider horizontal style="height: 34px" />
       <m-row wrap>
         <folder-item
           name="folders"

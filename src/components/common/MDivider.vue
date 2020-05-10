@@ -5,7 +5,7 @@
 export default {
   name: 'Divider',
   props: {
-    vertical: {
+    horizontal: {
       type: Boolean,
       defaul: false,
     },
@@ -36,7 +36,7 @@ export default {
   height: 1px;
   margin: 20px 0;
   padding: 0;
-  &._vertical {
+  &._horizontal {
     flex-shrink: 0;
     height: 100%;
     margin: 0 12px;
