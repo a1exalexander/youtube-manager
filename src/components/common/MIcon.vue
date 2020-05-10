@@ -34,6 +34,9 @@ export default {
     [getName('play')]: () => import('../icons/IconPlay.vue'),
     [getName('download')]: () => import('../icons/IconDownload.vue'),
     [getName('trash')]: () => import('../icons/IconTrash.vue'),
+    [getName('folder-empty')]: () => import('../icons/IconFolderEmpty.vue'),
+    [getName('action-horizontal')]: () => import('../icons/IconActionHorizontal.vue'),
+    [getName('edit')]: () => import('../icons/IconEdit.vue'),
   },
   computed: {
     getIcon() {
