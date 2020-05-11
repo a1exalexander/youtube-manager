@@ -14,6 +14,7 @@
       <div class="home-filter-select__container">
         <span class="home-filter-select__label">Clear selectes items</span>
         <m-checkbox
+          class="home-filter-select__checkbox"
           name="active-filters"
           v-model="filtersModel"
           :val="checkbox"
@@ -25,6 +26,7 @@
       <div class="home-filter-select__container">
         <span class="home-filter-select__label">All Filters</span>
         <m-checkbox
+          class="home-filter-select__checkbox"
           name="active-filters"
           v-model="filtersModel"
           :val="checkbox"
@@ -105,6 +107,9 @@ $style: home-filter-select;
     display: block;
     @include text($H12, 400);
     margin-bottom: 9px;
+  }
+  &__checkbox:not(:last-child) {
+    margin-bottom: 12px;
   }
 }
 </style>

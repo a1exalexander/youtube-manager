@@ -18,6 +18,7 @@
 </template>
 <script>
 import HomeFilterViews from './filters/HomeFilterViews.vue';
+import HomeFilterTopic from './filters/HomeFilterTopic.vue';
 import HomeFilterSelect from './components/HomeFilterSelect.vue';
 
 export default {
@@ -25,6 +26,7 @@ export default {
   components: {
     HomeFilterViews,
     HomeFilterSelect,
+    HomeFilterTopic,
   },
   data() {
     return {
@@ -38,6 +40,7 @@ export default {
         // { name: 'click through rate', value: 'click-through-rate' },
         // { name: 'impressions', value: 'impressions' },
         // { name: 'no. of faces detected', value: 'no-of-faces-detected' },
+        { name: 'topic', value: 'topic' },
       ],
       activeFilters: [],
     };

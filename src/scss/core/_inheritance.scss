@@ -79,3 +79,9 @@
 %rotate {
   transform: rotateX(180deg);
 }
+
+%transparent-csrollbar {
+  &::-webkit-scrollbar {
+    background: transparent;
+  }
+}
