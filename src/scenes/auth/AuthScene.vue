@@ -1,5 +1,5 @@
 <template>
-  <m-container center class="auth-scene" contentClass="auth-scene__inner">
+  <m-container class="auth-scene" contentClass="auth-scene__inner">
     <icon-logo animation class="auth-scene__logo" />
     <article class="auth-scene__card">
       <slot />
@@ -19,10 +19,13 @@ export default {
 <style lang="scss">
 .auth-scene {
   padding: 24px;
+  @include flex(center, center);
+  text-align: center;
   @include media {
-    padding: 90px 40px;
+    padding: 20vh 40px;
   }
   &__inner {
+    text-align: center;
     flex-basis: 340px;
   }
   &__logo {

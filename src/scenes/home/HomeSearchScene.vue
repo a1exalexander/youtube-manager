@@ -71,7 +71,7 @@
 </template>
 <script>
 import { mapMutations, mapState } from 'vuex';
-import { SEARCH_SET } from '../../store';
+import { CATALOG_SEARCH_SET } from '../../store';
 import HomeExportPopup from './HomeExportPopup.vue';
 // import { eventBus } from '../../services';
 
@@ -89,7 +89,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations('catalog', [SEARCH_SET]),
+    ...mapMutations('catalog', [CATALOG_SEARCH_SET]),
     show(name) {
       if (name in this.visible) this.visible[name] = true;
     },
@@ -101,7 +101,7 @@ export default {
     ...mapState('catalog', { getSearch: (state) => state.search }),
     search: {
       set(value) {
-        this[SEARCH_SET](value);
+        this[CATALOG_SEARCH_SET](value);
       },
       get() {
         return this.getSearch;

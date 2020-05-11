@@ -1,12 +1,12 @@
 <template>
-  <form @submit.prevent='submit'>
+  <form @submit.prevent="submit">
     <m-col class="login">
       <m-input
         type="email"
         v-model="email"
         class="login__input"
         :error="!isValid.email"
-        :message='vErrors.email'
+        :message="vErrors.email"
         @blur="vBlur.email"
       >Email</m-input>
       <m-input
@@ -14,21 +14,13 @@
         class="login__input"
         v-model="password"
         :error="!isValid.password"
-        :message='vErrors.password'
+        :message="vErrors.password"
         @blur="vBlur.password"
       >Password</m-input>
-      <router-link
-        class="login__reset-btn"
-        :to="{ name: 'ResetPassword' }"
-      >
+      <router-link class="login__reset-btn" :to="{ name: 'ResetPassword' }">
         <m-subtle>Reset password</m-subtle>
       </router-link>
-      <m-button
-        fluid
-        :loading='loading'
-        :disabled="disabled"
-        class="login__login-btn"
-      >Login</m-button>
+      <m-button fluid :loading="loading" :disabled="disabled" class="login__login-btn">Login</m-button>
       <m-button
         fluid
         google
@@ -40,6 +32,8 @@
   </form>
 </template>
 <script>
+import { mapActions } from 'vuex';
+import { AUTH_REQUEST } from '../../store';
 import { useValidation } from '../../services';
 
 export default {
@@ -48,11 +42,13 @@ export default {
     const options = {
       required: ['email', 'password'],
     };
-    const {
-      isValid, vErrors, email, password, vBlur,
-    } = useValidation(options);
+    const { isValid, vErrors, email, password, vBlur } = useValidation(options);
     return {
-      isValid, vErrors, email, password, vBlur,
+      isValid,
+      vErrors,
+      email,
+      password,
+      vBlur,
     };
   },
   data() {
@@ -61,9 +57,13 @@ export default {
     };
   },
   methods: {
-    submit() {
+    ...mapActions('auth', [AUTH_REQUEST]),
+    async submit() {
       this.loading = true;
-      setTimeout(() => { this.loading = false; }, 1500);
+      const { email, password } = this;
+      const ok = await this[AUTH_REQUEST]({ email, password });
+      this.loading = false;
+      if (ok) this.$router.push('/');
     },
   },
   computed: {

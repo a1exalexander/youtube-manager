@@ -1,4 +1,4 @@
-export default function scrollBehavior(to, from, savedPosition) {
+export const scrollMiddleware = (to, from, savedPosition) => {
   if (savedPosition) {
     return savedPosition;
   }
@@ -8,4 +8,4 @@ export default function scrollBehavior(to, from, savedPosition) {
     };
   }
   return { x: 0, y: 0 };
-}
+};

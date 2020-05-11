@@ -7,6 +7,7 @@
       <input
         :autocomplete="autocomplete"
         :id="id"
+        :readonly='readonly'
         :type="inputType"
         :disabled="disabled"
         :placeholder="placeholder"
@@ -35,6 +36,10 @@ import { v4 } from 'uuid';
 export default {
   name: 'MInput',
   props: {
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
     label: {
       type: String,
       default: null,
@@ -101,7 +106,6 @@ export default {
       },
       set(value) {
         if ((this.type === 'number' && this.$isNumber(value)) || this.type !== 'number') {
-          console.log(this.$isNumber(this.value));
           this.$emit('input', value);
         }
         this.$forceUpdate();

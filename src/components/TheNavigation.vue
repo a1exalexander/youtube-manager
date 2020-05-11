@@ -45,10 +45,10 @@
             <m-select-item icon="link">Components</m-select-item>
           </router-link>
           <a-divider />
-          <m-select-item icon="exit">Log Out</m-select-item>
+          <m-select-item @click='onLogout' icon="exit">Log Out</m-select-item>
         </template>
         <m-subtle type="white"
-          >{{ 'Sasha Ratushnyi' }}<template #icon-right> <m-icon icon="angle-down"/></template
+          >{{ user.name }}<template #icon-right> <m-icon icon="angle-down"/></template
         ></m-subtle>
       </a-popover>
     </m-row>
@@ -57,6 +57,9 @@
 <script>
 import IconLogo from '@/components/icons/IconLogo.vue';
 import TheNavigationAccountItem from '@/scenes/navigation/TheNavigationAccountItem.vue';
+import { mapState, mapActions } from 'vuex';
+import { AUTH_LOGOUT } from '../store';
+import { routeName } from '../router';
 
 export default {
   name: 'TheNavigation',
@@ -83,7 +86,17 @@ export default {
       ],
     };
   },
+  methods: {
+    ...mapActions('auth', [
+      AUTH_LOGOUT,
+    ]),
+    onLogout() {
+      this[AUTH_LOGOUT]();
+      this.$router.push({ name: routeName.auth });
+    },
+  },
   computed: {
+    ...mapState('profile', ['user']),
     accountName() {
       return this.accounts.find(({ id }) => id === this.account)?.name || 'YouTube Account';
     },

@@ -3,12 +3,13 @@
     <h2 class="settings-scene__title settings-scene__title--main">Personal Settings</h2>
     <m-row ai="center" class="settings-scene__avatar-row">
       <div class="settings-scene__img-wrapper">
-        <m-icon icon="user" v-if="!user.userImage" class="settings-scene__icon" />
-        <img v-else :src="user.userImage" class="settings-scene__avatar" />
+        <m-avatar :src="user.avatar" :size='70' class="settings-scene__avatar">
+          <m-icon icon="user" v-if="!newUser.userImage" class="settings-scene__icon" />
+        </m-avatar>
       </div>
       <m-col>
         <m-row ai="center" class="settings-scene__username-wrapper">
-          <h2 class="settings-scene__title settings-scene__title--user">Pavel Tseluyko</h2>
+          <h2 class="settings-scene__title settings-scene__title--user">{{ user.name }}</h2>
           <m-badge>Admin</m-badge>
         </m-row>
         <label class="settings-scene__upload">
@@ -28,8 +29,8 @@
       </m-col>
     </m-row>
     <div class="settings-scene__inputs-wrapper">
-      <m-input class="settings-scene__input" v-model="user.name">Full Name</m-input>
-      <m-input class="settings-scene__input" type="email" v-model="user.email">Email</m-input>
+      <m-input class="settings-scene__input" :value="user.name" readonly>Full Name</m-input>
+      <m-input class="settings-scene__input" type="email" :value="user.email" readonly>Email</m-input>
     </div>
     <m-divider />
     <h2 class="settings-scene__title settings-scene__title--pass">Change password</h2>
@@ -46,7 +47,7 @@
         <m-input
           class="settings-scene__input"
           type="password"
-          v-model="user.password"
+          v-model="newUser.password"
         >Current Password</m-input>
         <m-button @click="password = 'new'">Continue</m-button>
       </m-row>
@@ -54,12 +55,12 @@
         <m-input
           class="settings-scene__input"
           type="password"
-          v-model="user.newPassword"
+          v-model="newUser.newPassword"
         >Create New Password</m-input>
         <m-input
           class="settings-scene__input"
           type="password"
-          v-model="user.newPassword"
+          v-model="newUser.newPassword"
         >Confirm New Password</m-input>
         <m-button @click="password = 'base'">Save</m-button>
       </m-row>
@@ -71,11 +72,13 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'SettingsScene',
   data() {
     return {
-      user: {
+      newUser: {
         userImage: null,
         name: '',
         email: '',
@@ -94,6 +97,9 @@ export default {
         this.user.userImage = e.target.result;
       };
     },
+  },
+  computed: {
+    ...mapState('profile', ['user']),
   },
 };
 </script>

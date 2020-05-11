@@ -1,7 +1,9 @@
 <template>
   <span class="m-avatar" :style="{ width: `${size}px`, height: `${size}px` }">
     <img class="m-avatar__image" :src="src" alt="" v-if="src" />
-    <m-icon class="m-avatar__icon" icon="profile" v-else />
+    <slot v-else>
+      <m-icon class="m-avatar__icon" icon="profile" />
+    </slot>
   </span>
 </template>
 <script>
