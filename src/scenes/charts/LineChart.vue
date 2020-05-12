@@ -1,6 +1,6 @@
 <template>
   <div class="line-chart">
-    <span class="line-chart__value" :style="{ color: color }">12:54</span>
+    <span class="line-chart__value" :style="{ color: color }">{{value}}</span>
     <a-popover trigger="click" placement="bottomLeft" @visibleChange="handleChangeVisibility">
       <template slot="content">
         <div class="line-chart__dropdown">
@@ -11,7 +11,7 @@
         </div>
       </template>
       <m-subtle :active="isClickedDropdown" class="line-chart__dropdown-button" type="light-grey" position="right"
-        ><template #icon-right><m-icon icon="drop-down" class="line-chart__dropdown-arrow"/></template>Click me</m-subtle
+        ><template #icon-right><m-icon icon="drop-down" class="line-chart__dropdown-arrow"/></template>{{dropName}}</m-subtle
       >
     </a-popover>
     <m-line-chart :chartdata="chartData" :width="100" :height="140" />
@@ -32,6 +32,14 @@ export default {
         return ['blue', 'teal', 'violet', 'lime'].indexOf(value) !== -1;
       },
       default: 'blue',
+    },
+    dropName: {
+      type: String,
+      default: 'WATCH TIME',
+    },
+    value: {
+      type: String,
+      default: '12:54',
     },
   },
   data() {

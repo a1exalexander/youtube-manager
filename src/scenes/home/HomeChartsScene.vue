@@ -5,13 +5,13 @@
         <line-chart />
       </div>
       <div class="home-charts-scene__chart-wrapper">
-        <line-chart type="teal" />
+        <line-chart type="teal" dropName="LIKES" value="816"/>
       </div>
       <div class="home-charts-scene__chart-wrapper">
-        <line-chart type="violet" />
+        <line-chart type="violet" dropName="IMPRESSIONS" value="268,000"/>
       </div>
       <div class="home-charts-scene__chart-wrapper">
-        <line-chart type="lime" />
+        <line-chart type="lime" dropName="AD REVENUE" value="$2,000"/>
       </div>
     </m-row>
   </m-container>
