@@ -24,6 +24,7 @@ import HomeFilterProduction from './filters/HomeFilterProduction.vue';
 import HomeFilterRoi from './filters/HomeFilterRoi.vue';
 import HomeFilterDateRange from './filters/HomeFilterDateRange.vue';
 import HomeFilterOnCameraRace from './filters/HomeFilterOnCameraRace.vue';
+import HomeFilterRunTime from './filters/HomeFilterRunTime.vue';
 
 export default {
   name: 'HomeFiltersScene',
@@ -35,13 +36,14 @@ export default {
     HomeFilterRoi,
     HomeFilterDateRange,
     HomeFilterOnCameraRace,
+    HomeFilterRunTime,
   },
   data() {
     return {
       filters: [
         { name: 'views', value: 'views' },
         { name: 'date range', value: 'date-range' },
-        // { name: 'run time', value: 'run-time' },
+        { name: 'run time', value: 'run-time' },
         // { name: 'watch time', value: 'watch-time' },
         // { name: 'watch time ratio', value: 'watch-time-ratio' },
         // { name: 'engagement ratio', value: 'engagement-ratio' },
