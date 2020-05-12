@@ -3,13 +3,12 @@ import { Logger } from '../logger';
 import { storage } from '../storage';
 import { getErrorMessage } from '../../utils';
 
-const logger = Logger('axios');
+const logger = Logger('[AXIOS]');
 
 axios.interceptors.request.use(
   (config) => {
     const { headers } = config;
     const token = storage.getToken();
-    logger.debug('REQUEST', { token });
     if (token) {
       headers.Authorization = token;
     }
