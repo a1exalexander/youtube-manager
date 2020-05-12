@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
+    "dev:prod": "vue-cli-service serve --mode production",
     "build": "vue-cli-service build",
     "build:dev": "vue-cli-service build --mode development",
     "test": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "sh deploy.sh"
   },
   "dependencies": {
     "@vue/composition-api": "^0.5.0",

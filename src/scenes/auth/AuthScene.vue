@@ -22,7 +22,7 @@ export default {
   @include flex(center, center);
   text-align: center;
   @include media {
-    padding: 20vh 40px;
+    padding: 20vh 40px 0;
   }
   &__inner {
     text-align: center;

@@ -90,8 +90,8 @@ export default {
     ...mapActions('auth', [
       AUTH_LOGOUT,
     ]),
-    onLogout() {
-      this[AUTH_LOGOUT]();
+    async onLogout() {
+      await this[AUTH_LOGOUT]();
       this.$router.push({ name: routeName.auth });
     },
   },
