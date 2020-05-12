@@ -4,7 +4,6 @@
     name="Production Value"
     class="home-filter-production"
     @remove="() => $emit('remove')"
-    :value='getValue'
   >
     <m-col class="home-filter-production__header">
       <m-radio name="production" val="all" v-model="value">All</m-radio>
