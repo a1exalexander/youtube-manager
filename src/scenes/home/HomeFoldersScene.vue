@@ -8,8 +8,8 @@
       @close="() => hide('delete')"
       @danger-action="() => hide('delete')"
     />
-    <edit-folder-popup :visible="visible.rename" @close="() => hide('rename')" @rename="() => hide('rename')"/>
-    <create-folder-popup :visible="visible.create" @close="() => hide('create')" @create="() => hide('create')"/>
+    <folder-edit-popup :visible="visible.rename" @close="() => hide('rename')" @rename="() => hide('rename')"/>
+    <folder-create-popup :visible="visible.create" @close="() => hide('create')" @create="() => hide('create')"/>
     <m-row jc="space-between" ai="center">
       <m-row ai="center" class="home-folders-scene__head">
         <h4 class="home-folders-scene__title">Folders</h4>
@@ -53,16 +53,16 @@
   </m-container>
 </template>
 <script>
-import FolderItem from './home-folders-scene-components/FolderItem.vue';
-import EditFolderPopup from './home-folders-scene-components/EditFolderPopup.vue';
-import CreateFolderPopup from './home-folders-scene-components/CreateFolderPopup.vue';
+import FolderItem from './folders/FolderItem.vue';
+import FolderEditPopup from './folders/FolderEditPopup.vue';
+import FolderCreatePopup from './folders/FolderCreatePopup.vue';
 
 export default {
   name: 'HomeFoldersScene',
   components: {
     FolderItem,
-    EditFolderPopup,
-    CreateFolderPopup,
+    FolderEditPopup,
+    FolderCreatePopup,
   },
   data() {
     return {

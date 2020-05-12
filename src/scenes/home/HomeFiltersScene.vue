@@ -20,6 +20,7 @@
 import HomeFilterViews from './filters/HomeFilterViews.vue';
 import HomeFilterTopic from './filters/HomeFilterTopic.vue';
 import HomeFilterProduction from './filters/HomeFilterProduction.vue';
+import HomeFilterRoi from './filters/HomeFilterRoi.vue';
 import HomeFilterSelect from './components/HomeFilterSelect.vue';
 
 export default {
@@ -29,11 +30,12 @@ export default {
     HomeFilterSelect,
     HomeFilterTopic,
     HomeFilterProduction,
+    HomeFilterRoi,
   },
   data() {
     return {
       filters: [
-        { name: 'views', value: 'views' },
+        { name: 'Views', value: 'views' },
         // { name: 'date range', value: 'date-range' },
         // { name: 'run time', value: 'run-time' },
         // { name: 'watch time', value: 'watch-time' },
@@ -42,8 +44,9 @@ export default {
         // { name: 'click through rate', value: 'click-through-rate' },
         // { name: 'impressions', value: 'impressions' },
         // { name: 'no. of faces detected', value: 'no-of-faces-detected' },
-        { name: 'production', value: 'production' },
-        { name: 'topic', value: 'topic' },
+        { name: 'ROI', value: 'roi' },
+        { name: 'Production Value', value: 'production' },
+        { name: 'Topic', value: 'topic' },
       ],
       activeFilters: [],
     };

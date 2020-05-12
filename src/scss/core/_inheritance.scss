@@ -85,3 +85,16 @@
     background: transparent;
   }
 }
+
+%filter-header {
+  padding: 3px 16px 0;
+}
+
+%filter-body {
+  padding: 0 16px 13px;
+  min-width: 152px;
+}
+
+%custom-radio {
+  margin-bottom: 16px;
+}

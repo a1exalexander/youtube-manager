@@ -1,20 +1,20 @@
 <template>
   <m-popup width="308px" :visible="visible" title="Create New Folder" @close="() => $emit('close')">
-    <m-container contentClass="create-folder-popup" style="padding: 0;">
+    <m-container contentClass="folder-edit-popup" style="padding: 0;">
       <m-input
         v-model="value"
         label="Folder Name"
         placeholder="Give name to the folder"
-        class="create-folder-popup__input"
+        class="folder-edit-popup__input"
       />
-      <m-row jc="space-between" class="create-folder-popup__row">
-        <span class="create-folder-popup__label">Video Catalog</span>
+      <m-row jc="space-between" class="folder-edit-popup__row">
+        <span class="folder-edit-popup__label">Video Catalog</span>
         <m-row>
-          <m-subtle type="grey" label="Clear" class="create-folder-popup__btn" />
+          <m-subtle type="grey" label="Clear" class="folder-edit-popup__btn" />
           <m-subtle label="Select All" />
         </m-row>
       </m-row>
-      <a-select placeholder="Add videos to the folder from the list" class="create-folder-popup__select">
+      <a-select placeholder="Add videos to the folder from the list" class="folder-edit-popup__select">
         <template #suffixIcon>
           <m-icon icon="drop-down" />
         </template>
@@ -31,7 +31,7 @@
 </template>
 <script>
 export default {
-  name: 'CreateFolderPopup',
+  name: 'FolderEditPopup',
   props: {
     visible: Boolean,
   },
@@ -43,7 +43,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.create-folder-popup {
+.folder-edit-popup {
   padding: 32px 24px;
   &__input {
     margin-bottom: 12px;

@@ -1,5 +1,6 @@
 <template>
   <home-filter-button
+    :value="getValue"
     name="Production Value"
     class="home-filter-production"
     @remove="() => $emit('remove')"
@@ -15,7 +16,7 @@
         v-model="value"
         class="home-filter-views__custom-radio"
       >Custom</m-radio>
-      <a-slider :default-value="3" :disabled="value !== 'custom'" :max="6"/>
+      <a-slider v-model="custom" :disabled="value !== 'custom'" :max="6" />
     </m-col>
   </home-filter-button>
 </template>
@@ -30,7 +31,13 @@ export default {
   data() {
     return {
       value: 'all',
+      custom: 3,
     };
+  },
+  computed: {
+    getValue() {
+      return this.value === 'all' ? 'All' : this.custom;
+    },
   },
 };
 </script>
