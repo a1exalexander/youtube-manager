@@ -11,7 +11,7 @@
 <script>
 import { mapActions } from 'vuex';
 import TheNavigation from './components/TheNavigation.vue';
-import { routeName } from './router';
+import { routePath } from './router';
 import { PROFILE_REQUEST } from './store';
 
 export default {
@@ -26,7 +26,8 @@ export default {
   },
   computed: {
     isNavigationVisible() {
-      return ![routeName.auth, routeName.resetPassword].includes(this.$route?.name);
+      const routes = [routePath.auth, routePath.resetPassword];
+      return !routes.includes(this.$route?.path) && !routes.includes(window.location.pathname);
     },
   },
   created() {

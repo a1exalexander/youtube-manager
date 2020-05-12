@@ -1,17 +1,17 @@
 import { Logger, storage } from '../../services';
-import { routeName } from '../routes';
+import { routePath } from '../routes';
 
 const logger = Logger('authMiddleware');
 
 export const authMiddleware = (to, from, next) => {
   const token = storage.getToken();
   logger.debug({ name: to.name, path: to.path, token });
-  if (!!token && to?.name === 'Auth') {
-    next({ name: routeName.home });
-  } else if (!token && from?.name === 'Auth') {
+  if (!!token && to?.path === routePath.auth) {
+    next(routePath.home);
+  } else if (!token && from?.path === routePath.auth) {
     next(false);
-  } else if (!token && to?.name !== 'Auth') {
-    next({ name: routeName.auth });
+  } else if (!token && to?.path !== routePath.auth) {
+    next(routePath.auth);
   } else {
     next();
   }
