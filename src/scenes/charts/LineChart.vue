@@ -55,6 +55,8 @@ export default {
             pointBackgroundColor: colors.$dark,
             pointBorderWidth: 2,
             pointRadius: 4.5,
+            borderJoinStyle: 'miter',
+            lineTension: 0,
           },
         ],
       };

@@ -1,5 +1,5 @@
 <template>
-  <home-filter-button name="Topic" class="home-filter-topic" @remove="() => $emit('remove')">
+  <home-filter-button :value="getValue" name="Topic" class="home-filter-topic" @remove="() => $emit('remove')">
     <home-filter-search v-model="search" />
     <m-divider color="#373c54" :offset="12" />
     <div class="home-filter-topic__body">
@@ -37,6 +37,10 @@ export default {
   computed: {
     filteredTopics() {
       return this.topics.filter((data) => data.toLowerCase().indexOf(this.search.toLowerCase()) > -1);
+    },
+    getValue() {
+      const { length } = this.selectedTopics;
+      return length !== 0 ? length : 'All';
     },
   },
 };

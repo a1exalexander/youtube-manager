@@ -24,19 +24,6 @@ export default {
   components: {
     LineChart,
   },
-  data() {
-    return {
-      chartdata: {
-        labels: ['NOV 12', 'JAN25', 'MAR 17', 'NOV 12', 'JAN25', 'MAR 17'],
-        datasets: [
-          {
-            label: 'First data',
-            data: [1, 6, 3, 8, 1, 7],
-          },
-        ],
-      },
-    };
-  },
 };
 </script>
 <style lang="scss">

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import {
-  AutoComplete, Select, Popover, Divider, Tabs,
+  AutoComplete, Select, Popover, Divider, Tabs, Slider,
 } from 'ant-design-vue';
 import VueCompositionApi from '@vue/composition-api';
 import App from './App.vue';
@@ -80,6 +80,7 @@ Vue.use(Select);
 Vue.use(Popover);
 Vue.use(Divider);
 Vue.use(Tabs);
+Vue.use(Slider);
 
 new Vue({
   router,
