@@ -5869,14 +5869,16 @@ a.ant-btn-sm {
 .ant-tooltip-inner {
   min-width: 22px;
   min-height: 15px;
-  padding: 2px 8px;
-  color: #fff;
+  padding: 4px 10px;
+  color: $G2;
   text-align: left;
   text-decoration: none;
   word-wrap: break-word;
-  background-color: $G6;
+  background-color: $D1;
   border-radius: 2px;
-  font-size: $H10;
+  font-size: $H12;
+  font-weight: 500;
+  box-shadow: 0 4px 11px 0 rgba(0,0,0,0.28);
 }
 .ant-tooltip-arrow {
   display: none;splay: none;splay: none;

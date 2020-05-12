@@ -1,7 +1,7 @@
 <template>
   <a-popover class="home-filter-select" trigger="click" placement="bottomLeft">
     <template #content>
-      <home-filter-search v-model='search' />
+      <home-filter-search v-model="search" />
       <m-divider color="#373c54" :offset="12" />
       <div class="home-filter-select__container">
         <span class="home-filter-select__label">Clear selectes items</span>
@@ -12,7 +12,9 @@
           :val="checkbox"
           v-for="checkbox in activeFilters"
           :key="checkbox.value"
-        ><span class="home-filter-select__value">{{checkbox.name}}</span></m-checkbox>
+        >
+          <span class="home-filter-select__value">{{checkbox.name}}</span>
+        </m-checkbox>
       </div>
       <m-divider color="#373c54" :offset="12" />
       <div class="home-filter-select__container">
@@ -24,7 +26,9 @@
           :val="checkbox"
           v-for="checkbox in inactiveFilters"
           :key="checkbox.value"
-        ><span class="home-filter-select__value">{{checkbox.name}}</span></m-checkbox>
+        >
+          <span class="home-filter-select__value">{{checkbox.name}}</span>
+        </m-checkbox>
       </div>
     </template>
     <m-subtle class="home-filter-select__add-btn">
@@ -63,10 +67,9 @@ export default {
       },
     },
     inactiveFilters() {
-      return this.$onSearch(
-        this.filters.filter(({ value }) => this.activeFilters.every((item) => item.value !== value)),
-        this.search,
-      );
+      return this.filters
+        .filter(({ value }) => this.activeFilters.every((item) => item.value !== value))
+        .filter(this.$onSearch(this.search));
     },
   },
 };

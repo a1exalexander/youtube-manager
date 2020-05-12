@@ -1,7 +1,7 @@
 <template>
   <home-table-item-wrapper class="home-table-head">
     <div class="home-table-head__cell">
-      <m-checkbox />
+      <m-checkbox v-model="checkbox" />
     </div>
     <div class="home-table-head__cell">video</div>
     <div class="home-table-head__cell">
@@ -30,6 +30,20 @@ export default {
   name: 'HomeTableHead',
   components: {
     HomeTableItemWrapper,
+  },
+  props: {
+    value: [String, Boolean],
+    val: Boolean,
+  },
+  computed: {
+    checkbox: {
+      set(e) {
+        this.$emit('input', e);
+      },
+      get() {
+        return this.value;
+      },
+    },
   },
 };
 </script>

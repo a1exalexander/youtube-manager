@@ -23,7 +23,7 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   (response) => {
-    logger.info(response?.data);
+    logger.info(response?.config?.url, response?.status);
     return Promise.resolve(response);
   },
   (error) => {

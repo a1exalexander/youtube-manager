@@ -1,4 +1,4 @@
-import { PROFILE_REQUEST, PROFILE_UPDATE, AUTH_LOGOUT } from '../mutation-types';
+import { PROFILE_REQUEST, PROFILE_UPDATE, CATCH_UNAUTHORIZED } from '../types';
 import { http } from '../../services';
 
 const initState = {
@@ -25,16 +25,13 @@ const mutations = {
   },
 };
 const actions = {
-  [PROFILE_REQUEST]: async ({ commit }) => {
+  [PROFILE_REQUEST]: async ({ commit, dispatch }) => {
     try {
       commit(PROFILE_REQUEST);
       const data = await http.getProfile();
       commit(PROFILE_UPDATE, data);
     } catch (error) {
-      const status = error?.response?.status;
-      if (status === 401) {
-        commit(`auth/${AUTH_LOGOUT}`, null, { root: true });
-      }
+      dispatch(CATCH_UNAUTHORIZED, error, { root: true });
     } finally {
       commit(PROFILE_REQUEST, false);
     }

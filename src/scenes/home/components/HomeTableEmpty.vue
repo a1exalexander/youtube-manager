@@ -16,6 +16,7 @@ export default {
 <style lang="scss">
 $style: home-table-empty;
 .#{$style} {
+  padding: 32px 0;
   flex: 1 1;
   &__title {
     @include text($H16, 500);

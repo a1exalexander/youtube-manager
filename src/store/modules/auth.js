@@ -1,4 +1,4 @@
-import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAILURE, AUTH_LOGOUT, PROFILE_REQUEST } from '../mutation-types';
+import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAILURE, AUTH_LOGOUT, PROFILE_REQUEST } from '../types';
 import { storage, http } from '../../services';
 
 const initState = {

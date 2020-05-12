@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     filteredTopics() {
-      return this.$onSearch(this.topics, this.search);
+      return this.topics.filter(this.$onSearch(this.search));
     },
     getValue() {
       const { length } = this.selectedTopics;

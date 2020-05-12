@@ -1,3 +1,4 @@
+import { parse, format } from 'date-fns';
 import axios from './axiosWrapper';
 import { url } from './url';
 
@@ -10,6 +11,17 @@ export class Http {
   getProfile = async () => {
     const { data } = await axios.get(url.profile);
     return data;
+  };
+
+  getCatalog = async () => {
+    try {
+      const { data } = await axios.get(url.catalog);
+      console.log(data);
+      const shallowCopy = data.map((item) => ({ ...item, date: format(parse(item.date, 'dd.MM.yyyy', new Date()), 'dd/MM/yyyy') }));
+      return shallowCopy;
+    } catch {
+      return null;
+    }
   };
 }
 

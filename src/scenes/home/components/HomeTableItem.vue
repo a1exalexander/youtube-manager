@@ -1,27 +1,31 @@
 <template>
   <li class="home-table-item">
     <home-table-item-wrapper>
-      <m-checkbox />
-      <m-row ai="center">
-        <img class="home-table-item__image" src="https://picsum.photos/300/200" alt="image" />
-        <m-col>
-          <span
-            class="home-table-item__name"
-          >{{'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis, nihil.'}}</span>
-        </m-col>
-      </m-row>
-      <span class="home-table-item__text">{{'10/12/2019'}}</span>
-      <span class="home-table-item__text _right">{{'12,900'}}</span>
-      <span class="home-table-item__text _right">{{'250'}}</span>
-      <span class="home-table-item__text _right">{{'28'}}</span>
-      <span class="home-table-item__text _right">{{'3'}}</span>
-      <span class="home-table-item__text _right">{{'68%'}}</span>
-      <span class="home-table-item__text _right">{{'9:12'}}</span>
-      <span class="home-table-item__text _right">{{'68%'}}</span>
-      <span class="home-table-item__text _right">{{'1.5%'}}</span>
-      <span class="home-table-item__text _right">{{'$2,000'}}</span>
-      <span class="home-table-item__text _right">{{'$201'}}</span>
-      <span class="home-table-item__text _right">{{'10.5%'}}</span>
+      <m-checkbox name='catalog' :val='video.id' v-model="select"/>
+      <router-link :to="{ name: 'VideoDetails', params: {id: video.id} }">
+        <m-row ai="center">
+          <img
+            class="home-table-item__image"
+            :src="`https://picsum.photos/id/${video.id}/300/200`"
+            alt="image"
+          />
+          <a-tooltip :title="video.name" placement="topRight">
+            <span class="home-table-item__name">{{video.name}}</span>
+          </a-tooltip>
+        </m-row>
+      </router-link>
+      <span class="home-table-item__text">{{video.date}}</span>
+      <span class="home-table-item__text _right">{{video.views | numeral('0,0')}}</span>
+      <span class="home-table-item__text _right">{{video.likes | numeral('0,0')}}</span>
+      <span class="home-table-item__text _right">{{video.dislides | numeral('0,0')}}</span>
+      <span class="home-table-item__text _right">{{video.comments | numeral('0,0')}}</span>
+      <span class="home-table-item__text _right">{{video.engagement_ratio || 0}}%</span>
+      <span class="home-table-item__text _right">{{video.watch_time}}</span>
+      <span class="home-table-item__text _right">{{video.watch_time_ratio || 0}}%</span>
+      <span class="home-table-item__text _right">{{video.click_through_rate || 0}}%</span>
+      <span class="home-table-item__text _right">${{video.ad_revenue | numeral('0,0')}}</span>
+      <span class="home-table-item__text _right">${{video.profuction_cost}}</span>
+      <span class="home-table-item__text _right">{{video.roi || 0 | numeral('0.[00]')}}%</span>
     </home-table-item-wrapper>
   </li>
 </template>
@@ -32,6 +36,21 @@ export default {
   name: 'HomeTableItem',
   props: {
     contentClass: String,
+    value: [String, Number, Array],
+    video: {
+      type: Object,
+      required: true,
+    },
+  },
+  computed: {
+    select: {
+      set(value) {
+        this.$emit('input', value);
+      },
+      get() {
+        return this.value;
+      },
+    },
   },
   components: {
     HomeTableItemWrapper,
@@ -50,6 +69,7 @@ $style: home-table-item;
     object-fit: cover;
     object-position: center;
     margin-right: 16px;
+    flex-shrink: 0;
   }
   &__text {
     @include text($H12, 400);

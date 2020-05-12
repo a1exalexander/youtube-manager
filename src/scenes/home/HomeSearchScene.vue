@@ -32,7 +32,7 @@
           <m-transition>
             <m-subtle
               v-show="!!search"
-              @click="() => SEARCH_SET('')"
+              @click="() => onSearch('')"
               class="home-search-scene__search-btn"
               type="white"
             >
@@ -89,7 +89,9 @@ export default {
     };
   },
   methods: {
-    ...mapMutations('catalog', [CATALOG_SEARCH_SET]),
+    ...mapMutations('catalog', {
+      onSearch: CATALOG_SEARCH_SET,
+    }),
     show(name) {
       if (name in this.visible) this.visible[name] = true;
     },
@@ -101,7 +103,7 @@ export default {
     ...mapState('catalog', { getSearch: (state) => state.search }),
     search: {
       set(value) {
-        this[CATALOG_SEARCH_SET](value);
+        this.onSearch(value);
       },
       get() {
         return this.getSearch;

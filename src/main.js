@@ -1,7 +1,6 @@
 import Vue from 'vue';
-import {
-  AutoComplete, Select, Popover, Divider, Tabs, Slider,
-} from 'ant-design-vue';
+import { AutoComplete, Select, Popover, Divider, Tabs, Slider, Tooltip } from 'ant-design-vue';
+import vueNumeralFilterInstaller from 'vue-numeral-filter';
 import VueCompositionApi from '@vue/composition-api';
 import App from './App.vue';
 import router, { routeName, routePath } from './router';
@@ -26,12 +25,8 @@ import MSliderTabs from './components/common/navigation/MSliderTabs.vue';
 import MBadge from './components/common/MBadge.vue';
 import MInputWrapper from './components/common/form/MInputWrapper.vue';
 import MAvatar from './components/common/MAvatar.vue';
-import {
-  isDev, isProd, isDevEnv, isProdEnv, apiMode, appVersion,
-} from './config';
-import {
-  isArray, isFunction, isNumber, isObject, isString, onSearch,
-} from './utils';
+import { isDev, isProd, isDevEnv, isProdEnv, apiMode, appVersion } from './config';
+import { isArray, isFunction, isNumber, isObject, isString, onSearch } from './utils';
 import './libs/animate.scss';
 import './libs/antd.scss';
 import './scss/style.scss';
@@ -79,6 +74,7 @@ Vue.component('MBadge', MBadge);
 Vue.component('MInputWrapper', MInputWrapper);
 Vue.component('MAvatar', MAvatar);
 
+Vue.use(vueNumeralFilterInstaller);
 Vue.use(VueCompositionApi);
 Vue.use(AutoComplete);
 Vue.use(Select);
@@ -86,6 +82,7 @@ Vue.use(Popover);
 Vue.use(Divider);
 Vue.use(Tabs);
 Vue.use(Slider);
+Vue.use(Tooltip);
 
 new Vue({
   router,

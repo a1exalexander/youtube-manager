@@ -12,11 +12,13 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import HomeChartsScene from '@/scenes/home/HomeChartsScene.vue';
 import HomeFoldersScene from '@/scenes/home/HomeFoldersScene.vue';
 import HomeSearchScene from '@/scenes/home/HomeSearchScene.vue';
 import HomeFiltersScene from '@/scenes/home/HomeFiltersScene.vue';
 import HomeTableScene from '@/scenes/home/HomeTableScene.vue';
+import { CATALOG_REQUEST } from '../store';
 
 export default {
   name: 'HomeView',
@@ -26,6 +28,14 @@ export default {
     HomeSearchScene,
     HomeFiltersScene,
     HomeTableScene,
+  },
+  methods: {
+    ...mapActions({
+      getCatalog: `catalog/${CATALOG_REQUEST}`,
+    }),
+  },
+  created() {
+    this.getCatalog();
   },
 };
 </script>
