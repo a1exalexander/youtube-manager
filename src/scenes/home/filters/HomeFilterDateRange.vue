@@ -16,7 +16,7 @@
 import HomeFilterButton from '../components/HomeFilterButton.vue';
 
 export default {
-  name: 'HomeFilterViews',
+  name: 'HomeFilterDateRange',
   components: {
     HomeFilterButton,
   },
@@ -31,13 +31,12 @@ export default {
 <style lang="scss">
 $style: home-filter-date-range;
 .#{$style} {
+  min-width: 132px;
+  padding: 3px 0;
   &__radio {
-    margin: 6px 16px;
-    &:first-of-type {
-      margin-top: 3px;
-    }
+    margin: 0 16px 12px;
     &:last-of-type {
-      margin-bottom: 3px;
+      margin-bottom: 0px;
     }
   }
 }
