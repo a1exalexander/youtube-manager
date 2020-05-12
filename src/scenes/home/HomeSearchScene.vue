@@ -115,7 +115,7 @@ $style: home-search-scene;
 .#{$style} {
   background-color: $dark;
   padding-top: 21px;
-  padding-bottom: 24px;
+  padding-bottom: 20px;
   &__wrapper {
     flex-grow: 1;
   }

@@ -1,12 +1,13 @@
 <template>
   <m-container class="home-filters-scene">
-    <m-row wrap ai="center">
+    <m-row wrap ai="center" class="home-filters-scene__row">
       <span class="home-filters-scene__caption">Filter by:</span>
       <component
         :is="`home-filter-${filter.value}`"
         v-for="filter in activeFilters"
         :key="filter.value"
         @remove="() => onRemove(filter.value)"
+        class="home-filters-scene__filter"
       />
       <home-filter-select
         v-model="activeFilters"
@@ -26,6 +27,7 @@ import HomeFilterDateRange from './filters/HomeFilterDateRange.vue';
 import HomeFilterOnCameraRace from './filters/HomeFilterOnCameraRace.vue';
 import HomeFilterRunTime from './filters/HomeFilterRunTime.vue';
 import HomeFilterOnCameraLocation from './filters/HomeFilterOnCameraLocation.vue';
+import HomeFilterStorytellingMethod from './filters/HomeFilterStorytellingMethod.vue';
 
 export default {
   name: 'HomeFiltersScene',
@@ -39,6 +41,7 @@ export default {
     HomeFilterOnCameraRace,
     HomeFilterRunTime,
     HomeFilterOnCameraLocation,
+    HomeFilterStorytellingMethod,
   },
   data() {
     return {
@@ -52,6 +55,7 @@ export default {
         // { name: 'click through rate', value: 'click-through-rate' },
         // { name: 'impressions', value: 'impressions' },
         // { name: 'no. of faces detected', value: 'no-of-faces-detected' },
+        { name: 'Storytelling Method', value: 'storytelling-method' },
         { name: 'On-Camera Location', value: 'on-camera-location' },
         { name: 'On-Camera Race', value: 'on-camera-race' },
         { name: 'ROI', value: 'roi' },
@@ -73,10 +77,16 @@ export default {
 $style: home-filters-scene;
 .#{$style} {
   background-color: $dark;
-  padding-bottom: 20px;
+  padding-bottom: 16px;
+  &__row {
+    min-height: 31px;
+  }
   &__caption {
     @include text($H12, 500);
     margin-right: 10px;
+  }
+  &__filter {
+    padding: 4px 0;
   }
 }
 </style>
