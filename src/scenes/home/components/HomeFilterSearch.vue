@@ -8,7 +8,7 @@
 export default {
   name: 'HomeFilterSearch',
   props: {
-    value: [String, Array, Number, Boolean],
+    value: String,
   },
   computed: {
     search: {

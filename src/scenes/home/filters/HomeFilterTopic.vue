@@ -36,11 +36,11 @@ export default {
   },
   computed: {
     filteredTopics() {
-      return this.topics.filter((data) => data.toLowerCase().indexOf(this.search.toLowerCase()) > -1);
+      return this.$onSearch(this.topics, this.search);
     },
     getValue() {
       const { length } = this.selectedTopics;
-      return length !== 0 ? length : 'All';
+      return length === 0 || length === this.topics.length ? 'All' : length;
     },
   },
 };

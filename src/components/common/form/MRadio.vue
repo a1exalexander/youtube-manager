@@ -5,7 +5,7 @@
       <div class="m-radio__cell">
         <div class="m-radio__image animated slow bounceIn"></div>
       </div>
-      <span v-if="!!$slots.default || !!label" class="m-radio__text"
+      <span v-if="!!$slots.default || !!label" class="m-radio__text" :class='{_capitalize: capitalize}'
         ><slot>{{ label }}</slot></span
       >
     </div>
@@ -26,6 +26,10 @@ export default {
     },
     label: {
       type: String,
+    },
+    capitalize: {
+      type: Boolean,
+      default: true,
     },
   },
   computed: {
@@ -94,6 +98,9 @@ $styles: m-radio;
     @include transition(color);
     cursor: pointer;
     pointer-events: none;
+    &._capitalize {
+      text-transform: capitalize;
+    }
   }
 }
 </style>

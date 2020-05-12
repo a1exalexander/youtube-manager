@@ -27,10 +27,10 @@ import MBadge from './components/common/MBadge.vue';
 import MInputWrapper from './components/common/form/MInputWrapper.vue';
 import MAvatar from './components/common/MAvatar.vue';
 import {
-  isDev, isProd,
+  isDev, isProd, isDevEnv, isProdEnv, apiMode, appVersion,
 } from './config';
 import {
-  isArray, isFunction, isNumber, isObject, isString,
+  isArray, isFunction, isNumber, isObject, isString, onSearch,
 } from './utils';
 import './libs/animate.scss';
 import './libs/antd.scss';
@@ -40,6 +40,10 @@ Vue.config.productionTip = false;
 
 Vue.prototype.$isDev = isDev;
 Vue.prototype.$isProd = isProd;
+Vue.prototype.$isDevEnv = isDevEnv;
+Vue.prototype.$isProdEnv = isProdEnv;
+Vue.prototype.$apiMode = apiMode;
+Vue.prototype.$appVersion = appVersion;
 Vue.prototype.$routeName = routeName;
 Vue.prototype.$routePath = routePath;
 Vue.prototype.$isArray = isArray;
@@ -47,6 +51,7 @@ Vue.prototype.$isFunction = isFunction;
 Vue.prototype.$isNumber = isNumber;
 Vue.prototype.$isObject = isObject;
 Vue.prototype.$isString = isString;
+Vue.prototype.$onSearch = onSearch;
 
 // Grid
 Vue.component('MContainer', MContainer);
