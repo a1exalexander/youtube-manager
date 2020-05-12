@@ -19,7 +19,7 @@ export default {
   name: 'HomeFilterButton',
   props: {
     name: String,
-    value: String,
+    value: [String, Number, Boolean],
     placement: {
       type: String,
       default: 'bottomLeft',

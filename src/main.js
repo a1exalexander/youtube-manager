@@ -30,7 +30,7 @@ import {
   isDev, isProd, isDevEnv, isProdEnv, apiMode, appVersion,
 } from './config';
 import {
-  isArray, isFunction, isNumber, isObject, isString,
+  isArray, isFunction, isNumber, isObject, isString, onSearch,
 } from './utils';
 import './libs/animate.scss';
 import './libs/antd.scss';
@@ -51,6 +51,7 @@ Vue.prototype.$isFunction = isFunction;
 Vue.prototype.$isNumber = isNumber;
 Vue.prototype.$isObject = isObject;
 Vue.prototype.$isString = isString;
+Vue.prototype.$onSearch = onSearch;
 
 // Grid
 Vue.component('MContainer', MContainer);

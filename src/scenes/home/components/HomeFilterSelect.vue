@@ -1,15 +1,7 @@
 <template>
   <a-popover class="home-filter-select" trigger="click" placement="bottomLeft">
     <template #content>
-      <m-row class="home-filter-select__search" ai="center">
-        <input
-          placeholder="Search"
-          class="home-filter-select__search-input"
-          type="text"
-          v-model="search"
-        />
-        <m-icon class="home-filter-select__search-icon" icon="search" />
-      </m-row>
+      <home-filter-search v-model='search' />
       <m-divider color="#373c54" :offset="12" />
       <div class="home-filter-select__container">
         <span class="home-filter-select__label">Clear selectes items</span>
@@ -20,7 +12,7 @@
           :val="checkbox"
           v-for="checkbox in activeFilters"
           :key="checkbox.value"
-        >{{checkbox.name}}</m-checkbox>
+        ><span class="home-filter-select__value">{{checkbox.name}}</span></m-checkbox>
       </div>
       <m-divider color="#373c54" :offset="12" />
       <div class="home-filter-select__container">
@@ -32,7 +24,7 @@
           :val="checkbox"
           v-for="checkbox in inactiveFilters"
           :key="checkbox.value"
-        >{{checkbox.name}}</m-checkbox>
+        ><span class="home-filter-select__value">{{checkbox.name}}</span></m-checkbox>
       </div>
     </template>
     <m-subtle class="home-filter-select__add-btn">
@@ -44,8 +36,13 @@
   </a-popover>
 </template>
 <script>
+import HomeFilterSearch from './HomeFilterSearch.vue';
+
 export default {
   name: 'HomeFilterSelect',
+  components: {
+    HomeFilterSearch,
+  },
   props: {
     value: [String, Array, Number, Boolean],
     activeFilters: Array,
@@ -66,7 +63,10 @@ export default {
       },
     },
     inactiveFilters() {
-      return this.filters.filter(({ value }) => this.activeFilters.every((item) => item.value !== value));
+      return this.$onSearch(
+        this.filters.filter(({ value }) => this.activeFilters.every((item) => item.value !== value)),
+        this.search,
+      );
     },
   },
 };
@@ -110,6 +110,9 @@ $style: home-filter-select;
   }
   &__checkbox:not(:last-child) {
     margin-bottom: 12px;
+  }
+  &__value {
+    text-transform: capitalize;
   }
 }
 </style>

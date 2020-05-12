@@ -17,10 +17,11 @@
   </m-container>
 </template>
 <script>
+import HomeFilterSelect from './components/HomeFilterSelect.vue';
 import HomeFilterViews from './filters/HomeFilterViews.vue';
 import HomeFilterTopic from './filters/HomeFilterTopic.vue';
 import HomeFilterProduction from './filters/HomeFilterProduction.vue';
-import HomeFilterSelect from './components/HomeFilterSelect.vue';
+import HomeFilterDateRange from './filters/HomeFilterDateRange.vue';
 
 export default {
   name: 'HomeFiltersScene',
@@ -29,12 +30,13 @@ export default {
     HomeFilterSelect,
     HomeFilterTopic,
     HomeFilterProduction,
+    HomeFilterDateRange,
   },
   data() {
     return {
       filters: [
         { name: 'views', value: 'views' },
-        // { name: 'date range', value: 'date-range' },
+        { name: 'date range', value: 'date-range' },
         // { name: 'run time', value: 'run-time' },
         // { name: 'watch time', value: 'watch-time' },
         // { name: 'watch time ratio', value: 'watch-time-ratio' },

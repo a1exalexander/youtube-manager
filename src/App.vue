@@ -6,6 +6,7 @@
     <m-transition>
       <router-view />
     </m-transition>
+    <span v-if='$isDev' class="app__version">{{$appVersion}}</span>
   </m-col>
 </template>
 <script>
@@ -38,5 +39,12 @@ export default {
 <style lang="scss">
 .app {
   min-height: 100vh;
+  &__version {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    @include z-index(immortal);
+    pointer-events: none;
+  }
 }
 </style>

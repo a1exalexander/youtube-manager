@@ -1,7 +1,7 @@
 <template>
-  <home-filter-button name="Views" class="home-filter-views" @remove="() => $emit('remove')">
+  <home-filter-button name="Views" class="home-filter-views" :value='value' @remove="() => $emit('remove')">
     <m-col class="home-filter-views__header">
-      <m-radio name="view" val="view" v-model="value">All Views</m-radio>
+      <m-radio name="view" val="all" v-model="value">All Views</m-radio>
     </m-col>
     <m-divider color="#373c54" :offset="12" />
     <m-col class="home-filter-views__body">
@@ -28,7 +28,7 @@ export default {
     return {
       from: '',
       to: '',
-      value: 'view',
+      value: 'all',
     };
   },
 };
