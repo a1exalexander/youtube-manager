@@ -50,16 +50,16 @@
     <m-divider />
     <m-row class="overview-scene__charts-row">
       <div class="overview-scene__chart-wrapper">
-        <overview-chart />
+        <line-chart />
       </div>
       <div class="overview-scene__chart-wrapper">
-        <overview-chart type="teal" />
+        <line-chart type="teal" />
       </div>
       <div class="overview-scene__chart-wrapper">
-        <overview-chart type="violet" />
+        <line-chart type="violet" />
       </div>
       <div class="overview-scene__chart-wrapper">
-        <overview-chart type="lime" />
+        <line-chart type="lime" />
       </div>
     </m-row>
     <div class="overview-scene__bottom-block">
@@ -82,7 +82,7 @@
   </div>
 </template>
 <script>
-import OverviewChart from './overview-scene/OverviewChart.vue';
+import LineChart from '../charts/LineChart.vue';
 import ProductionOverviewTab from './overview-scene/ProductionOverview.vue';
 import TranscriptOverviewTab from './overview-scene/TranscriptOverview.vue';
 import LanguageStatsTab from './overview-scene/LanguageStats.vue';
@@ -90,23 +90,10 @@ import LanguageStatsTab from './overview-scene/LanguageStats.vue';
 export default {
   name: 'OverviewScene',
   components: {
-    OverviewChart,
+    LineChart,
     ProductionOverviewTab,
     TranscriptOverviewTab,
     LanguageStatsTab,
-  },
-  data() {
-    return {
-      chartdata: {
-        labels: ['NOV 12', 'JAN25', 'MAR 17', 'NOV 12', 'JAN25', 'MAR 17'],
-        datasets: [
-          {
-            label: 'First data',
-            data: [1, 6, 3, 8, 1, 7],
-          },
-        ],
-      },
-    };
   },
 };
 </script>
