@@ -25,6 +25,7 @@ import HomeFilterRoi from './filters/HomeFilterRoi.vue';
 import HomeFilterDateRange from './filters/HomeFilterDateRange.vue';
 import HomeFilterOnCameraRace from './filters/HomeFilterOnCameraRace.vue';
 import HomeFilterRunTime from './filters/HomeFilterRunTime.vue';
+import HomeFilterOnCameraLocation from './filters/HomeFilterOnCameraLocation.vue';
 
 export default {
   name: 'HomeFiltersScene',
@@ -37,6 +38,7 @@ export default {
     HomeFilterDateRange,
     HomeFilterOnCameraRace,
     HomeFilterRunTime,
+    HomeFilterOnCameraLocation,
   },
   data() {
     return {
@@ -50,6 +52,7 @@ export default {
         // { name: 'click through rate', value: 'click-through-rate' },
         // { name: 'impressions', value: 'impressions' },
         // { name: 'no. of faces detected', value: 'no-of-faces-detected' },
+        { name: 'On-Camera Location', value: 'on-camera-location' },
         { name: 'On-Camera Race', value: 'on-camera-race' },
         { name: 'ROI', value: 'roi' },
         { name: 'Production Value', value: 'production' },
