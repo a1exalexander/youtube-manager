@@ -38,6 +38,7 @@ export default {
     [getName('folder-empty')]: () => import('../icons/IconFolderEmpty.vue'),
     [getName('action-horizontal')]: () => import('../icons/IconActionHorizontal.vue'),
     [getName('edit')]: () => import('../icons/IconEdit.vue'),
+    [getName('time')]: () => import('../icons/IconTime.vue'),
   },
   computed: {
     getIcon() {

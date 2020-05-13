@@ -33,6 +33,12 @@ import HomeFilterSponsored from './filters/HomeFilterSponsored.vue';
 import HomeFilterProductionCost from './filters/HomeFilterProductionCost.vue';
 import HomeFilterAdRevenue from './filters/HomeFilterAdRevenue.vue';
 import HomeFilterCategories from './filters/HomeFilterCategories.vue';
+import HomeFilterFaces from './filters/HomeFilterFaces.vue';
+import HomeFilterImpressions from './filters/HomeFilterImpressions.vue';
+import HomeFilterClickThroughRate from './filters/HomeFilterClickThroughRate.vue';
+import HomeFilterEngagementRatio from './filters/HomeFilterEngagementRatio.vue';
+import HomeFilterWatchTimeRatio from './filters/HomeFilterWatchTimeRatio.vue';
+import HomeFilterWatchTime from './filters/HomeFilterWatchTime.vue';
 
 export default {
   name: 'HomeFiltersScene',
@@ -52,6 +58,12 @@ export default {
     HomeFilterProductionCost,
     HomeFilterAdRevenue,
     HomeFilterCategories,
+    HomeFilterFaces,
+    HomeFilterImpressions,
+    HomeFilterClickThroughRate,
+    HomeFilterEngagementRatio,
+    HomeFilterWatchTimeRatio,
+    HomeFilterWatchTime,
   },
   data() {
     return {
@@ -59,12 +71,12 @@ export default {
         { name: 'views', value: 'views' },
         { name: 'date range', value: 'date-range' },
         { name: 'run time', value: 'run-time' },
-        // { name: 'watch time', value: 'watch-time' },
-        // { name: 'watch time ratio', value: 'watch-time-ratio' },
-        // { name: 'engagement ratio', value: 'engagement-ratio' },
-        // { name: 'click through rate', value: 'click-through-rate' },
-        // { name: 'impressions', value: 'impressions' },
-        // { name: 'no. of faces detected', value: 'no-of-faces-detected' },
+        { name: 'watch time', value: 'watch-time' },
+        { name: 'Watch Time Ratio', value: 'watch-time-ratio' },
+        { name: 'Engagement Ratio', value: 'engagement-ratio' },
+        { name: 'Click Through Rate', value: 'click-through-rate' },
+        { name: 'Impressions', value: 'impressions' },
+        { name: 'No. of Faces Detected', value: 'faces' },
         { name: 'Categories', value: 'categories' },
         { name: 'Ad Revenue', value: 'ad-revenue' },
         { name: 'Production Cost', value: 'production-cost' },
