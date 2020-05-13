@@ -66,11 +66,7 @@ $style: home-filter-roi;
     position: relative;
   }
   &__percents {
-    position: absolute;
-    right: 10px;
-    bottom: 6px;
-    z-index: 1;
-    @include text($H12, 400, $G2);
+    @extend %input-symbol;
   }
 }
 </style>

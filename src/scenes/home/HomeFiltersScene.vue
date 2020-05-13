@@ -29,6 +29,8 @@ import HomeFilterRunTime from './filters/HomeFilterRunTime.vue';
 import HomeFilterOnCameraLocation from './filters/HomeFilterOnCameraLocation.vue';
 import HomeFilterStorytellingMethod from './filters/HomeFilterStorytellingMethod.vue';
 import HomeFilterOnCameraGender from './filters/HomeFilterOnCameraGender.vue';
+import HomeFilterSponsored from './filters/HomeFilterSponsored.vue';
+import HomeFilterProductionCost from './filters/HomeFilterProductionCost.vue';
 
 export default {
   name: 'HomeFiltersScene',
@@ -44,6 +46,8 @@ export default {
     HomeFilterOnCameraLocation,
     HomeFilterStorytellingMethod,
     HomeFilterOnCameraGender,
+    HomeFilterSponsored,
+    HomeFilterProductionCost,
   },
   data() {
     return {
@@ -57,6 +61,8 @@ export default {
         // { name: 'click through rate', value: 'click-through-rate' },
         // { name: 'impressions', value: 'impressions' },
         // { name: 'no. of faces detected', value: 'no-of-faces-detected' },
+        { name: 'Production Cost', value: 'production-cost' },
+        { name: 'Sponsored', value: 'sponsored' },
         { name: 'On-Camera Gender', value: 'on-camera-gender' },
         { name: 'Storytelling Method', value: 'storytelling-method' },
         { name: 'On-Camera Location', value: 'on-camera-location' },
