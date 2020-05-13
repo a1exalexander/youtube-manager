@@ -31,6 +31,7 @@ import HomeFilterStorytellingMethod from './filters/HomeFilterStorytellingMethod
 import HomeFilterOnCameraGender from './filters/HomeFilterOnCameraGender.vue';
 import HomeFilterSponsored from './filters/HomeFilterSponsored.vue';
 import HomeFilterProductionCost from './filters/HomeFilterProductionCost.vue';
+import HomeFilterAdRevenue from './filters/HomeFilterAdRevenue.vue';
 
 export default {
   name: 'HomeFiltersScene',
@@ -48,6 +49,7 @@ export default {
     HomeFilterOnCameraGender,
     HomeFilterSponsored,
     HomeFilterProductionCost,
+    HomeFilterAdRevenue,
   },
   data() {
     return {
@@ -61,6 +63,7 @@ export default {
         // { name: 'click through rate', value: 'click-through-rate' },
         // { name: 'impressions', value: 'impressions' },
         // { name: 'no. of faces detected', value: 'no-of-faces-detected' },
+        { name: 'Ad Revenue', value: 'ad-revenue' },
         { name: 'Production Cost', value: 'production-cost' },
         { name: 'Sponsored', value: 'sponsored' },
         { name: 'On-Camera Gender', value: 'on-camera-gender' },
