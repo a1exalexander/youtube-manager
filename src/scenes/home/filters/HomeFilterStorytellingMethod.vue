@@ -47,7 +47,8 @@ export default {
   },
   computed: {
     getValue() {
-      return this.all ? 'All' : this.checked.join(', ');
+      const { length } = this.checked;
+      return length === 0 || length === this.inputs.length ? 'All' : length;
     },
   },
   watch: {
