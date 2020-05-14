@@ -18,8 +18,8 @@
   </home-filter-button>
 </template>
 <script>
-import HomeFilterButton from '../components/HomeFilterButton.vue';
-import HomeFilterSearch from '../components/HomeFilterSearch.vue';
+import HomeFilterButton from './components/HomeFilterButton.vue';
+import HomeFilterSearch from './components/HomeFilterSearch.vue';
 
 export default {
   name: 'HomeFilterCategories',

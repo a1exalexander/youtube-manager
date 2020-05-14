@@ -19,16 +19,18 @@
       <m-divider color="#373c54" :offset="12" />
       <div class="home-filter-select__container">
         <span class="home-filter-select__label">All Filters</span>
-        <m-checkbox
-          class="home-filter-select__checkbox"
-          name="active-filters"
-          v-model="filtersModel"
-          :val="checkbox"
-          v-for="checkbox in inactiveFilters"
-          :key="checkbox.value"
-        >
-          <span class="home-filter-select__value">{{checkbox.name}}</span>
-        </m-checkbox>
+        <div class="home-filter-select__list">
+          <m-checkbox
+            class="home-filter-select__checkbox"
+            name="active-filters"
+            v-model="filtersModel"
+            :val="checkbox"
+            v-for="checkbox in inactiveFilters"
+            :key="checkbox.value"
+          >
+            <span class="home-filter-select__value">{{checkbox.name}}</span>
+          </m-checkbox>
+        </div>
       </div>
     </template>
     <m-subtle class="home-filter-select__add-btn">
@@ -81,6 +83,11 @@ $style: home-filter-select;
     min-width: 202px;
     padding: 0 14px 0 16px;
   }
+  &__list {
+    max-height: 105px;
+    overflow-y: auto;
+    padding-right: 9px;
+  }
   &__add-btn {
     position: relative;
     bottom: -1px;
@@ -104,15 +111,18 @@ $style: home-filter-select;
   }
   &__container {
     min-width: 202px;
-    padding: 0 16px;
+    padding: 0 7px 0 16px;
   }
   &__label {
     display: block;
     @include text($H12, 400);
     margin-bottom: 9px;
   }
+  &__checkbox {
+    min-height: 18px;
+  }
   &__checkbox:not(:last-child) {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   &__value {
     text-transform: capitalize;

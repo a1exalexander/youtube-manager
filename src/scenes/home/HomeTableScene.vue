@@ -26,10 +26,10 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import HomeTableHead from './components/HomeTableHead.vue';
-import HomeTableEmpty from './components/HomeTableEmpty.vue';
-import HomeTableItem from './components/HomeTableItem.vue';
-import HomeTableSectionHeader from './components/HomeTableSectionHeader.vue';
+import HomeTableHead from './table/HomeTableHead.vue';
+import HomeTableEmpty from './table/HomeTableEmpty.vue';
+import HomeTableItem from './table/HomeTableItem.vue';
+import HomeTableSectionHeader from './table/HomeTableSectionHeader.vue';
 
 export default {
   name: 'HomeTableScene',

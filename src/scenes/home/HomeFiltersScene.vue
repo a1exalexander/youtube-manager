@@ -18,7 +18,7 @@
   </m-container>
 </template>
 <script>
-import HomeFilterSelect from './components/HomeFilterSelect.vue';
+import HomeFilterSelect from './filters/components/HomeFilterSelect.vue';
 import HomeFilterViews from './filters/HomeFilterViews.vue';
 import HomeFilterTopic from './filters/HomeFilterTopic.vue';
 import HomeFilterProduction from './filters/HomeFilterProduction.vue';

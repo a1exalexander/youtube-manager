@@ -34,7 +34,7 @@
   </home-filter-button>
 </template>
 <script>
-import HomeFilterButton from '../components/HomeFilterButton.vue';
+import HomeFilterButton from './components/HomeFilterButton.vue';
 
 export default {
   name: 'HomeFilterWatchTimeRatio',

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { AutoComplete, Select, Popover, Divider, Tabs, Slider, Tooltip } from 'ant-design-vue';
+import { AutoComplete, Select, Popover, Divider, Tabs, Slider, Tooltip, message, Upload } from 'ant-design-vue';
 import vueNumeralFilterInstaller from 'vue-numeral-filter';
 import VueCompositionApi from '@vue/composition-api';
 import App from './App.vue';
@@ -47,6 +47,7 @@ Vue.prototype.$isNumber = isNumber;
 Vue.prototype.$isObject = isObject;
 Vue.prototype.$isString = isString;
 Vue.prototype.$onSearch = onSearch;
+Vue.prototype.$message = message;
 
 // Grid
 Vue.component('MContainer', MContainer);
@@ -83,6 +84,7 @@ Vue.use(Divider);
 Vue.use(Tabs);
 Vue.use(Slider);
 Vue.use(Tooltip);
+Vue.use(Upload);
 
 new Vue({
   router,

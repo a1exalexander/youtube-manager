@@ -39,6 +39,7 @@ export default {
     [getName('action-horizontal')]: () => import('../icons/IconActionHorizontal.vue'),
     [getName('edit')]: () => import('../icons/IconEdit.vue'),
     [getName('time')]: () => import('../icons/IconTime.vue'),
+    [getName('upload')]: () => import('../icons/IconUpload.vue'),
   },
   computed: {
     getIcon() {

@@ -19,7 +19,9 @@
       type,
     ]"
   >
-    <slot name="icon" />
+    <slot name="icon" v-if="!!icon || !!$slots.icon">
+      <m-icon :icon="icon"/>
+    </slot>
     <span class="m-subtle__text" v-if="!!$slots.default || !!label">
       <slot>{{ label }}</slot>
     </span>
@@ -55,6 +57,7 @@ export default {
       },
       default: 'primary',
     },
+    icon: String,
   },
 };
 </script>

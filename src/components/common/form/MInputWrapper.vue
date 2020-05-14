@@ -5,7 +5,6 @@
   >
     <span
       class="m-input-wrapper__label"
-      :for="id"
       v-if="!!$slots.label || !!label"
     >
       <slot name='label'>{{ label }}</slot>
@@ -107,6 +106,7 @@ $style: m-input-wrapper;
   &__label {
     text-align: left;
     @extend %label;
+    @include flex(space-between, center);
   }
   &__visibility-btn {
     border: none;

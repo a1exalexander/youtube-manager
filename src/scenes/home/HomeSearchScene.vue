@@ -8,27 +8,21 @@
         Catalog?"
       @close="() => hide('delete')"
       @danger-action="() => hide('delete')"
-    >
-    </m-popconfirm>
+    ></m-popconfirm>
     <home-export-popup
       :visible="visible.export"
       @close="() => hide('export')"
       @submit="() => hide('export')"
     />
-    <m-row
-      jc="space-between"
-      ai="center"
-      class="home-search-scene__wrapper"
-    >
-      <m-row
-        ai="center"
-        class="home-search-scene__inner"
-      >
+    <home-new-video-popup
+      :visible="visible.new"
+      @close="() => hide('new')"
+      @submit="() => hide('new')"
+    />
+    <m-row jc="space-between" ai="center" class="home-search-scene__wrapper">
+      <m-row ai="center" class="home-search-scene__inner">
         <h2 class="home-search-scene__title">Video Catalog</h2>
-        <m-row
-          ai="center"
-          class="home-search-scene__search"
-        >
+        <m-row ai="center" class="home-search-scene__search">
           <m-transition>
             <m-subtle
               v-show="!!search"
@@ -39,10 +33,7 @@
               <m-icon icon="close" />
             </m-subtle>
           </m-transition>
-          <m-input
-            v-model="search"
-            class="home-search-scene__input"
-          />
+          <m-input v-model="search" class="home-search-scene__input" />
         </m-row>
       </m-row>
       <m-row ai="center">
@@ -52,14 +43,15 @@
             @click="() => show('delete')"
             type="danger"
             class="home-search-scene__delete-btn"
-          >Delete<template #icon-right>
-              <m-icon icon="trash" /></template></m-subtle>
+          >
+            Delete
+            <template #icon-right>
+              <m-icon icon="trash" />
+            </template>
+          </m-subtle>
         </m-transition>
-        <m-subtle
-          @click="() => show('export')"
-          class="home-search-scene__export-btn"
-        >Export</m-subtle>
-        <m-subtle class="home-search-scene__add-btn">
+        <m-subtle @click="() => show('export')" class="home-search-scene__export-btn">Export</m-subtle>
+        <m-subtle @click="() => show('new')" class="home-search-scene__add-btn">
           <template #icon>
             <m-icon icon="plus" />
           </template>
@@ -72,19 +64,21 @@
 <script>
 import { mapMutations, mapState } from 'vuex';
 import { CATALOG_SEARCH_SET } from '../../store';
-import HomeExportPopup from './HomeExportPopup.vue';
-// import { eventBus } from '../../services';
+import HomeExportPopup from './search/HomeExportPopup.vue';
+import HomeNewVideoPopup from './search/HomeNewVideoPopup.vue';
 
 export default {
   name: 'HomeSearchScene',
   components: {
     HomeExportPopup,
+    HomeNewVideoPopup,
   },
   data() {
     return {
       visible: {
         delete: false,
         export: false,
+        new: false,
       },
     };
   },

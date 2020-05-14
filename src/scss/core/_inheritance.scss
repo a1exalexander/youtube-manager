@@ -42,6 +42,9 @@
   &:disabled {
     background-color: $darken;
     border-color: $G8;
+    &::placeholder {
+      color: $G7;
+    }
   }
 }
 

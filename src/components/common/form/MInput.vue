@@ -15,7 +15,13 @@
         @blur="(e) => $emit('blur', e)"
         @focus="(e) => $emit('focus', e)"
         class="m-input__input"
+        :class="{'_icon-left': !!iconLeft || !!$slots.iconLeft, _fill: !!vModel}"
       />
+      <div class="m-input__icon-left" v-if="!!iconLeft || !!$slots.iconLeft">
+        <slot name='iconLeft'>
+          <m-icon :icon="iconLeft"/>
+        </slot>
+      </div>
       <button
         v-if="type === 'password'"
         @click.prevent="toggleVisibility"
@@ -84,6 +90,10 @@ export default {
         return ['default', 'small'].indexOf(value) !== -1;
       },
       default: 'default',
+    },
+    iconLeft: {
+      type: String,
+      default: null,
     },
   },
   data() {
@@ -181,6 +191,22 @@ $style: m-input;
     }
     &:focus ~ .#{$style}__message {
       display: none;
+    }
+    &._fill ~ .#{$style}__icon-left {
+      svg {
+        fill: $N0;
+      }
+    }
+    &._icon-left {
+      padding-left: 30px;
+    }
+  }
+  &__icon-left {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    svg {
+      @include svg(15px, $G6);
     }
   }
   &__label {

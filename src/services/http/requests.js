@@ -16,7 +16,6 @@ export class Http {
   getCatalog = async () => {
     try {
       const { data } = await axios.get(url.catalog);
-      console.log(data);
       const shallowCopy = data.map((item) => ({ ...item, date: format(parse(item.date, 'dd.MM.yyyy', new Date()), 'dd/MM/yyyy') }));
       return shallowCopy;
     } catch {
