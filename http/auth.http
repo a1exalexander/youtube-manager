@@ -1,0 +1,10 @@
+@base_url = {{dev_url}}
+
+POST {{base_url}}/login
+content-type: application/json
+
+{
+    "email": "john.doe@mediascout.co",
+    "password": "password12345",
+    "remember": true
+}
