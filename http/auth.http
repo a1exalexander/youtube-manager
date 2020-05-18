@@ -1,5 +1,10 @@
 @base_url = {{dev_url}}
 
+<<<<<<< HEAD
+=======
+# @name Login
+
+>>>>>>> 596f5e2880e5c137c86594b66b3883f331504c67
 POST {{base_url}}/login
 content-type: application/json
 
@@ -7,4 +12,12 @@ content-type: application/json
     "email": "john.doe@mediascout.co",
     "password": "password12345",
     "remember": true
+<<<<<<< HEAD
 }
+=======
+}
+
+### 
+
+# @name SignUp
+>>>>>>> 596f5e2880e5c137c86594b66b3883f331504c67
