@@ -2,8 +2,8 @@ import { apiMode } from '../../config';
 
 const baseUrls = {
   fake: 'https://media-scout-fake-server.herokuapp.com/api',
-  prod: 'https://media-scout-fake-server.herokuapp.com/api',
-  dev: 'https://media-scout-fake-server.herokuapp.com/api',
+  prod: 'https://mediascout.co/api',
+  dev: 'https://mediascout.co/api',
 };
 
 export const BASE_URL = baseUrls[apiMode];

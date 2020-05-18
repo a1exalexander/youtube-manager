@@ -1,20 +1,13 @@
-@base_url = http://localhost:9000/api
+@base_url = {{fake_url}}
 
-POST {{base_url}}/login
-Content-Type: application/json
-
-{
-  "email": "email@example.com",
-  "password": "testpassword"
-}
-
-###
-
+# @name Profile
 GET {{base_url}}/profile
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGV4YW1wbGUuY29tIiwibmFtZSI6IlBpZXJjZSBDb25uZWxseSBKci4iLCJpZCI6ImI0MDRlNjMwLTMyMDctNGVmNS04MzU5LWNkNzRhYTAyZDQ4NSIsImlhdCI6MTU4OTEzODgxMH0.6r4W0qGzIz_HxhxMELTBhlfl74eoW7kmfMsaOFiaaDY
 
 ###
+
+# @name Catalog
 
 GET {{base_url}}/catalog
 Content-Type: application/json
