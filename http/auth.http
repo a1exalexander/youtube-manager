@@ -4,6 +4,7 @@
 
 POST {{base_url}}/login
 content-type: application/json
+Accept: application/json
 
 {
     "email": "john.doe@mediascout.co",
@@ -14,3 +15,15 @@ content-type: application/json
 ### 
 
 # @name SignUp
+
+POST {{base_url}}/register
+Content-Type: application/json
+Accept: application/json
+
+{
+  "first_name": "Alex",
+  "last_name": "Test",
+  "email": "sania2403@gmail.com",
+  "password": "tester123",
+  "password_confirmation": "tester123"
+}

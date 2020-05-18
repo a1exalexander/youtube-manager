@@ -16,12 +16,23 @@ export default {
 </script>
 <style lang="scss">
 $style: home-table-item-wrapper;
+@function columns($width: 200px) {
+  @return 16px #{$width} 85px 85px 75px 70px 75px 100px 70px 100px 110px 70px 100px 42px;
+}
 .#{$style} {
   &__content {
     display: grid;
-    grid-template-columns: 16px auto 86px 50px 50px 50px 60px 100px 70px 100px 110px 70px 100px 40px;
+    grid-template-columns: columns();
     align-items: center;
-    column-gap: 25px;
+    justify-content: space-between;
+    column-gap: 5px;
+    @include media($screen-fullhd) {
+      grid-template-columns: columns(210px);
+    }
+    @include media($screen-retina) {
+      column-gap: 25px;
+      grid-template-columns: columns(2fr);
+    }
   }
 }
 </style>

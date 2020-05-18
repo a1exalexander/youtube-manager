@@ -18,7 +18,12 @@
         </ul>
         <home-table-section-header :visible="isSearch">Global results:</home-table-section-header>
         <ul class="home-table-scene__list" v-if="isSearch && !isEmpty">
-          <home-table-item v-for="video in getCatalog" :key="video.id" :video="video" />
+          <home-table-item
+            v-for="video in getCatalog"
+            :key="video.id"
+            :video="video"
+            v-model="selected"
+          />
         </ul>
       </div>
     </m-transition>

@@ -1,6 +1,6 @@
 <template>
   <m-col class="home">
-    <home-charts-scene />
+    <!-- <home-charts-scene /> -->
     <m-container>
       <m-divider class="home__divider" />
     </m-container>
@@ -13,7 +13,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import HomeChartsScene from '@/scenes/home/HomeChartsScene.vue';
+// import HomeChartsScene from '@/scenes/home/HomeChartsScene.vue';
 import HomeFoldersScene from '@/scenes/home/HomeFoldersScene.vue';
 import HomeSearchScene from '@/scenes/home/HomeSearchScene.vue';
 import HomeFiltersScene from '@/scenes/home/HomeFiltersScene.vue';
@@ -23,7 +23,7 @@ import { CATALOG_REQUEST } from '../store';
 export default {
   name: 'HomeView',
   components: {
-    HomeChartsScene,
+    // HomeChartsScene,
     HomeFoldersScene,
     HomeSearchScene,
     HomeFiltersScene,

@@ -55,7 +55,7 @@ $style: home-table-head;
   &__cell {
     @include text($H10, 500, $G4);
     text-transform: uppercase;
-    white-space: nowrap;
+    // white-space: nowrap;
     text-align: left;
     &._right {
       text-align: right;
@@ -89,7 +89,7 @@ $style: home-table-head;
     @include text($H10, 500, $G4);
     @include transition(all);
     text-transform: uppercase;
-    white-space: nowrap;
+    // white-space: nowrap;
   }
   &__icon {
     margin-left: 2px;
