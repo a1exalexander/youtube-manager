@@ -1,4 +1,17 @@
 @base_url = {{fake_url}}
+<<<<<<< HEAD
+
+POST {{base_url}}/login
+Content-Type: application/json
+
+{
+  "email": "email@example.com",
+  "password": "testpassword"
+}
+
+###
+=======
+>>>>>>> 596f5e2880e5c137c86594b66b3883f331504c67
 
 # @name Profile
 GET {{base_url}}/profile
