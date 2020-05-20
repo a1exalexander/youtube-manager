@@ -91,7 +91,7 @@
     </div>
     <template #buttons>
       <m-button @click="() => $emit('close')" type="secondary">Cancel</m-button>
-      <m-button @click="() => $emit('submit')">Add Video</m-button>
+      <m-button @click="onSubmit">Add Video</m-button>
     </template>
   </m-popup>
 </template>
@@ -125,6 +125,9 @@ export default {
       this.video = undefined;
       this.channel = undefined;
     },
+    onSubmit() {
+      this.$message.success('Video uploaded successfully!');
+    },
     handleChange(info) {
       if (info.file.status === 'uploading') {
         this.loading = true;
@@ -141,11 +144,11 @@ export default {
     beforeUpload(file) {
       const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
       if (!isJpgOrPng) {
-        this.$message.error('You can only upload JPG file!');
+        this.$message.warn('You can only upload JPG file!');
       }
       const isLt2M = file.size / 1024 / 1024 < 2;
       if (!isLt2M) {
-        this.$message.error('Image must smaller than 2MB!');
+        this.$message.warn('Image must smaller than 2MB!');
       }
       return isJpgOrPng && isLt2M;
     },

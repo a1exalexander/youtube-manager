@@ -7,8 +7,8 @@ content-type: application/json
 Accept: application/json
 
 {
-    "email": "john.doe@mediascout.co",
-    "password": "password12345",
+    "email": "sania2403@gmail.com",
+    "password": "tester123",
     "remember": true
 }
 
@@ -23,7 +23,7 @@ Accept: application/json
 {
   "first_name": "Alex",
   "last_name": "Test",
-  "email": "sania2403@gmail.com",
+  "email": "sania2403+2@gmail.com",
   "password": "tester123",
   "password_confirmation": "tester123"
 }

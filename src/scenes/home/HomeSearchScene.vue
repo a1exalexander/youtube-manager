@@ -7,7 +7,7 @@
       text="Are you sure that you want to delete video How to Build an Open Source Business from the Video
         Catalog?"
       @close="() => hide('delete')"
-      @danger-action="() => hide('delete')"
+      @danger-action="() => $message.success('Video(s) deleted successfully!')"
     ></m-popconfirm>
     <home-export-popup
       :visible="visible.export"
