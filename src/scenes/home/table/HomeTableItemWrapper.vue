@@ -26,6 +26,7 @@ $style: home-table-item-wrapper;
     align-items: center;
     justify-content: space-between;
     column-gap: 5px;
+    position: relative;
     @include media($screen-fullhd) {
       grid-template-columns: columns(210px);
     }

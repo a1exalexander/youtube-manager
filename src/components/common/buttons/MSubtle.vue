@@ -93,7 +93,6 @@ $disabled: (
   'danger': $G6,
 );
 .#{$style} {
-  align-self: center;
   cursor: pointer;
   position: relative;
   @include flex(flex-start, center);

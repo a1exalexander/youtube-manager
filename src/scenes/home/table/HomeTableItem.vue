@@ -1,7 +1,7 @@
 <template>
-  <li class="home-table-item">
+  <li class="home-table-item" @mouseenter="showMore = true" @mouseleave="hideShowMore">
     <home-table-item-wrapper>
-      <m-checkbox name='catalog' :val='video.id' v-model="select"/>
+      <m-checkbox name="catalog" :val="video.id" v-model="select" />
       <router-link :to="{ name: 'VideoDetails', params: {id: video.id} }">
         <m-row ai="center">
           <img
@@ -26,11 +26,17 @@
       <span class="home-table-item__text _right">${{video.ad_revenue | numeral('0,0')}}</span>
       <span class="home-table-item__text _right">${{video.profuction_cost}}</span>
       <span class="home-table-item__text _right">{{video.roi || 0 | numeral('0.[00]')}}%</span>
+      <home-table-item-cascader
+        class="home-table-item__cascader"
+        v-if="showMore"
+        @popoverIsVisible="popoverIsVisible = !popoverIsVisible"
+      />
     </home-table-item-wrapper>
   </li>
 </template>
 <script>
 import HomeTableItemWrapper from './HomeTableItemWrapper.vue';
+import HomeTableItemCascader from './HomeTableItemCascader.vue';
 
 export default {
   name: 'HomeTableItem',
@@ -42,6 +48,12 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      showMore: false,
+      popoverIsVisible: false,
+    };
+  },
   computed: {
     select: {
       set(value) {
@@ -52,8 +64,16 @@ export default {
       },
     },
   },
+  methods: {
+    hideShowMore() {
+      if (!this.popoverIsVisible) {
+        this.showMore = false;
+      }
+    },
+  },
   components: {
     HomeTableItemWrapper,
+    HomeTableItemCascader,
   },
 };
 </script>
@@ -85,6 +105,12 @@ $style: home-table-item;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+  }
+  &__cascader {
+    position: absolute;
+    right: -35px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 </style>
