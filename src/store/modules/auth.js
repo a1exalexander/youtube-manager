@@ -1,5 +1,17 @@
-import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAILURE, AUTH_LOGOUT, PROFILE_REQUEST } from '../types';
+import { message } from 'ant-design-vue';
+import {
+  AUTH_REQUEST,
+  AUTH_SUCCESS,
+  AUTH_FAILURE,
+  AUTH_LOGOUT,
+  PROFILE_REQUEST,
+  ACCOUNTS_REQUEST,
+  PROFILE_CLEAN,
+  CHARTS_CLEAN,
+  CATALOG_CLEAN,
+} from '../types';
 import { storage, http } from '../../services';
+import { cleanState } from '../../utils';
 
 const initState = {
   user: {
@@ -35,9 +47,7 @@ const mutations = {
     state.token = null;
   },
   [AUTH_LOGOUT](state) {
-    state.loading = false;
-    state.error = null;
-    state.token = null;
+    cleanState(state, initState);
   },
 };
 const actions = {
@@ -47,15 +57,21 @@ const actions = {
       const { email, token, name, id } = await http.login(formData);
       commit(AUTH_SUCCESS, { token, user: { name, email, id } });
       dispatch(`profile/${PROFILE_REQUEST}`, null, { root: true });
+      dispatch(`profile/${ACCOUNTS_REQUEST}`, null, { root: true });
       return storage.setToken(token);
     } catch (err) {
       commit(AUTH_FAILURE, err);
+      message.error(err);
       return storage.removeToken();
     }
   },
-  [AUTH_LOGOUT]: ({ commit }) => {
+  [AUTH_LOGOUT]: ({ commit, dispatch }) => {
     commit(AUTH_LOGOUT);
+    dispatch(`profile/${PROFILE_CLEAN}`, null, { root: true });
+    dispatch(`charts/${CHARTS_CLEAN}`, null, { root: true });
+    dispatch(`catalog/${CATALOG_CLEAN}`, null, { root: true });
     storage.removeToken();
+    sessionStorage.clear();
   },
 };
 

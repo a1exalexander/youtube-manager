@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Logger } from '../logger';
 import { storage } from '../storage';
 import { getErrorMessage } from '../../utils';
+import { CATCH_UNAUTHORIZED } from '../../store/types';
 
 const logger = Logger('[AXIOS]');
 
@@ -26,7 +27,9 @@ axios.interceptors.response.use(
     logger.info(response?.config?.url, response?.status);
     return Promise.resolve(response);
   },
-  (error) => {
+  async (error) => {
+    const { dispatch } = await import('../../store/store');
+    dispatch(CATCH_UNAUTHORIZED, error);
     const message = getErrorMessage(error);
     const status = error?.response?.status;
     logger.error(status, message);

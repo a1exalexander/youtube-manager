@@ -13,19 +13,21 @@
               :account="item"
               :val="item.id"
               name="accounts"
-              v-model="account"
+              v-model="accountIdModel"
             />
             <m-select-item icon="plus">Add Account</m-select-item>
             <m-select-item icon="exit">Log Out</m-select-item>
           </m-col>
         </template>
         <m-subtle>
-          <template #icon> <m-icon icon="profile"/></template>
-          <template #icon-right> <m-icon icon="angle-down"/></template>
+          <template #icon>
+            <m-avatar class="the-navigation__icon" :size='18' :src='account && account.thumbnail' />
+          </template>
+          <template #icon-right>
+            <m-icon icon="angle-down" />
+          </template>
           <m-transition appear>
-            <span :key="accountName">
-              {{ accountName }}
-            </span>
+            <span :key="accountName">{{ accountName }}</span>
           </m-transition>
         </m-subtle>
       </a-popover>
@@ -45,11 +47,14 @@
             <m-select-item icon="link">Components</m-select-item>
           </router-link>
           <a-divider />
-          <m-select-item @click='onLogout' icon="exit">Log Out</m-select-item>
+          <m-select-item @click="onLogout" icon="exit">Log Out</m-select-item>
         </template>
-        <m-subtle type="white"
-          >{{ user.name }}<template #icon-right> <m-icon icon="angle-down"/></template
-        ></m-subtle>
+        <m-subtle type="white">
+          {{ user.name }}
+          <template #icon-right>
+            <m-icon icon="angle-down" />
+          </template>
+        </m-subtle>
       </a-popover>
     </m-row>
   </m-container>
@@ -57,8 +62,8 @@
 <script>
 import IconLogo from '@/components/icons/IconLogo.vue';
 import TheNavigationAccountItem from '@/scenes/navigation/TheNavigationAccountItem.vue';
-import { mapState, mapActions } from 'vuex';
-import { AUTH_LOGOUT } from '../store';
+import { mapState, mapActions, mapGetters, mapMutations } from 'vuex';
+import { AUTH_LOGOUT, ACCOUNT_SET } from '../store';
 import { routeName } from '../router';
 
 export default {
@@ -67,38 +72,31 @@ export default {
     IconLogo,
     TheNavigationAccountItem,
   },
-  data() {
-    return {
-      account: null,
-      accounts: [
-        {
-          id: 1,
-          name: 'TEDx',
-          email: 'ted.x@gmail.com',
-          image: '',
-        },
-        {
-          id: 2,
-          name: 'Greg Blackman',
-          email: 'greg.blackman@gmail.com',
-          image: '',
-        },
-      ],
-    };
-  },
   methods: {
-    ...mapActions('auth', [
-      AUTH_LOGOUT,
-    ]),
+    ...mapActions({
+      [AUTH_LOGOUT]: `auth/${AUTH_LOGOUT}`,
+    }),
+    ...mapMutations({
+      [ACCOUNT_SET]: `profile/${ACCOUNT_SET}`,
+    }),
     async onLogout() {
       await this[AUTH_LOGOUT]();
       this.$router.push({ name: routeName.auth });
     },
   },
   computed: {
-    ...mapState('profile', ['user']),
+    ...mapState('profile', ['user', 'accounts', 'accountId']),
+    ...mapGetters('profile', ['account']),
+    accountIdModel: {
+      set(id) {
+        this[ACCOUNT_SET](id);
+      },
+      get() {
+        return this.accountId;
+      },
+    },
     accountName() {
-      return this.accounts.find(({ id }) => id === this.account)?.name || 'YouTube Account';
+      return this.accounts.find(({ id }) => id === this.accountIdModel)?.name || 'YouTube Account';
     },
   },
 };
@@ -126,6 +124,9 @@ $style: the-navigation;
   }
   &__account-divider {
     margin-top: 0 !important;
+  }
+  &__icon {
+    margin-right: 7px;
   }
 }
 </style>

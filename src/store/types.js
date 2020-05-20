@@ -1,3 +1,5 @@
+export const CATCH_UNAUTHORIZED = 'CATCH_UNAUTHORIZED';
+
 export const AUTH_REQUEST = 'auth/REQUEST';
 export const AUTH_SUCCESS = 'auth/SUCCESS';
 export const AUTH_FAILURE = 'auth/FAILURE';
@@ -7,8 +9,23 @@ export const CATALOG_SEARCH_SET = 'catalog/SEARCH_SET';
 export const CATALOG_REQUEST = 'catalog/REQUEST';
 export const CATALOG_UPDATE = 'catalog/UPDATE';
 export const CATALOG_SELECT_VIDEO = 'catalog/SELECT_VIDEO';
+export const CATALOG_CLEAN = 'catalog/CLEAN';
 
 export const PROFILE_REQUEST = 'profile/REQUEST';
 export const PROFILE_UPDATE = 'profile/UPDATE';
+export const PROFILE_CLEAN = 'profile/CLEAN';
 
-export const CATCH_UNAUTHORIZED = 'CATCH_UNAUTHORIZED';
+export const ACCOUNTS_REQUEST = 'profile/ACCOUNTS_REQUEST';
+export const ACCOUNTS_UPDATE = 'profile/ACCOUNTS_UPDATE';
+export const ACCOUNT_SET = 'profile/ACCOUNT_SET';
+
+export const CHARTS_CLEAN = 'charts/CLEAN';
+export const CHARTS_ACCOUNT_REQUEST = 'charts/ACCOUNT_REQUEST';
+export const CHARTS_AMOUNT_REQUEST = 'profile/AMOUNT_REQUEST';
+export const CHARTS_VIDEO_REQUEST = 'profile/VIDEO_REQUEST';
+export const CHARTS_ACCOUNT_SET = 'charts/ACCOUNT_SET';
+export const CHARTS_AMOUNT_SET = 'profile/AMOUNT_SET';
+export const CHARTS_VIDEO_SET = 'profile/VIDEO_SET';
+export const CHARTS_ACCOUNT_CLEAN = 'charts/ACCOUNT_CLEAN';
+export const CHARTS_AMOUNT_CLEAN = 'profile/AMOUNT_CLEAN';
+export const CHARTS_VIDEO_CLEAN = 'profile/VIDEO_CLEAN';

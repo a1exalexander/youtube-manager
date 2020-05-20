@@ -6,8 +6,8 @@
         <m-row ai="center">
           <img
             class="home-table-item__image"
-            :src="`https://picsum.photos/id/${video.id}/300/200`"
-            alt="image"
+            :src="video && video.image"
+            alt=""
           />
           <a-tooltip :title="video.name" placement="topRight">
             <span class="home-table-item__name">{{video.name}}</span>
@@ -17,7 +17,7 @@
       <span class="home-table-item__text">{{video.date}}</span>
       <span class="home-table-item__text _right">{{video.views | numeral('0,0')}}</span>
       <span class="home-table-item__text _right">{{video.likes | numeral('0,0')}}</span>
-      <span class="home-table-item__text _right">{{video.dislides | numeral('0,0')}}</span>
+      <span class="home-table-item__text _right">{{video.dislikes | numeral('0,0')}}</span>
       <span class="home-table-item__text _right">{{video.comments | numeral('0,0')}}</span>
       <span class="home-table-item__text _right">{{video.engagement_ratio || 0}}%</span>
       <span class="home-table-item__text _right">{{video.watch_time}}</span>
@@ -70,6 +70,7 @@ $style: home-table-item;
     object-position: center;
     margin-right: 16px;
     flex-shrink: 0;
+    background-color: $D4;
   }
   &__text {
     @include text($H12, 400);

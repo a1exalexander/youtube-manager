@@ -6,14 +6,14 @@
     <m-transition>
       <router-view />
     </m-transition>
-    <span v-if='$isDev' class="app__version">{{$appVersion}}</span>
+    <span v-if="$isDev" class="app__version">{{$appVersion}}</span>
   </m-col>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import TheNavigation from './components/TheNavigation.vue';
 import { routePath } from './router';
-import { PROFILE_REQUEST } from './store';
+import { PROFILE_REQUEST, ACCOUNTS_REQUEST } from './store';
 
 export default {
   name: 'App',
@@ -23,16 +23,21 @@ export default {
   methods: {
     ...mapActions({
       getProfile: `profile/${PROFILE_REQUEST}`,
+      getAccounts: `profile/${ACCOUNTS_REQUEST}`,
     }),
   },
   computed: {
+    ...mapGetters('auth', ['isAuth']),
     isNavigationVisible() {
       const routes = [routePath.auth, routePath.resetPassword];
       return !routes.includes(this.$route?.path) && !routes.includes(window.location.pathname);
     },
   },
   created() {
-    this.getProfile();
+    if (this.isAuth) {
+      this.getProfile();
+      this.getAccounts();
+    }
   },
 };
 </script>

@@ -1,13 +1,15 @@
-import { CATALOG_SEARCH_SET, CATALOG_REQUEST, CATALOG_UPDATE } from '../types';
+import { CATALOG_SEARCH_SET, CATALOG_REQUEST, CATALOG_UPDATE, CATALOG_CLEAN } from '../types';
 import { http } from '../../services';
-import { onSearch } from '../../utils';
+import { onSearch, cleanState } from '../../utils';
 
-const state = () => ({
+const initState = {
   search: '',
   loading: false,
   catalog: [],
   selected: [],
-});
+};
+
+const state = () => ({ ...initState });
 const mutations = {
   [CATALOG_SEARCH_SET](state, payload) {
     state.search = payload;
@@ -18,6 +20,9 @@ const mutations = {
   [CATALOG_UPDATE](state, payload) {
     state.catalog = [...payload];
   },
+  [CATALOG_CLEAN](state) {
+    cleanState(state, initState);
+  },
 };
 const actions = {
   [CATALOG_REQUEST]: async ({ commit }) => {
@@ -25,6 +30,9 @@ const actions = {
     const data = await http.getCatalog();
     if (data) commit(CATALOG_UPDATE, data);
     commit(CATALOG_REQUEST, false);
+  },
+  [CATALOG_CLEAN]: async ({ commit }) => {
+    commit();
   },
 };
 const getters = {

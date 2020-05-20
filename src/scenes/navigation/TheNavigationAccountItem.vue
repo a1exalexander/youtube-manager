@@ -4,7 +4,7 @@
     <span class="the-navigation-account-item__content">
       <span class="the-navigation-account-item__email">{{ account && account.email }}</span>
       <span class="the-navigation-account-item__row">
-        <m-avatar :src="account && account.image" class="the-navigation-account-item__avatar" />
+        <m-avatar :src="account && account.thumbnail" class="the-navigation-account-item__avatar" />
         <span class="the-navigation-account-item__name">{{ account && account.name }}</span>
         <m-icon class="the-navigation-account-item__icon animated fast bounceIn" icon="check" />
       </span>

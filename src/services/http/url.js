@@ -4,6 +4,7 @@ const baseUrls = {
   fake: 'https://media-scout-fake-server.herokuapp.com/api',
   prod: 'https://mediascout.co/api',
   dev: 'https://mediascout.co/api',
+  local: 'http://localhost:9000/api',
 };
 
 export const BASE_URL = baseUrls[apiMode];
@@ -11,5 +12,7 @@ export const BASE_URL = baseUrls[apiMode];
 export const url = {
   login: `${BASE_URL}/login`,
   profile: `${BASE_URL}/profile`,
-  catalog: `${BASE_URL}/catalog`,
+  videos: `${BASE_URL}/videos`,
+  accounts: `${BASE_URL}/accounts`,
+  charts: `${BASE_URL}/charts`,
 };
