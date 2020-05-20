@@ -29,8 +29,9 @@ $style: home-table-item-wrapper;
     align-items: center;
     justify-content: space-between;
     column-gap: 5px;
+    position: relative;
     &._scroll {
-      & > *:not(:first-child) {
+      & > *:not(:first-child):not(:last-child) {
         overflow-x: auto;
       }
     }

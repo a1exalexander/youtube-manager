@@ -40,6 +40,8 @@ export default {
     [getName('edit')]: () => import('../icons/IconEdit.vue'),
     [getName('time')]: () => import('../icons/IconTime.vue'),
     [getName('upload')]: () => import('../icons/IconUpload.vue'),
+    [getName('action-vertical')]: () => import('../icons/IconActionVertical.vue'),
+    [getName('expand-right')]: () => import('../icons/IconExpandRight.vue'),
   },
   computed: {
     getIcon() {
