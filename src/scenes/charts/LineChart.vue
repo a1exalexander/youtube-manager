@@ -4,15 +4,25 @@
     <a-popover trigger="click" placement="bottomLeft" @visibleChange="handleChangeVisibility">
       <template slot="content">
         <div class="line-chart__dropdown">
-          <m-subtle :active="impressions" class="line-chart__dropdown-item" type="light-grey">Impressions</m-subtle>
-          <m-subtle class="line-chart__dropdown-item" type="light-grey">
-            Click Through Rate
-          </m-subtle>
+          <m-subtle
+            :active="impressions"
+            class="line-chart__dropdown-item"
+            type="light-grey"
+          >Impressions</m-subtle>
+          <m-subtle class="line-chart__dropdown-item" type="light-grey">Click Through Rate</m-subtle>
         </div>
       </template>
-      <m-subtle :active="isClickedDropdown" class="line-chart__dropdown-button" type="light-grey" position="right"
-        ><template #icon-right><m-icon icon="drop-down" class="line-chart__dropdown-arrow"/></template>{{dropName}}</m-subtle
+      <m-subtle
+        :active="isClickedDropdown"
+        class="line-chart__dropdown-button"
+        type="light-grey"
+        position="right"
       >
+        <template #icon-right>
+          <m-icon icon="drop-down" class="line-chart__dropdown-arrow" />
+        </template>
+        {{dropName}}
+      </m-subtle>
     </a-popover>
     <m-line-chart :chartdata="chartData" :width="100" :height="140" />
   </div>
@@ -63,6 +73,18 @@ export default {
             pointBackgroundColor: colors.$dark,
             pointBorderWidth: 2,
             pointRadius: 4.5,
+            borderJoinStyle: 'miter',
+            lineTension: 0,
+          },
+          {
+            label: 'First datasssssssssssssssssssssssssssss',
+            data: [6, 1, 2, 2, 8, 2],
+            backgroundColor: 'transparent',
+            borderColor: '#8489A1',
+            borderWidth: 1,
+            pointBackgroundColor: colors.$dark,
+            pointBorderWidth: 1,
+            pointRadius: 3.5,
             borderJoinStyle: 'miter',
             lineTension: 0,
           },
