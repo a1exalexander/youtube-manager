@@ -4,7 +4,7 @@ import vueNumeralFilterInstaller from 'vue-numeral-filter';
 import VueCompositionApi from '@vue/composition-api';
 import App from './App.vue';
 import router, { routeName, routePath } from './router';
-import store from './store';
+import { store } from './store';
 import MButton from './components/common/buttons/MButton.vue';
 import MSubtle from './components/common/buttons/MSubtle.vue';
 import MInput from './components/common/form/MInput.vue';

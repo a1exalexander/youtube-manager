@@ -28,7 +28,7 @@ axios.interceptors.response.use(
     return Promise.resolve(response);
   },
   async (error) => {
-    const { dispatch } = await import('../../store/store');
+    const { dispatch } = await import('../../store');
     dispatch(CATCH_UNAUTHORIZED, error);
     const message = getErrorMessage(error);
     const status = error?.response?.status;
