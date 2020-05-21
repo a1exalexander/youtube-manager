@@ -28,6 +28,15 @@ export class Http {
     }
   };
 
+  deleteVideo = async (id) => {
+    try {
+      const { data } = await axios.delete(`${url.videos}/ad${id}`);
+      return data;
+    } catch {
+      return null;
+    }
+  };
+
   getAccounts = async () => {
     try {
       const { data } = await axios.get(url.accounts);

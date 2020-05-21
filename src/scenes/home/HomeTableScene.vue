@@ -30,11 +30,12 @@
   </m-col>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState, mapMutations } from 'vuex';
 import HomeTableHead from './table/HomeTableHead.vue';
 import HomeTableEmpty from './table/HomeTableEmpty.vue';
 import HomeTableItem from './table/HomeTableItem.vue';
 import HomeTableSectionHeader from './table/HomeTableSectionHeader.vue';
+import { CATALOG_SELECTED_SET } from '../../store';
 
 export default {
   name: 'HomeTableScene',
@@ -47,19 +48,30 @@ export default {
   data() {
     return {
       selectedAll: false,
-      selected: [],
     };
+  },
+  methods: {
+    ...mapMutations('catalog', [CATALOG_SELECTED_SET]),
   },
   computed: {
     ...mapGetters('catalog', ['getCatalog', 'isSearch', 'isEmpty']),
+    ...mapState('catalog', { getSelected: (state) => state.selected }),
+    selected: {
+      get() {
+        return this.getSelected;
+      },
+      set(e) {
+        this[CATALOG_SELECTED_SET](e);
+      },
+    },
   },
   watch: {
     async selectedAll() {
       await this.$nextTick();
       if (this.selectedAll) {
-        this.selected = [...this.getCatalog.map(({ id }) => id)];
+        this[CATALOG_SELECTED_SET]([...this.getCatalog.map(({ id }) => id)]);
       } else {
-        this.selected = [];
+        this[CATALOG_SELECTED_SET]([]);
       }
     },
   },

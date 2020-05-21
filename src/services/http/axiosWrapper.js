@@ -33,7 +33,7 @@ axios.interceptors.response.use(
     const message = getErrorMessage(error);
     const status = error?.response?.status;
     logger.error(status, message);
-    return Promise.reject(error);
+    return Promise.reject(getErrorMessage(error));
   },
 );
 

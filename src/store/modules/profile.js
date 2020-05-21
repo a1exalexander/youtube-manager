@@ -57,11 +57,13 @@ const actions = {
     if (data) commit(PROFILE_UPDATE, data);
     commit(PROFILE_REQUEST, false);
   },
-  [ACCOUNTS_REQUEST]: async ({ commit }) => {
+  [ACCOUNTS_REQUEST]: async ({ state, commit }) => {
     commit(PROFILE_REQUEST);
     const data = await http.getAccounts();
     if (data) commit(ACCOUNTS_UPDATE, data);
     commit(PROFILE_REQUEST, false);
+    const { 0: account } = data;
+    if (!state.accountId && account) commit(ACCOUNT_SET, account?.id);
   },
   [PROFILE_CLEAN]({ commit }) {
     commit(PROFILE_CLEAN);
