@@ -44,7 +44,7 @@ export const tooltips = {
     const position = this._chart.canvas.getBoundingClientRect();
     tooltipEl.style.opacity = 1;
     tooltipEl.style.position = 'absolute';
-    tooltipEl.style.left = `${position.left + window.pageXOffset + tooltipModel.caretX}px`;
+    tooltipEl.style.left = `${position.left + window.pageXOffset + tooltipModel.caretX + 20}px`;
     tooltipEl.style.top = `${position.top + window.pageYOffset + tooltipModel.caretY}px`;
     tooltipEl.style.pointerEvents = 'none';
   },

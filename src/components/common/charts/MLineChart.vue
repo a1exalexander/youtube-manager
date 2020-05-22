@@ -1,21 +1,33 @@
 <script>
-import { Line } from 'vue-chartjs';
+import { Line, mixins } from 'vue-chartjs';
+import '@/libs/chartjs-plugin-crosshair.min';
 import colors from './colors';
 import { tooltips } from './config';
+
+const { reactiveProp } = mixins;
 
 export default {
   extends: Line,
   name: 'MLineChart',
-  props: {
-    chartdata: {
-      type: Object,
-      default: null,
-    },
-  },
+  mixins: [reactiveProp],
   data() {
     return {
       options: {
         tooltips,
+        plugins: {
+          crosshair: {
+            line: {
+              color: '#5e6480',
+              width: 1,
+            },
+            sync: {
+              enabled: false,
+            },
+            zoom: {
+              enabled: false,
+            },
+          },
+        },
         layout: {
           padding: {
             left: 0,
@@ -35,6 +47,11 @@ export default {
                 zeroLineColor: colors.$G8,
                 color: 'transparent',
                 drawTicks: false,
+              },
+              type: 'time',
+              distribution: 'series',
+              time: {
+                unit: 'day',
               },
               ticks: {
                 fontColor: colors.$G6,
@@ -64,7 +81,7 @@ export default {
     };
   },
   mounted() {
-    this.renderChart(this.chartdata, this.options);
+    this.renderChart(this.chartData, this.options);
   },
 };
 </script>
@@ -74,6 +91,7 @@ export default {
   border: 1px solid #25293b;
   border-radius: 4px;
   padding: 10px 10px 0;
+  z-index: 100;
   &__td {
     @include flex-row(space-between, center);
     white-space: nowrap;

@@ -13,10 +13,10 @@ import {
 import { http } from '../../services';
 
 const initChartsState = {
-  watchTime: {},
-  likeCount: {},
-  impressionCount: {},
-  adRevenue: {},
+  watchTime: [],
+  likeCount: [],
+  impressionCount: [],
+  adRevenue: [],
 };
 
 const state = () => ({
@@ -33,6 +33,15 @@ const mutations = {
   },
   [CHARTS_VIDEO_SET](state, payload) {
     state.video = { ...payload };
+  },
+  [CHARTS_ACCOUNT_CLEAN](state) {
+    state.account = { ...initChartsState };
+  },
+  [CHARTS_AMOUNT_CLEAN](state) {
+    state.amount = { ...initChartsState };
+  },
+  [CHARTS_VIDEO_CLEAN](state) {
+    state.video = { ...initChartsState };
   },
 };
 
@@ -58,9 +67,13 @@ const actions = {
 
 const getters = {
   getAccountWatchLabels: (state) => state.account.watchTime.map(({ x }) => x),
-  getAccountLikesLabels: (state) => state.account.watchTime.map(({ x }) => x),
-  getAccountImpressionsLabels: (state) => state.account.watchTime.map(({ x }) => x),
-  getAccountAdRevenueLabels: (state) => state.account.watchTime.map(({ x }) => x),
+  getAccountLikesLabels: (state) => state.account.likeCount.map(({ x }) => x),
+  getAccountImpressionsLabels: (state) => state.account.impressionCount.map(({ x }) => x),
+  getAccountAdRevenueLabels: (state) => state.account.adRevenue.map(({ x }) => x),
+  getVideoWatchLabels: (state) => state.video.watchTime.map(({ x }) => x),
+  getVideoLikesLabels: (state) => state.video.likeCount.map(({ x }) => x),
+  getVideoImpressionsLabels: (state) => state.video.impressionCount.map(({ x }) => x),
+  getVideoAdRevenueLabels: (state) => state.video.adRevenue.map(({ x }) => x),
 };
 
 export default {

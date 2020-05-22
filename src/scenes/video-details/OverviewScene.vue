@@ -50,16 +50,34 @@
     <m-divider />
     <m-row class="overview-scene__charts-row">
       <div class="overview-scene__chart-wrapper">
-        <line-chart />
+        <line-chart :firstDataset="video.watchTime" :labels="getVideoWatchLabels" />
       </div>
       <div class="overview-scene__chart-wrapper">
-        <line-chart type="teal" dropName="LIKES" value="816"/>
+        <line-chart
+          type="teal"
+          dropName="LIKES"
+          value="816"
+          :firstDataset="video.likeCount"
+          :labels="getVideoLikesLabels"
+        />
       </div>
       <div class="overview-scene__chart-wrapper">
-        <line-chart type="violet" dropName="IMPRESSIONS" value="268,000"/>
+        <line-chart
+          type="violet"
+          dropName="IMPRESSIONS"
+          value="268,000"
+          :firstDataset="video.impressionCount"
+          :labels="getVideoImpressionsLabels"
+        />
       </div>
       <div class="overview-scene__chart-wrapper">
-        <line-chart type="lime" dropName="AD REVENUE" value="$2,000"/>
+        <line-chart
+          type="lime"
+          dropName="AD REVENUE"
+          value="$2,000"
+          :firstDataset="video.adRevenue"
+          :labels="getVideoAdRevenueLabels"
+        />
       </div>
     </m-row>
     <div class="overview-scene__bottom-block">
@@ -82,6 +100,8 @@
   </div>
 </template>
 <script>
+import { mapState, mapGetters, mapActions } from 'vuex';
+import { CHARTS_VIDEO_REQUEST } from '@/store';
 import LineChart from '../charts/LineChart.vue';
 import ProductionOverviewTab from './overview-scene/ProductionOverview.vue';
 import TranscriptOverviewTab from './overview-scene/TranscriptOverview.vue';
@@ -94,6 +114,23 @@ export default {
     ProductionOverviewTab,
     TranscriptOverviewTab,
     LanguageStatsTab,
+  },
+  computed: {
+    ...mapState('charts', ['video']),
+    ...mapGetters('charts', [
+      'getVideoWatchLabels',
+      'getVideoLikesLabels',
+      'getVideoImpressionsLabels',
+      'getVideoAdRevenueLabels',
+    ]),
+  },
+  methods: {
+    ...mapActions({
+      getVieoCharts: `charts/${CHARTS_VIDEO_REQUEST}`,
+    }),
+  },
+  async mounted() {
+    await this.getVieoCharts();
   },
 };
 </script>

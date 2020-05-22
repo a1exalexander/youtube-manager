@@ -24,7 +24,13 @@
         {{dropName}}
       </m-subtle>
     </a-popover>
-    <m-line-chart :chartdata="chartData" :width="100" :height="140" class="line-chart__chart" />
+    <m-line-chart
+      :chart-id="chartId"
+      :chart-data="chartData"
+      :width="100"
+      :height="140"
+      class="line-chart__chart"
+    />
   </div>
 </template>
 <script>
@@ -63,6 +69,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    chartId: {
+      type: String,
+      required: true,
+    },
   },
   data() {
     return {
@@ -85,7 +95,6 @@ export default {
             pointBackgroundColor: colors.$dark,
             pointBorderWidth: 2,
             pointRadius: 4.5,
-            borderJoinStyle: 'miter',
             lineTension: 0,
           },
           {
@@ -97,7 +106,6 @@ export default {
             pointBackgroundColor: colors.$dark,
             pointBorderWidth: 1,
             pointRadius: 3.5,
-            borderJoinStyle: 'miter',
             lineTension: 0,
           },
         ],
@@ -128,6 +136,7 @@ export default {
   height: 170px;
   padding: 30px 2px 10px 2px;
   position: relative;
+  background-color: $dark;
   & &__dropdown-button {
     position: absolute;
     top: 16px;
