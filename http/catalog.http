@@ -1,0 +1,12 @@
+@base_url = {{local_url}}
+
+# @name Catalog
+GET {{base_url}}/videos
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbmlhMjQwM0BnbWFpbC5jb20iLCJuYW1lIjoiR3JheWNlIER1QnVxdWUiLCJpZCI6MTUsImlhdCI6MTU5MDA1NTMxNH0.fJ7bga4We3-Lj1RLUM_e7_vYMu8T6oJrZ4m6LZHAMkc
+
+###
+
+DELETE  {{base_url}}/videos/5
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbmlhMjQwM0BnbWFpbC5jb20iLCJuYW1lIjoiR3JheWNlIER1QnVxdWUiLCJpZCI6MTUsImlhdCI6MTU5MDA1NTMxNH0.fJ7bga4We3-Lj1RLUM_e7_vYMu8T6oJrZ4m6LZHAMkc

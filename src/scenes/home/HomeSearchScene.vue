@@ -7,7 +7,7 @@
       text="Are you sure that you want to delete video How to Build an Open Source Business from the Video
         Catalog?"
       @close="() => hide('delete')"
-      @danger-action="() => $message.success('Video(s) deleted successfully!')"
+      @danger-action="onDelete"
     ></m-popconfirm>
     <home-export-popup
       :visible="visible.export"
@@ -39,7 +39,7 @@
       <m-row ai="center">
         <m-transition>
           <m-subtle
-            v-if="true"
+            v-if="hasSelected"
             @click="() => show('delete')"
             type="danger"
             class="home-search-scene__delete-btn"
@@ -50,7 +50,13 @@
             </template>
           </m-subtle>
         </m-transition>
-        <m-subtle @click="() => show('export')" class="home-search-scene__export-btn">Export</m-subtle>
+        <m-transition>
+          <m-subtle
+            v-if="hasSelected"
+            @click="() => show('export')"
+            class="home-search-scene__export-btn"
+          >Export</m-subtle>
+        </m-transition>
         <m-subtle @click="() => show('new')" class="home-search-scene__add-btn">
           <template #icon>
             <m-icon icon="plus" />
@@ -62,8 +68,8 @@
   </m-container>
 </template>
 <script>
-import { mapMutations, mapState } from 'vuex';
-import { CATALOG_SEARCH_SET } from '../../store';
+import { mapMutations, mapState, mapGetters, mapActions } from 'vuex';
+import { CATALOG_SEARCH_SET, CATALOG_DELETE } from '../../store';
 import HomeExportPopup from './search/HomeExportPopup.vue';
 import HomeNewVideoPopup from './search/HomeNewVideoPopup.vue';
 
@@ -86,15 +92,21 @@ export default {
     ...mapMutations('catalog', {
       onSearch: CATALOG_SEARCH_SET,
     }),
+    ...mapActions('catalog', [CATALOG_DELETE]),
     show(name) {
       if (name in this.visible) this.visible[name] = true;
     },
     hide(name) {
       if (name in this.visible) this.visible[name] = false;
     },
+    onDelete() {
+      this[CATALOG_DELETE]();
+      this.hide('delete');
+    },
   },
   computed: {
     ...mapState('catalog', { getSearch: (state) => state.search }),
+    ...mapGetters('catalog', ['hasSelected']),
     search: {
       set(value) {
         this.onSearch(value);

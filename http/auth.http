@@ -1,4 +1,4 @@
-@base_url = {{dev_url}}
+@base_url = {{local_url}}
 
 # @name Login
 
