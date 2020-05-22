@@ -56,7 +56,12 @@ const actions = {
   },
 };
 
-const getters = {};
+const getters = {
+  getAccountWatchLabels: (state) => state.account.watchTime.map(({ x }) => x),
+  getAccountLikesLabels: (state) => state.account.watchTime.map(({ x }) => x),
+  getAccountImpressionsLabels: (state) => state.account.watchTime.map(({ x }) => x),
+  getAccountAdRevenueLabels: (state) => state.account.watchTime.map(({ x }) => x),
+};
 
 export default {
   namespaced: true,

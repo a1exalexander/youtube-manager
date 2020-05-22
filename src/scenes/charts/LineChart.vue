@@ -24,7 +24,7 @@
         {{dropName}}
       </m-subtle>
     </a-popover>
-    <m-line-chart :chartdata="chartData" :width="100" :height="140" />
+    <m-line-chart :chartdata="chartData" :width="100" :height="140" class="line-chart__chart" />
   </div>
 </template>
 <script>
@@ -51,6 +51,18 @@ export default {
       type: String,
       default: '12:54',
     },
+    firstDataset: {
+      type: Array,
+      default: () => [],
+    },
+    secondDataset: {
+      type: Array,
+      default: () => [],
+    },
+    labels: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
@@ -62,11 +74,11 @@ export default {
   computed: {
     chartData() {
       return {
-        labels: ['NOV 12', 'JAN25', 'MAR 17', 'NOV 12', 'JAN25', 'MAR 17'],
+        labels: this.labels,
         datasets: [
           {
             label: 'First data',
-            data: [1, 6, 3, 8, 1, 7],
+            data: this.firstDataset,
             backgroundColor: 'transparent',
             borderColor: this.color,
             borderWidth: 2,
@@ -77,8 +89,8 @@ export default {
             lineTension: 0,
           },
           {
-            label: 'First datasssssssssssssssssssssssssssss',
-            data: [6, 1, 2, 2, 8, 2],
+            label: 'Total Catalog',
+            data: this.secondDataset,
             backgroundColor: 'transparent',
             borderColor: '#8489A1',
             borderWidth: 1,
@@ -150,6 +162,8 @@ export default {
     position: absolute;
     top: 16px;
     right: 16px;
+  }
+  &__chart {
   }
 }
 </style>

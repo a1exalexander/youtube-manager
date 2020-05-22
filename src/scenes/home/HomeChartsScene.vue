@@ -2,27 +2,50 @@
   <m-container class="home-charts-scene">
     <m-row class="home-charts-scene__charts-row">
       <div class="home-charts-scene__chart-wrapper">
-        <line-chart />
+        <line-chart :firstDataset="account.watchTime" :labels="getAccountWatchLabels" />
       </div>
       <div class="home-charts-scene__chart-wrapper">
-        <line-chart type="teal" dropName="LIKES" value="816"/>
+        <line-chart
+          type="teal"
+          dropName="LIKES"
+          value="816"
+          :firstDataset="account.likeCount"
+          :labels="getAccountLikesLabels"
+        />
       </div>
       <div class="home-charts-scene__chart-wrapper">
-        <line-chart type="violet" dropName="IMPRESSIONS" value="268,000"/>
+        <line-chart
+          type="violet"
+          dropName="IMPRESSIONS"
+          value="268,000"
+          :firstDataset="account.impressionCount"
+          :labels="getAccountImpressionsLabels"
+        />
       </div>
       <div class="home-charts-scene__chart-wrapper">
-        <line-chart type="lime" dropName="AD REVENUE" value="$2,000"/>
+        <line-chart
+          type="lime"
+          dropName="AD REVENUE"
+          value="$2,000"
+          :firstDataset="account.adRevenue"
+          :labels="getAccountAdRevenueLabels"
+        />
       </div>
     </m-row>
   </m-container>
 </template>
 <script>
+import { mapState, mapGetters } from 'vuex';
 import LineChart from '../charts/LineChart.vue';
 
 export default {
   name: 'HomeChartsScene',
   components: {
     LineChart,
+  },
+  computed: {
+    ...mapState('charts', ['account']),
+    ...mapGetters('charts', ['getAccountWatchLabels', 'getAccountLikesLabels', 'getAccountImpressionsLabels', 'getAccountAdRevenueLabels']),
   },
 };
 </script>
@@ -39,7 +62,7 @@ $styles: home-charts-scene;
     }
   }
   &__charts-row {
-    margin-bottom: 24px;
+    margin: 0 0 24px;
   }
 }
 </style>
