@@ -7,10 +7,12 @@ export const useValidation = ({ required = [] }) => {
 
   const email = ref('');
   const password = ref('');
+  const link = ref('');
 
   const blur = reactive({
     email: false,
     password: false,
+    link: false,
   });
 
   const vBlur = {
@@ -20,6 +22,9 @@ export const useValidation = ({ required = [] }) => {
     password: () => {
       blur.password = true;
     },
+    link: () => {
+      blur.link = true;
+    },
   };
 
   const isValid = reactive({
@@ -28,6 +33,14 @@ export const useValidation = ({ required = [] }) => {
       const valid = regex.email(email.value);
       if (isRequired('email')) {
         return !!email.value.trim() && valid;
+      }
+      return valid;
+    }),
+    link: computed(() => {
+      if (!blur.link) return true;
+      const valid = regex.link(link.value);
+      if (isRequired('link')) {
+        return !!link.value.trim() && valid;
       }
       return valid;
     }),
@@ -49,6 +62,17 @@ export const useValidation = ({ required = [] }) => {
           return messages.email.required;
         case !isValid.email:
           return messages.email.valid;
+        default:
+          return '';
+      }
+    }),
+    link: computed(() => {
+      if (!blur.link) return '';
+      switch (true) {
+        case isRequired('link') && !link.value:
+          return messages.link.required;
+        case !isValid.link && !!link.value:
+          return messages.link.valid;
         default:
           return '';
       }
@@ -78,9 +102,10 @@ export const useValidation = ({ required = [] }) => {
   return {
     isValid,
     vErrors,
+    vBlur,
     email,
     password,
-    vBlur,
+    link,
   };
 };
 

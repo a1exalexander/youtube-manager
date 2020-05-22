@@ -1,10 +1,17 @@
 <template>
   <m-popup :visible="visible" width="384px" title="Add New Video" @close="() => $emit('close')">
     <div class="home-new-video-popup">
-      <a-tabs defaultActiveKey="1" class="home-new-video-popup__tabs">
+      <a-tabs v-model="tab" class="home-new-video-popup__tabs">
         <a-tab-pane class="home-new-video-popup__tab-content" tab="From YouTube via Link" key="1">
           <p class="home-new-video-popup__caption">Add video to the catalog from YouTube via Link</p>
-          <m-input v-model="link" placeholder="Place Link here" iconLeft="link" />
+          <m-input
+            v-model="link"
+            :error="!isValid.link && !!link"
+            :message="vErrors.link"
+            @blur="vBlur.link"
+            placeholder="Place Link here"
+            iconLeft="link"
+          />
         </a-tab-pane>
         <a-tab-pane class="home-new-video-popup__tab-content" tab="From Youtube Channel" key="2">
           <p class="home-new-video-popup__caption">Add video to the catalog from my YouTube channel</p>
@@ -58,18 +65,22 @@
         </a-tab-pane>
         <a-tab-pane class="home-new-video-popup__tab-content" tab="Upload" key="3">
           <m-transition>
-            <div v-if="imageUrl" key='image'>
-              <m-row class='home-new-video-popup__upload-header'>
+            <div v-if="imageUrl" key="image">
+              <m-row class="home-new-video-popup__upload-header">
                 <div class="home-new-video-popup__upload-image-wrapper">
-                  <img :src="imageUrl" alt="" class="home-new-video-popup__upload-image"/>
+                  <img :src="imageUrl" alt class="home-new-video-popup__upload-image" />
                 </div>
-                <m-subtle @click="imageUrl = ''" type='danger' icon='close'>Delete</m-subtle>
+                <m-subtle @click="imageUrl = ''" type="danger" icon="close">Delete</m-subtle>
               </m-row>
-              <m-input v-model='name' class='home-new-video-popup__input'>Video Name</m-input>
-              <m-input v-model="description" placeholder='Optional' class='home-new-video-popup__input'>Description</m-input>
+              <m-input v-model="name" class="home-new-video-popup__input">Video Name</m-input>
+              <m-input
+                v-model="description"
+                placeholder="Optional"
+                class="home-new-video-popup__input"
+              >Description</m-input>
             </div>
             <a-upload-dragger
-              key='upload'
+              key="upload"
               v-else
               name="file"
               action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
@@ -91,12 +102,15 @@
     </div>
     <template #buttons>
       <m-button @click="() => $emit('close')" type="secondary">Cancel</m-button>
-      <m-button @click="onSubmit">Add Video</m-button>
+      <m-button :loading="loading" :disabled='disabled' @click="onSubmit">Add Video</m-button>
     </template>
   </m-popup>
 </template>
 <script>
 import { getBase64 } from '@/utils';
+import { mapActions } from 'vuex';
+import { CATALOG_ADD } from '../../../store';
+import { useValidation } from '../../../services';
 
 export default {
   name: 'HomeNewVideoPopup',
@@ -109,24 +123,40 @@ export default {
       render: (h, ctx) => ctx.props.vnodes,
     },
   },
+  setup() {
+    const options = {
+      required: ['email', 'password'],
+    };
+    const { isValid, vErrors, link, vBlur } = useValidation(options);
+    return {
+      isValid,
+      vErrors,
+      vBlur,
+      link,
+    };
+  },
   data() {
     return {
-      link: '',
+      tab: '1',
+      loading: false,
       channel: undefined,
       video: undefined,
-      loading: false,
       imageUrl: '',
       name: '',
       description: '',
     };
   },
   methods: {
+    ...mapActions('catalog', [CATALOG_ADD]),
     clean() {
       this.video = undefined;
       this.channel = undefined;
     },
-    onSubmit() {
-      this.$message.success('Video uploaded successfully!');
+    async onSubmit() {
+      this.loading = true;
+      const ok = await this[CATALOG_ADD](this.link);
+      this.loading = false;
+      if (ok) this.$emit('close');
     },
     handleChange(info) {
       if (info.file.status === 'uploading') {
@@ -151,6 +181,16 @@ export default {
         this.$message.warn('Image must smaller than 2MB!');
       }
       return isJpgOrPng && isLt2M;
+    },
+  },
+  computed: {
+    disabled() {
+      switch (this.tab) {
+        case '1':
+          return !(this.isValid.link && this.link);
+        default:
+          return false;
+      }
     },
   },
 };

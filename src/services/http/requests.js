@@ -37,6 +37,15 @@ export class Http {
     }
   };
 
+  addVideo = async (body) => {
+    try {
+      const { data } = await axios.post(url.videos, body);
+      return data;
+    } catch {
+      return null;
+    }
+  };
+
   getAccounts = async () => {
     try {
       const { data } = await axios.get(url.accounts);

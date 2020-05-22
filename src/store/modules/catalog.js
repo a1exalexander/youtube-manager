@@ -6,6 +6,7 @@ import {
   CATALOG_CLEAN,
   CATALOG_SELECTED_SET,
   CATALOG_DELETE,
+  CATALOG_ADD,
 } from '../types';
 import { http } from '../../services';
 import { onSearch, cleanState } from '../../utils';
@@ -58,6 +59,16 @@ const actions = {
       dispatch(CATALOG_REQUEST);
       message.error('Video(s) not deleted. Please try again later!');
     }
+  },
+  [CATALOG_ADD]: async ({ dispatch }, link) => {
+    const data = await http.addVideo({ link });
+    if (data) {
+      dispatch(CATALOG_REQUEST);
+      message.success('Video(s) uploaded successfully!');
+      return true;
+    }
+    message.error('Video(s) not uploaded. Please try again later!');
+    return false;
   },
   [CATALOG_CLEAN]: async ({ commit }) => {
     commit();

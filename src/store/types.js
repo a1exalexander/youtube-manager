@@ -12,6 +12,7 @@ export const CATALOG_SELECT_VIDEO = 'catalog/SELECT_VIDEO';
 export const CATALOG_CLEAN = 'catalog/CLEAN';
 export const CATALOG_SELECTED_SET = 'catalog/SELECTED_SET';
 export const CATALOG_DELETE = 'catalog/DELETE';
+export const CATALOG_ADD = 'catalog/ADD';
 
 export const PROFILE_REQUEST = 'profile/REQUEST';
 export const PROFILE_UPDATE = 'profile/UPDATE';

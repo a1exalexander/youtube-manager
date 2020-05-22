@@ -9,6 +9,11 @@ const email = {
   valid: 'Please, enter a valid email',
 };
 
+const link = {
+  required: 'Link is required',
+  valid: 'Please, enter a valid link',
+};
+
 const password = {
   required: 'Password required',
   valid: 'Please, enter a valid password',
@@ -20,4 +25,4 @@ const password = {
   match: 'Password does\'t match',
 };
 
-export default { email, password, common };
+export default { email, password, common, link };
