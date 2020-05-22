@@ -16,8 +16,14 @@ export default {
     return {
       options: {
         tooltips,
-        aspectRatio: 4,
-        responsive: true,
+        layout: {
+          padding: {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 10,
+          },
+        },
         maintainAspectRatio: false,
         legend: {
           display: false,
@@ -32,7 +38,7 @@ export default {
               },
               ticks: {
                 fontColor: colors.$G6,
-                maxTicksLimit: 8,
+                maxTicksLimit: 3,
                 fontFamily: `'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
                 fontSize: 8,
