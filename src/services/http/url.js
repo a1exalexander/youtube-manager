@@ -15,4 +15,7 @@ export const url = {
   videos: `${BASE_URL}/videos`,
   accounts: `${BASE_URL}/accounts`,
   charts: `${BASE_URL}/charts`,
+  clips: `${BASE_URL}/clips`,
+  shots: `${BASE_URL}/shots`,
+  folders: `${BASE_URL}/folders`,
 };

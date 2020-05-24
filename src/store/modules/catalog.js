@@ -7,6 +7,8 @@ import {
   CATALOG_SELECTED_SET,
   CATALOG_DELETE,
   CATALOG_ADD,
+  CATALOG_FOLDERS_SET,
+  CATALOG_FOLDERS_EDIT,
 } from '../types';
 import { http } from '../../services';
 import { onSearch, cleanState } from '../../utils';
@@ -16,6 +18,7 @@ const initState = {
   loading: false,
   catalog: [],
   selected: [],
+  folders: [],
 };
 
 const state = () => ({ ...initState });
@@ -34,6 +37,13 @@ const mutations = {
   },
   [CATALOG_SELECTED_SET](state, payload) {
     state.selected = [...payload];
+  },
+  [CATALOG_FOLDERS_SET](state, payload) {
+    state.folders = [...payload];
+  },
+  [CATALOG_FOLDERS_EDIT](state, { id, name }) {
+    const idx = state.folders.findIndex((item) => item === id);
+    if (idx >= 0) state.folders.splice(idx, 1, { ...state.folders[idx], name });
   },
 };
 const actions = {

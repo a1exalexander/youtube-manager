@@ -30,7 +30,7 @@ export class Http {
 
   deleteVideo = async (id) => {
     try {
-      const { data } = await axios.delete(`${url.videos}/ad${id}`);
+      const { data } = await axios.delete(`${url.videos}/${id}`);
       return data;
     } catch {
       return null;
@@ -65,6 +65,51 @@ export class Http {
         adRevenue: formatToChartData(data?.['ad_revenue']),
       };
       return payload;
+    } catch {
+      return null;
+    }
+  };
+
+  getFolders = async () => {
+    try {
+      const { data } = await axios.get(url.folders);
+      return data;
+    } catch {
+      return null;
+    }
+  };
+
+  deleteFolder = async (id) => {
+    try {
+      const { data } = await axios.delete(`${url.folders}/${id}`);
+      return data;
+    } catch {
+      return null;
+    }
+  };
+
+  editFolder = async (id, body) => {
+    try {
+      const { data } = await axios.patch(`${url.folders}/${id}`, body);
+      return data;
+    } catch {
+      return null;
+    }
+  };
+
+  getClips = async () => {
+    try {
+      const { data } = await axios.get(url.clips);
+      return data;
+    } catch {
+      return null;
+    }
+  };
+
+  getShots = async () => {
+    try {
+      const { data } = await axios.get(url.shots);
+      return data;
     } catch {
       return null;
     }

@@ -13,6 +13,11 @@ export const CATALOG_CLEAN = 'catalog/CLEAN';
 export const CATALOG_SELECTED_SET = 'catalog/SELECTED_SET';
 export const CATALOG_DELETE = 'catalog/DELETE';
 export const CATALOG_ADD = 'catalog/ADD';
+export const CATALOG_FOLDERS_REQUEST = 'catalog/FOLDERS_REQUEST';
+export const CATALOG_FOLDERS_SET = 'catalog/FOLDERS_SET';
+export const CATALOG_FOLDERS_UPDATE = 'catalog/FOLDERS_UPDATE';
+export const CATALOG_FOLDERS_EDIT = 'catalog/FOLDERS_EDIT';
+export const CATALOG_FOLDERS_REMOVE = 'catalog/FOLDERS_REMOVE';
 
 export const PROFILE_REQUEST = 'profile/REQUEST';
 export const PROFILE_UPDATE = 'profile/UPDATE';
