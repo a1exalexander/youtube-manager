@@ -79,6 +79,15 @@ export class Http {
     }
   };
 
+  addFolder = async (body) => {
+    try {
+      const { data } = await axios.post(url.folders, body);
+      return data;
+    } catch {
+      return null;
+    }
+  };
+
   deleteFolder = async (id) => {
     try {
       const { data } = await axios.delete(`${url.folders}/${id}`);
@@ -88,7 +97,7 @@ export class Http {
     }
   };
 
-  editFolder = async (id, body) => {
+  editFolder = async ({ id, ...body }) => {
     try {
       const { data } = await axios.patch(`${url.folders}/${id}`, body);
       return data;

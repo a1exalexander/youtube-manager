@@ -9,6 +9,9 @@ import {
   CATALOG_ADD,
   CATALOG_FOLDERS_SET,
   CATALOG_FOLDERS_EDIT,
+  CATALOG_FOLDERS_REMOVE,
+  CATALOG_FOLDERS_REQUEST,
+  CATALOG_FOLDERS_ADD,
 } from '../types';
 import { http } from '../../services';
 import { onSearch, cleanState } from '../../utils';
@@ -41,9 +44,13 @@ const mutations = {
   [CATALOG_FOLDERS_SET](state, payload) {
     state.folders = [...payload];
   },
-  [CATALOG_FOLDERS_EDIT](state, { id, name }) {
+  [CATALOG_FOLDERS_EDIT](state, { id, ...payload }) {
     const idx = state.folders.findIndex((item) => item === id);
-    if (idx >= 0) state.folders.splice(idx, 1, { ...state.folders[idx], name });
+    if (idx >= 0) state.folders.splice(idx, 1, { ...state.folders[idx], ...payload });
+  },
+  [CATALOG_FOLDERS_REMOVE](state, id) {
+    const idx = state.folders.findIndex((item) => item === id);
+    if (idx >= 0) state.folders.splice(idx, 1);
   },
 };
 const actions = {
@@ -80,8 +87,47 @@ const actions = {
     message.error('Video(s) not uploaded. Please try again later!');
     return false;
   },
+  [CATALOG_FOLDERS_REQUEST]: async ({ commit }) => {
+    const data = await http.getFolders();
+    if (data) {
+      commit(CATALOG_FOLDERS_SET, data);
+    }
+  },
+  [CATALOG_FOLDERS_ADD]: async ({ state, commit, dispatch }, body) => {
+    const shallowCopy = [...state.folders, { ...body, id: String(Date.now()) }];
+    commit(CATALOG_FOLDERS_SET, shallowCopy);
+    const data = await http.addFolder(body);
+    dispatch(CATALOG_FOLDERS_REQUEST);
+    if (!data) {
+      message.error('Folder not saved. Please try again later!');
+      return false;
+    }
+    return true;
+  },
+  [CATALOG_FOLDERS_REMOVE]: async ({ commit, dispatch }, id) => {
+    commit(CATALOG_FOLDERS_REMOVE, id);
+    const data = await http.deleteFolder(id);
+    if (!data) {
+      dispatch(CATALOG_FOLDERS_REQUEST);
+      message.error('Folder not deleted. Please try again later!');
+      return false;
+    }
+    return true;
+  },
+  [CATALOG_FOLDERS_EDIT]: async ({ commit, dispatch }, payload) => {
+    commit(CATALOG_FOLDERS_EDIT, payload);
+    const data = await http.editFolder(payload);
+    if (!data) {
+      dispatch(CATALOG_FOLDERS_REQUEST);
+      message.error('Folder not edited. Please try again later!');
+      return false;
+    }
+    return true;
+  },
   [CATALOG_CLEAN]: async ({ commit }) => {
-    commit();
+    commit(CATALOG_UPDATE, []);
+    commit(CATALOG_SELECTED_SET, []);
+    commit(CATALOG_FOLDERS_SET, []);
   },
 };
 const getters = {
