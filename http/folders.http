@@ -1,23 +1,35 @@
-@base_url = {{fake_url}}
+@base_url = {{local_url}}
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbmlhMjQwM0BnbWFpbC5jb20iLCJuYW1lIjoiR3JheWNlIER1QnVxdWUiLCJpZCI6MTUsImlhdCI6MTU5MDA1NTMxNH0.fJ7bga4We3-Lj1RLUM_e7_vYMu8T6oJrZ4m6LZHAMkc
 
-# @name Catalog
-GET {{base_url}}/videos
+# @name Folders
+
+GET {{base_url}}/folders
 Content-Type: application/json
 Authorization: {{token}}
 
 ###
 
-DELETE  {{base_url}}/videos/5
+DELETE {{base_url}}/folders/5
 Content-Type: application/json
 Authorization: {{token}}
 
 ###
 
-POST  {{base_url}}/videos
+POST {{base_url}}/folders
 Content-Type: application/json
 Authorization: {{token}}
 
 {
-  "link": "https://www.youtube.com/watch?v=IkgsUuFmqsQ"
+  "name": "new folder 4",
+  "videos": null
+}
+
+###
+
+PATCH {{base_url}}/folders/4
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "new folder 44"
 }

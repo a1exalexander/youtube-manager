@@ -15,17 +15,17 @@
         </m-row>
       </router-link>
       <span class="home-table-item__text">{{video.date}}</span>
-      <span class="home-table-item__text _right">{{video.views | numeral('0,0')}}</span>
-      <span class="home-table-item__text _right">{{video.likes | numeral('0,0')}}</span>
-      <span class="home-table-item__text _right">{{video.dislikes | numeral('0,0')}}</span>
-      <span class="home-table-item__text _right">{{video.comments | numeral('0,0')}}</span>
-      <span class="home-table-item__text _right">{{video.engagement_ratio || 0}}%</span>
+      <span class="home-table-item__text _right">{{$separator(video.views)}}</span>
+      <span class="home-table-item__text _right">{{$separator(video.likes)}}</span>
+      <span class="home-table-item__text _right">{{$separator(video.dislikes)}}</span>
+      <span class="home-table-item__text _right">{{$separator(video.comments)}}</span>
+      <span class="home-table-item__text _right">{{$float(video.engagement_ratio)}}%</span>
       <span class="home-table-item__text _right">{{video.watch_time}}</span>
-      <span class="home-table-item__text _right">{{video.watch_time_ratio || 0}}%</span>
-      <span class="home-table-item__text _right">{{video.click_through_rate || 0}}%</span>
-      <span class="home-table-item__text _right">${{video.ad_revenue | numeral('0,0')}}</span>
-      <span class="home-table-item__text _right">${{video.profuction_cost}}</span>
-      <span class="home-table-item__text _right">{{video.roi || 0 | numeral('0.[00]')}}%</span>
+      <span class="home-table-item__text _right">{{$float(video.watch_time_ratio)}}%</span>
+      <span class="home-table-item__text _right">{{$float(video.click_through_rate)}}%</span>
+      <span class="home-table-item__text _right">{{$currency(video.ad_revenue)}}</span>
+      <span class="home-table-item__text _right">{{$currency(video.profuction_cost)}}</span>
+      <span class="home-table-item__text _right">{{$float(5.10 || video.roi)}}%</span>
       <home-table-item-cascader
         class="home-table-item__cascader"
         v-if="showMore"

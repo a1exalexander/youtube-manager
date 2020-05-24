@@ -1,6 +1,6 @@
+/* eslint-disable no-underscore-dangle */
 import Vue from 'vue';
 import { AutoComplete, Select, Popover, Divider, Tabs, Slider, Tooltip, message, Upload } from 'ant-design-vue';
-import vueNumeralFilterInstaller from 'vue-numeral-filter';
 import VueCompositionApi from '@vue/composition-api';
 import App from './App.vue';
 import router, { routeName, routePath } from './router';
@@ -26,7 +26,18 @@ import MBadge from './components/common/MBadge.vue';
 import MInputWrapper from './components/common/form/MInputWrapper.vue';
 import MAvatar from './components/common/MAvatar.vue';
 import { isDev, isProd, isDevEnv, isProdEnv, apiMode, appVersion } from './config';
-import { isArray, isFunction, isNumber, isObject, isString, onSearch } from './utils';
+import {
+  isArray,
+  isFunction,
+  isNumber,
+  isObject,
+  isString,
+  onSearch,
+  separator,
+  percentage,
+  currency,
+  float,
+} from './utils';
 import './libs/animate.scss';
 import './libs/antd.scss';
 import './scss/style.scss';
@@ -48,6 +59,10 @@ Vue.prototype.$isObject = isObject;
 Vue.prototype.$isString = isString;
 Vue.prototype.$onSearch = onSearch;
 Vue.prototype.$message = message;
+Vue.prototype.$separator = separator;
+Vue.prototype.$currency = currency;
+Vue.prototype.$percentage = percentage;
+Vue.prototype.$float = float;
 
 // Grid
 Vue.component('MContainer', MContainer);
@@ -75,7 +90,6 @@ Vue.component('MBadge', MBadge);
 Vue.component('MInputWrapper', MInputWrapper);
 Vue.component('MAvatar', MAvatar);
 
-Vue.use(vueNumeralFilterInstaller);
 Vue.use(VueCompositionApi);
 Vue.use(AutoComplete);
 Vue.use(Select);
