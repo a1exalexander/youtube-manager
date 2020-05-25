@@ -50,7 +50,14 @@
     <m-divider />
     <m-row class="overview-scene__charts-row">
       <div class="overview-scene__chart-wrapper">
-        <line-chart :firstDataset="video.watchTime" :labels="getVideoWatchLabels" />
+        <line-chart
+          :firstDataset="video.watchTime"
+          :labels="getVideoWatchLabels"
+          chartId="watch-chart"
+          padding="24px"
+          left="-10px"
+          width="107%"
+        />
       </div>
       <div class="overview-scene__chart-wrapper">
         <line-chart
@@ -59,6 +66,10 @@
           value="816"
           :firstDataset="video.likeCount"
           :labels="getVideoLikesLabels"
+          chartId="likes-chart"
+          left="-31px"
+          padding="8px"
+          width="109%"
         />
       </div>
       <div class="overview-scene__chart-wrapper">
@@ -68,6 +79,10 @@
           value="268,000"
           :firstDataset="video.impressionCount"
           :labels="getVideoImpressionsLabels"
+          chartId="impressions-chart"
+          left="-30px"
+          padding="8px"
+          width="108%"
         />
       </div>
       <div class="overview-scene__chart-wrapper">
@@ -77,6 +92,9 @@
           value="$2,000"
           :firstDataset="video.adRevenue"
           :labels="getVideoAdRevenueLabels"
+          chartId="ad-chart"
+          left="-37px"
+          width="108%"
         />
       </div>
     </m-row>
@@ -190,16 +208,16 @@ export default {
     padding: 0 24px 30px;
   }
   &__chart-wrapper {
-    @extend %block-style;
+    border-radius: 2px;
     flex: 1 1 25%;
     max-width: 25%;
-    margin-right: 24px;
+    padding: 0 12px;
     &:last-child {
       margin-right: 0;
     }
   }
   &__charts-row {
-    margin-bottom: 24px;
+    margin: 0 -12px 24px;
   }
 }
 </style>

@@ -50,6 +50,7 @@ export default {
               },
               type: 'time',
               distribution: 'series',
+              bounds: 'ticks',
               time: {
                 unit: 'day',
               },

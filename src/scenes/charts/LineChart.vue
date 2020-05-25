@@ -30,12 +30,14 @@
       :width="100"
       :height="140"
       class="line-chart__chart"
+      :style="{left: left, paddingRight: padding, width: width}"
     />
   </div>
 </template>
 <script>
 import MLineChart from '@/components/common/charts/MLineChart.vue';
 import colors from '@/components/common/charts/colors';
+import Chart from 'vue-chartjs';
 
 export default {
   name: 'LineChart',
@@ -72,6 +74,18 @@ export default {
     chartId: {
       type: String,
       required: true,
+    },
+    left: {
+      type: String,
+      default: '0',
+    },
+    padding: {
+      type: String,
+      default: '0',
+    },
+    width: {
+      type: String,
+      default: '100%',
     },
   },
   data() {
@@ -129,6 +143,9 @@ export default {
       this.isClickedDropdown = !this.isClickedDropdown;
     },
   },
+  mounted() {
+    console.log(Chart);
+  },
 };
 </script>
 <style lang="scss">
@@ -173,6 +190,7 @@ export default {
     right: 16px;
   }
   &__chart {
+    position: relative;
   }
 }
 </style>
