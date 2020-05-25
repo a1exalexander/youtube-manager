@@ -33,6 +33,12 @@ export default {
 .fade-leave-active {
   animation: fadeOut 0.2s;
 }
+.zoom-enter-active {
+  animation: zoomIn 0.2s;
+}
+.zoom-leave-active {
+  animation: zoomOut 0.2s;
+}
 .bounce-enter-active {
   animation: bounceIn 0.3s;
 }

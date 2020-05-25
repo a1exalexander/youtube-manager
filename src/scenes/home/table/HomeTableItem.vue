@@ -4,11 +4,7 @@
       <m-checkbox name="catalog" :val="video.id" v-model="select" />
       <router-link :to="{ name: 'VideoDetails', params: {id: video.id} }">
         <m-row ai="center">
-          <img
-            class="home-table-item__image"
-            :src="video && video.image"
-            alt=""
-          />
+          <img class="home-table-item__image" :src="video && video.image" alt />
           <a-tooltip :title="video.name" placement="topRight">
             <span class="home-table-item__name">{{video.name}}</span>
           </a-tooltip>
@@ -27,8 +23,10 @@
       <span class="home-table-item__text _right">{{$currency(video.profuction_cost)}}</span>
       <span class="home-table-item__text _right">{{$float(5.10 || video.roi)}}%</span>
       <home-table-item-cascader
+        :id="video.id"
+        :used-folders="video.folders"
         class="home-table-item__cascader"
-        v-if="showMore"
+        v-show="showMore"
         @popoverIsVisible="popoverIsVisible = !popoverIsVisible"
       />
     </home-table-item-wrapper>

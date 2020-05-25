@@ -4,12 +4,12 @@
       <div class="home-table-item-cascader__popover" v-if="popoverSecond" @mousedown.stop>
         <m-col class="home-table-item-cascader__popover-inner">
           <m-subtle
-            v-for="(folder, idx) in folders"
-            :key="folder+idx"
-            :label="folder"
+            v-for="folder in folders"
+            :key="folder.id"
+            :label="folder.name"
             type="grey"
             class="home-table-item-cascader__popover-btn"
-            @click="handleClick(folder)"
+            @click="() => onSelectFolder(folder)"
           />
         </m-col>
         <footer class="home-table-item-cascader__popover-footer">
@@ -39,7 +39,12 @@
               <m-icon icon="expand-right" />
             </template>
           </m-subtle>
-          <m-subtle type="danger" label="Remove" class="home-table-item-cascader__btn _no-margin" />
+          <m-subtle
+            v-if="!selectedAllFolders"
+            type="danger"
+            label="Remove"
+            class="home-table-item-cascader__btn _no-margin"
+          />
         </m-col>
       </template>
       <m-subtle icon="action-vertical" type="grey" />
@@ -47,21 +52,41 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapActions, mapState } from 'vuex';
+import { CATALOG_FOLDERS_EDIT } from '../../../store';
+
 export default {
   name: 'HomeTableItemCascader',
+  props: {
+    usedFolders: Array,
+    id: [Number, String],
+  },
   data() {
     return {
-      folders: ['Bussines', 'Commercial', 'Management'],
       popoverSecond: false,
       popoverFirst: false,
       name: '',
       showInput: false,
     };
   },
+  computed: {
+    ...mapGetters('catalog', ['getUnusedFolders', 'getSelectedFolder']),
+    ...mapState('catalog', ['selectedAllFolders']),
+    folders() {
+      return this.getUnusedFolders(this.usedFolders);
+    },
+  },
   methods: {
-    handleClick(e) {
+    ...mapActions('catalog', [CATALOG_FOLDERS_EDIT]),
+    onSelectFolder(folder) {
+      this[CATALOG_FOLDERS_EDIT]({ id: folder?.id, videos: [...folder?.videos, this.id] });
+      if (!this.selectedAllFolders) {
+        const oldVideos = [...this.getSelectedFolder?.videos];
+        const idx = oldVideos.findIndex((id) => id === this.id);
+        oldVideos.splice(idx, 1);
+        this[CATALOG_FOLDERS_EDIT]({ id: this.getSelectedFolder?.id, videos: oldVideos });
+      }
       this.$emit('popoverIsVisible');
-      this.$emit('clickFolder', e);
       this.popoverFirst = false;
       this.popoverSecond = false;
     },

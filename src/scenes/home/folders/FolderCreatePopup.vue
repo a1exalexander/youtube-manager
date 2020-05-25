@@ -37,7 +37,7 @@
     </m-container>
     <template #buttons>
       <m-button @click="close" type="secondary">Cancel</m-button>
-      <m-button :disabled="disabled" @click="submit">Create</m-button>
+      <m-button :disabled="disabled" :loading="loading" @click="submit">Create</m-button>
     </template>
   </m-popup>
 </template>

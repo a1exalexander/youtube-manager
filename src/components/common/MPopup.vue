@@ -1,26 +1,33 @@
 <template>
   <m-transition>
-    <div class="m-popup" :style="{ zIndex }" v-if="visible">
+    <div class="m-popup" :style="{ zIndex }" v-if="visible" key="popup">
       <div class="m-popup__inner" @click="onClose">
-        <article
-          @click.stop
-          class="m-popup__card animated faster"
-          :style="{ width }"
-          :class="{ zoomIn: visible }"
+        <transition
+          appear
+          class="animated faster"
+          leave-active-class="zoomOut"
+          enter-active-class="zoomIn"
         >
-          <m-row jc="space-between" ai="center" class="m-popup__header">
-            <h3 class="m-popup__title">{{ title }}</h3>
-            <button @click="onClose" class="m-popup__close-btn">
-              <m-icon class="m-popup__close-icon" icon="close" />
-            </button>
-          </m-row>
-          <div class="m-popup__content">
-            <slot />
-          </div>
-          <m-row jc="flex-end" class="m-popup__buttons" v-if="$slots.buttons">
-            <slot name="buttons" />
-          </m-row>
-        </article>
+          <article
+            @click.stop
+            class="m-popup__card animated faster"
+            :style="{ width }"
+            v-show="visible"
+          >
+            <m-row jc="space-between" ai="center" class="m-popup__header">
+              <h3 class="m-popup__title">{{ title }}</h3>
+              <button @click="onClose" class="m-popup__close-btn">
+                <m-icon class="m-popup__close-icon" icon="close" />
+              </button>
+            </m-row>
+            <div class="m-popup__content">
+              <slot />
+            </div>
+            <m-row jc="flex-end" class="m-popup__buttons" v-if="$slots.buttons">
+              <slot name="buttons" />
+            </m-row>
+          </article>
+        </transition>
       </div>
     </div>
   </m-transition>

@@ -9,8 +9,18 @@
       @close="hideDeletePopup"
       @danger-action="onDeleteFolder"
     />
-    <folder-edit-popup :old-name='oldName' :visible="visible.rename" @close="hideEditPopup" @rename="onEditFolder" />
-    <folder-create-popup :visible="visible.create" @close="() => hide('create')" />
+    <folder-edit-popup
+      v-if="visible.rename"
+      :old-name="oldName"
+      :visible="visible.rename"
+      @close="hideEditPopup"
+      @rename="onEditFolder"
+    />
+    <folder-create-popup
+      v-if="visible.create"
+      :visible="visible.create"
+      @close="() => hide('create')"
+    />
     <m-row jc="space-between" ai="center">
       <m-row ai="center" class="home-folders-scene__head">
         <h4 class="home-folders-scene__title">Folders</h4>
@@ -21,20 +31,24 @@
           </template>
         </m-subtle>
       </m-row>
-      <a-popover trigger="hover" placement="bottomLeft">
-        <template slot="content">
-          <m-col class="home-folders-scene__drop">
-            <m-subtle type="white" class="home-folders-scene__drop-btn">Last Modified</m-subtle>
-            <m-subtle type="grey" class="home-folders-scene__drop-btn">Name</m-subtle>
-          </m-col>
-        </template>
-        <m-subtle>
-          Last Modified
-          <template #icon-right>
-            <m-icon icon="angle-down" />
+      <m-transition>
+        <a-popover v-if="hasFolders" trigger="hover" placement="bottomRight">
+          <template #content>
+            <m-select-item
+              v-model="sortedModel"
+              val="last_modified"
+              key="last_modified"
+            >Last Modified</m-select-item>
+            <m-select-item v-model="sortedModel" val="name" key="name">Name</m-select-item>
           </template>
-        </m-subtle>
-      </a-popover>
+          <m-subtle>
+            {{getSortType}}
+            <template #icon-right>
+              <m-icon icon="angle-down" />
+            </template>
+          </m-subtle>
+        </a-popover>
+      </m-transition>
     </m-row>
     <m-row ai="flex-start">
       <m-checkbox-button toggle v-model="selectedAllFoldersModel">All</m-checkbox-button>
@@ -62,6 +76,7 @@ import {
   CATALOG_FOLDERS_SELECT_ALL,
   CATALOG_FOLDERS_REMOVE,
   CATALOG_FOLDERS_EDIT,
+  CATALOG_FOLDERS_SORTED_SET,
 } from '../../store';
 import FolderItem from './folders/FolderItem.vue';
 import FolderEditPopup from './folders/FolderEditPopup.vue';
@@ -86,8 +101,16 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('catalog', ['getFolders']),
-    ...mapState('catalog', ['selectedFolder', 'selectedAllFolders']),
+    ...mapGetters('catalog', ['getFolders', 'hasFolders', 'getSortType']),
+    ...mapState('catalog', ['selectedFolder', 'selectedAllFolders', 'sorted']),
+    sortedModel: {
+      get() {
+        return this.sorted;
+      },
+      set(e) {
+        this[CATALOG_FOLDERS_SORTED_SET](e);
+      },
+    },
     selectedFolderModel: {
       get() {
         return this.selectedFolder;
@@ -106,7 +129,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations('catalog', [CATALOG_FOLDERS_SELECT, CATALOG_FOLDERS_SELECT_ALL]),
+    ...mapMutations('catalog', [CATALOG_FOLDERS_SELECT, CATALOG_FOLDERS_SELECT_ALL, CATALOG_FOLDERS_SORTED_SET]),
     ...mapActions('catalog', [CATALOG_FOLDERS_REMOVE, CATALOG_FOLDERS_EDIT]),
     hideDeletePopup() {
       this.selectedFolderId = null;

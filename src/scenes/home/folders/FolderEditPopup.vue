@@ -30,10 +30,8 @@ export default {
       this.value = '';
     },
   },
-  watch: {
-    oldName(name) {
-      if (this.visible && name && !this.value) this.value = name;
-    },
+  created() {
+    this.value = this.oldName;
   },
 };
 </script>

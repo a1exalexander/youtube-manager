@@ -1,10 +1,8 @@
 <template>
-  <button class="m-select-item" :class="{ active }" @click="() => $emit('click')">
+  <button class="m-select-item" :class="{ active: getActive }" @click="onClick">
     <m-icon :icon="icon" class="m-select-item__icon" v-if="!!icon" />
     <span v-if="!!$slots.default || !!label" class="m-select-item__text">
-      <slot>
-        {{ label }}
-      </slot>
+      <slot>{{ label }}</slot>
     </span>
   </button>
 </template>
@@ -23,6 +21,28 @@ export default {
     icon: {
       type: String,
       default: '',
+    },
+    val: {
+      type: [Boolean, Array, String, Object, Number],
+    },
+    value: {
+      type: [Boolean, Array, String, Object, Number],
+    },
+  },
+  methods: {
+    onClick() {
+      if (this.val) {
+        this.$emit('input', this.val);
+      } else {
+        this.$emit('click');
+      }
+    },
+  },
+  computed: {
+    getActive() {
+      const { val, value, active } = this;
+      if (val) return value === val;
+      return active;
     },
   },
 };

@@ -14,6 +14,7 @@ import {
   CATALOG_FOLDERS_ADD,
   CATALOG_FOLDERS_SELECT,
   CATALOG_FOLDERS_SELECT_ALL,
+  CATALOG_FOLDERS_SORTED_SET,
 } from '../types';
 import { http } from '../../services';
 import { onSearch, cleanState } from '../../utils';
@@ -26,6 +27,7 @@ const initState = {
   folders: [],
   selectedFolder: null,
   selectedAllFolders: true,
+  sorted: 'last_modified',
 };
 
 const state = () => ({ ...initState });
@@ -61,6 +63,9 @@ const mutations = {
   },
   [CATALOG_FOLDERS_SELECT_ALL](state, payload) {
     state.selectedAllFolders = payload;
+  },
+  [CATALOG_FOLDERS_SORTED_SET](state, payload) {
+    state.sorted = payload;
   },
 };
 const actions = {
@@ -133,7 +138,6 @@ const actions = {
       message.error('Folder not edited. Please try again later!');
       return false;
     }
-    message.success('Folder saved successfully!');
     return true;
   },
   [CATALOG_CLEAN]: async ({ commit }) => {
@@ -145,27 +149,46 @@ const actions = {
 const getters = {
   getCatalog(state) {
     const { catalog = [], selectedFolder = null, folders = [], search = '' } = state;
-    return catalog.filter(onSearch(search)).filter((item) => {
-      if (selectedFolder) {
-        const folder = folders.find(({ id }) => selectedFolder === id);
-        if (folder) {
-          return (folder.videos || []).some((id) => id === item.id);
+    return catalog
+      .map((item) => ({ ...item, folders: folders.filter(({ videos }) => videos.some((id) => id === item.id)) }))
+      .filter(onSearch(search))
+      .filter((item) => {
+        if (selectedFolder) {
+          const folder = folders.find(({ id }) => selectedFolder === id);
+          if (folder) {
+            return (folder.videos || []).some((id) => id === item.id);
+          }
         }
-      }
-      return true;
-    });
+        return true;
+      });
   },
-  getVideoNames: (state) => state.catalog.map(({ id, name }) => ({ id, name })),
-  isSearch: (state) => !!state.search,
-  isEmpty: (state) => !state.catalog.length && !state.loading,
-  hasSelected: (state) => !!state.selected.length,
-  getFolders: (state) => {
-    const { folders = [], catalog = [] } = state;
-    return folders.map((item) => ({
-      ...item,
-      videos: catalog.filter(({ id }) => item.videos && item.videos.some((vId) => vId === id)),
-    }));
+  getVideoNames: ({ catalog }) => catalog.map(({ id, name }) => ({ id, name })),
+  isSearch: ({ search }) => !!search,
+  isEmpty: ({ catalog, loading }) => !catalog.length && !loading,
+  hasSelected: ({ selected }) => !!selected.length,
+  getFolders: ({ folders = [], catalog = [], sorted }) =>
+    folders
+      .map((item) => ({
+        ...item,
+        videos: catalog.filter(({ id }) => item.videos && item.videos.some((vId) => vId === id)),
+      }))
+      .sort((a, b) => {
+        if (sorted === 'last_modified') {
+          return String(b.name).localeCompare(a.name);
+        }
+        return String(a.name).localeCompare(b.name);
+      }),
+  hasFolders: ({ folders }) => !!folders.length,
+  getSortType: ({ sorted }) => {
+    const sortTypes = {
+      last_modified: 'Last Modified',
+      name: 'Name',
+    };
+    return sortTypes[sorted] || sortTypes.last_modified;
   },
+  getSelectedFolder: ({ folders, selectedFolder }) => folders.find(({ id }) => id === selectedFolder),
+  getUnusedFolders: ({ folders }) => (usedFolders = []) =>
+    folders.filter(({ id }) => usedFolders.every((item) => item.id !== id)),
 };
 
 export default {

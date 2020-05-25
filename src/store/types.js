@@ -21,6 +21,7 @@ export const CATALOG_FOLDERS_EDIT = 'catalog/FOLDERS_EDIT';
 export const CATALOG_FOLDERS_REMOVE = 'catalog/FOLDERS_REMOVE';
 export const CATALOG_FOLDERS_SELECT_ALL = 'catalog/FOLDERS_FOLDERS_SELECT_ALL';
 export const CATALOG_FOLDERS_SELECT = 'catalog/FOLDERS_FOLDERS_SELECT';
+export const CATALOG_FOLDERS_SORTED_SET = 'catalog/FOLDERS_SORTED_SET';
 
 export const PROFILE_REQUEST = 'profile/REQUEST';
 export const PROFILE_UPDATE = 'profile/UPDATE';

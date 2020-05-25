@@ -19,7 +19,7 @@ export default {
   name: 'MCheckboxButton',
   props: {
     val: {
-      type: [String, Boolean, Number],
+      type: [Boolean, Array, String, Object, Number],
     },
     value: {
       type: [Boolean, Array, String, Object, Number],

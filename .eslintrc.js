@@ -25,6 +25,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'no-shadow': 'off',
     'object-curly-newline': 'off',
+    'implicit-arrow-linebreak': 'off',
   },
   overrides: [
     {
