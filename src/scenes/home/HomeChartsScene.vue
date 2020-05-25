@@ -7,6 +7,9 @@
           :secondDataset="amountChart.watchTime"
           :labels="getAccountWatchLabels"
           chartId="watch-chart"
+          padding="24px"
+          left="-10px"
+          width="107%"
         />
       </div>
       <div class="home-charts-scene__chart-wrapper">
@@ -17,7 +20,10 @@
           :firstDataset="accountChart.likeCount"
           :secondDataset="amountChart.likeCount"
           :labels="getAccountLikesLabels"
-          chartId="liks-chart"
+          chartId="likes-chart"
+          left="-30px"
+          padding="8px"
+          width="109%"
         />
       </div>
       <div class="home-charts-scene__chart-wrapper">
@@ -29,6 +35,9 @@
           :secondDataset="amountChart.impressionCount"
           :labels="getAccountImpressionsLabels"
           chartId="impressions-chart"
+          left="-24px"
+          padding="8px"
+          width="107%"
         />
       </div>
       <div class="home-charts-scene__chart-wrapper">
@@ -40,6 +49,8 @@
           :secondDataset="amountChart.adRevenue"
           :labels="getAccountAdRevenueLabels"
           chartId="ad-chart"
+          left="-36px"
+          width="107%"
         />
       </div>
     </m-row>
@@ -90,16 +101,16 @@ export default {
 $styles: home-charts-scene;
 .#{$styles} {
   &__chart-wrapper {
-    @extend %block-style;
+    border-radius: 2px;
     flex: 1 1 25%;
     max-width: 25%;
-    margin-right: 24px;
+    padding: 12px;
     &:last-child {
       margin-right: 0;
     }
   }
   &__charts-row {
-    margin: 0 0 24px;
+    margin: 0 -12px 24px;
   }
 }
 </style>
