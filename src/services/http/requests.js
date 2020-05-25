@@ -79,9 +79,9 @@ export class Http {
     }
   };
 
-  addFolder = async (body) => {
+  addFolder = async ({ name, videos = null }) => {
     try {
-      const { data } = await axios.post(url.folders, body);
+      const { data } = await axios.post(url.folders, { name, videos });
       return data;
     } catch {
       return null;

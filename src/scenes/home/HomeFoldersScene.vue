@@ -4,12 +4,13 @@
       :visible="visible.delete"
       title="Delete Folder?"
       width="340px"
+      :zIndex="10000"
       text="Are you sure that you want to delete folder Couch from the Video Catalog? All videos will be still available in the catalog."
-      @close="() => hide('delete')"
-      @danger-action="() => hide('delete')"
+      @close="hideDeletePopup"
+      @danger-action="onDeleteFolder"
     />
-    <folder-edit-popup :visible="visible.rename" @close="() => hide('rename')" @rename="() => hide('rename')"/>
-    <folder-create-popup :visible="visible.create" @close="() => hide('create')" @create="() => hide('create')"/>
+    <folder-edit-popup :old-name='oldName' :visible="visible.rename" @close="hideEditPopup" @rename="onEditFolder" />
+    <folder-create-popup :visible="visible.create" @close="() => hide('create')" />
     <m-row jc="space-between" ai="center">
       <m-row ai="center" class="home-folders-scene__head">
         <h4 class="home-folders-scene__title">Folders</h4>
@@ -36,23 +37,32 @@
       </a-popover>
     </m-row>
     <m-row ai="flex-start">
-      <m-checkbox-button v-model="all">All</m-checkbox-button>
+      <m-checkbox-button toggle v-model="selectedAllFoldersModel">All</m-checkbox-button>
       <m-divider horizontal style="height: 34px" />
       <m-row wrap>
         <folder-item
           name="folders"
-          label="first"
-          val="first"
-          v-model="folders"
+          :label="folder.name"
+          :val="folder.id"
+          v-model="selectedFolderModel"
           class="home-folders-scene__folder-item"
-          @delete="() => show('delete')"
-          @rename="() => show('rename')"
+          @delete="showDeletePopup"
+          @rename="showEditPopup"
+          v-for="folder in getFolders"
+          :key="folder.id"
         />
       </m-row>
     </m-row>
   </m-container>
 </template>
 <script>
+import { mapGetters, mapMutations, mapState, mapActions } from 'vuex';
+import {
+  CATALOG_FOLDERS_SELECT,
+  CATALOG_FOLDERS_SELECT_ALL,
+  CATALOG_FOLDERS_REMOVE,
+  CATALOG_FOLDERS_EDIT,
+} from '../../store';
 import FolderItem from './folders/FolderItem.vue';
 import FolderEditPopup from './folders/FolderEditPopup.vue';
 import FolderCreatePopup from './folders/FolderCreatePopup.vue';
@@ -66,8 +76,8 @@ export default {
   },
   data() {
     return {
-      all: false,
-      folders: '',
+      selectedFolderId: null,
+      oldName: '',
       visible: {
         delete: false,
         rename: false,
@@ -75,12 +85,74 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapGetters('catalog', ['getFolders']),
+    ...mapState('catalog', ['selectedFolder', 'selectedAllFolders']),
+    selectedFolderModel: {
+      get() {
+        return this.selectedFolder;
+      },
+      set(e) {
+        this[CATALOG_FOLDERS_SELECT](e);
+      },
+    },
+    selectedAllFoldersModel: {
+      get() {
+        return this.selectedAllFolders;
+      },
+      set(e) {
+        this[CATALOG_FOLDERS_SELECT_ALL](e);
+      },
+    },
+  },
   methods: {
+    ...mapMutations('catalog', [CATALOG_FOLDERS_SELECT, CATALOG_FOLDERS_SELECT_ALL]),
+    ...mapActions('catalog', [CATALOG_FOLDERS_REMOVE, CATALOG_FOLDERS_EDIT]),
+    hideDeletePopup() {
+      this.selectedFolderId = null;
+      this.hide('delete');
+    },
+    showDeletePopup(id) {
+      this.selectedFolderId = id;
+      this.show('delete');
+    },
+    onDeleteFolder() {
+      const { selectedFolderId } = this;
+      this[CATALOG_FOLDERS_REMOVE](selectedFolderId);
+      this.hideDeletePopup();
+    },
+    hideEditPopup() {
+      this.selectedFolderId = null;
+      this.oldName = '';
+      this.hide('rename');
+    },
+    showEditPopup({ id, name }) {
+      this.selectedFolderId = id;
+      this.oldName = name;
+      this.show('rename');
+    },
+    onEditFolder(name) {
+      const { selectedFolderId } = this;
+      this[CATALOG_FOLDERS_EDIT]({ id: selectedFolderId, name });
+      this.hideEditPopup();
+    },
     show(name) {
       if (name in this.visible) this.visible[name] = true;
     },
     hide(name) {
       if (name in this.visible) this.visible[name] = false;
+    },
+  },
+  watch: {
+    selectedFolder(val) {
+      if (val && this.selectedAllFolders) {
+        this[CATALOG_FOLDERS_SELECT_ALL](false);
+      }
+    },
+    selectedAllFolders(val) {
+      if (val && this.selectedFolder) {
+        this[CATALOG_FOLDERS_SELECT](null);
+      }
     },
   },
 };

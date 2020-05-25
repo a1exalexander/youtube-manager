@@ -1,6 +1,6 @@
 <template>
   <m-transition>
-    <div class="m-popconfirm" v-if="visible">
+    <div class="m-popconfirm" :style="{ zIndex }" v-if="visible">
       <div class="m-popconfirm__inner" @click="onClose">
         <article
           @click.stop
@@ -15,9 +15,7 @@
           <m-row jc="center" class="m-popconfirm__buttons">
             <slot name="buttons">
               <m-button type="secondary" @click="onClose">Cancel</m-button>
-              <m-button type="danger" @click="() => $emit('danger-action')">
-                {{ dangerLabel }}
-              </m-button>
+              <m-button type="danger" @click="() => $emit('danger-action')">{{ dangerLabel }}</m-button>
             </slot>
           </m-row>
         </article>
@@ -49,6 +47,10 @@ export default {
       type: String,
       default: 'Delete',
     },
+    zIndex: {
+      type: Number,
+      default: 15,
+    },
   },
   methods: {
     onClose() {
@@ -65,7 +67,6 @@ $style: m-popconfirm;
   min-height: 100vh;
   background: rgba($D10, 0.6);
   overflow: auto;
-  @include z-index(popup);
   &__inner {
     padding: 32px;
     height: 100%;

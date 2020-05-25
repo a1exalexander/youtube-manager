@@ -37,8 +37,8 @@ export default {
       get() {
         return this.value;
       },
-      set(val) {
-        this.onChange(val);
+      set(e) {
+        this.onChange(e);
       },
     },
   },
@@ -105,6 +105,7 @@ $styles: m-checkbox;
     @include transition(color);
     cursor: pointer;
     margin-left: 8px;
+    @extend %noselect;
   }
 }
 </style>

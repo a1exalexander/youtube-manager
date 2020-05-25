@@ -1,6 +1,6 @@
 <template>
   <m-transition>
-    <div class="m-popup" v-if="visible">
+    <div class="m-popup" :style="{ zIndex }" v-if="visible">
       <div class="m-popup__inner" @click="onClose">
         <article
           @click.stop
@@ -14,10 +14,12 @@
               <m-icon class="m-popup__close-icon" icon="close" />
             </button>
           </m-row>
-          <div class="m-popup__content"><slot /></div>
-          <m-row jc="flex-end" class="m-popup__buttons" v-if="$slots.buttons"
-            ><slot name="buttons"
-          /></m-row>
+          <div class="m-popup__content">
+            <slot />
+          </div>
+          <m-row jc="flex-end" class="m-popup__buttons" v-if="$slots.buttons">
+            <slot name="buttons" />
+          </m-row>
         </article>
       </div>
     </div>
@@ -38,6 +40,10 @@ export default {
     visible: {
       type: Boolean,
       default: false,
+    },
+    zIndex: {
+      type: Number,
+      default: 15,
     },
   },
   methods: {

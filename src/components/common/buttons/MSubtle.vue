@@ -115,10 +115,12 @@ $disabled: (
   }
   svg {
     @extend %noselect;
+    @extend %noselect;
     @include svg(16px, $I6);
     margin-right: 7px;
     position: relative;
     & ~ svg {
+      @extend %noselect;
       margin-right: 0;
       margin-left: 3px !important;
       position: relative;

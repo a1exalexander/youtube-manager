@@ -12,6 +12,8 @@ import {
   CATALOG_FOLDERS_REMOVE,
   CATALOG_FOLDERS_REQUEST,
   CATALOG_FOLDERS_ADD,
+  CATALOG_FOLDERS_SELECT,
+  CATALOG_FOLDERS_SELECT_ALL,
 } from '../types';
 import { http } from '../../services';
 import { onSearch, cleanState } from '../../utils';
@@ -22,6 +24,8 @@ const initState = {
   catalog: [],
   selected: [],
   folders: [],
+  selectedFolder: null,
+  selectedAllFolders: true,
 };
 
 const state = () => ({ ...initState });
@@ -45,12 +49,18 @@ const mutations = {
     state.folders = [...payload];
   },
   [CATALOG_FOLDERS_EDIT](state, { id, ...payload }) {
-    const idx = state.folders.findIndex((item) => item === id);
+    const idx = state.folders.findIndex((item) => item?.id === id);
     if (idx >= 0) state.folders.splice(idx, 1, { ...state.folders[idx], ...payload });
   },
   [CATALOG_FOLDERS_REMOVE](state, id) {
-    const idx = state.folders.findIndex((item) => item === id);
+    const idx = state.folders.findIndex((item) => item?.id === id);
     if (idx >= 0) state.folders.splice(idx, 1);
+  },
+  [CATALOG_FOLDERS_SELECT](state, payload) {
+    state.selectedFolder = payload;
+  },
+  [CATALOG_FOLDERS_SELECT_ALL](state, payload) {
+    state.selectedAllFolders = payload;
   },
 };
 const actions = {
@@ -93,15 +103,15 @@ const actions = {
       commit(CATALOG_FOLDERS_SET, data);
     }
   },
-  [CATALOG_FOLDERS_ADD]: async ({ state, commit, dispatch }, body) => {
-    const shallowCopy = [...state.folders, { ...body, id: String(Date.now()) }];
-    commit(CATALOG_FOLDERS_SET, shallowCopy);
+  [CATALOG_FOLDERS_ADD]: async ({ dispatch }, body) => {
     const data = await http.addFolder(body);
     dispatch(CATALOG_FOLDERS_REQUEST);
     if (!data) {
-      message.error('Folder not saved. Please try again later!');
+      message.error('Folder not added. Please try again later!');
       return false;
     }
+    dispatch(CATALOG_FOLDERS_REQUEST);
+    message.success('Folder added successfully!');
     return true;
   },
   [CATALOG_FOLDERS_REMOVE]: async ({ commit, dispatch }, id) => {
@@ -112,6 +122,7 @@ const actions = {
       message.error('Folder not deleted. Please try again later!');
       return false;
     }
+    message.success('Folder deleted successfully!');
     return true;
   },
   [CATALOG_FOLDERS_EDIT]: async ({ commit, dispatch }, payload) => {
@@ -122,6 +133,7 @@ const actions = {
       message.error('Folder not edited. Please try again later!');
       return false;
     }
+    message.success('Folder saved successfully!');
     return true;
   },
   [CATALOG_CLEAN]: async ({ commit }) => {
@@ -131,10 +143,29 @@ const actions = {
   },
 };
 const getters = {
-  getCatalog: (state) => state.catalog.filter(onSearch(state.search)),
+  getCatalog(state) {
+    const { catalog = [], selectedFolder = null, folders = [], search = '' } = state;
+    return catalog.filter(onSearch(search)).filter((item) => {
+      if (selectedFolder) {
+        const folder = folders.find(({ id }) => selectedFolder === id);
+        if (folder) {
+          return (folder.videos || []).some((id) => id === item.id);
+        }
+      }
+      return true;
+    });
+  },
+  getVideoNames: (state) => state.catalog.map(({ id, name }) => ({ id, name })),
   isSearch: (state) => !!state.search,
   isEmpty: (state) => !state.catalog.length && !state.loading,
   hasSelected: (state) => !!state.selected.length,
+  getFolders: (state) => {
+    const { folders = [], catalog = [] } = state;
+    return folders.map((item) => ({
+      ...item,
+      videos: catalog.filter(({ id }) => item.videos && item.videos.some((vId) => vId === id)),
+    }));
+  },
 };
 
 export default {

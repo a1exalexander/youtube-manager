@@ -1,15 +1,16 @@
 <template>
-  <label class="m-checkbox-button">
+  <label class="m-checkbox-button" @click="e => toggle && value && e.preventDefault()">
     <input
       type="checkbox"
       class="m-checkbox-button__input"
+      :name="name"
       :value="val"
       v-model="checked"
     />
     <span class="m-checkbox-button__inner">
-      <span v-if="!!$slots.default || !!label" class="m-checkbox-button__text"
-        ><slot>{{ label }}</slot></span
-      >
+      <span v-if="!!$slots.default || !!label" class="m-checkbox-button__text">
+        <slot>{{ label }}</slot>
+      </span>
     </span>
   </label>
 </template>
@@ -21,10 +22,17 @@ export default {
       type: [String, Boolean, Number],
     },
     value: {
-      type: [Boolean, Array],
+      type: [Boolean, Array, String, Object, Number],
     },
     label: {
       type: String,
+    },
+    name: {
+      type: String,
+    },
+    toggle: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
@@ -32,14 +40,9 @@ export default {
       get() {
         return this.value;
       },
-      set(val) {
-        this.onChange(val);
+      set(e) {
+        this.$emit('input', e);
       },
-    },
-  },
-  methods: {
-    onChange(e) {
-      this.$emit('input', e);
     },
   },
 };
@@ -80,6 +83,7 @@ $styles: m-checkbox-button;
     @include text($H12, 400, $G2);
     @include transition(color);
     cursor: pointer;
+    @extend %noselect;
   }
 }
 </style>

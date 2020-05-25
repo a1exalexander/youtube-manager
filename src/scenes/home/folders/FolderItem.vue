@@ -12,13 +12,13 @@
     <a-popover trigger="hover" placement="bottomLeft">
       <template slot="content">
         <m-col class="folder-item__drop">
-          <m-subtle type="white" class="folder-item__drop-btn" @click="() => $emit('rename')">
+          <m-subtle type="white" class="folder-item__drop-btn" @click="onEdit">
             Rename
             <template #icon>
               <m-icon icon="edit" />
             </template>
           </m-subtle>
-          <m-subtle type="danger" class="folder-item__drop-btn" @click="() => $emit('delete')">
+          <m-subtle type="danger" class="folder-item__drop-btn" @click="onDelete">
             Delete
             <template #icon>
               <m-icon icon="trash" />
@@ -54,9 +54,17 @@ export default {
       get() {
         return this.value;
       },
-      set() {
-        this.$emit('input', this.val);
+      set(e) {
+        this.$emit('input', e);
       },
+    },
+  },
+  methods: {
+    onDelete() {
+      this.$emit('delete', this.val);
+    },
+    onEdit() {
+      this.$emit('rename', { name: this.label, id: this.val });
     },
   },
 };
@@ -93,9 +101,11 @@ $styles: folder-item;
   &__folder-icon {
     @include svg(14px, $G2);
     margin-right: 6px;
+    @extend %noselect;
   }
   &__text {
     @include text($H12, 400, $G2);
+    @extend %noselect;
   }
   &__checkbox-drop-btn {
     @include flex-row(center, center);
