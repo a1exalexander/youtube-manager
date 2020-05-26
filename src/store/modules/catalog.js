@@ -64,7 +64,7 @@ const mutations = {
   [CATALOG_FOLDERS_SELECT](state, payload) {
     state.selectedFolder = payload;
   },
-  [CATALOG_FOLDERS_SELECT_ALL](state, payload) {
+  [CATALOG_FOLDERS_SELECT_ALL](state, payload = true) {
     state.selectedAllFolders = payload;
   },
   [CATALOG_FOLDERS_SORTED_SET](state, payload) {
@@ -130,6 +130,7 @@ const actions = {
   },
   [CATALOG_FOLDERS_REMOVE]: async ({ commit, dispatch }, id) => {
     commit(CATALOG_FOLDERS_REMOVE, id);
+    commit(CATALOG_FOLDERS_SELECT_ALL);
     const data = await http.deleteFolder(id);
     if (!data) {
       dispatch(CATALOG_FOLDERS_REQUEST);
