@@ -70,9 +70,9 @@ $style: m-popup;
   overflow: auto;
   @include z-index(popup);
   &__inner {
-    padding: 32px;
+    padding: 30vh 32px 32px;
     height: 100%;
-    @include flex(center, center);
+    @include flex(center, flex-start);
   }
   &__card {
     background-color: $dark;

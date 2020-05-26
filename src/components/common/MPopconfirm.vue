@@ -68,9 +68,9 @@ $style: m-popconfirm;
   background: rgba($D10, 0.6);
   overflow: auto;
   &__inner {
-    padding: 32px;
+    padding: 30vh 32px 32px;
     height: 100%;
-    @include flex(center, center);
+    @include flex(center, flex-start);
   }
   &__card {
     background-color: $dark;
