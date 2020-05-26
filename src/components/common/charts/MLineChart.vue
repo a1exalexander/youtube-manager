@@ -31,8 +31,8 @@ export default {
         layout: {
           padding: {
             left: 0,
-            right: 0,
-            top: 0,
+            right: 10,
+            top: 10,
             bottom: 10,
           },
         },
@@ -49,7 +49,6 @@ export default {
                 drawTicks: false,
               },
               type: 'time',
-              distribution: 'series',
               bounds: 'ticks',
               time: {
                 unit: 'day',
@@ -57,6 +56,8 @@ export default {
               ticks: {
                 fontColor: colors.$G6,
                 maxTicksLimit: 3,
+                autoSkip: true,
+                maxRotation: 0,
                 fontFamily: `'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
                 fontSize: 8,
@@ -72,6 +73,7 @@ export default {
                 drawTicks: false,
               },
               ticks: {
+                display: false,
                 min: 0,
                 fontColor: 'transparent',
               },

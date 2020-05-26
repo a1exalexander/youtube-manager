@@ -2,7 +2,7 @@
   <div class="home-table-item-cascader">
     <m-transition>
       <div class="home-table-item-cascader__popover" v-if="popoverSecond" @mousedown.stop>
-        <m-col class="home-table-item-cascader__popover-inner">
+        <m-col class="home-table-item-cascader__popover-inner" v-show="folders.length">
           <m-subtle
             v-for="folder in folders"
             :key="folder.id"
@@ -12,16 +12,20 @@
             @click="() => onSelectFolder(folder)"
           />
         </m-col>
+        <m-divider :offset="0" color="#373c54" v-show="folders.length" />
         <footer class="home-table-item-cascader__popover-footer">
+          <m-input-wrapper v-if="showInput" class="home-table-item-cascader__input" key="input">
+            <m-input v-model="name" placeholder="Folder Name" />
+            <m-subtle @click="saveFolder" label="Save" class="home-table-item-cascader__save" />
+          </m-input-wrapper>
           <m-subtle
             icon="plus"
+            class="home-table-item-cascader__add-btn"
             label="Create New Folder"
             @click="showInput = true"
-            v-if="!showInput"
+            key="button"
+            v-else
           />
-          <m-input v-model="name" v-if="showInput" placeholder="Folder Name">
-            <m-subtle @click="saveFolder" label="Save" class="home-table-item-cascader__save" />
-          </m-input>
         </footer>
       </div>
     </m-transition>
@@ -31,7 +35,7 @@
           <m-subtle
             @click="popoverSecond = !popoverSecond"
             type="white"
-            label="Move to"
+            label="Copy to"
             class="home-table-item-cascader__btn"
             :class="{popover: popoverSecond}"
           >
@@ -43,7 +47,8 @@
             v-if="!selectedAllFolders"
             type="danger"
             label="Remove"
-            class="home-table-item-cascader__btn _no-margin"
+            class="home-table-item-cascader__btn _mt"
+            @click="removeVideoFromFolder"
           />
         </m-col>
       </template>
@@ -52,8 +57,8 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions, mapState } from 'vuex';
-import { CATALOG_FOLDERS_EDIT } from '../../../store';
+import { mapGetters, mapActions, mapState, mapMutations } from 'vuex';
+import { CATALOG_FOLDERS_VIDEO_REMOVE, CATALOG_FOLDERS_ADD, CATALOG_FOLDERS_VIDEO_COPY, CATALOG_FOLDERS_SELECT } from '../../../store';
 
 export default {
   name: 'HomeTableItemCascader',
@@ -77,31 +82,46 @@ export default {
     },
   },
   methods: {
-    ...mapActions('catalog', [CATALOG_FOLDERS_EDIT]),
-    onSelectFolder(folder) {
-      this[CATALOG_FOLDERS_EDIT]({ id: folder?.id, videos: [...folder?.videos, this.id] });
-      if (!this.selectedAllFolders) {
-        const oldVideos = [...this.getSelectedFolder?.videos];
-        const idx = oldVideos.findIndex((id) => id === this.id);
-        oldVideos.splice(idx, 1);
-        this[CATALOG_FOLDERS_EDIT]({ id: this.getSelectedFolder?.id, videos: oldVideos });
-      }
-      this.$emit('popoverIsVisible');
-      this.popoverFirst = false;
-      this.popoverSecond = false;
+    ...mapMutations('catalog', [CATALOG_FOLDERS_SELECT]),
+    ...mapActions('catalog', [CATALOG_FOLDERS_VIDEO_COPY, CATALOG_FOLDERS_VIDEO_REMOVE, CATALOG_FOLDERS_ADD]),
+    async onSelectFolder(folder) {
+      this[CATALOG_FOLDERS_VIDEO_COPY]({ folder, id: this.id });
+      this.hide();
     },
     hide() {
+      this.name = '';
       this.popoverFirst = false;
       this.popoverSecond = false;
+      this.$emit('hide');
     },
-    change() {
-      this.$emit('popoverIsVisible');
+    change(value) {
+      this.$emit(value ? 'show' : 'hide');
       this.popoverSecond = false;
       this.showInput = false;
     },
-    saveFolder() {
-      this.folders.push(this.name);
-      this.name = '';
+    async saveFolder() {
+      const { name } = this;
+      this.$message.loading({ content: 'A new folder is being created right now!', key: name });
+      const ok = await this[CATALOG_FOLDERS_ADD]({ name, videos: [this.id] });
+      if (ok) {
+        this.$message.success({
+          content: `Folder "${name}" added and video copied to this folder successfully!`,
+          key: name,
+          duration: 4,
+        });
+        this[CATALOG_FOLDERS_SELECT](ok?.id);
+        this.hide();
+      } else {
+        this.$message.success({
+          content: `Folder "${name}" not added. Please try again later!`,
+          key: name,
+          duration: 4,
+        });
+      }
+    },
+    removeVideoFromFolder() {
+      this[CATALOG_FOLDERS_VIDEO_REMOVE](this.id);
+      this.hide();
     },
   },
 };
@@ -116,11 +136,10 @@ $styles: home-table-item-cascader;
     @include flex-col(stretch, stretch);
   }
   &__btn {
-    margin-bottom: 9px;
-    padding: 6px 16px;
-    &._no-margin {
-      margin-bottom: 0;
-      padding: 0 16px;
+    padding: 4px 16px;
+    &._mt {
+      margin-top: 11px;
+      padding: 0 16px 4px;
     }
     &.popover {
       background-color: $user-border;
@@ -135,16 +154,16 @@ $styles: home-table-item-cascader;
     left: -322px;
     top: 0;
     z-index: 100;
+    margin-bottom: 6px;
   }
   &__popover-inner {
-    padding: 14px 16px;
+    padding: 13px 16px;
   }
   &__popover-btn:not(:last-child) {
     margin-bottom: 16px;
   }
   &__popover-footer {
-    padding: 10px 14px;
-    border-top: 1px solid $G7;
+    padding: 0 16px;
     & .m-input__label {
       display: inline;
     }
@@ -154,6 +173,12 @@ $styles: home-table-item-cascader;
     right: 10px;
     bottom: 10px;
     z-index: 1;
+  }
+  &__input {
+    margin: 12px 0;
+  }
+  &__add-btn {
+    margin: 13px 0 11px;
   }
 }
 </style>

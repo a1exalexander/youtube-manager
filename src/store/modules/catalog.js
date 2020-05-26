@@ -15,6 +15,8 @@ import {
   CATALOG_FOLDERS_SELECT,
   CATALOG_FOLDERS_SELECT_ALL,
   CATALOG_FOLDERS_SORTED_SET,
+  CATALOG_FOLDERS_VIDEO_COPY,
+  CATALOG_FOLDERS_VIDEO_REMOVE,
 } from '../types';
 import { http } from '../../services';
 import { onSearch, cleanState } from '../../utils';
@@ -31,6 +33,7 @@ const initState = {
 };
 
 const state = () => ({ ...initState });
+
 const mutations = {
   [CATALOG_SEARCH_SET](state, payload) {
     state.search = payload;
@@ -68,6 +71,14 @@ const mutations = {
     state.sorted = payload;
   },
 };
+
+const removeVideoAndGetVideos = (folder, id) => {
+  const videos = [...(folder?.videos || [])];
+  const idx = videos.findIndex((iId) => iId === id);
+  videos.splice(idx, 1);
+  return videos;
+};
+
 const actions = {
   [CATALOG_REQUEST]: async ({ commit }) => {
     commit(CATALOG_REQUEST);
@@ -112,12 +123,10 @@ const actions = {
     const data = await http.addFolder(body);
     dispatch(CATALOG_FOLDERS_REQUEST);
     if (!data) {
-      message.error('Folder not added. Please try again later!');
       return false;
     }
     dispatch(CATALOG_FOLDERS_REQUEST);
-    message.success('Folder added successfully!');
-    return true;
+    return data;
   },
   [CATALOG_FOLDERS_REMOVE]: async ({ commit, dispatch }, id) => {
     commit(CATALOG_FOLDERS_REMOVE, id);
@@ -135,10 +144,27 @@ const actions = {
     const data = await http.editFolder(payload);
     if (!data) {
       dispatch(CATALOG_FOLDERS_REQUEST);
-      message.error('Folder not edited. Please try again later!');
       return false;
     }
     return true;
+  },
+  [CATALOG_FOLDERS_VIDEO_COPY]: async ({ dispatch }, { folder, id }) => {
+    const ok = await dispatch(CATALOG_FOLDERS_EDIT, { id: folder?.id, videos: [...(folder?.videos || []), id] });
+    if (ok) {
+      message.success(`Video copied to "${folder?.name}" folder successfully!`);
+    } else {
+      message.error(`Video not copied to "${folder?.name}" folder. Please try again later!`);
+    }
+  },
+  [CATALOG_FOLDERS_VIDEO_REMOVE]: async ({ getters, dispatch }, id) => {
+    const { getSelectedFolder } = getters;
+    const videos = removeVideoAndGetVideos(getSelectedFolder, id);
+    const ok = await dispatch(CATALOG_FOLDERS_EDIT, { id: getSelectedFolder?.id, videos });
+    if (ok) {
+      message.success(`Video removed from "${getSelectedFolder?.name}" folder successfully!`);
+    } else {
+      message.error(`Video not removed from "${getSelectedFolder?.name}" folder. Please try again later!`);
+    }
   },
   [CATALOG_CLEAN]: async ({ commit }) => {
     commit(CATALOG_UPDATE, []);
@@ -150,7 +176,10 @@ const getters = {
   getCatalog(state) {
     const { catalog = [], selectedFolder = null, folders = [], search = '' } = state;
     return catalog
-      .map((item) => ({ ...item, folders: folders.filter(({ videos }) => videos.some((id) => id === item.id)) }))
+      .map((item) => ({
+        ...item,
+        folders: folders.filter(({ videos }) => (videos || []).some((id) => id === item.id)),
+      }))
       .filter(onSearch(search))
       .filter((item) => {
         if (selectedFolder) {

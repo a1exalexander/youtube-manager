@@ -80,7 +80,6 @@ export default {
 <style lang="scss">
 $style: home-table-scene;
 .#{$style} {
-  flex: 1 1;
   background-color: $dark;
 }
 </style>

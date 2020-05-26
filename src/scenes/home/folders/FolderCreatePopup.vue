@@ -80,7 +80,12 @@ export default {
       const videos = selectedVideo !== 'all' ? [selectedVideo] : this.getVideoNames.map(({ id }) => id);
       const ok = await this[CATALOG_FOLDERS_ADD]({ videos, name });
       this.loading = false;
-      if (ok) this.close();
+      if (ok) {
+        this.$message.success(`Folder "${name}" added successfully!`);
+        this.close();
+      } else {
+        this.$message.error(`Folder "${name}" not added. Please try again later!`);
+      }
     },
   },
 };

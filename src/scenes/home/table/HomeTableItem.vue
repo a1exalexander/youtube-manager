@@ -1,5 +1,11 @@
 <template>
-  <li class="home-table-item" @mouseenter="showMore = true" @mouseleave="hideShowMore">
+  <li
+    class="home-table-item"
+    @mousemove="showMore = true"
+    @mouseenter="showMore = true"
+    @mouseleave="hideShowMore"
+    @click="hideAction"
+  >
     <home-table-item-wrapper>
       <m-checkbox name="catalog" :val="video.id" v-model="select" />
       <router-link :to="{ name: 'VideoDetails', params: {id: video.id} }">
@@ -27,7 +33,9 @@
         :used-folders="video.folders"
         class="home-table-item__cascader"
         v-show="showMore"
-        @popoverIsVisible="popoverIsVisible = !popoverIsVisible"
+        @hide="hideAction"
+        @show="showAction"
+        @click.native.stop
       />
     </home-table-item-wrapper>
   </li>
@@ -67,6 +75,14 @@ export default {
       if (!this.popoverIsVisible) {
         this.showMore = false;
       }
+    },
+    hideAction() {
+      this.popoverIsVisible = false;
+      this.showMore = false;
+    },
+    showAction() {
+      this.popoverIsVisible = true;
+      this.showMore = true;
     },
   },
   components: {

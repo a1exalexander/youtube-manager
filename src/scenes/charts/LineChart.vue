@@ -27,17 +27,14 @@
     <m-line-chart
       :chart-id="chartId"
       :chart-data="chartData"
-      :width="100"
       :height="140"
       class="line-chart__chart"
-      :style="{left: left, paddingRight: padding, width: width}"
     />
   </div>
 </template>
 <script>
 import MLineChart from '@/components/common/charts/MLineChart.vue';
 import colors from '@/components/common/charts/colors';
-import Chart from 'vue-chartjs';
 
 export default {
   name: 'LineChart',
@@ -142,9 +139,6 @@ export default {
     handleChangeVisibility() {
       this.isClickedDropdown = !this.isClickedDropdown;
     },
-  },
-  mounted() {
-    console.log(Chart);
   },
 };
 </script>

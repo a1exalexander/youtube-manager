@@ -46,7 +46,7 @@ export default {
 <style lang="scss">
 .home {
   flex: 1 1;
-  padding: 24px 0 0;
+  padding: 24px 0 40px;
   &__divider {
     margin: 24px 0 20px !important;
   }

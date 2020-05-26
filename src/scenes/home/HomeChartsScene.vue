@@ -7,9 +7,6 @@
           :secondDataset="amountChart.watchTime"
           :labels="getAccountWatchLabels"
           chartId="watch-chart"
-          padding="24px"
-          left="-10px"
-          width="107%"
         />
       </div>
       <div class="home-charts-scene__chart-wrapper">
@@ -17,13 +14,10 @@
           type="teal"
           dropName="LIKES"
           value="816"
-          :firstDataset="accountChart.likeCount"
-          :secondDataset="amountChart.likeCount"
+          :firstDataset="accountChart.watchTime"
+          :secondDataset="amountChart.watchTime"
           :labels="getAccountLikesLabels"
           chartId="likes-chart"
-          left="-30px"
-          padding="8px"
-          width="109%"
         />
       </div>
       <div class="home-charts-scene__chart-wrapper">
@@ -31,13 +25,10 @@
           type="violet"
           dropName="IMPRESSIONS"
           value="268,000"
-          :firstDataset="accountChart.impressionCount"
-          :secondDataset="amountChart.impressionCount"
+          :firstDataset="accountChart.watchTime"
+          :secondDataset="amountChart.watchTime"
           :labels="getAccountImpressionsLabels"
           chartId="impressions-chart"
-          left="-24px"
-          padding="8px"
-          width="107%"
         />
       </div>
       <div class="home-charts-scene__chart-wrapper">
@@ -49,8 +40,6 @@
           :secondDataset="amountChart.adRevenue"
           :labels="getAccountAdRevenueLabels"
           chartId="ad-chart"
-          left="-36px"
-          width="107%"
         />
       </div>
     </m-row>
@@ -105,6 +94,7 @@ $styles: home-charts-scene;
     flex: 1 1 25%;
     max-width: 25%;
     padding: 12px;
+    position: relative;
     &:last-child {
       margin-right: 0;
     }
