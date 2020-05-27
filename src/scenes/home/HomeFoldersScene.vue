@@ -53,19 +53,19 @@
     <m-row ai="flex-start">
       <m-checkbox-button toggle v-model="selectedAllFoldersModel">All</m-checkbox-button>
       <m-divider horizontal style="height: 34px" />
-      <m-row wrap>
+      <transition-group class="home-folders-scene__folders-list" name="list-complete" tag="ul">
         <folder-item
           name="folders"
           :label="folder.name"
           :val="folder.id"
           v-model="selectedFolderModel"
-          class="home-folders-scene__folder-item"
+          class="home-folders-scene__folder-item list-complete-item"
           @delete="showDeletePopup"
           @rename="showEditPopup"
           v-for="folder in getFolders"
           :key="folder.id"
         />
-      </m-row>
+      </transition-group>
     </m-row>
   </m-container>
 </template>
@@ -202,6 +202,10 @@ $styles: home-folders-scene;
   &__folder-item {
     margin-right: 12px;
     margin-bottom: 12px;
+  }
+  &__folders-list {
+    @include flex;
+    flex-wrap: wrap;
   }
 }
 </style>

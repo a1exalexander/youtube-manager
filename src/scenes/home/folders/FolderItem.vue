@@ -1,5 +1,5 @@
 <template>
-  <div class="folder-item">
+  <li class="folder-item">
     <label class="folder-item__radio">
       <input type="radio" class="folder-item__input" :name="name" :value="val" v-model="checked" />
       <div class="folder-item__inner">
@@ -30,7 +30,7 @@
         <m-icon icon="action-horizontal" class="folder-item__dots" />
       </span>
     </a-popover>
-  </div>
+  </li>
 </template>
 <script>
 export default {

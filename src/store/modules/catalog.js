@@ -7,15 +7,19 @@ import {
   CATALOG_SELECTED_SET,
   CATALOG_DELETE,
   CATALOG_ADD,
+  CATALOG_SORT_SET,
 } from '../types';
 import { http } from '../../services';
 import { onSearch, cleanState } from '../../utils';
+import { sortByDate, sortByString, sortByNumber } from '../../utils/sort';
 
 const initState = {
   search: '',
   loading: false,
   catalog: [],
   selected: [],
+  sortBy: 'date',
+  sortDirection: 'desc',
 };
 
 const state = () => ({ ...initState });
@@ -35,6 +39,10 @@ const mutations = {
   },
   [CATALOG_SELECTED_SET](state, payload) {
     state.selected = [...payload];
+  },
+  [CATALOG_SORT_SET](state, { sortBy, sortDirection }) {
+    state.sortBy = sortBy;
+    state.sortDirection = sortDirection;
   },
 };
 
@@ -78,8 +86,8 @@ const actions = {
 };
 const getters = {
   getCatalog(state, getters, { folders: { selectedFolder = null, folders = [] } }) {
-    const { catalog = [], search = '' } = state;
-    return catalog
+    const { catalog = [], search = '', sortBy, sortDirection } = state;
+    const filtered = catalog
       .map((item) => ({
         ...item,
         folders: folders.filter(({ videos }) => (videos || []).some((id) => id === item.id)),
@@ -94,6 +102,18 @@ const getters = {
         }
         return true;
       });
+    const sorted = filtered.sort((a, b) => {
+      switch (sortBy) {
+        case 'name':
+          return sortByString(a?.name, b?.name, sortDirection);
+        case 'date':
+          return sortByDate(a?.date, b?.date, sortDirection);
+        default:
+          return sortByNumber(a?.id, b?.id, sortDirection);
+      }
+    });
+    console.log(sorted);
+    return sorted;
   },
   getVideoNames: ({ catalog }) => catalog.map(({ id, name }) => ({ id, name })),
   isSearch: ({ search }) => !!search,

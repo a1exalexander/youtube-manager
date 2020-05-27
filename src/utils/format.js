@@ -20,3 +20,5 @@ export const float = function float(number, fallback = '--') {
   if (isNumber(number)) return numeral(number).format('0[.]00', Math.floor);
   return fallback;
 };
+
+export const dateFormat = 'dd/MM/yyyy';

@@ -5,9 +5,13 @@
     </div>
     <div class="home-table-head__cell">video</div>
     <div class="home-table-head__cell">
-      <button class="home-table-head__cell-btn">
+      <button class="home-table-head__cell-btn" @click="() => toggleSortBy('date')">
         <span class="home-table-head__text">posted date</span>
-        <m-icon class="home-table-head__icon" icon="arrow-up" />
+        <m-icon
+          class="home-table-head__icon"
+          icon="arrow-up"
+          :class="{_active: sortDirection === 'asc'}"
+        />
       </button>
     </div>
     <div class="home-table-head__cell _right">views</div>
@@ -24,7 +28,9 @@
   </home-table-item-wrapper>
 </template>
 <script>
+import { mapState, mapMutations } from 'vuex';
 import HomeTableItemWrapper from './HomeTableItemWrapper.vue';
+import { CATALOG_SORT_SET } from '../../../store';
 
 export default {
   name: 'HomeTableHead',
@@ -36,6 +42,7 @@ export default {
     val: Boolean,
   },
   computed: {
+    ...mapState('catalog', ['sortBy', 'sortDirection']),
     checkbox: {
       set(e) {
         this.$emit('input', e);
@@ -43,6 +50,13 @@ export default {
       get() {
         return this.value;
       },
+    },
+  },
+  methods: {
+    ...mapMutations('catalog', [CATALOG_SORT_SET]),
+    toggleSortBy(sortBy) {
+      const sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+      this[CATALOG_SORT_SET]({ sortBy, sortDirection });
     },
   },
 };
@@ -94,6 +108,9 @@ $style: home-table-head;
   &__icon {
     margin-left: 2px;
     @include svg(17px, $I6);
+    &._active {
+      transform: rotateX(180deg);
+    }
   }
 }
 </style>

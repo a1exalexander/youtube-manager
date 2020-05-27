@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import axios from './axiosWrapper';
 import { url } from './url';
-import { formatToChartData } from '../../utils';
+import { formatToChartData, dateFormat } from '../../utils';
 
 export class Http {
   login = async ({ email, password }) => {
@@ -23,7 +23,7 @@ export class Http {
       const { data } = await axios.get(url.videos);
       const shallowCopy = data.map((item) => ({
         ...item,
-        date: format(new Date(item?.date), 'dd/MM/yyyy'),
+        date: format(new Date(item?.date), dateFormat),
       }));
       return shallowCopy;
     } catch {
