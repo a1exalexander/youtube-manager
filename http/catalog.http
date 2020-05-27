@@ -1,4 +1,4 @@
-@base_url = {{fake_url}}
+@base_url = {{local_url}}
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbmlhMjQwM0BnbWFpbC5jb20iLCJuYW1lIjoiR3JheWNlIER1QnVxdWUiLCJpZCI6MTUsImlhdCI6MTU5MDA1NTMxNH0.fJ7bga4We3-Lj1RLUM_e7_vYMu8T6oJrZ4m6LZHAMkc
 
 # @name Catalog
@@ -8,7 +8,13 @@ Authorization: {{token}}
 
 ###
 
-DELETE  {{base_url}}/videos/5
+DELETE  {{base_url}}/videos/1
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+
+GET  {{base_url}}/videos/66
 Content-Type: application/json
 Authorization: {{token}}
 

@@ -2,57 +2,54 @@
   <div class="overview-scene">
     <m-row>
       <m-col class="overview-scene__video-wrapper">
-        <img src="https://picsum.photos/520/290" alt />
+        <img v-if="details.image" :src="details.image" :alt="details.name" />
       </m-col>
       <m-col class="overview-scene__video-description">
-        <h1 class="overview-scene__video-title">Growth, Sales, and a New Era of B2B</h1>
+        <h1 class="overview-scene__video-title">{{details.name}}</h1>
         <m-row class="overview-scene__video-row">
           <m-col class="overview-scene__video-col">
             <h6 class="overview-scene__video-subtitle">
               Category:
-              <span>Society</span>
+              <span class="overview-scene__value">{{details.category}}</span>
             </h6>
             <h6 class="overview-scene__video-subtitle">
               Posted Date:
-              <span>11/11/2019</span>
+              <span class="overview-scene__value">{{details.date}}</span>
             </h6>
           </m-col>
           <m-col class="overview-scene__video-col">
             <h6 class="overview-scene__video-subtitle">
               Topic:
-              <span>Business</span>
+              <span class="overview-scene__value">{{details.topic}}</span>
             </h6>
             <h6 class="overview-scene__video-subtitle">
               Length:
-              <span>16:07</span>
+              <span class="overview-scene__value">{{details.length}}</span>
             </h6>
           </m-col>
           <m-col class="overview-scene__video-col">
             <h6 class="overview-scene__video-subtitle">
               Production Cost:
-              <span>$1,000</span>
+              <span
+                class="overview-scene__value"
+              >{{$currency(details.production_cost)}}</span>
             </h6>
             <h6 class="overview-scene__video-subtitle">
               ROI:
-              <span>8%</span>
+              <span class="overview-scene__value">{{$float(details.roi)}}%</span>
             </h6>
           </m-col>
         </m-row>
         <h6 class="overview-scene__video-subtitle overview-scene__video-subtitle--mb">Description:</h6>
-        <p class="overview-scene__video-text">
-          Traditionally, consumer companies have had viral growth and network effects, while enterprise companies have
-          been built brick by brick and sale by sale. But a new wave of B2B companies — Dropbox, Twilio, Atlassian,
-          SurveyMonkey, GitHub — show that recently enterprise businesses have started to look a lot more like their
-          consumer counterparts.
-        </p>
+        <p class="overview-scene__video-text">{{details.description}}</p>
       </m-col>
     </m-row>
     <m-divider />
     <m-row class="overview-scene__charts-row">
       <div class="overview-scene__chart-wrapper">
         <line-chart
-          :firstDataset="video.watchTime"
-          :labels="getVideoWatchLabels"
+          :firstDataset="charts.watchTime"
+          :labels="getVideoChartWatchLabels"
           chartId="watch-chart"
           padding="24px"
           left="-10px"
@@ -64,8 +61,8 @@
           type="teal"
           dropName="LIKES"
           value="816"
-          :firstDataset="video.likeCount"
-          :labels="getVideoLikesLabels"
+          :firstDataset="charts.likeCount"
+          :labels="getVideoChartLikesLabels"
           chartId="likes-chart"
           left="-31px"
           padding="8px"
@@ -77,8 +74,8 @@
           type="violet"
           dropName="IMPRESSIONS"
           value="268,000"
-          :firstDataset="video.impressionCount"
-          :labels="getVideoImpressionsLabels"
+          :firstDataset="charts.impressionCount"
+          :labels="getVideoChartImpressionsLabels"
           chartId="impressions-chart"
           left="-30px"
           padding="8px"
@@ -90,8 +87,8 @@
           type="lime"
           dropName="AD REVENUE"
           value="$2,000"
-          :firstDataset="video.adRevenue"
-          :labels="getVideoAdRevenueLabels"
+          :firstDataset="charts.adRevenue"
+          :labels="getVideoChartAdRevenueLabels"
           chartId="ad-chart"
           left="-37px"
           width="108%"
@@ -119,11 +116,11 @@
 </template>
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex';
-import { CHARTS_VIDEO_REQUEST } from '@/store';
 import LineChart from '../charts/LineChart.vue';
 import ProductionOverviewTab from './overview-scene/ProductionOverview.vue';
 import TranscriptOverviewTab from './overview-scene/TranscriptOverview.vue';
 import LanguageStatsTab from './overview-scene/LanguageStats.vue';
+import { VIDEO_DETAILS_REQUEST, VIDEO_CHARTS_REQUEST } from '../../store';
 
 export default {
   name: 'OverviewScene',
@@ -134,41 +131,33 @@ export default {
     LanguageStatsTab,
   },
   computed: {
-    ...mapState('charts', ['video']),
-    ...mapGetters('charts', [
-      'getVideoWatchLabels',
-      'getVideoLikesLabels',
-      'getVideoImpressionsLabels',
-      'getVideoAdRevenueLabels',
+    ...mapState('video', ['charts', 'details']),
+    ...mapGetters('video', [
+      'getVideoChartWatchLabels',
+      'getVideoChartLikesLabels',
+      'getVideoChartImpressionsLabels',
+      'getVideoChartAdRevenueLabels',
     ]),
   },
   methods: {
-    ...mapActions({
-      getVieoCharts: `charts/${CHARTS_VIDEO_REQUEST}`,
-    }),
+    ...mapActions('video', [VIDEO_DETAILS_REQUEST, VIDEO_CHARTS_REQUEST]),
   },
-  async mounted() {
-    await this.getVieoCharts();
+  created() {
+    const { id } = this.$route.params;
+    this[VIDEO_DETAILS_REQUEST](id);
+    this[VIDEO_CHARTS_REQUEST]();
   },
 };
 </script>
 <style lang="scss">
 .overview-scene {
   &__video-wrapper {
-    flex: 1 1 516px;
-    min-width: 40%;
-    max-width: 340px;
-    border: 1px solid $D9;
-    border-radius: 2px;
-    overflow: hidden;
-    img {
-      width: 100%;
-      height: auto;
-    }
+    flex-basis: 40%;
+    @include padding-hack(22.5%, cover);
   }
   &__video-description {
     padding-left: 40px;
-    flex: 1 1 60%;
+    flex: 1 1;
   }
   &__video-title {
     @include text($H18, 500, $N0);
@@ -218,6 +207,9 @@ export default {
   }
   &__charts-row {
     margin: 0 -12px 24px;
+  }
+  &__value {
+    text-transform: capitalize;
   }
 }
 </style>

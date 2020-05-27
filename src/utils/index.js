@@ -5,3 +5,5 @@ export * from './file';
 export * from './charts';
 export * from './store';
 export * from './format';
+export * from './sort';
+export * from './http';

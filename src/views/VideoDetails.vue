@@ -23,6 +23,14 @@
 import OverviewScene from '@/scenes/video-details/OverviewScene.vue';
 import ClipLocatorScene from '@/scenes/video-details/ClipLocatorScene.vue';
 import ImagesUsedScene from '@/scenes/video-details/ImagesUsedScene.vue';
+import { mapActions } from 'vuex';
+import {
+  VIDEO_DETAILS_REQUEST,
+  VIDEO_CLIPS_REQUEST,
+  VIDEO_SHOTS_REQUEST,
+  VIDEO_CLEAN,
+  VIDEO_CHARTS_REQUEST,
+} from '../store';
 
 export default {
   name: 'VideoDetailsView',
@@ -30,6 +38,22 @@ export default {
     OverviewScene,
     ClipLocatorScene,
     ImagesUsedScene,
+  },
+  methods: {
+    ...mapActions('video', [
+      VIDEO_CLEAN,
+      VIDEO_DETAILS_REQUEST,
+      VIDEO_CLIPS_REQUEST,
+      VIDEO_SHOTS_REQUEST,
+      VIDEO_CHARTS_REQUEST,
+    ]),
+  },
+  created() {
+    this[VIDEO_CLIPS_REQUEST]();
+    this[VIDEO_SHOTS_REQUEST]();
+  },
+  destroyed() {
+    this[VIDEO_CLEAN]();
   },
 };
 </script>

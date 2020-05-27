@@ -123,7 +123,7 @@ $styles: folder-item;
     @include svg(14px, $G2);
   }
   &__drop {
-    padding: 10px 16px;
+    padding: 2px 16px 3px;
   }
   &__drop-btn {
     margin-bottom: 10px;

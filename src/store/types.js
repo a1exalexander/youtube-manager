@@ -46,3 +46,15 @@ export const CHARTS_VIDEO_SET = 'profile/VIDEO_SET';
 export const CHARTS_ACCOUNT_CLEAN = 'charts/ACCOUNT_CLEAN';
 export const CHARTS_AMOUNT_CLEAN = 'profile/AMOUNT_CLEAN';
 export const CHARTS_VIDEO_CLEAN = 'profile/VIDEO_CLEAN';
+
+export const VIDEO_DETAILS_REQUEST = 'video/DETAILS_REQUEST';
+export const VIDEO_DETAILS_SET = 'video/DETAILS_SET';
+export const VIDEO_DETAILS_FILURE = 'video/DETAILS_FILURE';
+export const VIDEO_DETAILS_SUCCESS = 'video/DETAILS_SUCCESS';
+export const VIDEO_CLIPS_REQUEST = 'video/CLIPS_REQUEST';
+export const VIDEO_CLIPS_SET = 'video/CLIPS_SET';
+export const VIDEO_SHOTS_REQUEST = 'video/SHOTS_REQUEST';
+export const VIDEO_SHOTS_SET = 'video/SHOTS_SET';
+export const VIDEO_CHARTS_REQUEST = 'video/CHARTS_REQUEST';
+export const VIDEO_CHARTS_SET = 'video/CHARTS_SET';
+export const VIDEO_CLEAN = 'video/CLEAN';

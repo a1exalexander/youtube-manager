@@ -1,7 +1,11 @@
 <template>
   <div class="production-overview">
     <m-row jc="space-between">
-      <m-col class="production-overview__col" v-for="({ name, value }) in test_data" :key="name">
+      <m-col
+        class="production-overview__col"
+        v-for="({ name, value, key }) in getDataList"
+        :key="key"
+      >
         <h6 class="production-overview__col-name">{{name}}</h6>
         <span class="production-overview__value">{{value}}</span>
       </m-col>
@@ -9,41 +13,67 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'ProductionOverview',
   data() {
     return {
-      test_data: [
+      structure: [
         {
+          key: 'method',
           name: 'storytelling method',
-          value: 'Lecture',
+          value: '',
         },
         {
+          key: 'value',
           name: 'production value',
-          value: '2',
+          value: '',
         },
         {
+          key: 'on_camera_location',
           name: 'on-camera location',
-          value: 'Indoors',
+          value: '',
         },
         {
+          key: 'on_camera_gender',
           name: 'on-camera gender',
-          value: 'Male',
+          value: '',
         },
         {
+          key: 'on_camera_race',
           name: 'on-camera race',
-          value: 'White',
+          value: '',
         },
         {
+          key: 'on_camera_age',
           name: 'on-camera age',
-          value: '45',
+          value: '',
         },
         {
+          key: 'faces_on_camera',
           name: 'faces on camera',
-          value: '1',
+          value: '',
+        },
+        {
+          key: 'numbers_of_shots_changes',
+          name: 'number of shot changes',
+          value: '',
         },
       ],
     };
+  },
+  computed: {
+    ...mapState('video', {
+      getData: ({ details }) => details.production_owerview,
+    }),
+    getDataList() {
+      return this.structure.map(({ key, name }) => ({
+        key,
+        name,
+        value: this.getData[key],
+      }));
+    },
   },
 };
 </script>

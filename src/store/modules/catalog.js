@@ -19,7 +19,7 @@ const initState = {
   catalog: [],
   selected: [],
   sortBy: 'date',
-  sortDirection: 'desc',
+  sortDirection: 'asc',
 };
 
 const state = () => ({ ...initState });
@@ -112,7 +112,6 @@ const getters = {
           return sortByNumber(a?.id, b?.id, sortDirection);
       }
     });
-    console.log(sorted);
     return sorted;
   },
   getVideoNames: ({ catalog }) => catalog.map(({ id, name }) => ({ id, name })),

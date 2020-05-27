@@ -13,7 +13,7 @@ import {
   FOLDERS_CLEAN,
 } from '../types';
 import { http } from '../../services';
-import { cleanState } from '../../utils';
+import { cleanState, sortByNumber, sortByString } from '../../utils';
 
 const initState = {
   loading: false,
@@ -89,9 +89,9 @@ const actions = {
   [FOLDERS_EDIT]: async ({ commit, dispatch }, { payload, successMsg, errorMsg }) => {
     commit(FOLDERS_EDIT, payload);
     const data = await http.editFolder(payload);
+    dispatch(FOLDERS_REQUEST);
     if (!data) {
       if (errorMsg) message.error(errorMsg);
-      dispatch(FOLDERS_REQUEST);
       return false;
     }
     if (successMsg) message.success(successMsg);
@@ -128,9 +128,9 @@ const getters = {
       }))
       .sort((a, b) => {
         if (sortFoldersBy === 'last_modified') {
-          return String(b.name).localeCompare(a.name);
+          return sortByNumber(a.last_modified, b.last_modified);
         }
-        return String(a.name).localeCompare(b.name);
+        return sortByString(a.name, b.name);
       }),
   hasFolders: ({ folders }) => !!folders.length,
   getSortType: ({ sortFoldersBy }) => {

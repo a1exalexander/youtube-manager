@@ -59,9 +59,9 @@ const actions = {
       dispatch(`profile/${PROFILE_REQUEST}`, null, { root: true });
       dispatch(`profile/${ACCOUNTS_REQUEST}`, null, { root: true });
       return storage.setToken(token);
-    } catch (err) {
-      commit(AUTH_FAILURE, err);
-      message.error(err);
+    } catch (error) {
+      commit(AUTH_FAILURE, error?.msg);
+      message.error(error?.msg);
       return storage.removeToken();
     }
   },

@@ -6,6 +6,7 @@ import auth from './modules/auth';
 import profile from './modules/profile';
 import charts from './modules/charts';
 import folders from './modules/folders';
+import video from './modules/video';
 import { CATCH_UNAUTHORIZED, AUTH_LOGOUT } from './types';
 
 export * from './types';
@@ -30,6 +31,7 @@ export const store = new Vuex.Store({
     profile,
     charts,
     folders,
+    video,
   },
 });
 

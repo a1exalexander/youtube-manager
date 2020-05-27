@@ -31,6 +31,11 @@ export class Http {
     }
   };
 
+  getVideoDetails = async (id) => {
+    const { data } = await axios.get(`${url.videos}/${id}`);
+    return data;
+  };
+
   deleteVideo = async (id) => {
     try {
       const { data } = await axios.delete(`${url.videos}/${id}`);

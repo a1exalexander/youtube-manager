@@ -64,10 +64,15 @@
   @include text($H10, 500, $G4);
   text-transform: uppercase;
   margin-bottom: 11px;
+  white-space: nowrap;
 }
 
 %overview-col-value {
   @include text($H16, 400, $N0);
+  text-transform: capitalize;
+  &._nowrap {
+    white-space: nowrap;
+  }
 }
 
 %noselect {
