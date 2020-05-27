@@ -71,13 +71,7 @@
 </template>
 <script>
 import { mapGetters, mapMutations, mapState, mapActions } from 'vuex';
-import {
-  CATALOG_FOLDERS_SELECT,
-  CATALOG_FOLDERS_SELECT_ALL,
-  CATALOG_FOLDERS_REMOVE,
-  CATALOG_FOLDERS_EDIT,
-  CATALOG_FOLDERS_SORTED_SET,
-} from '../../store';
+import { FOLDERS_SELECT, FOLDERS_SELECT_ALL, FOLDERS_REMOVE, FOLDERS_EDIT, FOLDERS_SORTED_SET } from '../../store';
 import FolderItem from './folders/FolderItem.vue';
 import FolderEditPopup from './folders/FolderEditPopup.vue';
 import FolderCreatePopup from './folders/FolderCreatePopup.vue';
@@ -101,14 +95,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('catalog', ['getFolders', 'hasFolders', 'getSortType']),
-    ...mapState('catalog', ['selectedFolder', 'selectedAllFolders', 'sorted']),
+    ...mapGetters('folders', ['getFolders', 'hasFolders', 'getSortType']),
+    ...mapState('folders', ['selectedFolder', 'selectedAllFolders', 'sortFoldersBy']),
     sortedModel: {
       get() {
-        return this.sorted;
+        return this.sortFoldersBy;
       },
       set(e) {
-        this[CATALOG_FOLDERS_SORTED_SET](e);
+        this[FOLDERS_SORTED_SET](e);
       },
     },
     selectedFolderModel: {
@@ -116,7 +110,7 @@ export default {
         return this.selectedFolder;
       },
       set(e) {
-        this[CATALOG_FOLDERS_SELECT](e);
+        this[FOLDERS_SELECT](e);
       },
     },
     selectedAllFoldersModel: {
@@ -124,13 +118,13 @@ export default {
         return this.selectedAllFolders;
       },
       set(e) {
-        this[CATALOG_FOLDERS_SELECT_ALL](e);
+        this[FOLDERS_SELECT_ALL](e);
       },
     },
   },
   methods: {
-    ...mapMutations('catalog', [CATALOG_FOLDERS_SELECT, CATALOG_FOLDERS_SELECT_ALL, CATALOG_FOLDERS_SORTED_SET]),
-    ...mapActions('catalog', [CATALOG_FOLDERS_REMOVE, CATALOG_FOLDERS_EDIT]),
+    ...mapMutations('folders', [FOLDERS_SELECT, FOLDERS_SELECT_ALL, FOLDERS_SORTED_SET]),
+    ...mapActions('folders', [FOLDERS_REMOVE, FOLDERS_EDIT]),
     hideDeletePopup() {
       this.selectedFolderId = null;
       this.hide('delete');
@@ -141,7 +135,7 @@ export default {
     },
     onDeleteFolder() {
       const { selectedFolderId } = this;
-      this[CATALOG_FOLDERS_REMOVE](selectedFolderId);
+      this[FOLDERS_REMOVE](selectedFolderId);
       this.hideDeletePopup();
     },
     hideEditPopup() {
@@ -156,7 +150,9 @@ export default {
     },
     onEditFolder(name) {
       const { selectedFolderId } = this;
-      this[CATALOG_FOLDERS_EDIT]({ id: selectedFolderId, name });
+      const successMsg = `Folder "${this.oldName}" renamed to "${name}" successfully!`;
+      const errorMsg = `Folder "${this.oldName}" not renamed to "${name}". Please try again later!`;
+      this[FOLDERS_EDIT]({ payload: { id: selectedFolderId, name }, successMsg, errorMsg });
       this.hideEditPopup();
     },
     show(name) {
@@ -169,12 +165,12 @@ export default {
   watch: {
     selectedFolder(val) {
       if (val && this.selectedAllFolders) {
-        this[CATALOG_FOLDERS_SELECT_ALL](false);
+        this[FOLDERS_SELECT_ALL](false);
       }
     },
     selectedAllFolders(val) {
       if (val && this.selectedFolder) {
-        this[CATALOG_FOLDERS_SELECT](null);
+        this[FOLDERS_SELECT](null);
       }
     },
   },

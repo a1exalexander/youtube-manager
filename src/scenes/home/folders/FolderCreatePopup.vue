@@ -43,7 +43,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import { CATALOG_FOLDERS_ADD } from '../../../store';
+import { FOLDERS_ADD } from '../../../store';
 
 export default {
   name: 'FolderEditPopup',
@@ -64,7 +64,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions('catalog', [CATALOG_FOLDERS_ADD]),
+    ...mapActions('folders', [FOLDERS_ADD]),
     selectAll() {
       this.selectedVideo = 'all';
     },
@@ -78,7 +78,7 @@ export default {
       this.loading = true;
       const { selectedVideo, name } = this;
       const videos = selectedVideo !== 'all' ? [selectedVideo] : this.getVideoNames.map(({ id }) => id);
-      const ok = await this[CATALOG_FOLDERS_ADD]({ videos, name });
+      const ok = await this[FOLDERS_ADD]({ videos, name });
       this.loading = false;
       if (ok) {
         this.$message.success(`Folder "${name}" added successfully!`);

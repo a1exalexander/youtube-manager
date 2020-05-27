@@ -5,6 +5,7 @@ import catalog from './modules/catalog';
 import auth from './modules/auth';
 import profile from './modules/profile';
 import charts from './modules/charts';
+import folders from './modules/folders';
 import { CATCH_UNAUTHORIZED, AUTH_LOGOUT } from './types';
 
 export * from './types';
@@ -28,6 +29,7 @@ export const store = new Vuex.Store({
     catalog,
     profile,
     charts,
+    folders,
   },
 });
 

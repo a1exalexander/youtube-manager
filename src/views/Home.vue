@@ -18,7 +18,7 @@ import HomeFoldersScene from '@/scenes/home/HomeFoldersScene.vue';
 import HomeSearchScene from '@/scenes/home/HomeSearchScene.vue';
 import HomeFiltersScene from '@/scenes/home/HomeFiltersScene.vue';
 import HomeTableScene from '@/scenes/home/HomeTableScene.vue';
-import { CATALOG_REQUEST, CHARTS_ACCOUNT_REQUEST, CATALOG_FOLDERS_REQUEST } from '../store';
+import { CATALOG_REQUEST, CHARTS_ACCOUNT_REQUEST, FOLDERS_REQUEST } from '../store';
 
 export default {
   name: 'HomeView',
@@ -32,7 +32,7 @@ export default {
   methods: {
     ...mapActions({
       getCatalog: `catalog/${CATALOG_REQUEST}`,
-      getFolders: `catalog/${CATALOG_FOLDERS_REQUEST}`,
+      getFolders: `folders/${FOLDERS_REQUEST}`,
       getCharts: `charts/${CHARTS_ACCOUNT_REQUEST}`,
     }),
   },

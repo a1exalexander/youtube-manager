@@ -58,7 +58,7 @@
 </template>
 <script>
 import { mapGetters, mapActions, mapState, mapMutations } from 'vuex';
-import { CATALOG_FOLDERS_VIDEO_REMOVE, CATALOG_FOLDERS_ADD, CATALOG_FOLDERS_VIDEO_COPY, CATALOG_FOLDERS_SELECT } from '../../../store';
+import { FOLDERS_VIDEO_REMOVE, FOLDERS_ADD, FOLDERS_VIDEO_COPY, FOLDERS_SELECT } from '../../../store';
 
 export default {
   name: 'HomeTableItemCascader',
@@ -75,17 +75,17 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('catalog', ['getUnusedFolders', 'getSelectedFolder']),
-    ...mapState('catalog', ['selectedAllFolders']),
+    ...mapGetters('folders', ['getUnusedFolders', 'getSelectedFolder']),
+    ...mapState('folders', ['selectedAllFolders']),
     folders() {
       return this.getUnusedFolders(this.usedFolders);
     },
   },
   methods: {
-    ...mapMutations('catalog', [CATALOG_FOLDERS_SELECT]),
-    ...mapActions('catalog', [CATALOG_FOLDERS_VIDEO_COPY, CATALOG_FOLDERS_VIDEO_REMOVE, CATALOG_FOLDERS_ADD]),
+    ...mapMutations('folders', [FOLDERS_SELECT]),
+    ...mapActions('folders', [FOLDERS_VIDEO_COPY, FOLDERS_VIDEO_REMOVE, FOLDERS_ADD]),
     async onSelectFolder(folder) {
-      this[CATALOG_FOLDERS_VIDEO_COPY]({ folder, id: this.id });
+      this[FOLDERS_VIDEO_COPY]({ folder, id: this.id });
       this.hide();
     },
     hide() {
@@ -102,14 +102,14 @@ export default {
     async saveFolder() {
       const { name } = this;
       this.$message.loading({ content: 'A new folder is being created right now!', key: name });
-      const ok = await this[CATALOG_FOLDERS_ADD]({ name, videos: [this.id] });
+      const ok = await this[FOLDERS_ADD]({ name, videos: [this.id] });
       if (ok) {
         this.$message.success({
           content: `Folder "${name}" added and video copied to this folder successfully!`,
           key: name,
           duration: 4,
         });
-        this[CATALOG_FOLDERS_SELECT](ok?.id);
+        this[FOLDERS_SELECT](ok?.id);
         this.hide();
       } else {
         this.$message.success({
@@ -120,7 +120,7 @@ export default {
       }
     },
     removeVideoFromFolder() {
-      this[CATALOG_FOLDERS_VIDEO_REMOVE](this.id);
+      this[FOLDERS_VIDEO_REMOVE](this.id);
       this.hide();
     },
   },
