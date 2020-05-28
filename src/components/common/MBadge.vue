@@ -1,10 +1,10 @@
 <template>
-  <div class="m-badge" :class="{'with-icon': withIcon}">
+  <button class="m-badge" :class="{'with-icon': withIcon}" @click="$emit('click')">
     <span class="m-badge__text">
       <slot />
     </span>
     <m-icon icon="ad" v-if="withIcon" />
-  </div>
+  </button>
 </template>
 <script>
 export default {
@@ -18,12 +18,30 @@ export default {
 };
 </script>
 <style lang="scss">
-$styles: m-badge;
-.#{$styles} {
+$style: m-badge;
+.#{$style} {
+  border: none;
+  outline: none;
   padding: 4px 12px;
   border-radius: 10px;
   background-color: $T8;
   @include flex-row(center, center);
+  cursor: pointer;
+  @include transition(all);
+  @include media {
+    &:hover {
+      background-color: lighten($T8, 5%);
+    }
+    &.with-icon:hover {
+      background-color: lighten($T5, 5%);
+    }
+  }
+  &:active {
+    background-color: darken($T8, 5%);
+  }
+  &.with-icon:active {
+    background-color: darken($T5, 5%);
+  }
   &.with-icon {
     background-color: $T5;
   }

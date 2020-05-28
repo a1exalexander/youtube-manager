@@ -1,7 +1,7 @@
-/* eslint-disable no-underscore-dangle */
 import Vue from 'vue';
-import { AutoComplete, Select, Popover, Divider, Tabs, Slider, Tooltip, message, Upload } from 'ant-design-vue';
+import { AutoComplete, Select, Popover, Divider, Tabs, Slider, Tooltip, message, Upload, Affix } from 'ant-design-vue';
 import VueCompositionApi from '@vue/composition-api';
+import VueYoutube from 'vue-youtube';
 import App from './App.vue';
 import router, { routeName, routePath } from './router';
 import { store } from './store';
@@ -37,6 +37,10 @@ import {
   percentage,
   currency,
   float,
+  wordsFromArray,
+  yesNo,
+  wordsCount,
+  number,
 } from './utils';
 import './libs/animate.scss';
 import './libs/antd.scss';
@@ -63,6 +67,10 @@ Vue.prototype.$separator = separator;
 Vue.prototype.$currency = currency;
 Vue.prototype.$percentage = percentage;
 Vue.prototype.$float = float;
+Vue.prototype.$wordsFromArray = wordsFromArray;
+Vue.prototype.$yesNo = yesNo;
+Vue.prototype.$wordsCount = wordsCount;
+Vue.prototype.$number = number;
 
 // Grid
 Vue.component('MContainer', MContainer);
@@ -91,6 +99,7 @@ Vue.component('MInputWrapper', MInputWrapper);
 Vue.component('MAvatar', MAvatar);
 
 Vue.use(VueCompositionApi);
+Vue.use(VueYoutube);
 Vue.use(AutoComplete);
 Vue.use(Select);
 Vue.use(Popover);
@@ -99,6 +108,7 @@ Vue.use(Tabs);
 Vue.use(Slider);
 Vue.use(Tooltip);
 Vue.use(Upload);
+Vue.use(Affix);
 
 new Vue({
   router,

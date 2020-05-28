@@ -1,60 +1,61 @@
 <template>
-  <label class="images-list-item">
-    <input type="checkbox" :name="name" class="images-list-item__input" :value="val" v-model="checked" />
+  <div class="images-list-item" :class="{_checked: checked}" @click="handleClick">
     <div class="images-list-item__inner">
       <m-row ai="center">
         <div class="images-list-item__img-wrapper">
-          <m-subtle type="white" class="images-list-item__zoom"
-            ><template #icon><m-icon icon="search"/></template
-          ></m-subtle>
-          <img :src="val.thumbnail" alt />
+          <m-subtle @click.stop="$emit('play')" type="white" class="images-list-item__zoom" icon="search" />
+          <img class="images-list-item__img" v-if="shot.image" :src="shot.image" alt />
         </div>
-        <m-subtle :type="getLinkType">{{ val.thumbnail }}</m-subtle>
+        <m-subtle @click.stop :type="getLinkType">{{ shot.image }}</m-subtle>
       </m-row>
       <m-row ai="center">
-        <m-subtle @click="$emit('isShowClicked', val.time)" :type="getButtonType" class="images-list-item__show-btn"
-          >Show in Video <template #icon><m-icon icon="visibility-off"/></template
-        ></m-subtle>
-        <m-subtle @click="$emit('isDownloadClicked', val.thumbnail)" :type="getButtonType"
-          >Download <template #icon><m-icon icon="download"/></template
-        ></m-subtle>
+        <m-subtle @click.stop :type="getButtonType" class="images-list-item__show-btn">
+          Show in Video
+          <template #icon>
+            <m-icon icon="visibility-off" />
+          </template>
+        </m-subtle>
+        <m-subtle @click.stop :type="getButtonType">
+          Download
+          <template #icon>
+            <m-icon icon="download" />
+          </template>
+        </m-subtle>
       </m-row>
     </div>
-  </label>
+  </div>
 </template>
 <script>
 export default {
   name: 'ImagesListItem',
   props: {
-    val: {
+    shot: {
       type: Object,
     },
-    name: {
-      type: String,
-    },
-    value: {
-      type: Array,
-    },
+    value: Array,
   },
   computed: {
-    checked: {
-      get() {
-        return this.value;
-      },
-      set(val) {
-        this.onChange(val);
-      },
-    },
     getLinkType() {
-      return this.value.find(({ thumbnail }) => this.val.thumbnail === thumbnail) ? 'white' : 'primary';
+      return this.checked ? 'white' : 'primary';
     },
     getButtonType() {
-      return this.value.find(({ thumbnail }) => this.val.thumbnail === thumbnail) ? 'grey' : 'primary';
+      return this.checked ? 'grey' : 'primary';
+    },
+    checked() {
+      return this.value.some((id) => id === this.shot?.id);
     },
   },
   methods: {
-    onChange(e) {
-      this.$emit('input', e);
+    handleClick() {
+      const { id } = this.shot;
+      const idx = this.value.findIndex((el) => el === id);
+      const shallowCopy = [...this.value];
+      if (this.checked) {
+        shallowCopy.splice(idx, 1);
+      } else {
+        shallowCopy.push(id);
+      }
+      this.$emit('input', shallowCopy);
     },
   },
 };
@@ -63,9 +64,8 @@ export default {
 $styles: images-list-item;
 .#{$styles} {
   cursor: pointer;
-  &__input {
-    display: none;
-    &:checked + .#{$styles}__inner {
+  &._checked {
+    .#{$styles}__inner {
       background-color: $lighten;
     }
   }
@@ -80,6 +80,10 @@ $styles: images-list-item;
     overflow: hidden;
     margin-right: 46px;
     @include padding-hack(20%, cover);
+    background-color: $dark;
+  }
+  &__img {
+    background-color: $BG-COLOR;
   }
   &__show-btn {
     margin-right: 40px;

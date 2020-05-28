@@ -9,6 +9,7 @@ import {
   VIDEO_SHOTS_SET,
   VIDEO_CHARTS_SET,
   VIDEO_CHARTS_REQUEST,
+  VIDEO_TAB_SET,
 } from '../types';
 import { http } from '../../services';
 import { cleanState } from '../../utils';
@@ -71,6 +72,7 @@ const initState = {
     impressionCount: [],
     adRevenue: [],
   },
+  activeTab: 'overview',
 };
 
 const state = () => ({ ...initState });
@@ -87,20 +89,24 @@ const mutations = {
   [VIDEO_CHARTS_SET](state, payload) {
     state.charts = { ...state.charts, ...payload };
   },
+  [VIDEO_TAB_SET](state, payload) {
+    state.activeTab = payload;
+  },
   [VIDEO_CLEAN](state) {
     cleanState(state, initState);
   },
 };
 
 const actions = {
-  [VIDEO_DETAILS_REQUEST]: async ({ commit }, id) => {
+  [VIDEO_DETAILS_REQUEST]: async ({ getters, commit }, id) => {
+    const { isVideoLoaded } = getters;
     try {
-      message.loading('Video details are loading...', 0);
+      if (!isVideoLoaded) message.loading('Video details are loading...', 0);
       const data = await http.getVideoDetails(id);
       if (data) commit(VIDEO_DETAILS_SET, data);
-      message.destroy();
+      if (!isVideoLoaded) setTimeout(() => message.destroy(), 1000);
     } catch ({ msg }) {
-      message.destroy();
+      if (!isVideoLoaded) message.destroy();
       message.error(msg);
     }
   },
@@ -126,6 +132,7 @@ const getters = {
   getVideoChartLikesLabels: ({ charts }) => charts.likeCount.map(({ x }) => x),
   getVideoChartImpressionsLabels: ({ charts }) => charts.impressionCount.map(({ x }) => x),
   getVideoChartAdRevenueLabels: ({ charts }) => charts.adRevenue.map(({ x }) => x),
+  isVideoLoaded: ({ details }) => !!details.id,
 };
 
 export default {

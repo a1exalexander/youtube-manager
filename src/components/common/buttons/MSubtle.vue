@@ -2,13 +2,13 @@
   <a
     class="m-subtle"
     :disabled="disabled"
-    @click="() => !disabled && $emit('click')"
-    @mouseover="() => !disabled && $emit('mouseover')"
-    @mouseleave="() => !disabled && $emit('mouseleave')"
-    @mouseenter="() => !disabled && $emit('mouseenter')"
-    @mouseout="() => !disabled && $emit('mouseout')"
-    @mousedown="() => !disabled && $emit('mousedown')"
-    @mouseup="() => !disabled && $emit('mouseup')"
+    @click="(e) => !disabled && $emit('click', e)"
+    @mouseover="(e) => !disabled && $emit('mouseover', e)"
+    @mouseleave="(e) => !disabled && $emit('mouseleave', e)"
+    @mouseenter="(e) => !disabled && $emit('mouseenter', e)"
+    @mouseout="(e) => !disabled && $emit('mouseout', e)"
+    @mousedown="(e) => !disabled && $emit('mousedown', e)"
+    @mouseup="(e) => !disabled && $emit('mouseup', e)"
     :class="[
       {
         hover,

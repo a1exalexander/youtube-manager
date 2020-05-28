@@ -1,19 +1,15 @@
 <template>
   <div class="images-used-scene">
-    <div class="images-used-scene__video-wrapper">
-      <img src="https://picsum.photos/520/290" alt />
-    </div>
+    <a-affix :offset-top="80" @change="affixChange">
+      <div class="images-used-scene__video-wrapper" :class="{_active: affix}">
+        <youtube class="images-used-scene__video" video-id="rjb9FdVdX5I" ref="youtube" />
+      </div>
+    </a-affix>
     <div class="images-used-scene__bottom-block">
       <header class="images-used-scene__bottom-block-header">
         <m-row jc="space-between" ai="center">
           <h4 class="images-used-scene__bottom-title">Image Shots</h4>
-          <m-row ai="center" v-if="checkedPictures.length !== 0">
-            <m-subtle class="images-used-scene__link-btn">
-              Open All Pictures in Google
-              <template #icon>
-                <m-icon icon="link" />
-              </template>
-            </m-subtle>
+          <m-row ai="center" v-if="checked.length !== 0">
             <m-subtle>
               Download All
               <template #icon>
@@ -28,14 +24,15 @@
         </m-row>
       </header>
       <ul class="images-used-scene__images-list">
-        <li v-for="item in pictures" :key="item.thumbnail">
-          <images-list-item v-model="checkedPictures" name="checkedPictures" :val="item" />
+        <li v-for="shot in shots" :key="shot.id">
+          <images-list-item v-model="checked" :shot="shot" @play="playAt(shot.time)" />
         </li>
       </ul>
     </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex';
 import ImagesListItem from './images-used-scene/ImagesListItem.vue';
 
 export default {
@@ -45,38 +42,47 @@ export default {
   },
   data() {
     return {
-      checkedPictures: [],
-      pictures: [
-        {
-          thumbnail: 'https://picsum.photos/id/1/132/90',
-          time: '11-24',
-        },
-        {
-          thumbnail: 'https://picsum.photos/id/2/132/90',
-          time: '11-26',
-        },
-        {
-          thumbnail: 'https://picsum.photos/id/3/132/90',
-          time: '11-28',
-        },
-      ],
+      checked: [],
+      affix: false,
     };
+  },
+  computed: {
+    ...mapState('video', {
+      video: ({ details }) => details?.image,
+      shots: ({ shots }) => shots,
+    }),
+    player() {
+      return this.$refs?.youtube?.player;
+    },
+  },
+  methods: {
+    playAt(time) {
+      if (this.$isNumber(time)) this.player.seekTo(time);
+    },
+    affixChange(e) {
+      this.affix = e;
+    },
   },
 };
 </script>
 <style lang="scss">
 $styles: images-used-scene;
 .#{$styles} {
+  .ant-affix {
+    pointer-events: none;
+  }
+  &__video-continer {
+    position: sticky;
+    z-index: 10000;
+    top: 0;
+  }
   &__video-wrapper {
     width: 40%;
     margin: auto;
-    border: 1px solid $D9;
-    border-radius: 2px;
-    overflow: hidden;
-    height: 340px;
-    img {
-      width: 100%;
-      height: auto;
+    @include padding-hack(22.4%, cover);
+    pointer-events: all;
+    &._active {
+      box-shadow: 0 0px 12px 6px rgba(0, 0, 0, 0.3);
     }
   }
   &__bottom-block {

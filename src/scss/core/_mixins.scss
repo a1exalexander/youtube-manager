@@ -104,7 +104,7 @@ $z-index: (
   @if $dev {
     background-color: red;
   }
-  img {
+  img, iframe {
     position: absolute;
     top: 0;
     bottom: 0;

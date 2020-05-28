@@ -73,6 +73,9 @@
   &._nowrap {
     white-space: nowrap;
   }
+  &._lowercase {
+    text-transform: lowercase;
+  }
 }
 
 %noselect {

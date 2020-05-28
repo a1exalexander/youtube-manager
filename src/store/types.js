@@ -58,3 +58,4 @@ export const VIDEO_SHOTS_SET = 'video/SHOTS_SET';
 export const VIDEO_CHARTS_REQUEST = 'video/CHARTS_REQUEST';
 export const VIDEO_CHARTS_SET = 'video/CHARTS_SET';
 export const VIDEO_CLEAN = 'video/CLEAN';
+export const VIDEO_TAB_SET = 'video/TAB_SET';

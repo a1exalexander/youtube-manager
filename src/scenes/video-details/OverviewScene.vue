@@ -2,46 +2,46 @@
   <div class="overview-scene">
     <m-row>
       <m-col class="overview-scene__video-wrapper">
-        <img v-if="details.image" :src="details.image" :alt="details.name" />
+        <youtube class="overview-scene__video" video-id="rjb9FdVdX5I" />
       </m-col>
-      <m-col class="overview-scene__video-description">
-        <h1 class="overview-scene__video-title">{{details.name}}</h1>
-        <m-row class="overview-scene__video-row">
-          <m-col class="overview-scene__video-col">
-            <h6 class="overview-scene__video-subtitle">
+      <m-col class="overview-scene__description">
+        <h1 class="overview-scene__title">{{details.name}}</h1>
+        <m-row class="overview-scene__row">
+          <m-col class="overview-scene__col">
+            <h6 class="overview-scene__subtitle">
               Category:
               <span class="overview-scene__value">{{details.category}}</span>
             </h6>
-            <h6 class="overview-scene__video-subtitle">
+            <h6 class="overview-scene__subtitle">
               Posted Date:
               <span class="overview-scene__value">{{details.date}}</span>
             </h6>
           </m-col>
-          <m-col class="overview-scene__video-col">
-            <h6 class="overview-scene__video-subtitle">
+          <m-col class="overview-scene__col">
+            <h6 class="overview-scene__subtitle">
               Topic:
               <span class="overview-scene__value">{{details.topic}}</span>
             </h6>
-            <h6 class="overview-scene__video-subtitle">
+            <h6 class="overview-scene__subtitle">
               Length:
               <span class="overview-scene__value">{{details.length}}</span>
             </h6>
           </m-col>
-          <m-col class="overview-scene__video-col">
-            <h6 class="overview-scene__video-subtitle">
+          <m-col class="overview-scene__col">
+            <h6 class="overview-scene__subtitle">
               Production Cost:
               <span
                 class="overview-scene__value"
               >{{$currency(details.production_cost)}}</span>
             </h6>
-            <h6 class="overview-scene__video-subtitle">
+            <h6 class="overview-scene__subtitle">
               ROI:
               <span class="overview-scene__value">{{$float(details.roi)}}%</span>
             </h6>
           </m-col>
         </m-row>
-        <h6 class="overview-scene__video-subtitle overview-scene__video-subtitle--mb">Description:</h6>
-        <p class="overview-scene__video-text">{{details.description}}</p>
+        <h6 class="overview-scene__subtitle overview-scene__subtitle--mb">Description:</h6>
+        <p class="overview-scene__text">{{details.description}}</p>
       </m-col>
     </m-row>
     <m-divider />
@@ -95,7 +95,7 @@
         />
       </div>
     </m-row>
-    <div class="overview-scene__bottom-block">
+    <div class="overview-scene__block">
       <a-tabs
         defaultActiveKey="1"
         class="overview-scene__tabs"
@@ -115,12 +115,11 @@
   </div>
 </template>
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import LineChart from '../charts/LineChart.vue';
 import ProductionOverviewTab from './overview-scene/ProductionOverview.vue';
 import TranscriptOverviewTab from './overview-scene/TranscriptOverview.vue';
 import LanguageStatsTab from './overview-scene/LanguageStats.vue';
-import { VIDEO_DETAILS_REQUEST, VIDEO_CHARTS_REQUEST } from '../../store';
 
 export default {
   name: 'OverviewScene',
@@ -139,14 +138,6 @@ export default {
       'getVideoChartAdRevenueLabels',
     ]),
   },
-  methods: {
-    ...mapActions('video', [VIDEO_DETAILS_REQUEST, VIDEO_CHARTS_REQUEST]),
-  },
-  created() {
-    const { id } = this.$route.params;
-    this[VIDEO_DETAILS_REQUEST](id);
-    this[VIDEO_CHARTS_REQUEST]();
-  },
 };
 </script>
 <style lang="scss">
@@ -155,24 +146,24 @@ export default {
     flex-basis: 40%;
     @include padding-hack(22.5%, cover);
   }
-  &__video-description {
+  &__description {
     padding-left: 40px;
     flex: 1 1;
   }
-  &__video-title {
+  &__title {
     @include text($H18, 500, $N0);
     margin-bottom: 16px;
   }
-  &__video-row {
+  &__row {
     margin-bottom: 16px;
   }
-  &__video-col {
+  &__col {
     margin-right: 60px;
     &:last-child {
       margin-right: 0;
     }
   }
-  &__video-subtitle {
+  &__subtitle {
     @include text($H12, 500, $N0);
     margin-bottom: 16px;
     span {
@@ -186,11 +177,11 @@ export default {
       margin-bottom: 4px;
     }
   }
-  &__video-text {
+  &__text {
     @include text($H12, 400, $G4);
     line-height: 1.7;
   }
-  &__bottom-block {
+  &__block {
     @extend %block-style;
   }
   &__tab {
