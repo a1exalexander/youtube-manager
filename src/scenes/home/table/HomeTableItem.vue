@@ -26,7 +26,7 @@
       <span class="home-table-item__text _right">{{$float(video.watch_time_ratio)}}%</span>
       <span class="home-table-item__text _right">{{$float(video.click_through_rate)}}%</span>
       <span class="home-table-item__text _right">{{$currency(video.ad_revenue)}}</span>
-      <span class="home-table-item__text _right">{{$currency(video.profuction_cost)}}</span>
+      <span class="home-table-item__text _right">{{$currency(video.production_cost)}}</span>
       <span class="home-table-item__text _right">{{$float(5.10 || video.roi)}}%</span>
       <home-table-item-cascader
         :id="video.id"
