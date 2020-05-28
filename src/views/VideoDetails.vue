@@ -1,11 +1,13 @@
 <template>
   <m-container class="video-details" contentClass="video-details__inner">
-    <m-subtle type="grey" @click="$router.go(-1)" class="video-details__back-btn">
-      Back to Catalog
-      <template #icon>
-        <m-icon icon="back" />
-      </template>
-    </m-subtle>
+    <router-link :to='{name: $routeName.home}'>
+      <m-subtle type="grey" class="video-details__back-btn">
+        Back to Catalog
+        <template #icon>
+          <m-icon icon="back" />
+        </template>
+      </m-subtle>
+    </router-link>
     <a-tabs
       v-model="tabModel"
       class="video-details__tabs"
