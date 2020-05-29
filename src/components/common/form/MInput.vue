@@ -7,7 +7,7 @@
       <input
         :autocomplete="autocomplete"
         :id="id"
-        :readonly='readonly'
+        :readonly="readonly"
         :type="inputType"
         :disabled="disabled"
         :placeholder="placeholder"
@@ -15,11 +15,18 @@
         @blur="(e) => $emit('blur', e)"
         @focus="(e) => $emit('focus', e)"
         class="m-input__input"
-        :class="{'_icon-left': !!iconLeft || !!$slots.iconLeft, _fill: !!vModel}"
+        :class="{'_icon-left': !!iconLeft || !!$slots.iconLeft, _fill: !!vModel, '_icon-right': !!iconRight || !!$slots.iconRight}"
+        :maxlength="maxlength"
+        :minlength="minlength"
       />
-      <div class="m-input__icon-left" v-if="!!iconLeft || !!$slots.iconLeft">
-        <slot name='iconLeft'>
-          <m-icon :icon="iconLeft"/>
+      <div class="m-input__icon _left" v-if="!!iconLeft || !!$slots.iconLeft">
+        <slot name="iconLeft">
+          <m-icon :icon="iconLeft" />
+        </slot>
+      </div>
+      <div class="m-input__icon _right" v-if="!!iconRight || !!$slots.iconRight">
+        <slot name="iconRight">
+          <m-icon :icon="iconRight" />
         </slot>
       </div>
       <button
@@ -42,6 +49,12 @@ import { v4 } from 'uuid';
 export default {
   name: 'MInput',
   props: {
+    maxlength: {
+      type: [Number, String],
+    },
+    minlength: {
+      type: [Number, String],
+    },
     readonly: {
       type: Boolean,
       default: false,
@@ -95,6 +108,10 @@ export default {
       type: String,
       default: null,
     },
+    iconRight: {
+      type: String,
+      default: null,
+    },
   },
   data() {
     return {
@@ -116,7 +133,7 @@ export default {
       },
       set(value) {
         if ((this.type === 'number' && this.$isNumber(value)) || this.type !== 'number') {
-          this.$emit('input', value);
+          this.$emit('input', String(value).includes('.') ? value : value && parseFloat(value));
         }
         this.$forceUpdate();
       },
@@ -166,10 +183,16 @@ $style: m-input;
     .#{$style}__input {
       min-height: 25px;
       @include text($H10, 400, $G2);
+      &::placeholder {
+        font-size: $H10;
+      }
     }
     .#{$style}__label {
       @include text($H9, 500, $G4);
       margin-bottom: 7px;
+    }
+    .#{$style}__icon {
+      top: 5px;
     }
   }
   &__field {
@@ -192,7 +215,7 @@ $style: m-input;
     &:focus ~ .#{$style}__message {
       display: none;
     }
-    &._fill ~ .#{$style}__icon-left {
+    &._fill ~ .#{$style}__icon {
       svg {
         fill: $N0;
       }
@@ -200,13 +223,21 @@ $style: m-input;
     &._icon-left {
       padding-left: 30px;
     }
+    &._icon-right {
+      padding-right: 30px;
+    }
   }
-  &__icon-left {
+  &__icon {
     position: absolute;
-    left: 8px;
     top: 8px;
     svg {
       @include svg(15px, $G6);
+    }
+    &._right {
+      right: 8px;
+    }
+    &._left {
+      left: 8px;
     }
   }
   &__label {

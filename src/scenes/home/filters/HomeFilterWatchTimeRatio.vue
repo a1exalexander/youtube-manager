@@ -1,6 +1,6 @@
 <template>
   <home-filter-button
-    :value="getValue"
+    :value="getPercentsValue"
     name="Watch Time Ratio"
     class="home-filter-watch-time-ratio"
     @remove="() => $emit('remove')"
@@ -24,29 +24,28 @@
         :disabled="value === 'all'"
       >
         FROM 0 TO 100
-        <span class="home-filter-watch-time-ratio__percents">%</span>
+        <template #iconRight>
+          <span class="home-filter-watch-time-ratio__percents">%</span>
+        </template>
       </m-input>
     </m-col>
   </home-filter-button>
 </template>
 <script>
 import HomeFilterButton from './components/HomeFilterButton.vue';
+import { filterGetSet, filter, props, getPercentsValue } from '../../../utils';
 
 export default {
   name: 'HomeFilterWatchTimeRatio',
   components: {
     HomeFilterButton,
   },
-  data() {
-    return {
-      value: 'all',
-      custom: '0',
-    };
-  },
+  props,
   computed: {
-    getValue() {
-      return this.value === 'all' ? 'All' : `${this.custom}%`;
-    },
+    filter,
+    value: filterGetSet('value', 'all'),
+    custom: filterGetSet('custom', 0),
+    getPercentsValue,
   },
 };
 </script>
@@ -63,7 +62,7 @@ $style: home-filter-watch-time-ratio;
     @extend %custom-radio;
   }
   &__percents {
-    @extend %input-symbol;
+    @extend %icon-right-symbol;
   }
 }
 </style>

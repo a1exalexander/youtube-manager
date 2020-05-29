@@ -80,7 +80,7 @@ const actions = {
     const data = await http.deleteFolder(id);
     if (!data) {
       dispatch(FOLDERS_REQUEST);
-      message.error('Folder not deleted. Please try again later!');
+      message.warn('Folder not deleted. Please try again later!');
       return false;
     }
     message.success('Folder deleted successfully!');
@@ -91,7 +91,7 @@ const actions = {
     const data = await http.editFolder(payload);
     dispatch(FOLDERS_REQUEST);
     if (!data) {
-      if (errorMsg) message.error(errorMsg);
+      if (errorMsg) message.warn(errorMsg);
       return false;
     }
     if (successMsg) message.success(successMsg);
@@ -102,7 +102,7 @@ const actions = {
     if (ok) {
       message.success(`Video copied to "${folder?.name}" folder successfully!`);
     } else {
-      message.error(`Video not copied to "${folder?.name}" folder. Please try again later!`);
+      message.warn(`Video not copied to "${folder?.name}" folder. Please try again later!`);
     }
   },
   [FOLDERS_VIDEO_REMOVE]: async ({ getters, dispatch }, id) => {
@@ -112,7 +112,7 @@ const actions = {
     if (ok) {
       message.success(`Video removed from "${getSelectedFolder?.name}" folder successfully!`);
     } else {
-      message.error(`Video not removed from "${getSelectedFolder?.name}" folder. Please try again later!`);
+      message.warn(`Video not removed from "${getSelectedFolder?.name}" folder. Please try again later!`);
     }
   },
   [FOLDERS_CLEAN]: async ({ commit }) => {

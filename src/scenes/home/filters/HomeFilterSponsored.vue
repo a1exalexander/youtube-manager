@@ -6,7 +6,7 @@
     @remove="() => $emit('remove')"
   >
     <m-col class="home-filter-sponsored__header">
-      <m-radio val="All" v-model="value">All</m-radio>
+      <m-radio val="all" v-model="value">All</m-radio>
     </m-col>
     <m-divider color="#373c54" :offset="12" />
     <m-col class="home-filter-sponsored__body">
@@ -22,16 +22,17 @@
 </template>
 <script>
 import HomeFilterButton from './components/HomeFilterButton.vue';
+import { filterGetSet, filter, props } from '../../../utils';
 
 export default {
   name: 'HomeFilterSponsored',
   components: {
     HomeFilterButton,
   },
-  data() {
-    return {
-      value: 'All',
-    };
+  props,
+  computed: {
+    filter,
+    value: filterGetSet('value', 'all'),
   },
 };
 </script>

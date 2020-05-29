@@ -84,7 +84,7 @@ export default {
         this.$message.success(`Folder "${name}" added successfully!`);
         this.close();
       } else {
-        this.$message.error(`Folder "${name}" not added. Please try again later!`);
+        this.$message.warn(`Folder "${name}" not added. Please try again later!`);
       }
     },
   },

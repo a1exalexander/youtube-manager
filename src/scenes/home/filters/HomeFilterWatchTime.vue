@@ -6,7 +6,7 @@
     @remove="() => $emit('remove')"
   >
     <m-col class="home-filter-watch-time__header">
-      <m-radio name="clickRate" val="All" v-model="value">All</m-radio>
+      <m-radio name="clickRate" val="all" v-model="value">All</m-radio>
     </m-col>
     <m-divider color="#373c54" :offset="12" />
     <m-col class="home-filter-watch-time__body">
@@ -20,33 +20,37 @@
         placeholder="00:00:00"
         v-model="from"
         size="small"
-        type="number"
         class="home-filter-watch-time__input"
-      >
-        FROM
-        <m-icon icon="time" class="home-filter-watch-time__symbol" />
-      </m-input>
-      <m-input placeholder="00:00:00" v-model="to" size="small" type="number">
-        TO
-        <m-icon icon="time" class="home-filter-watch-time__symbol" />
-      </m-input>
+        maxlength="8"
+        icon-right="time"
+        :disabled="value === 'all'"
+      >FROM</m-input>
+      <m-input
+        placeholder="00:00:00"
+        v-model="to"
+        size="small"
+        maxlength="8"
+        icon-right="time"
+        :disabled="value === 'all'"
+      >TO</m-input>
     </m-col>
   </home-filter-button>
 </template>
 <script>
 import HomeFilterButton from './components/HomeFilterButton.vue';
+import { filterGetSet, filter, props, timeOff, time } from '../../../utils';
 
 export default {
-  name: 'HomeFilterWatchTimeRatio',
+  name: 'HomeFilterWatchTime',
   components: {
     HomeFilterButton,
   },
-  data() {
-    return {
-      value: 'All',
-      from: '',
-      to: '',
-    };
+  props,
+  computed: {
+    filter,
+    from: filterGetSet('from', '00:00:00', { type: 'number', maskGet: time, maskSet: timeOff }),
+    to: filterGetSet('to', '00:00:00', { type: 'number', maskGet: time, maskSet: timeOff }),
+    value: filterGetSet('value', 'all'),
   },
 };
 </script>

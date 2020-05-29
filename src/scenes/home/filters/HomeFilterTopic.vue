@@ -1,5 +1,10 @@
 <template>
-  <home-filter-button :value="getValue" name="Topic" class="home-filter-topic" @remove="() => $emit('remove')">
+  <home-filter-button
+    :value="getValue"
+    name="Topic"
+    class="home-filter-topic"
+    @remove="() => $emit('remove')"
+  >
     <home-filter-search v-model="search" />
     <m-divider color="#373c54" :offset="12" />
     <div class="home-filter-topic__body">
@@ -11,7 +16,7 @@
           :label="topic"
           :val="topic"
           name="selectedTopics"
-          v-model="selectedTopics"
+          v-model="selected"
         />
       </m-col>
     </div>
@@ -20,6 +25,7 @@
 <script>
 import HomeFilterButton from './components/HomeFilterButton.vue';
 import HomeFilterSearch from './components/HomeFilterSearch.vue';
+import { filterGetSet, filter, props } from '../../../utils';
 
 export default {
   name: 'HomeFilterTopic',
@@ -27,21 +33,23 @@ export default {
     HomeFilterButton,
     HomeFilterSearch,
   },
+  props,
   data() {
     return {
       topics: ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eigth'],
-      selectedTopics: [],
       search: '',
     };
   },
   computed: {
+    filter,
     filteredTopics() {
       return this.topics.filter(this.$onSearch(this.search));
     },
     getValue() {
-      const { length } = this.selectedTopics;
+      const { length } = this.selected;
       return length === 0 || length === this.topics.length ? 'All' : length;
     },
+    selected: filterGetSet('selected', []),
   },
 };
 </script>

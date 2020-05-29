@@ -2,7 +2,7 @@
   <div class="overview-scene">
     <m-row>
       <m-col class="overview-scene__video-wrapper">
-        <youtube class="overview-scene__video" video-id="rjb9FdVdX5I" />
+        <youtube class="overview-scene__video" :video-id="details.videoId" />
       </m-col>
       <m-col class="overview-scene__description">
         <h1 class="overview-scene__title">{{details.name}}</h1>

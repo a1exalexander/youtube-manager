@@ -61,7 +61,7 @@ const actions = {
       return storage.setToken(token);
     } catch (error) {
       commit(AUTH_FAILURE, error?.msg);
-      message.error(error?.msg);
+      message.warn(error?.msg);
       return storage.removeToken();
     }
   },

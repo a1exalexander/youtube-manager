@@ -8,6 +8,9 @@ import {
   CATALOG_DELETE,
   CATALOG_ADD,
   CATALOG_SORT_SET,
+  CATALOG_FILTERS_SET,
+  CATALOG_FILTERS_REMOVE,
+  CATALOG_FILTERS_EDIT,
 } from '../types';
 import { http } from '../../services';
 import { onSearch, cleanState } from '../../utils';
@@ -20,6 +23,7 @@ const initState = {
   selected: [],
   sortBy: 'date',
   sortDirection: 'asc',
+  filters: [],
 };
 
 const state = () => ({ ...initState });
@@ -44,17 +48,33 @@ const mutations = {
     state.sortBy = sortBy;
     state.sortDirection = sortDirection;
   },
+  [CATALOG_FILTERS_SET](state, payload) {
+    state.filters = [...payload];
+  },
+  [CATALOG_FILTERS_REMOVE](state, id) {
+    const idx = state.filters.findIndex((filter) => filter.id === id);
+    if (idx >= 0) {
+      state.filters.splice(idx, 1);
+    }
+  },
+  [CATALOG_FILTERS_EDIT](state, filter) {
+    const idx = state.filters.findIndex(({ id }) => id === filter.id);
+    if (idx >= 0) {
+      state.filters.splice(idx, 1, { ...state.filters[idx], ...filter });
+    }
+  },
 };
 
 const actions = {
   [CATALOG_REQUEST]: async ({ commit }) => {
     commit(CATALOG_REQUEST);
     const data = await http.getCatalog();
+    console.log(data);
     if (data) commit(CATALOG_UPDATE, data);
     commit(CATALOG_REQUEST, false);
   },
   [CATALOG_DELETE]: async ({ state, dispatch, commit }) => {
-    const selectedIds = state.selected;
+    const selectedIds = [...state.selected];
     const result = state.catalog.filter(({ id }) => selectedIds.every((item) => item !== id));
     commit(CATALOG_UPDATE, result);
     commit(CATALOG_SELECTED_SET, []);
@@ -67,7 +87,9 @@ const actions = {
     if (oks.some((ok) => !ok)) {
       commit(CATALOG_SELECTED_SET, selectedIds);
       dispatch(CATALOG_REQUEST);
-      message.error('Video(s) not deleted. Please try again later!');
+      message.warn('Video(s) not deleted. Please try again later!');
+    } else {
+      message.success(`Video${selectedIds.length > 1 ? 's' : ''} deleted successfully!`);
     }
   },
   [CATALOG_ADD]: async ({ dispatch }, link) => {
@@ -77,7 +99,7 @@ const actions = {
       message.success('Video(s) uploaded successfully!');
       return true;
     }
-    message.error('Video(s) not uploaded. Please try again later!');
+    message.warn('Video(s) not uploaded. Please try again later!');
     return false;
   },
   [CATALOG_CLEAN]: async ({ commit }) => {
@@ -118,6 +140,7 @@ const getters = {
   isSearch: ({ search }) => !!search,
   isEmpty: ({ catalog, loading }) => !catalog.length && !loading,
   hasSelected: ({ selected }) => !!selected.length,
+  getFilterById: ({ filters }) => (id) => filters.find((filter) => filter.id === id),
 };
 
 export default {

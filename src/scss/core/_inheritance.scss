@@ -45,6 +45,13 @@
     &::placeholder {
       color: $G7;
     }
+    & ~ * {
+      fill: $G7 !important;
+      color: $G7 !important;
+      svg {
+        fill: $G7 !important;
+      }
+    }
   }
 }
 
@@ -116,4 +123,13 @@
   bottom: 6px;
   z-index: 1;
   @include text($H12, 400, $G2);
+}
+
+%icon-right-symbol {
+  position: absolute;
+  right: 3px;
+  top: -1px;
+  z-index: 1;
+  @include text($H12, 400, $G2);
+  color: inherit;
 }

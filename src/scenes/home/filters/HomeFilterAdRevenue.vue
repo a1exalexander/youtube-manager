@@ -16,36 +16,37 @@
         v-model="value"
         class="home-filter-ad-revenue__custom-radio"
       >Custom</m-radio>
-      <m-input v-model="from" size="small" type="number">
+      <m-input :disabled="value === 'all'" v-model="from" size="small" type="number">
         FROM
-        <span class="home-filter-ad-revenue__symbol">$</span>
+        <template #iconRight>
+          <span class="home-filter-ad-revenue__symbol">$</span>
+        </template>
       </m-input>
-      <m-input v-model="to" size="small" type="number">
+      <m-input :disabled="value === 'all'" v-model="to" size="small" type="number">
         TO
-        <span class="home-filter-ad-revenue__symbol">$</span>
+        <template #iconRight>
+          <span class="home-filter-ad-revenue__symbol">$</span>
+        </template>
       </m-input>
     </m-col>
   </home-filter-button>
 </template>
 <script>
 import HomeFilterButton from './components/HomeFilterButton.vue';
+import { filterGetSet, filter, props, getStringValue } from '../../../utils';
 
 export default {
   name: 'HomeFilterAdRevenue',
   components: {
     HomeFilterButton,
   },
-  data() {
-    return {
-      from: '0',
-      to: '0',
-      value: 'all',
-    };
-  },
+  props,
   computed: {
-    getValue() {
-      return this.value === 'all' ? 'All' : 'Custom';
-    },
+    getStringValue,
+    filter,
+    from: filterGetSet('from', '0'),
+    to: filterGetSet('to', '0'),
+    value: filterGetSet('value', 'all'),
   },
 };
 </script>
@@ -62,7 +63,7 @@ $style: home-filter-ad-revenue;
     @extend %custom-radio;
   }
   &__symbol {
-    @extend %input-symbol;
+    @extend %icon-right-symbol;
   }
 }
 </style>

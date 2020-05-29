@@ -2,7 +2,11 @@
   <div class="clip-locator-scene">
     <m-row>
       <m-col class="clip-locator-scene__video-wrapper">
-        <youtube class="clip-locator-scene__video" video-id="rjb9FdVdX5I" ref="youtube" />
+        <youtube
+          class="clip-locator-scene__video"
+          :video-id="videoId"
+          ref="youtube"
+        />
       </m-col>
       <m-col class="clip-locator-scene__clips">
         <m-row jc="space-between" ai="center" class="clip-locator-scene__clips-head">
@@ -72,7 +76,7 @@ export default {
   computed: {
     ...mapState('video', {
       clips: ({ clips }) => clips,
-      video: ({ details }) => details?.image,
+      videoId: ({ details }) => details?.videoId,
     }),
     filteredArrayByAd() {
       return this.clips.filter(({ ad }) => (!this.isAdShown && !ad) || this.isAdShown);

@@ -2,7 +2,7 @@
   <div class="images-used-scene">
     <a-affix :offset-top="80" @change="affixChange">
       <div class="images-used-scene__video-wrapper" :class="{_active: affix}">
-        <youtube class="images-used-scene__video" video-id="rjb9FdVdX5I" ref="youtube" />
+        <youtube class="images-used-scene__video" :video-id="videoId" ref="youtube" />
       </div>
     </a-affix>
     <div class="images-used-scene__bottom-block">
@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     ...mapState('video', {
-      video: ({ details }) => details?.image,
+      videoId: ({ details }) => details?.videoId,
       shots: ({ shots }) => shots,
     }),
     player() {

@@ -1,5 +1,10 @@
 <template>
-  <home-filter-button :value="getValue" name="Categories" class="home-filter-categories" @remove="() => $emit('remove')">
+  <home-filter-button
+    :value="getValue"
+    name="Categories"
+    class="home-filter-categories"
+    @remove="() => $emit('remove')"
+  >
     <home-filter-search v-model="search" />
     <m-divider color="#373c54" :offset="12" />
     <div class="home-filter-categories__body">
@@ -11,7 +16,7 @@
           :label="topic"
           :val="topic"
           name="selectedCategories"
-          v-model="selectedCategories"
+          v-model="categories"
         />
       </m-col>
     </div>
@@ -20,27 +25,30 @@
 <script>
 import HomeFilterButton from './components/HomeFilterButton.vue';
 import HomeFilterSearch from './components/HomeFilterSearch.vue';
+import { filterGetSet, filter, props } from '../../../utils';
 
 export default {
   name: 'HomeFilterCategories',
+  props,
   components: {
     HomeFilterButton,
     HomeFilterSearch,
   },
   data() {
     return {
-      categories: ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eigth'],
-      selectedCategories: [],
+      categoriesList: ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eigth'],
       search: '',
     };
   },
   computed: {
+    filter,
+    categories: filterGetSet('categories', []),
     filteredTopics() {
-      return this.categories.filter(this.$onSearch(this.search));
+      return this.categoriesList.filter(this.$onSearch(this.search));
     },
     getValue() {
-      const { length } = this.selectedCategories;
-      return length === 0 || length === this.categories.length ? 'All' : length;
+      const { length } = this.categories;
+      return length === 0 || length === this.categoriesList.length ? 'All' : length;
     },
   },
 };
@@ -54,7 +62,7 @@ $style: home-filter-categories;
   &__wrapper {
     overflow-y: auto;
     padding-right: 8px;
-    max-height: 178px;
+    max-height: 162px;
     @extend %transparent-csrollbar;
   }
   &__checkbox:not(:last-child) {

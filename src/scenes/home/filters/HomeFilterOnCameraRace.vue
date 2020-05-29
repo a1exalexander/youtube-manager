@@ -23,24 +23,27 @@
 </template>
 <script>
 import HomeFilterButton from './components/HomeFilterButton.vue';
+import { filterGetSet, filter, props } from '../../../utils';
 
 export default {
   name: 'HomeFilterOnCameraRace',
   components: {
     HomeFilterButton,
   },
+  props,
   data() {
     return {
       inputs: [{ name: 'Black' }, { name: 'White' }, { name: 'Asian' }, { name: 'Hispanic' }, { name: 'Other' }],
-      checked: [],
       all: true,
     };
   },
   computed: {
+    filter,
     getValue() {
       const { length } = this.checked;
       return length === 0 || length === this.inputs.length ? 'All' : length;
     },
+    checked: filterGetSet('checked', []),
   },
   watch: {
     async all(value) {

@@ -11,11 +11,13 @@
     ></m-popconfirm>
     <home-export-popup
       :visible="visible.export"
+      v-if="visible.export"
       @close="() => hide('export')"
       @submit="() => hide('export')"
     />
     <home-new-video-popup
       :visible="visible.new"
+      v-if="visible.new"
       @close="() => hide('new')"
       @submit="() => hide('new')"
     />

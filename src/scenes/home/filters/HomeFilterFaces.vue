@@ -22,22 +22,21 @@
 </template>
 <script>
 import HomeFilterButton from './components/HomeFilterButton.vue';
+import { filterGetSet, filter, props } from '../../../utils';
 
 export default {
   name: 'HomeFilterFaces',
   components: {
     HomeFilterButton,
   },
-  data() {
-    return {
-      value: 'all',
-      sliderValue: 0,
-    };
-  },
+  props,
   computed: {
+    filter,
     getValue() {
       return this.value === 'all' ? 'all' : this.sliderValue;
     },
+    sliderValue: filterGetSet('sliderValue', 0),
+    value: filterGetSet('value', 'all'),
   },
 };
 </script>

@@ -14,17 +14,22 @@
 </template>
 <script>
 import HomeFilterButton from './components/HomeFilterButton.vue';
+import { filterGetSet, filter, props } from '../../../utils';
 
 export default {
   name: 'HomeFilterDateRange',
   components: {
     HomeFilterButton,
   },
+  props,
   data() {
     return {
       filters: ['all', 'today', 'last week', 'last month', 'last year'],
-      value: 'all',
     };
+  },
+  computed: {
+    filter,
+    value: filterGetSet('value', 'all'),
   },
 };
 </script>

@@ -5,16 +5,18 @@
       <m-divider color="#373c54" :offset="12" />
       <div class="home-filter-select__container">
         <span class="home-filter-select__label">Clear selectes items</span>
-        <m-checkbox
-          class="home-filter-select__checkbox"
-          name="active-filters"
-          v-model="filtersModel"
-          :val="checkbox"
-          v-for="checkbox in activeFilters"
-          :key="checkbox.value"
-        >
-          <span class="home-filter-select__value">{{checkbox.name}}</span>
-        </m-checkbox>
+        <div class="home-filter-select__list">
+          <m-checkbox
+            class="home-filter-select__checkbox"
+            name="active-filters"
+            v-model="filtersModel"
+            :val="checkbox"
+            v-for="checkbox in activeFilters"
+            :key="checkbox.id"
+          >
+            <span class="home-filter-select__value">{{checkbox.name}}</span>
+          </m-checkbox>
+        </div>
       </div>
       <m-divider color="#373c54" :offset="12" />
       <div class="home-filter-select__container">
@@ -26,7 +28,7 @@
             v-model="filtersModel"
             :val="checkbox"
             v-for="checkbox in inactiveFilters"
-            :key="checkbox.value"
+            :key="checkbox.id"
           >
             <span class="home-filter-select__value">{{checkbox.name}}</span>
           </m-checkbox>
@@ -64,13 +66,13 @@ export default {
       get() {
         return this.value;
       },
-      set(val) {
-        this.$emit('input', val);
+      set(value) {
+        this.$emit('input', value);
       },
     },
     inactiveFilters() {
       return this.filters
-        .filter(({ value }) => this.activeFilters.every((item) => item.value !== value))
+        .filter(({ id }) => this.activeFilters.every((item) => item.id !== id))
         .filter(this.$onSearch(this.search));
     },
   },
@@ -84,7 +86,7 @@ $style: home-filter-select;
     padding: 0 14px 0 16px;
   }
   &__list {
-    max-height: 105px;
+    max-height: 106px;
     overflow-y: auto;
     padding-right: 9px;
   }
@@ -119,7 +121,7 @@ $style: home-filter-select;
     margin-bottom: 9px;
   }
   &__checkbox {
-    min-height: 18px;
+    min-height: 19px;
   }
   &__checkbox:not(:last-child) {
     margin-bottom: 10px;

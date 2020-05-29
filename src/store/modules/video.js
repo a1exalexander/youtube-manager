@@ -107,7 +107,7 @@ const actions = {
       if (!isVideoLoaded) setTimeout(() => message.destroy(), 1000);
     } catch ({ msg }) {
       if (!isVideoLoaded) message.destroy();
-      message.error(msg);
+      message.warn(msg);
     }
   },
   [VIDEO_CLIPS_REQUEST]: async ({ commit }) => {

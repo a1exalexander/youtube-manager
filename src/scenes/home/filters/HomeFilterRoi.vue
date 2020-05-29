@@ -1,6 +1,6 @@
 <template>
   <home-filter-button
-    :value="getValue"
+    :value="getPercentsValue"
     name="ROI"
     class="home-filter-roi"
     @remove="() => $emit('remove')"
@@ -24,29 +24,28 @@
         :disabled="value === 'all'"
       >
         FROM 0 TO 100
-        <span class="home-filter-roi__percents">%</span>
+        <template #iconRight>
+          <span class="home-filter-roi__percents">%</span>
+        </template>
       </m-input>
     </m-col>
   </home-filter-button>
 </template>
 <script>
 import HomeFilterButton from './components/HomeFilterButton.vue';
+import { filterGetSet, filter, props, getPercentsValue } from '../../../utils';
 
 export default {
   name: 'HomeFilterRoi',
   components: {
     HomeFilterButton,
   },
-  data() {
-    return {
-      value: 'all',
-      custom: '0',
-    };
-  },
+  props,
   computed: {
-    getValue() {
-      return this.value === 'all' ? 'All' : `${this.custom}%`;
-    },
+    filter,
+    getPercentsValue,
+    value: filterGetSet('value', 'all'),
+    custom: filterGetSet('custom', 0),
   },
 };
 </script>
@@ -66,7 +65,7 @@ $style: home-filter-roi;
     position: relative;
   }
   &__percents {
-    @extend %input-symbol;
+    @extend %icon-right-symbol;
   }
 }
 </style>

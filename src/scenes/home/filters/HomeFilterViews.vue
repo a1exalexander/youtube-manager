@@ -1,5 +1,10 @@
 <template>
-  <home-filter-button name="Views" class="home-filter-views" :value='value' @remove="() => $emit('remove')">
+  <home-filter-button
+    name="Views"
+    class="home-filter-views"
+    :value="value"
+    @remove="() => $emit('remove')"
+  >
     <m-col class="home-filter-views__header">
       <m-radio name="view" val="all" v-model="value">All Views</m-radio>
     </m-col>
@@ -11,25 +16,26 @@
         v-model="value"
         class="home-filter-views__custom-radio"
       >Custom</m-radio>
-      <m-input v-model="from" size="small" type="number">FROM</m-input>
-      <m-input v-model="to" size="small" type="number">TO</m-input>
+      <m-input :disabled="value === 'all'" v-model="from" size="small" type="number">FROM</m-input>
+      <m-input :disabled="value === 'all'" v-model="to" size="small" type="number">TO</m-input>
     </m-col>
   </home-filter-button>
 </template>
 <script>
 import HomeFilterButton from './components/HomeFilterButton.vue';
+import { filterGetSet, filter, props } from '../../../utils';
 
 export default {
   name: 'HomeFilterViews',
   components: {
     HomeFilterButton,
   },
-  data() {
-    return {
-      from: '',
-      to: '',
-      value: 'all',
-    };
+  props,
+  computed: {
+    filter,
+    from: filterGetSet('from'),
+    to: filterGetSet('to'),
+    value: filterGetSet('value', 'all'),
   },
 };
 </script>

@@ -50,4 +50,21 @@ export const yesNo = function yesNo(boolean, fallback = '--') {
   return fallback;
 };
 
+export const time = function time(value = '') {
+  const time = String(value)
+    .split(':')
+    .join('')
+    .split('.')
+    .join('');
+  return time.split('').reduce((acc, cur, idx) => (idx === 2 || idx === 4 ? `${acc}:${cur}` : `${acc}${cur}`), '');
+};
+
+export const timeOff = function time(value = '') {
+  return String(value)
+    .split(':')
+    .join('')
+    .split('.')
+    .join('');
+};
+
 export const dateFormat = 'dd/MM/yyyy';

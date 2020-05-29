@@ -23,12 +23,14 @@
 </template>
 <script>
 import HomeFilterButton from './components/HomeFilterButton.vue';
+import { filterGetSet, filter, props } from '../../../utils';
 
 export default {
   name: 'HomeFilterStorytellingMethod',
   components: {
     HomeFilterButton,
   },
+  props,
   data() {
     return {
       inputs: [
@@ -41,11 +43,12 @@ export default {
         { name: 'Vlog' },
         { name: 'Lecture' },
       ],
-      checked: [],
       all: true,
     };
   },
   computed: {
+    filter,
+    checked: filterGetSet('checked', []),
     getValue() {
       const { length } = this.checked;
       return length === 0 || length === this.inputs.length ? 'All' : length;

@@ -23,20 +23,23 @@
 </template>
 <script>
 import HomeFilterButton from './components/HomeFilterButton.vue';
+import { filterGetSet, filter, props } from '../../../utils';
 
 export default {
   name: 'HomeFilterOnCameraLocation',
   components: {
     HomeFilterButton,
   },
+  props,
   data() {
     return {
-      inputs: [{ name: 'indors' }, { name: 'Outdors' }, { name: 'Webcam' }],
-      checked: [],
+      inputs: [{ name: 'indors' }, { name: 'outdors' }, { name: 'webcam' }],
       all: true,
     };
   },
   computed: {
+    filter,
+    checked: filterGetSet('checked', []),
     getValue() {
       const { length } = this.checked;
       return length === 0 || length === this.inputs.length ? 'All' : length;
@@ -65,6 +68,9 @@ $style: home-filter-on-camera-location;
   }
   &__body {
     @extend %filter-body;
+  }
+  &__checkbox {
+    text-transform: capitalize;
   }
   &__checkbox:not(:last-child) {
     margin-bottom: 12px;

@@ -3,21 +3,19 @@
     <m-row wrap ai="center" class="home-filters-scene__row">
       <span class="home-filters-scene__caption">Filter by:</span>
       <component
-        :is="`home-filter-${filter.value}`"
-        v-for="filter in activeFilters"
-        :key="filter.value"
-        @remove="() => onRemove(filter.value)"
+        :is="`home-filter-${filter.id}`"
+        v-for="filter in filters"
+        :key="filter.id"
+        :id='filter.id'
+        @remove="onRemove(filter.id)"
         class="home-filters-scene__filter"
       />
-      <home-filter-select
-        v-model="activeFilters"
-        :filters="filters"
-        :active-filters="activeFilters"
-      />
+      <home-filter-select v-model="activeFilters" :filters="filterList" :active-filters="filters" />
     </m-row>
   </m-container>
 </template>
 <script>
+import { mapState, mapMutations } from 'vuex';
 import HomeFilterSelect from './filters/components/HomeFilterSelect.vue';
 import HomeFilterViews from './filters/HomeFilterViews.vue';
 import HomeFilterTopic from './filters/HomeFilterTopic.vue';
@@ -39,6 +37,7 @@ import HomeFilterClickThroughRate from './filters/HomeFilterClickThroughRate.vue
 import HomeFilterEngagementRatio from './filters/HomeFilterEngagementRatio.vue';
 import HomeFilterWatchTimeRatio from './filters/HomeFilterWatchTimeRatio.vue';
 import HomeFilterWatchTime from './filters/HomeFilterWatchTime.vue';
+import { CATALOG_FILTERS_SET, CATALOG_FILTERS_REMOVE } from '../../store';
 
 export default {
   name: 'HomeFiltersScene',
@@ -67,35 +66,45 @@ export default {
   },
   data() {
     return {
-      filters: [
-        { name: 'views', value: 'views' },
-        { name: 'date range', value: 'date-range' },
-        { name: 'run time', value: 'run-time' },
-        { name: 'watch time', value: 'watch-time' },
-        { name: 'Watch Time Ratio', value: 'watch-time-ratio' },
-        { name: 'Engagement Ratio', value: 'engagement-ratio' },
-        { name: 'Click Through Rate', value: 'click-through-rate' },
-        { name: 'Impressions', value: 'impressions' },
-        { name: 'No. of Faces Detected', value: 'faces' },
-        { name: 'Categories', value: 'categories' },
-        { name: 'Ad Revenue', value: 'ad-revenue' },
-        { name: 'Production Cost', value: 'production-cost' },
-        { name: 'Sponsored', value: 'sponsored' },
-        { name: 'On-Camera Gender', value: 'on-camera-gender' },
-        { name: 'Storytelling Method', value: 'storytelling-method' },
-        { name: 'On-Camera Location', value: 'on-camera-location' },
-        { name: 'On-Camera Race', value: 'on-camera-race' },
-        { name: 'ROI', value: 'roi' },
-        { name: 'Production Value', value: 'production' },
-        { name: 'Topic', value: 'topic' },
+      filterList: [
+        { name: 'views', id: 'views' },
+        { name: 'date range', id: 'date-range' },
+        { name: 'run time', id: 'run-time' },
+        { name: 'watch time', id: 'watch-time' },
+        { name: 'Watch Time Ratio', id: 'watch-time-ratio' },
+        { name: 'Engagement Ratio', id: 'engagement-ratio' },
+        { name: 'Click Through Rate', id: 'click-through-rate' },
+        { name: 'Impressions', id: 'impressions' },
+        { name: 'No. of Faces Detected', id: 'faces' },
+        { name: 'Categories', id: 'categories' },
+        { name: 'Ad Revenue', id: 'ad-revenue' },
+        { name: 'Production Cost', id: 'production-cost' },
+        { name: 'Sponsored', id: 'sponsored' },
+        { name: 'On-Camera Gender', id: 'on-camera-gender' },
+        { name: 'Storytelling Method', id: 'storytelling-method' },
+        { name: 'On-Camera Location', id: 'on-camera-location' },
+        { name: 'On-Camera Race', id: 'on-camera-race' },
+        { name: 'ROI', id: 'roi' },
+        { name: 'Production id', id: 'production' },
+        { name: 'Topic', id: 'topic' },
       ],
-      activeFilters: [],
     };
   },
+  computed: {
+    ...mapState('catalog', ['filters']),
+    activeFilters: {
+      get() {
+        return this.filters;
+      },
+      set(value) {
+        this[CATALOG_FILTERS_SET](value);
+      },
+    },
+  },
   methods: {
-    onRemove(value) {
-      const idx = this.activeFilters.findIndex((item) => item.value === value);
-      this.activeFilters.splice(idx, 1);
+    ...mapMutations('catalog', [CATALOG_FILTERS_SET, CATALOG_FILTERS_REMOVE]),
+    onRemove(id) {
+      this[CATALOG_FILTERS_REMOVE](id);
     },
   },
 };
