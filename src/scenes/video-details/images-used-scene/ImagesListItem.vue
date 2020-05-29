@@ -3,7 +3,6 @@
     <div class="images-list-item__inner">
       <m-row ai="center">
         <div class="images-list-item__img-wrapper">
-          <m-subtle @click.stop="$emit('play')" type="white" class="images-list-item__zoom" icon="search" />
           <img class="images-list-item__img" v-if="shot.image" :src="shot.image" alt />
         </div>
         <m-subtle @click.stop :type="getLinkType">{{ shot.image }}</m-subtle>

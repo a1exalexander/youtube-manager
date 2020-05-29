@@ -1,10 +1,8 @@
 <template>
   <div class="images-used-scene">
-    <a-affix :offset-top="80" @change="affixChange">
-      <div class="images-used-scene__video-wrapper" :class="{_active: affix}">
-        <youtube class="images-used-scene__video" :video-id="videoId" ref="youtube" />
-      </div>
-    </a-affix>
+    <div class="images-used-scene__video-wrapper" :class="{_active: affix}">
+      <youtube class="images-used-scene__video" :video-id="videoId" ref="youtube" />
+    </div>
     <div class="images-used-scene__bottom-block">
       <header class="images-used-scene__bottom-block-header">
         <m-row jc="space-between" ai="center">
@@ -68,19 +66,16 @@ export default {
 <style lang="scss">
 $styles: images-used-scene;
 .#{$styles} {
+  max-height: calc(100vh - 178px);
+  overflow: visible;
+  @include flex-col;
   .ant-affix {
     pointer-events: none;
   }
-  &__video-continer {
-    position: sticky;
-    z-index: 10000;
-    top: 0;
-  }
   &__video-wrapper {
-    width: 40%;
+    width: 24.9%;
     margin: auto;
-    @include padding-hack(22.4%, cover);
-    pointer-events: all;
+    @include padding-hack(14%, cover, true);
     &._active {
       box-shadow: 0 0px 12px 6px rgba(0, 0, 0, 0.3);
     }
@@ -88,6 +83,8 @@ $styles: images-used-scene;
   &__bottom-block {
     @extend %block-style;
     margin-top: 24px;
+    @include flex-col;
+    overflow: hidden;
   }
   &__bottom-block-header {
     padding: 20px 24px 16px;
@@ -104,6 +101,7 @@ $styles: images-used-scene;
     margin-right: 46px;
   }
   &__images-list {
+    overflow-y: auto;
     li {
       border-bottom: 1px solid $G8;
     }
