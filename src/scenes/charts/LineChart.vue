@@ -145,7 +145,7 @@ export default {
 <style lang="scss">
 .line-chart {
   height: 170px;
-  padding: 30px 2px 10px 2px;
+  padding: 30px 8px 10px;
   position: relative;
   background-color: $dark;
   & &__dropdown-button {

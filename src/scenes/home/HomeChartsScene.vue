@@ -13,9 +13,9 @@
         <line-chart
           type="teal"
           dropName="LIKES"
-          value="816"
-          :firstDataset="accountChart.watchTime"
-          :secondDataset="amountChart.watchTime"
+          :value="$separator(getLikeCountValue)"
+          :firstDataset="accountChart.likeCount"
+          :secondDataset="amountChart.likeCount"
           :labels="getAccountLikesLabels"
           chartId="likes-chart"
         />
@@ -24,7 +24,7 @@
         <line-chart
           type="violet"
           dropName="IMPRESSIONS"
-          value="268,000"
+          :value="$separator(getWatchTimeValue * 1000)"
           :firstDataset="accountChart.watchTime"
           :secondDataset="amountChart.watchTime"
           :labels="getAccountImpressionsLabels"
@@ -35,7 +35,7 @@
         <line-chart
           type="lime"
           dropName="AD REVENUE"
-          value="$2,000"
+          :value="$currency(getAdRevenueValue)"
           :firstDataset="accountChart.adRevenue"
           :secondDataset="amountChart.adRevenue"
           :labels="getAccountAdRevenueLabels"
@@ -66,6 +66,10 @@ export default {
       'getAccountLikesLabels',
       'getAccountImpressionsLabels',
       'getAccountAdRevenueLabels',
+      'getWatchTimeValue',
+      'getLikeCountValue',
+      'getImpressionCountValue',
+      'getAdRevenueValue',
     ]),
   },
   methods: {
@@ -93,14 +97,14 @@ $styles: home-charts-scene;
     border-radius: 2px;
     flex: 1 1 25%;
     max-width: 25%;
-    padding: 12px;
+    padding: 0 12px;
     position: relative;
     &:last-child {
       margin-right: 0;
     }
   }
   &__charts-row {
-    margin: 0 -12px 24px;
+    margin: 0 -12px 0;
   }
 }
 </style>

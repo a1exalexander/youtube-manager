@@ -44,7 +44,7 @@
         <p class="overview-scene__text">{{details.description}}</p>
       </m-col>
     </m-row>
-    <m-divider />
+    <m-divider :offset='24' />
     <m-row class="overview-scene__charts-row">
       <div class="overview-scene__chart-wrapper">
         <line-chart

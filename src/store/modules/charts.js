@@ -51,10 +51,14 @@ const actions = {
 };
 
 const getters = {
-  getAccountWatchLabels: (state) => state.account.watchTime.map(({ x }) => x),
-  getAccountLikesLabels: (state) => state.account.likeCount.map(({ x }) => x),
-  getAccountImpressionsLabels: (state) => state.account.impressionCount.map(({ x }) => x),
-  getAccountAdRevenueLabels: (state) => state.account.adRevenue.map(({ x }) => x),
+  getAccountWatchLabels: ({ account }) => account.watchTime.map(({ x }) => x),
+  getAccountLikesLabels: ({ account }) => account.likeCount.map(({ x }) => x),
+  getAccountImpressionsLabels: ({ account }) => account.impressionCount.map(({ x }) => x),
+  getAccountAdRevenueLabels: ({ account }) => account.adRevenue.map(({ x }) => x),
+  getWatchTimeValue: ({ account }) => account.watchTime[account.watchTime.length - 1]?.y,
+  getLikeCountValue: ({ account }) => account.likeCount[account.likeCount.length - 1]?.y,
+  getImpressionCountValue: ({ account }) => account.impressionCount[account.impressionCount.length - 1]?.y,
+  getAdRevenueValue: ({ account }) => account.adRevenue[account.adRevenue.length - 1]?.y,
 };
 
 export default {

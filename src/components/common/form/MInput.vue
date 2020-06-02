@@ -132,10 +132,17 @@ export default {
         return this.value;
       },
       set(value) {
-        if ((this.type === 'number' && this.$isNumber(value)) || this.type !== 'number') {
-          this.$emit('input', String(value).includes('.') ? value : value && parseFloat(value));
+        switch (true) {
+          case this.type === 'number' && this.$isNumber(value):
+            this.$emit('input', String(value).includes('.') ? value : value && parseFloat(value));
+            break;
+          case this.type === 'number':
+            this.$forceUpdate();
+            break;
+          default:
+            this.$emit('input', value);
+            break;
         }
-        this.$forceUpdate();
       },
     },
     inputType() {
