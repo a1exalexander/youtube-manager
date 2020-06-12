@@ -1,8 +1,12 @@
 <template>
-  <m-container center width='884px'>
+  <m-container contentClass="settings" width="884px">
     <m-transition>
-      <settings-scene key="settings" v-if="navigation === 'settings'" @disableAccount="navigation = 'disable-account'" />
-      <settings-disable-account-scene key="disable-account" v-else @back="navigation = 'settings'"/>
+      <settings-scene
+        key="settings"
+        v-if="navigation === 'settings'"
+        @disableAccount="navigation = 'disable-account'"
+      />
+      <settings-disable-account-scene key="disable-account" v-else @back="navigation = 'settings'" />
     </m-transition>
   </m-container>
 </template>
@@ -23,3 +27,8 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+.settings {
+  padding: 20vh 0 0;
+}
+</style>

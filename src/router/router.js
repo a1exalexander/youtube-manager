@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
-import Team from '../views/Team.vue';
 import Settings from '../views/Settings.vue';
 import VideoDetails from '../views/VideoDetails.vue';
 import { isDev } from '../config';
@@ -44,12 +43,6 @@ const routes = [
     name: routeName.videoDetails,
     component: VideoDetails,
     meta: { title: 'Video Details | Media Scout' },
-  },
-  {
-    path: routePath.team,
-    name: routeName.team,
-    component: Team,
-    meta: { title: 'Team | Media Scout' },
   },
 ];
 

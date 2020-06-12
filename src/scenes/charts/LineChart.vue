@@ -98,7 +98,7 @@ export default {
         labels: this.labels,
         datasets: [
           {
-            label: 'First data',
+            label: 'Total Catalog',
             data: this.firstDataset,
             backgroundColor: 'transparent',
             borderColor: this.color,
@@ -109,7 +109,7 @@ export default {
             lineTension: 0,
           },
           {
-            label: 'Total Catalog',
+            label: 'Selected Videos',
             data: this.secondDataset,
             backgroundColor: 'transparent',
             borderColor: '#8489A1',

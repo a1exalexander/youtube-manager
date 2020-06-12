@@ -1,5 +1,8 @@
 import numeral from 'numeral';
+import { isValid, parse, format, parseISO } from 'date-fns';
 import { isNumber, isArray, isBoolean } from './check';
+
+export const dateFormat = 'MM/dd/yyyy';
 
 export const separator = function separator(number, fallback = '--') {
   if (isNumber(number)) return numeral(number).format('0,0', Math.floor);
@@ -28,6 +31,12 @@ export const float = function float(number, fallback = '--') {
 
 export const wordsFromArray = function wordsFromArray(words, fallback = '--') {
   if (isArray(words)) return words.join(', ');
+  return fallback;
+};
+
+export const date = function date(date, fallback = '--', { mask = dateFormat, formatString } = {}) {
+  const parsedDate = formatString ? parse(date, formatString, new Date()) : parseISO(date);
+  if (isValid(new Date(parsedDate))) return format(new Date(parsedDate), mask);
   return fallback;
 };
 
@@ -66,5 +75,3 @@ export const timeOff = function time(value = '') {
     .split('.')
     .join('');
 };
-
-export const dateFormat = 'dd/MM/yyyy';

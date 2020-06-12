@@ -22,6 +22,7 @@ const initState = {
   catalog: [],
   selected: [],
   sortBy: 'date',
+  sortType: 'date',
   sortDirection: 'asc',
   filters: [],
 };
@@ -44,9 +45,10 @@ const mutations = {
   [CATALOG_SELECTED_SET](state, payload) {
     state.selected = [...payload];
   },
-  [CATALOG_SORT_SET](state, { sortBy, sortDirection }) {
+  [CATALOG_SORT_SET](state, { sortBy, sortDirection, sortType }) {
     state.sortBy = sortBy;
     state.sortDirection = sortDirection;
+    state.sortType = sortType;
   },
   [CATALOG_FILTERS_SET](state, payload) {
     state.filters = [...payload];
@@ -108,7 +110,7 @@ const actions = {
 };
 const getters = {
   getCatalog(state, getters, { folders: { selectedFolder = null, folders = [] } }) {
-    const { catalog = [], search = '', sortBy, sortDirection } = state;
+    const { catalog = [], search = '', sortBy, sortType, sortDirection } = state;
     const filtered = catalog
       .map((item) => ({
         ...item,
@@ -125,13 +127,15 @@ const getters = {
         return true;
       });
     const sorted = filtered.sort((a, b) => {
-      switch (sortBy) {
-        case 'name':
-          return sortByString(a?.name, b?.name, sortDirection);
+      switch (sortType) {
+        case 'string':
+          return sortByString(a?.[sortBy], b?.[sortBy], sortDirection);
         case 'date':
-          return sortByDate(a?.date, b?.date, sortDirection);
+          return sortByDate(a?.[sortBy], b?.[sortBy], sortDirection);
+        case 'number':
+          return sortByNumber(a?.[sortBy], b?.[sortBy], sortDirection);
         default:
-          return sortByNumber(a?.id, b?.id, sortDirection);
+          return sortByNumber(a?.[sortBy], b?.[sortBy], sortDirection);
       }
     });
     return sorted;

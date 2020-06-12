@@ -108,7 +108,7 @@ export default {
     @include text($H10, 400, $G4);
     margin-right: 16px;
     overflow-x: hidden;
-    max-width: 60px;
+    max-width: 90px;
     text-overflow: ellipsis;
   }
   &__text {

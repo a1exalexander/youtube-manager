@@ -1,7 +1,7 @@
-import { format } from 'date-fns';
+import { getIdFromUrl } from 'vue-youtube';
 import axios from './axiosWrapper';
 import { url } from './url';
-import { formatToChartData, dateFormat, getVideoId } from '../../utils';
+import { formatToChartData } from '../../utils';
 
 export class Http {
   login = async ({ email, password }) => {
@@ -23,8 +23,7 @@ export class Http {
       const { data } = await axios.get(url.videos);
       const shallowCopy = data.map((item) => ({
         ...item,
-        date: format(new Date(item?.date), dateFormat),
-        videoId: getVideoId(item?.link),
+        videoId: getIdFromUrl(item?.link),
       }));
       return shallowCopy;
     } catch {
@@ -34,7 +33,7 @@ export class Http {
 
   getVideoDetails = async (id) => {
     const { data } = await axios.get(`${url.videos}/${id}`);
-    data.videoId = getVideoId(data?.link);
+    data.videoId = getIdFromUrl(data?.link);
     return data;
   };
 

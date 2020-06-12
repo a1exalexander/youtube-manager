@@ -1,8 +1,8 @@
 import { parse, compareAsc, compareDesc } from 'date-fns';
-import { dateFormat } from './format';
 
-export const sortByDate = (a, b, direction = 'asc', format = dateFormat) => {
-  const forSort = (value) => parse(value, format, new Date());
+export const sortByDate = (a, b, direction = 'asc', format) => {
+  const forSort = (value) => (format ? parse(value, format, new Date()) : parse(value));
+  console.log(a, b);
   if (direction === 'asc') return compareAsc(forSort(a), forSort(b));
   return compareDesc(forSort(a), forSort(b));
 };

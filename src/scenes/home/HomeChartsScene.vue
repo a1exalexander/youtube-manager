@@ -3,14 +3,6 @@
     <m-row class="home-charts-scene__charts-row">
       <div class="home-charts-scene__chart-wrapper">
         <line-chart
-          :firstDataset="accountChart.watchTime"
-          :secondDataset="amountChart.watchTime"
-          :labels="getAccountWatchLabels"
-          chartId="watch-chart"
-        />
-      </div>
-      <div class="home-charts-scene__chart-wrapper">
-        <line-chart
           type="teal"
           dropName="LIKES"
           :value="$separator(getLikeCountValue)"
@@ -18,6 +10,14 @@
           :secondDataset="amountChart.likeCount"
           :labels="getAccountLikesLabels"
           chartId="likes-chart"
+        />
+      </div>
+      <div class="home-charts-scene__chart-wrapper">
+        <line-chart
+          :firstDataset="accountChart.watchTime"
+          :secondDataset="amountChart.watchTime"
+          :labels="getAccountWatchLabels"
+          chartId="watch-chart"
         />
       </div>
       <div class="home-charts-scene__chart-wrapper">

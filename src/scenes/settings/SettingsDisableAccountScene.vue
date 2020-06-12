@@ -67,6 +67,7 @@ export default {
 </script>
 <style lang="scss">
 .settings-disable-account-scene {
+  padding-top: 48px;
   color: $N0;
   @include flex-col(center);
   @include media($screen-tablet) {

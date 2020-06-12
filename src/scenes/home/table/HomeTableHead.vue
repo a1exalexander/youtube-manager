@@ -3,43 +3,112 @@
     <div class="home-table-head__cell">
       <m-checkbox v-model="checkbox" />
     </div>
-    <div class="home-table-head__cell">video</div>
-    <div class="home-table-head__cell">
-      <button class="home-table-head__cell-btn" @click="() => toggleSortBy('date')">
-        <span class="home-table-head__text">posted date</span>
-        <m-icon
-          class="home-table-head__icon"
-          icon="arrow-up"
-          :class="{_active: sortDirection === 'asc'}"
-        />
-      </button>
+    <div class="home-table-head__cell">VIDEO</div>
+    <div class="home-table-head__cell" :class='item.position' v-for="item in headItems" :key="item.name">
+      <home-table-head-item
+        :value="sortBy"
+        :type="item.value"
+        :direction="sortDirection"
+        @click="(e) => toggleSortBy(e, item.type)"
+      >{{ item.name }}</home-table-head-item>
     </div>
-    <div class="home-table-head__cell _right">views</div>
-    <div class="home-table-head__cell _right">likes</div>
-    <div class="home-table-head__cell _right">dislikes</div>
-    <div class="home-table-head__cell _right">comments</div>
-    <div class="home-table-head__cell _right">engagement ratio</div>
-    <div class="home-table-head__cell _right">watch time</div>
-    <div class="home-table-head__cell _right">watch time ratio</div>
-    <div class="home-table-head__cell _right">click through rate</div>
-    <div class="home-table-head__cell _right">ad revenue</div>
-    <div class="home-table-head__cell _right">production cost</div>
-    <div class="home-table-head__cell _right">roi</div>
   </home-table-item-wrapper>
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex';
 import HomeTableItemWrapper from './HomeTableItemWrapper.vue';
+import HomeTableHeadItem from './HomeTableHeadItem.vue';
 import { CATALOG_SORT_SET } from '../../../store';
+
+const headItems = [
+  {
+    value: 'date',
+    type: 'date',
+    position: '_left',
+    name: 'posted date',
+  },
+  {
+    value: 'views',
+    type: 'number',
+    position: '_right',
+    name: 'views',
+  },
+  {
+    value: 'likes',
+    type: 'number',
+    position: '_right',
+    name: 'likes',
+  },
+  {
+    value: 'dislikes',
+    type: 'number',
+    position: '_right',
+    name: 'dislikes',
+  },
+  {
+    value: 'comments',
+    type: 'number',
+    position: '_right',
+    name: 'comments',
+  },
+  {
+    value: 'engagement_ratio',
+    type: 'number',
+    position: '_right',
+    name: 'engagement ratio',
+  },
+  {
+    value: 'watch_time',
+    type: 'number',
+    position: '_right',
+    name: 'watch time',
+  },
+  {
+    value: 'watch_time_ratio',
+    type: 'number',
+    position: '_right',
+    name: 'watch time ratio',
+  },
+  {
+    value: 'click_through_rate',
+    type: 'number',
+    position: '_right',
+    name: 'click through rate',
+  },
+  {
+    value: 'ad_revenue',
+    type: 'number',
+    position: '_right',
+    name: 'ad revenue',
+  },
+  {
+    value: 'production_cost',
+    type: 'number',
+    position: '_right',
+    name: 'production cost',
+  },
+  {
+    value: 'roi',
+    type: 'number',
+    position: '_right',
+    name: 'roi',
+  },
+];
 
 export default {
   name: 'HomeTableHead',
   components: {
     HomeTableItemWrapper,
+    HomeTableHeadItem,
   },
   props: {
     value: [String, Boolean],
     val: Boolean,
+  },
+  data() {
+    return {
+      headItems,
+    };
   },
   computed: {
     ...mapState('catalog', ['sortBy', 'sortDirection']),
@@ -54,9 +123,9 @@ export default {
   },
   methods: {
     ...mapMutations('catalog', [CATALOG_SORT_SET]),
-    toggleSortBy(sortBy) {
+    toggleSortBy(sortBy, sortType) {
       const sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-      this[CATALOG_SORT_SET]({ sortBy, sortDirection });
+      this[CATALOG_SORT_SET]({ sortBy, sortDirection, sortType });
     },
   },
 };
@@ -69,47 +138,15 @@ $style: home-table-head;
   &__cell {
     @include text($H10, 500, $G4);
     text-transform: uppercase;
-    // white-space: nowrap;
     text-align: left;
+    justify-self: start;
+    &._left {
+      text-align: left;
+      justify-self: start;
+    }
     &._right {
       text-align: right;
-    }
-  }
-  &__cell-btn {
-    @include flex(center, center);
-    border: none;
-    outline: none;
-    background-color: transparent;
-    @include media {
-      &:hover {
-        .#{$style}__text {
-          color: $G2;
-        }
-        .#{$style}__icon {
-          fill: $I4;
-        }
-      }
-    }
-    &:active {
-      .#{$style}__text {
-        color: $G6;
-      }
-      .#{$style}__icon {
-        fill: $I8;
-      }
-    }
-  }
-  &__text {
-    @include text($H10, 500, $G4);
-    @include transition(all);
-    text-transform: uppercase;
-    // white-space: nowrap;
-  }
-  &__icon {
-    margin-left: 2px;
-    @include svg(17px, $I6);
-    &._active {
-      transform: rotateX(180deg);
+      justify-self: end;
     }
   }
 }

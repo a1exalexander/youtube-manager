@@ -14,7 +14,7 @@
             </h6>
             <h6 class="overview-scene__subtitle">
               Posted Date:
-              <span class="overview-scene__value">{{details.date}}</span>
+              <span class="overview-scene__value">{{$date(details.date)}}</span>
             </h6>
           </m-col>
           <m-col class="overview-scene__col">

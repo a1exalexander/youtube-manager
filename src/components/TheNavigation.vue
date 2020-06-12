@@ -37,9 +37,6 @@
           <router-link :to="{ name: $routeName.home }" exact>
             <m-select-item icon="video">Video Catalog</m-select-item>
           </router-link>
-          <router-link :to="{ name: $routeName.team }">
-            <m-select-item icon="team">Team</m-select-item>
-          </router-link>
           <router-link :to="{ name: $routeName.settings }">
             <m-select-item icon="settings">Settings</m-select-item>
           </router-link>

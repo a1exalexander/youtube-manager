@@ -41,6 +41,7 @@ import {
   yesNo,
   wordsCount,
   number,
+  date,
 } from './utils';
 import './libs/animate.scss';
 import './libs/antd.scss';
@@ -71,6 +72,7 @@ Vue.prototype.$wordsFromArray = wordsFromArray;
 Vue.prototype.$yesNo = yesNo;
 Vue.prototype.$wordsCount = wordsCount;
 Vue.prototype.$number = number;
+Vue.prototype.$date = date;
 
 // Grid
 Vue.component('MContainer', MContainer);

@@ -1,75 +1,83 @@
 <template>
-  <div class="settings-scene">
-    <h2 class="settings-scene__title settings-scene__title--main">Personal Settings</h2>
-    <m-row ai="center" class="settings-scene__avatar-row">
-      <div class="settings-scene__img-wrapper">
-        <m-avatar :src="user.avatar" :size='70' class="settings-scene__avatar">
-          <m-icon icon="user" v-if="!newUser.userImage" class="settings-scene__icon" />
-        </m-avatar>
+  <m-col class="settings-scene">
+    <m-subtle
+      class="settings-scene__back-btn"
+      @click="$router.go(-1)"
+      type="grey"
+      icon="back"
+    >Go Back</m-subtle>
+    <div class="settings-scene__card">
+      <h2 class="settings-scene__title settings-scene__title--main">Personal Settings</h2>
+      <m-row ai="center" class="settings-scene__avatar-row">
+        <div class="settings-scene__img-wrapper">
+          <m-avatar :src="user.avatar" :size="70" class="settings-scene__avatar">
+            <m-icon icon="user" v-if="!newUser.userImage" class="settings-scene__icon" />
+          </m-avatar>
+        </div>
+        <m-col>
+          <m-row ai="center" class="settings-scene__username-wrapper">
+            <h2 class="settings-scene__title settings-scene__title--user">{{ user.name }}</h2>
+            <m-badge>Admin</m-badge>
+          </m-row>
+          <label class="settings-scene__upload">
+            <input
+              class="settings-scene__upload-input"
+              type="file"
+              accept="image/*"
+              @change="uploadImage($event)"
+            />
+            <m-subtle>
+              Change Avatar
+              <template #icon>
+                <m-icon icon="photo" class="settings-scene__icon-photo" />
+              </template>
+            </m-subtle>
+          </label>
+        </m-col>
+      </m-row>
+      <div class="settings-scene__inputs-wrapper">
+        <m-input class="settings-scene__input" :value="user.name" readonly>Full Name</m-input>
+        <m-input class="settings-scene__input" type="email" :value="user.email" readonly>Email</m-input>
       </div>
-      <m-col>
-        <m-row ai="center" class="settings-scene__username-wrapper">
-          <h2 class="settings-scene__title settings-scene__title--user">{{ user.name }}</h2>
-          <m-badge>Admin</m-badge>
+      <m-divider />
+      <h2 class="settings-scene__title settings-scene__title--pass">Change password</h2>
+      <transition
+        mode="out-in"
+        enter-active-class="animated faster fadeIn"
+        leave-active-class="animated faster fadeOut"
+      >
+        <m-col ai="flex-start" key="base" v-if="password === 'base'">
+          <m-button class="settings-scene__reset-btn" @click="password = 'current'">Reset Password</m-button>
+          <span class="settings-scene__password-date">Last change: 14 Oct, 2019</span>
+        </m-col>
+        <m-row key="current" ai="flex-end" v-if="password === 'current'">
+          <m-input
+            class="settings-scene__input"
+            type="password"
+            v-model="newUser.password"
+          >Current Password</m-input>
+          <m-button @click="password = 'new'">Continue</m-button>
         </m-row>
-        <label class="settings-scene__upload">
-          <input
-            class="settings-scene__upload-input"
-            type="file"
-            accept="image/*"
-            @change="uploadImage($event)"
-          />
-          <m-subtle>
-            Change Avatar
-            <template #icon>
-              <m-icon icon="photo" class="settings-scene__icon-photo" />
-            </template>
-          </m-subtle>
-        </label>
-      </m-col>
-    </m-row>
-    <div class="settings-scene__inputs-wrapper">
-      <m-input class="settings-scene__input" :value="user.name" readonly>Full Name</m-input>
-      <m-input class="settings-scene__input" type="email" :value="user.email" readonly>Email</m-input>
+        <m-row key="new" ai="flex-end" v-if="password === 'new'">
+          <m-input
+            class="settings-scene__input"
+            type="password"
+            v-model="newUser.newPassword"
+          >Create New Password</m-input>
+          <m-input
+            class="settings-scene__input"
+            type="password"
+            v-model="newUser.newPassword"
+          >Confirm New Password</m-input>
+          <m-button @click="password = 'base'">Save</m-button>
+        </m-row>
+      </transition>
+      <m-divider />
+      <h2 class="settings-scene__title settings-scene__title--last">Disable Account</h2>
+      <p class="settings-scene__text">The page can be restored with all previous data saved.</p>
+      <m-button type="secondary" @click="$emit('disableAccount')">Disable</m-button>
     </div>
-    <m-divider />
-    <h2 class="settings-scene__title settings-scene__title--pass">Change password</h2>
-    <transition
-      mode="out-in"
-      enter-active-class="animated faster fadeIn"
-      leave-active-class="animated faster fadeOut"
-    >
-      <m-col ai="flex-start" key="base" v-if="password === 'base'">
-        <m-button class="settings-scene__reset-btn" @click="password = 'current'">Reset Password</m-button>
-        <span class="settings-scene__password-date">Last change: 14 Oct, 2019</span>
-      </m-col>
-      <m-row key="current" ai="flex-end" v-if="password === 'current'">
-        <m-input
-          class="settings-scene__input"
-          type="password"
-          v-model="newUser.password"
-        >Current Password</m-input>
-        <m-button @click="password = 'new'">Continue</m-button>
-      </m-row>
-      <m-row key="new" ai="flex-end" v-if="password === 'new'">
-        <m-input
-          class="settings-scene__input"
-          type="password"
-          v-model="newUser.newPassword"
-        >Create New Password</m-input>
-        <m-input
-          class="settings-scene__input"
-          type="password"
-          v-model="newUser.newPassword"
-        >Confirm New Password</m-input>
-        <m-button @click="password = 'base'">Save</m-button>
-      </m-row>
-    </transition>
-    <m-divider />
-    <h2 class="settings-scene__title settings-scene__title--last">Disable Account</h2>
-    <p class="settings-scene__text">The page can be restored with all previous data saved.</p>
-    <m-button type="secondary" @click="$emit('disableAccount')">Disable</m-button>
-  </div>
+  </m-col>
 </template>
 <script>
 import { mapState } from 'vuex';
@@ -105,12 +113,17 @@ export default {
 </script>
 <style lang="scss">
 .settings-scene {
-  flex: 1;
-  background-color: $dark;
-  border-radius: 2px;
-  padding: 25px 32px;
-  text-align: left;
-  color: $N0;
+  &__back-btn {
+    margin-bottom: 32px;
+  }
+  &__card {
+    flex: 1;
+    background-color: $dark;
+    border-radius: 2px;
+    padding: 25px 32px;
+    text-align: left;
+    color: $N0;
+  }
   &__inputs-wrapper {
     @include flex-col;
     @include media($screen-tablet) {
