@@ -47,7 +47,6 @@ import HomeTableItemCascader from './HomeTableItemCascader.vue';
 export default {
   name: 'HomeTableItem',
   props: {
-    contentClass: String,
     value: [String, Number, Array],
     video: {
       type: Object,
