@@ -19,13 +19,13 @@ export default {
 </script>
 <style lang="scss">
 $style: home-table-item-wrapper;
-@function columns($width: 150px) {
-  @return 16px #{$width} 85px 70px 70px 70px 70px 120px 80px 110px 125px 80px 110px 42px;
+@function columns($width: 80px) {
+  @return 16px 70px #{$width} 85px 70px 70px 70px 70px 120px 80px 110px 125px 80px 110px 42px;
 }
 .#{$style} {
   &__content {
     display: grid;
-    grid-template-columns: 18px 150px 85px 50px 50px 50px 60px 110px 70px 100px 110px 70px 100px 40px;
+    grid-template-columns: 18px 70px 80px 85px 50px 50px 50px 60px 110px 70px 100px 110px 70px 100px 40px;
     grid-template-columns: columns();
     align-items: center;
     justify-content: space-between;
@@ -40,11 +40,11 @@ $style: home-table-item-wrapper;
       grid-template-columns: columns();
     }
     @include media($screen-fullhd) {
-      grid-template-columns: columns(220px);
+      grid-template-columns: columns(150px);
     }
     @include media($screen-retina) {
       column-gap: 20px;
-      grid-template-columns: columns(2fr);
+      grid-template-columns: columns(1fr);
     }
   }
 }

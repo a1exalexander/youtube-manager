@@ -22,6 +22,12 @@ import { CATALOG_SORT_SET } from '../../../store';
 
 const headItems = [
   {
+    value: 'name',
+    type: 'string',
+    position: '_left',
+    name: 'title',
+  },
+  {
     value: 'date',
     type: 'date',
     position: '_left',

@@ -75,7 +75,7 @@ $styles: images-used-scene;
   &__video-wrapper {
     width: 24.9%;
     margin: auto;
-    @include padding-hack(14%, cover, true);
+    @include padding-hack(14%, cover);
     &._active {
       box-shadow: 0 0px 12px 6px rgba(0, 0, 0, 0.3);
     }

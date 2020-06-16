@@ -36,6 +36,8 @@ $style: table-head-button;
   border: none;
   outline: none;
   background-color: transparent;
+  position: relative;
+  overflow: visible;
   @include media {
     &:hover {
       .#{$style}__text {
@@ -58,10 +60,9 @@ $style: table-head-button;
     @include text($H10, 500, $G4);
     @include transition(all);
     text-transform: uppercase;
-    // white-space: nowrap;
+    transform: translateX(2px);
   }
   &__icon {
-    margin-left: 2px;
     @include svg(17px, $I6);
     &._active {
       transform: rotateX(180deg);

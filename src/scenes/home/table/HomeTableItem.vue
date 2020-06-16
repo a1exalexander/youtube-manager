@@ -9,12 +9,12 @@
     <home-table-item-wrapper>
       <m-checkbox name="catalog" :val="video.id" v-model="select" />
       <router-link :to="{ name: 'VideoDetails', params: {id: video.id} }">
-        <m-row ai="center">
-          <img class="home-table-item__image" :src="video && video.image" alt />
-          <a-tooltip :title="video.name" placement="topRight">
-            <span class="home-table-item__name">{{video.name}}</span>
-          </a-tooltip>
-        </m-row>
+        <img class="home-table-item__image" :src="video && video.image" alt />
+      </router-link>
+      <router-link :to="{ name: 'VideoDetails', params: {id: video.id} }">
+        <a-tooltip :title="video.name" placement="topRight">
+          <span class="home-table-item__name">{{video.name}}</span>
+        </a-tooltip>
       </router-link>
       <span class="home-table-item__text">{{$date(video.date)}}</span>
       <span class="home-table-item__text _right">{{$separator(video.views)}}</span>
@@ -101,7 +101,6 @@ $style: home-table-item;
     height: 40px;
     object-fit: cover;
     object-position: center;
-    margin-right: 16px;
     flex-shrink: 0;
     background-color: $D4;
   }
@@ -116,6 +115,8 @@ $style: home-table-item;
     @extend .#{$style}__text;
     overflow: hidden;
     text-overflow: ellipsis;
+    width: fit-content;
+    max-width: 100%;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
