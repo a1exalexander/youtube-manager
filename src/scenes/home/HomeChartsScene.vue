@@ -4,42 +4,51 @@
       <div class="home-charts-scene__chart-wrapper">
         <line-chart
           type="teal"
-          dropName="LIKES"
+          chartId="likes-chart"
+          :data="['views', 'watch time per video', 'watch time ratio']"
+          :selected="selectedFirst"
           :value="$separator(getLikeCountValue)"
           :firstDataset="accountChart.likeCount"
           :secondDataset="amountChart.likeCount"
           :labels="getAccountLikesLabels"
-          chartId="likes-chart"
+          @change="e => selectedFirst = e"
         />
       </div>
       <div class="home-charts-scene__chart-wrapper">
         <line-chart
+          chartId="watch-chart"
+          :data="['likes', 'dislikes', 'comments', 'total engagement', 'engagement ratio']"
+          :selected="selectedSecond"
           :firstDataset="accountChart.watchTime"
           :secondDataset="amountChart.watchTime"
           :labels="getAccountWatchLabels"
-          chartId="watch-chart"
+          @change="e => selectedSecond = e"
         />
       </div>
       <div class="home-charts-scene__chart-wrapper">
         <line-chart
+          chartId="impressions-chart"
           type="violet"
-          dropName="IMPRESSIONS"
+          :data="['impressions', 'click through rate']"
+          :selected="selectedThird"
           :value="$separator(getWatchTimeValue * 1000)"
           :firstDataset="accountChart.watchTime"
           :secondDataset="amountChart.watchTime"
           :labels="getAccountImpressionsLabels"
-          chartId="impressions-chart"
+          @change="e => selectedThird = e"
         />
       </div>
       <div class="home-charts-scene__chart-wrapper">
         <line-chart
+          chartId="ad-chart"
           type="lime"
-          dropName="AD REVENUE"
+          :data="['ad revenue', 'production cost', 'ROI']"
+          :selected="selectedFourth"
           :value="$currency(getAdRevenueValue)"
           :firstDataset="accountChart.adRevenue"
           :secondDataset="amountChart.adRevenue"
           :labels="getAccountAdRevenueLabels"
-          chartId="ad-chart"
+          @change="e => selectedFourth = e"
         />
       </div>
     </m-row>
@@ -47,13 +56,21 @@
 </template>
 <script>
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex';
-import { CHARTS_AMOUNT_REQUEST, CHARTS_AMOUNT_CLEAN } from '@/store';
+import { CHARTS_AMOUNT_REQUEST, CHARTS_AMOUNT_CLEAN, CHARTS_ACCOUNT_REQUEST } from '@/store';
 import LineChart from '../charts/LineChart.vue';
 
 export default {
   name: 'HomeChartsScene',
   components: {
     LineChart,
+  },
+  data() {
+    return {
+      selectedFirst: 'views',
+      selectedSecond: 'likes',
+      selectedThird: 'impressions',
+      selectedFourth: 'ad revenue',
+    };
   },
   computed: {
     ...mapState({
@@ -75,17 +92,37 @@ export default {
   methods: {
     ...mapActions({
       getAmountChart: `charts/${CHARTS_AMOUNT_REQUEST}`,
+      getCharts: `charts/${CHARTS_ACCOUNT_REQUEST}`,
     }),
     ...mapMutations('charts', [CHARTS_AMOUNT_CLEAN]),
-  },
-  watch: {
-    async selectedVideos() {
+    async fetchCharts() {
       await this.$nextTick();
       if (this.selectedVideos.length === 0) {
         this[CHARTS_AMOUNT_CLEAN]();
       } else {
         this.getAmountChart();
       }
+    },
+  },
+  watch: {
+    selectedFirst() {
+      this.fetchCharts();
+      this.getCharts();
+    },
+    selectedSecond() {
+      this.fetchCharts();
+      this.getCharts();
+    },
+    selectedThird() {
+      this.fetchCharts();
+      this.getCharts();
+    },
+    selectedFourth() {
+      this.fetchCharts();
+      this.getCharts();
+    },
+    selectedVideos() {
+      this.fetchCharts();
     },
   },
 };

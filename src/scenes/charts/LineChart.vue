@@ -1,15 +1,22 @@
 <template>
   <div class="line-chart">
     <span class="line-chart__value" :style="{ color: color }">{{value}}</span>
-    <a-popover trigger="click" placement="bottomLeft" @visibleChange="handleChangeVisibility">
+    <a-popover
+      trigger="click"
+      placement="bottomLeft"
+      @visibleChange="handleChangeVisibility"
+      v-model="visible"
+    >
       <template slot="content">
         <div class="line-chart__dropdown">
           <m-subtle
-            :active="impressions"
+            v-for="item in data"
+            :active="isActive(item)"
             class="line-chart__dropdown-item"
             type="light-grey"
-          >Impressions</m-subtle>
-          <m-subtle class="line-chart__dropdown-item" type="light-grey">Click Through Rate</m-subtle>
+            :key="item"
+            @click="() => onChange(item)"
+          >{{item}}</m-subtle>
         </div>
       </template>
       <m-subtle
@@ -21,7 +28,7 @@
         <template #icon-right>
           <m-icon icon="drop-down" class="line-chart__dropdown-arrow" />
         </template>
-        {{dropName}}
+        {{selected}}
       </m-subtle>
     </a-popover>
     <m-line-chart
@@ -48,9 +55,13 @@ export default {
       },
       default: 'blue',
     },
-    dropName: {
+    data: {
+      type: Array,
+      required: true,
+    },
+    selected: {
       type: String,
-      default: 'WATCH TIME',
+      required: true,
     },
     value: {
       type: String,
@@ -90,6 +101,7 @@ export default {
       hoverItem: 'search',
       impressions: true,
       isClickedDropdown: false,
+      visible: false,
     };
   },
   computed: {
@@ -139,6 +151,13 @@ export default {
     handleChangeVisibility() {
       this.isClickedDropdown = !this.isClickedDropdown;
     },
+    isActive(item) {
+      return String(item).toLowerCase() === String(this.selected).toLowerCase();
+    },
+    onChange(item) {
+      this.$emit('change', item);
+      this.visible = false;
+    },
   },
 };
 </script>
@@ -163,6 +182,7 @@ export default {
   &__dropdown-item {
     display: block;
     margin-bottom: 6px;
+    text-transform: capitalize;
     &:last-child {
       margin-bottom: 0;
     }
